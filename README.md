@@ -2,6 +2,8 @@ Project Origin: Geometric Hubble Tension Solver
 
 "This project is a collaboration between a human researcher (Intuition & Concept) and Gemini 3 Flash AI (Mathematical Validation & Implementation)."
 
+![Validation Plot](image_c0f9f5.png)
+
 
 Project Overview:
 
