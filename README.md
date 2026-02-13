@@ -34,3 +34,6 @@ How to use:
 2. Run python techorb_validation.py.
 
 3. Observe the curve fitting against Type Ia Supernova data.
+
+"This project originates from the 'God's Tech-Orb' hypothesis, exploring the geometric nature of space-time. It is a collaborative effort between human intuition and AI-assisted logical validation."
+
