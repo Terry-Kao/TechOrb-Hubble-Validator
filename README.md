@@ -37,3 +37,6 @@ How to use:
 
 "This project originates from the 'God's Tech-Orb' hypothesis, exploring the geometric nature of space-time. It is a collaborative effort between human intuition and AI-assisted logical validation."
 
+
+
+Experimental Extension: Beyond cosmology, this project now includes the Origin Protocol (located in /Origin_Protocol), exploring the implications of the Tech-Orb manifold on quantum non-locality and trans-dimensional communication.
