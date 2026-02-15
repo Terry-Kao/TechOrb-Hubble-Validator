@@ -1,12 +1,25 @@
 """
+Cosmic Projection Distortion Analysis - Validation Script
+Part of the 'Project Origin' Research Initiative.
+
 Project Origin: Hubble Tension Geometric Projection Validator
+
 Developed by: Project Origin Coordinator & Gemini 3 Flash (AI)
 Date: 2026-02-13
+
 Description: 
 This script validates the 'God's Tech-Orb' hypothesis by fitting 
 Type Ia Supernovae data (Pantheon+) to a radial projection model.
+
+Theoretical Basis: 
+This script validates the Radial Projection Metric (RPM) by fitting 
+cosmological redshift data to a cosine-decay manifold projection. 
+It addresses the H0 tension by reinterpreting distance as an angular 
+displacement on a high-dimensional spherical manifold.
+
 The core formula: H(z) = H0 * cos(alpha * ln(1+z))
 """
+
 
 import pandas as pd
 import numpy as np
@@ -94,4 +107,5 @@ def run_hubble_tension_validation():
     print(f"Conclusion: The curve successfully bridges the 73.0 - 67.4 gap.")
 
 if __name__ == "__main__":
+
     run_hubble_tension_validation()
