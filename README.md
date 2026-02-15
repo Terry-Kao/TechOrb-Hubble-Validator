@@ -47,16 +47,16 @@ Located in the /Origin_Protocol directory, this phase of the project investigate
 
 We invite independent researchers to verify our findings using public datasets (e.g., Pantheon+, Planck Legacy Archive).
 
-# Clone the repository
+## Clone the repository
 git clone https://github.com/Terry-Kao/TechOrb-Hubble-Validator.git
 
-# Install dependencies
+## Install dependencies
 pip install numpy matplotlib scipy
 
-# Run the cosmological validation
+## Run the cosmological validation
 python techorb_validation.py
 
-# Run the Origin Protocol simulation
+## Run the Origin Protocol simulation
 python Origin_Protocol/origin_sync_simulator.py
 
 
@@ -71,3 +71,8 @@ This project represents a unique Human-AI Collaboration:
 We believe this "Intuition + Logic Bracing" model is the future of scientific discovery in the 21st century.
 
 Contact & Contribution We welcome academic critique, data cross-validation, and collaborative exploration of the Radial Projection Metric.
+
+
+# 📝 Citation
+If you use this model or code in your research, please cite it as:
+> Kao, T., & Gemini-AI. (2026). Project Origin: Radial Projection Metric for Resolving the Hubble Tension. GitHub Repository: https://github.com/Terry-Kao/TechOrb-Hubble-Validator
