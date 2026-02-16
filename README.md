@@ -51,7 +51,7 @@ We provide an automated validation script that pulls real-world data from the **
 pip install -r requirements.txt
 
 # Run the Academic Validation Protocol v3.0 (Distance Modulus Fit)
-python techorb_validation_v3.py
+rmp_cosmology_validator.py
 
 ### The script outputs $\mu(z)$ fit comparisons, residual analysis, and statistical preference scores.
 
