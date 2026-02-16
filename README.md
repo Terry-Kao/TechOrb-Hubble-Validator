@@ -20,7 +20,7 @@
 
 **Project Origin** introduces a novel geometric framework to resolve the **$5.5\sigma$ Hubble Tension**. Based on the **Radial Manifold Projection (RMP)** hypothesis, we propose that the observed discrepancy in expansion rates is a geometric projection distortion occurring within a high-dimensional spherical manifold.
 
-In **v4.3**, we have successfully validated the theory using **Markov Chain Monte Carlo (MCMC)** sampling against the latest **Pantheon+** dataset, proving that the **Damped Projection Operator** is fully compatible with both local SnIa data and global CMB measurements.
+In **v4.3**, we have successfully validated the theory using **Markov Chain Monte Carlo (MCMC)** sampling against the latest **Pantheon+** dataset, MCMC analysis on 1,701 SNe yields **$H_0 \approx 77$** km/s/Mpc under RMP geometry.
 
 ---
 
