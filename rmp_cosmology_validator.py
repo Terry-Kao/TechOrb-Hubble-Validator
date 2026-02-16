@@ -9,8 +9,26 @@ Features:
 """
 
 
-!pip install emcee corner pandas requests scipy matplotlib
+import subprocess
+import sys
 
+# --- 自動環境檢查機制 ---
+def setup_environment():
+    required = {"numpy", "pandas", "matplotlib", "scipy", "requests", "emcee", "corner"}
+    try:
+        import pkg_resources
+        installed = {pkg.key for pkg in pkg_resources.working_set}
+        missing = required - installed
+        if missing:
+            print(f"[*] 偵測到缺失組件: {missing}，正在自動安裝...")
+            subprocess.check_call([sys.executable, "-m", "pip", "install", *missing])
+    except Exception:
+        # 針對 Colab 環境的相容處理
+        pass
+
+setup_environment()
+
+# --- 正式導入 ---
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -158,3 +176,4 @@ def main():
 if __name__ == "__main__":
     main()
     
+
