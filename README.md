@@ -7,9 +7,10 @@
 > **"We do not merely fit the data; we derive the geometry that necessitates it."**
 
 ## 🌌 Abstract
-**Project Origin** introduces a novel geometric framework to resolve the $5.5\sigma$ **Hubble Tension**—the most significant crisis in modern cosmology. Based on the **Radial Manifold Projection (RMP)** hypothesis, we propose that the observed discrepancy in expansion rates is not a dynamical energy mystery, but a geometric projection distortion occurring within a high-dimensional spherical manifold.
 
-In Version 2.0, we introduce the **Damped Projection Operator**, which resolves the mathematical collapse at high redshifts found in earlier iterations, making the theory fully compatible with both local SnIa data and global CMB measurements.
+**Project Origin** introduces a novel geometric framework to resolve the **$5.5\sigma$ Hubble Tension**. Based on the **Radial Manifold Projection (RMP)** hypothesis, we propose that the observed discrepancy in expansion rates is a geometric projection distortion occurring within a high-dimensional spherical manifold.
+
+In **v4.3**, we have successfully validated the theory using **Markov Chain Monte Carlo (MCMC)** sampling against the latest **Pantheon+** dataset, proving that the **Damped Projection Operator** is fully compatible with both local SnIa data and global CMB measurements.
 
 ---
 
