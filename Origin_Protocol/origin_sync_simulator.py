@@ -4,6 +4,20 @@ Author: Terry Kao & Gemini (AI Research Collaborator)
 License: MIT
 """
 
+"""
+Origin Protocol: Radial Resonance Simulator (v1.2)
+--------------------------------------------------
+ACADEMIC NOTE: 
+This script is a CONCEPTUAL SIMULATION of the RMP hypothesis. 
+It models how two distant stations (A and B) would perceive a 
+simultaneous signal if they were both projections of the same 
+4D Origin Source. 
+
+This is intended to demonstrate the 'Lag 0' statistical signature 
+of the theory, not as an empirical proof of faster-than-light 
+communication in the current 3D environment.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 
