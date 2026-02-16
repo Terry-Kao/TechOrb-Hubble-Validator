@@ -22,6 +22,8 @@
 
 This result suggests that the "tension" is not a mere measurement error, but a manifestation of **High-Intensity Geometric Stress (HIGS)** within a high-dimensional spherical manifold. RMP provides the mathematical bridge to reconcile this local "stiff" geometry with the global CMB baseline ($H_{CMB} \approx 67.4$).
 
+![Corner Plot](./rmp_mcmc_corner_REAL.png)
+
 ---
 
 ## 🏛️ Technical Documentation (Core Theory)
