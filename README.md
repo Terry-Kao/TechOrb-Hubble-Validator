@@ -44,16 +44,26 @@ The [Origin Protocol](./Origin_Protocol/) explores the radical implications of t
 ---
 
 ## 💻 Validation & Reproducibility
-We provide an automated validation script that pulls real-world data from the **Pantheon+** supernova survey and performs numerical integration of the metric.
 
+We provide an automated validation script that pulls real-world data from the official **Pantheon+ DataRelease (2025/2026)** and performs MCMC parameter estimation.
 
-# Install dependencies
-pip install -r requirements.txt
+### 🚀 Quick Start (One-Command Setup)
 
-# Run the Academic Validation Protocol v3.0 (Distance Modulus Fit)
-rmp_cosmology_validator.py
+To ensure all academic dependencies are met, run:
 
-### The script outputs $\mu(z)$ fit comparisons, residual analysis, and statistical preference scores.
+### pip install -r requirements.txt
+
+### 🔍 Run the Academic Validation Protocol v4.3
+
+Execute the MCMC sampler and geometric fit:
+
+### python rmp_cosmology_validator.py
+
+The script will:
+
+* **Fetch real SNe data from the official repository.**
+* **Perform MCMC sampling ($H_0$ and $\alpha$ estimation).**
+* **Output rmp_mcmc_corner_REAL.png showing posterior distributions and parameter correlations.**
 
 ---
 
