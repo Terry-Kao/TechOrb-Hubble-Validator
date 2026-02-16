@@ -56,7 +56,7 @@ pip install -r requirements.txt
 python techorb_validation.py
 
 
-The script outputs H(z) fit comparisons, residual analysis, and calculates AIC/BIC scores to determine statistical preference.
+(The script outputs H(z) fit comparisons, residual analysis, and calculates AIC/BIC scores to determine statistical preference.)
 
 ---
 
