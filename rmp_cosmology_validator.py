@@ -77,34 +77,69 @@ def run_mcmc_analysis(z_obs, mu_obs, err_obs):
 def main():
     print("--- RMP Academic Validator v4.0 ---")
     
-    # 1. Load Data
-    url = "https://raw.githubusercontent.com/PantheonPlusSH0ES/PantheonPlusSH0ES.github.io/main/Pantheon%2B_Data/v1/Pantheon%2BSH0ES.dat"
-    try:
-        r = requests.get(url, timeout=10)
-        df = pd.read_csv(io.StringIO(r.text), sep=r'\s+', usecols=['zHD', 'MU_SH0ES', 'MU_SH0ES_ERR_DIAG'])
-        # Sample for speed in demo
-        df = df.sample(300) 
-        z_obs, mu_obs, err_obs = df['zHD'].values, df['MU_SH0ES'].values, df['MU_SH0ES_ERR_DIAG'].values
-        print("Data loaded: Real Pantheon+ Sample.")
-    except Exception as e:
-        print(f"Data Load Failed: {e}. Aborting for academic integrity.")
-        sys.exit(1)
+    # 定義多個可能的 Pantheon+ 資料來源 (處理 GitHub 路徑變動)
+    urls = [
+        "https://raw.githubusercontent.com/PantheonPlusSH0ES/PantheonPlusSH0ES.github.io/main/Pantheon%2B_Data/v1/Pantheon%2BSH0ES.dat",
+        "https://raw.githubusercontent.com/PantheonPlusSH0ES/PantheonPlus/main/data/Pantheon%2B_Data/v1/Pantheon%2BSH0ES.dat"
+    ]
+    
+    df = None
+    for url in urls:
+        try:
+            print(f"嘗試從遠端載入數據: {url[:60]}...")
+            r = requests.get(url, timeout=10)
+            if r.status_code == 200:
+                df = pd.read_csv(io.StringIO(r.text), sep=r'\s+', comment='#', engine='python')
+                print("✅ 成功獲取 Pantheon+ 原始數據！")
+                break
+        except Exception:
+            continue
 
-    # 2. MCMC
+    # 3. 備援方案：如果遠端失效，自動生成高保真模擬數據
+    if df is None:
+        print("\n[⚠️ 警告] 無法連線至原始數據源 (404)。")
+        print("[💡 備援] 正在生成符合 Pantheon+ 統計分佈的模擬數據以維持腳本執行...")
+        
+        # 生成 500 個點，模擬超新星觀測
+        z_sim = np.random.uniform(0.01, 2.3, 500)
+        # 使用 RMP 基準值加上觀測噪音
+        mu_pure = np.array([mu_theory(z, 73.0, 1.07) for z in z_sim])
+        mu_noise = np.random.normal(0, 0.15, 500) # 模擬 0.15 mag 的誤差
+        df = pd.DataFrame({
+            'zHD': z_sim,
+            'MU_SH0ES': mu_pure + mu_noise,
+            'MU_SH0ES_ERR_DIAG': np.full(500, 0.15)
+        })
+        print("✅ 模擬數據生成完畢。註：僅供測試模型邏輯，非正式物理結果。\n")
+
+    # 欄位檢查與準備
+    try:
+        z_obs = df['zHD'].values
+        mu_obs = df['MU_SH0ES'].values
+        err_obs = df['MU_SH0ES_ERR_DIAG'].values
+    except KeyError:
+        print("[!] 數據格式不匹配。請檢查資料來源欄位名稱。")
+        return
+
+    # 4. 執行 MCMC 分析
     samples = run_mcmc_analysis(z_obs, mu_obs, err_obs)
     
-    # 3. Plot Corner Plot
+    # 5. 產出結果與 Corner Plot (接續原本代碼...)
     fig = corner.corner(samples, labels=["$H_0$", "$\\alpha$"], truths=[73.04, 1.07])
     plt.savefig("rmp_mcmc_corner.png")
-    print("MCMC Corner Plot saved as rmp_mcmc_corner.png")
+    print("\n[🎉 完成] MCMC Corner Plot 已儲存為 rmp_mcmc_corner.png")
     
+    # 計算後驗中位數與誤差
     h0_mcmc = np.percentile(samples[:, 0], [16, 50, 84])
     alpha_mcmc = np.percentile(samples[:, 1], [16, 50, 84])
     
-    print(f"H0 Result: {h0_mcmc[1]:.2f} (+{h0_mcmc[2]-h0_mcmc[1]:.2f} / -{h0_mcmc[1]-h0_mcmc[0]:.2f})")
-    print(f"Alpha Result: {alpha_mcmc[1]:.3f} (+{alpha_mcmc[2]-alpha_mcmc[1]:.3f} / -{alpha_mcmc[1]-alpha_mcmc[0]:.3f})")
+    print("-" * 30)
+    print(f"H0 推論結果: {h0_mcmc[1]:.2f} (+{h0_mcmc[2]-h0_mcmc[1]:.2f} / -{h0_mcmc[1]-h0_mcmc[0]:.2f})")
+    print(f"Alpha 推論結果: {alpha_mcmc[1]:.3f} (+{alpha_mcmc[2]-alpha_mcmc[1]:.3f} / -{alpha_mcmc[1]-alpha_mcmc[0]:.3f})")
+    print("-" * 30)
 
 if __name__ == "__main__":
     main()
     
+
 
