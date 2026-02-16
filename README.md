@@ -11,12 +11,12 @@
 
 In Version 2.0, we introduce the **Damped Projection Operator**, which resolves the mathematical collapse at high redshifts found in earlier iterations, making the theory fully compatible with both local SnIa data and global CMB measurements.
 
----
+---Origin_Protocol/PHYSICS_DERIVATION.md
 
 ## 🏛️ Technical Documentation
 
 1.  **[Theoretical Framework (THEORY_FRAMEWORK.md)](./THEORY_FRAMEWORK.md)**: Conceptual origins and geometric intuition.
-2.  **[Physics Derivation v2.0 (PHYSICS_DERIVATION.md)](./PHYSICS_DERIVATION.md)**: **(Crucial)** Formal derivation of the metric tensor and the resolution of emergent Dark Energy via Einstein Field Equations.
+2.  **[Physics Derivation v2.0 (PHYSICS_DERIVATION.md)](./Origin_Protocol/PHYSICS_DERIVATION.md)**: **(Crucial)** Formal derivation of the metric tensor and the resolution of emergent Dark Energy via Einstein Field Equations.
 
 ---
 
