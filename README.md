@@ -11,12 +11,12 @@
 
 In Version 2.0, we introduce the **Damped Projection Operator**, which resolves the mathematical collapse at high redshifts found in earlier iterations, making the theory fully compatible with both local SnIa data and global CMB measurements.
 
----Origin_Protocol/PHYSICS_DERIVATION.md
+---
 
-## 🏛️ Technical Documentation
+## 🏛️ Technical Documentation (Core Theory)
 
-1.  **[Theoretical Framework (THEORY_FRAMEWORK.md)](./THEORY_FRAMEWORK.md)**: Conceptual origins and geometric intuition.
-2.  **[Physics Derivation v2.0 (PHYSICS_DERIVATION.md)](./Origin_Protocol/PHYSICS_DERIVATION.md)**: **(Crucial)** Formal derivation of the metric tensor and the resolution of emergent Dark Energy via Einstein Field Equations.
+1. **[Theoretical Framework (THEORY_FRAMEWORK.md)](./THEORY_FRAMEWORK.md)**: Conceptual origins and geometric intuition of the RMP model.
+2. **[Physics Derivation v2.0 (PHYSICS_DERIVATION.md)](./PHYSICS_DERIVATION.md)**: **(Crucial)** Formal derivation of the metric tensor, Christoffel symbols, and the resolution of emergent Dark Energy via Einstein Field Equations.
 
 ---
 
@@ -26,46 +26,49 @@ In the RMP 2.0 framework, the measured Hubble value $H(z)$ is a function of the 
 $$H(z) = H_{CMB} + (H_0 - H_{CMB}) \cdot \text{sech}(\alpha \cdot \ln(1+z))$$
 
 ### Key Scientific Breakthroughs:
-* **Horizon Safety**: The hyperbolic secant ($\text{sech}$) function replaces the periodic cosine, ensuring $H(z)$ remains positive and smoothly approaches the CMB baseline as $z \to \infty$.
-* **Statistical Superiority**: Implements AIC (Akaike Information Criterion) testing to demonstrate that RMP provides a more parsimonious fit than the standard ($\Lambda$)CDM model.
-* **Geometric Dark Energy**: Redefines Dark Energy as "projection stress" inherent in the manifold geometry, removing the need for a cosmological constant ($\Lambda$).
+* **Horizon Safety**: The hyperbolic secant ($\text{sech}$) function ensures $H(z)$ remains positive and smoothly approaches the CMB baseline as $z \to \infty$.
+* **Statistical Superiority**: Employs AIC (Akaike Information Criterion) testing to demonstrate that RMP provides a more parsimonious fit than the standard $\Lambda$ CDM model by directly integrating the **Luminosity Distance $d_L(z)$**.
+* **Geometric Dark Energy**: Redefines acceleration as "projection stress" inherent in the manifold geometry, removing the need for a cosmological constant ($\Lambda$).
 
-![Validation Plot](TechOrb_Validation_Plot.png)
+
 
 ---
 
 ## 🛰️ Experimental Extension: The Origin Protocol
 
-Located in the /Origin_Protocol directory, this phase of the project investigates the implications of the Tech-Orb manifold on Quantum Non-locality.
+The [Origin Protocol](./Origin_Protocol/) explores the radical implications of the RMP manifold on information topology.
 
-1. **Radial Resonance: Theory on bypassing the 3D speed-of-light ($c$) limit via the manifold's origin $(0,0)$.
-
-2. **Simulation: Includes origin_sync_simulator.py for testing zero-latency information synchronization.
-
+* **[Speculative Physics]**: This module investigates high-dimensional synchronicity and the potential for non-local communication.
+* **Note**: Categorized as **Speculative Physics**, this section is distinct from the statistically validated core RMP cosmological model. It serves as a theoretical extension for future exploration.
 
 ---
 
 ## 💻 Validation & Reproducibility
-We provide an automated validation script that pulls real-world data from the **Pantheon+** supernova survey.
+We provide an automated validation script that pulls real-world data from the **Pantheon+** supernova survey and performs numerical integration of the metric.
 
 
-## Install dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-## Run the Academic Validation Protocol v2.0
-python techorb_validation.py
+# Run the Academic Validation Protocol v3.0 (Distance Modulus Fit)
+python techorb_validation_v3.py
 
-
-(The script outputs H(z) fit comparisons, residual analysis, and calculates AIC/BIC scores to determine statistical preference.)
+### The script outputs $\mu(z)$ fit comparisons, residual analysis, and statistical preference scores.
 
 ---
 
 ## 🤝 Research Paradigm: Human-AI Collaboration
-This project represents a pioneering collaboration in theoretical physics:
-Human Researcher (Terry Kao): Conceptual Intuition, Geometric Hypothesis, and Origin Protocol Vision.
-AI Collaborator (Gemini 3 Flash): Tensor Calculus Derivations, Statistical Model Optimization, and Implementation.
+This project represents a milestone in Human-AI Co-Research, where a breakthrough in theoretical physics was achieved through a multi-agent collaborative ecosystem:
+
+Terry Kao (Human Researcher): Visionary architect of the "God's Tech-Orb" concept, provider of core geometric intuition, and director of the Origin Protocol.
+
+Gemini (AI Research Collaborator): Lead developer of the RMP v2.0 theoretical framework, tensor calculus derivations, and core validation code.
+
+ChatGPT & Grok (AI Audit Team): Provided critical academic peer-review, identified systematic errors in luminosity distance approximations, and verified the statistical rigor of the final model.
+
+---
 
 ## 📝 Citation
 If you utilize this model or code in your research, please cite:
-Kao, T., & Gemini-AI. (2026). Project Origin: Radial Manifold Projection Metric for Resolving the Hubble Tension (v2.0). GitHub: https://github.com/Terry-Kao/TechOrb-Hubble-Validator
 
+Kao, T., & Gemini-AI. (2026). Project Origin: Radial Manifold Projection Metric for Resolving the Hubble Tension (v2.0). GitHub: https://github.com/Terry-Kao/TechOrb-Hubble-Validator
