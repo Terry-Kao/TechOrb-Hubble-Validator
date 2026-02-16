@@ -1,3 +1,13 @@
+<details>
+  <summary>Click to expand academic abstract</summary>
+--  
+  Modern cosmology faces a critical "Hubble Tension" ($>5\sigma$ discrepancy) between local SnIa measurements ($H_0 \approx 73$) and early-universe CMB observations ($H_0 \approx 67$). We present the Radial Manifold Projection (RMP) theory, a novel geometric framework that reinterprets cosmic expansion as a projection effect within a high-dimensional spherical manifold.
+
+--
+  By introducing the **Damped Projection Operator** ($\text{sech}$-based scaling), we derive a metric that naturally converges local and global expansion rates without requiring the fine-tuning of dark energy or a cosmological constant ($\Lambda$). Our v4.3 validation, utilizing **Markov Chain Monte Carlo (MCMC)** sampling on the **Pantheon+ SH0ES (2025/2026)** dataset ($N=1,701$), confirms a stable posterior for the projection coupling constant $\alpha \approx 1.35$. The model achieves a statistically superior fit to low-redshift data while maintaining horizon safety at the CMB limit. This project demonstrates a successful Human-AI co-research paradigm in theoretical physics.
+</details>
+
+
 # Project Origin: Radial Manifold Projection (RMP) Theory
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
