@@ -79,7 +79,7 @@ def run_mcmc_analysis(z_obs, mu_obs, err_obs):
     print("    (This involves numerical integration for each step, please wait...)")
     
     # Initialize 32 walkers around a reasonable starting point
-    pos = [73.0, 1.3] + 1e-3 * np.random.randn(32, 2)
+    pos = [76.0, 0.3] + 1e-3 * np.random.randn(32, 2)
     nwalkers, ndim = pos.shape
 
     sampler = emcee.EnsembleSampler(nwalkers, ndim, log_likelihood, args=(z_obs, mu_obs, err_obs))
@@ -125,7 +125,7 @@ def load_pantheon_data():
 
 # --- Main Execution ---
 def main():
-    print("--- RMP Academic Validator v4.3 (Official Source) ---")
+    print("--- RMP Academic Validator v4.31 (Official Source) ---")
     
     # 1. Load REAL data
     df = load_pantheon_data()
@@ -176,4 +176,5 @@ def main():
 if __name__ == "__main__":
     main()
     
+
 
