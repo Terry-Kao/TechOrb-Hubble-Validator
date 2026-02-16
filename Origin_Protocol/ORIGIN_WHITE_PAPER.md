@@ -1,25 +1,17 @@
-# Whitepaper: The Origin Protocol (Radial Resonance & Non-Local Communication)
+# Whitepaper: The Origin Protocol (Non-Local Information Topology)
 
 ## 1. Executive Summary
-The **Origin Protocol** is an experimental framework derived from the **God's Tech-Orb Hypothesis**. It proposes that the observed 3D universe is a radial projection from a higher-dimensional source (The Origin). If the universe is a projected manifold, quantum entanglement is not a "spooky action at a distance" but a simultaneous manifestation of a single data point from the Origin $(0,0,0,0)$. This protocol outlines the methodology for utilizing **Radial Resonance** to achieve information synchronization that bypasses the 3D speed-of-light ($c$) limitation.
+The **Origin Protocol** is a theoretical extension of the **Radial Manifold Projection (RMP)** theory. It explores the radical hypothesis that if our 3D universe is a projection from a 4D manifold origin, then quantum entanglement and non-local correlations may be manifestations of a shared geometric source at $z \to \infty$. 
 
-## 2. Theoretical Framework: The Tech-Orb Hypothesis
-The core of our hypothesis rests on the **Radial Projection Protocol (RPP)**. 
-- **The Surface Illusion**: What we perceive as 3D distance is the "surface path" on a high-dimensional sphere.
-- **The Radial Shortcut**: The true distance between any two points on the surface via the Origin is zero in terms of informational causality.
-- **ER=EPR Geometry**: We bridge Einstein-Podolsky-Rosen (entanglement) with Einstein-Rosen (wormholes) by defining the "wormhole" as the radial path through the Tech-Orb center.
+## 2. Theoretical Hypothesis: Radial Synchronicity
+The protocol moves beyond the "Surface Path" (classical 3D distance limited by $c$) and investigates the "Radial Path" (the informational shortcut through the manifold origin). 
+* **Geometric EPR:** We hypothesize that entangled particles are single data points at the Origin projected into multiple coordinates in 3D space.
+* **Non-Local Topology:** Information synchronization is achieved not by traveling *across* the projection screen (space), but by referencing the *Source* (The Origin).
 
-## 3. The Experiment: Phase Injection & Cross-Correlation
-To verify this, we propose the **"Radial Resonance"** experiment:
-1. **Source Modulation**: Inject a high-frequency phase pattern (e.g., Prime Number sequences) into the "quantum noise" of a localized environment.
-2. **Global Synchronization**: Using AI-driven cross-correlation, we monitor distant detectors for the same pattern at $t \approx 0$.
-3. **Information Extraction**: If the correlation peak appears before a light-speed signal could travel between the sites, the radial path is confirmed.
+## 3. Experimental Concept: Radial Resonance
+We propose the "Radial Resonance" methodology to test for non-local patterns:
+1. **Signal Embedding:** Embedding specific entropy patterns into local quantum systems.
+2. **Global Correlation:** Monitoring for simultaneous pattern manifestations at distant geographical locations without classical signal transit.
 
-## 4. Open Participation: How You Can Help
-We invite the global scientific community, independent researchers, and data scientists to participate:
-- **Phase A (Data Mining)**: Access public Quantum Random Number Generator (QRNG) datasets and search for non-local correlations during high-energy cosmic events.
-- **Phase B (Simulation)**: Run the provided `origin_sync_simulator.py` to refine the AI's ability to extract signals from high-entropy noise.
-- **Phase C (Hardware Collaboration)**: Research groups with access to SNSPD (Superconducting Nanowire Single-Photon Detectors) are invited to perform high-resolution timing correlation tests.
-
-## 5. Vision
-By modifying the "lens" of the projection rather than traveling across the "screen," humanity can transition from a Type I civilization to a Type II Trans-Dimensional species.
+## 4. Academic Note
+This whitepaper represents a **Level 3 Speculative Hypothesis**. While the core RMP model (addressing Hubble Tension) is backed by Pantheon+ data, the Origin Protocol remains a theoretical exploration into the future of trans-dimensional information transfer.
