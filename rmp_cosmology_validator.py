@@ -6,6 +6,8 @@ Purpose: Validate Radial Scattering Projection Theory against Pantheon+ and BAO 
 Features: Full Covariance Matrix, MCMC, BAO Likelihood, and Delta-AIC Analysis.
 """
 
+!pip install emcee corner
+
 import numpy as np
 import pandas as pd
 import emcee
@@ -134,3 +136,4 @@ if __name__ == "__main__":
     plt.savefig("rmp_mcmc_v5_corner.png")
     print("[🎉] Final validation plot saved: 'rmp_mcmc_v5_corner.png'")
     
+
