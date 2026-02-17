@@ -3,7 +3,7 @@ import sys
 
 # --- 自動環境檢查機制 ---
 def setup_environment():
-    required = {"numpy", "pandas", "matplotlib", "scipy", "requests", "emcee", "corner"}
+    required = {"numpy", "pandas", "matplotlib", "scipy", "requests", "emcee", "corner", "torch"}
     try:
         import pkg_resources
         installed = {pkg.key for pkg in pkg_resources.working_set}
