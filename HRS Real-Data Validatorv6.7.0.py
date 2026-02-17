@@ -26,40 +26,39 @@ from scipy.integrate import odeint
 import os
 
 # ==========================================
-# 1. 動力學引擎：能量交換 ODE
+# 1. 動力學引擎：能量濃度掛鉤 (Q = Gamma * H * rho_m)
 # ==========================================
-def cosmo_engine(y, a, Gamma, Om0):
+def cosmo_engine_v67(y, a, Gamma, Om0):
     # y[0] = rho_m, y[1] = rho_hol
     rho_m, rho_hol = y
     
-    # 總能量密度 (假設輻射在低紅移可忽略)
+    # 總能量密度
     H_sq = (rho_m + rho_hol) 
     H = np.sqrt(max(H_sq, 1e-10))
     
-    # 交互作用項 Q = Gamma * H * rho_hol
-    Q = Gamma * H * rho_hol
+    # 【核心修改】：能量交換 Q 與物質濃度 rho_m 成正比
+    # 這代表能量變化率隨環境能量濃度而變 (時間動力隨能量演化)
+    Q = Gamma * H * rho_m
     
-    # 演化方程 d(rho)/da = (d(rho)/dt) / (aH)
+    # 演化方程 d(rho)/da
     d_rho_m = (-3 * H * rho_m + Q) / (a * H)
-    d_rho_hol = (-Q) / (a * H) # 假設全息項本身是 Lambda-like (w=-1)
+    d_rho_hol = (-Q) / (a * H)
     
     return [d_rho_m, d_rho_hol]
 
-def get_H_history(Om0, Gamma, z_max):
-    a_steps = np.linspace(1.0, 1.0/(1.0 + z_max), 500)
-    # 初始條件 (現在 a=1): rho_m = Om0, rho_hol = (1 - Om0)
+def get_H_history_v67(Om0, Gamma, z_max):
+    a_steps = np.linspace(1.0, 1.0/(1.0 + z_max), 600)
     y0 = [Om0, 1.0 - Om0]
-    
-    sol = odeint(cosmo_engine, y0, a_steps, args=(Gamma, Om0))
+    sol = odeint(cosmo_engine_v67, y0, a_steps, args=(Gamma, Om0))
     rho_m_h, rho_hol_h = sol[:, 0], sol[:, 1]
-    H_history = np.sqrt(rho_m_h + rho_hol_h)
+    H_history = np.sqrt(np.maximum(rho_m_h + rho_hol_h, 1e-10))
     return a_steps, H_history
 
 # ==========================================
-# 2. 數據載入 (維持 z > 0.1 斷點測試)
+# 2. 數據載入 (堅持 z > 0.1 斷點測試)
 # ==========================================
-def load_data_v66(z_min=0.1):
-    print(f"[*] v6.6.0 啟動：全息能量交換動力學測試 (z > {z_min})")
+def load_data_v67(z_min=0.1):
+    print(f"[*] v6.7.0 啟動：能量濃度掛鉤模型 (z > {z_min})")
     dat_file = "Pantheon+SH0ES.dat"
     cov_file = "Pantheon+SH0ES_STAT+SYS.cov"
     
@@ -90,21 +89,15 @@ def log_likelihood(theta, z_obs, mu_obs, inv_cov, model='hrs'):
         om, gamma = theta
     
     if not (0.2 < om < 0.5): return -np.inf
-    if model == 'hrs' and not (-0.5 < gamma < 0.5): return -np.inf
+    if model == 'hrs' and not (-1.0 < gamma < 1.0): return -np.inf
 
-    # 解 ODE 得到膨脹歷史
-    a_hist, H_hist = get_H_history(om, gamma, np.max(z_obs)*1.1)
+    a_hist, H_hist = get_H_history_v67(om, gamma, np.max(z_obs)*1.2)
     z_hist = 1.0/a_hist - 1.0
     
-    # 積分求光度距離 dl
-    # dc = c * integral(1/H dz)
     c = 299792.458
     inv_H = 1.0 / H_hist
-    # 注意 a_hist 是從 1 到 0 (降序)，所以 z_hist 是從 0 到 z_max (升序)
-    # 我們需要對 z 進行梯形積分
     dc_cum = np.cumsum(inv_H * np.gradient(z_hist)) * c
     
-    # 插值得到觀測點的距離
     dl = (1 + z_obs) * np.interp(z_obs, z_hist, dc_cum)
     mu_model = 5.0 * np.log10(np.maximum(dl, 1e-10)) + 25.0
     
@@ -117,38 +110,34 @@ def log_likelihood(theta, z_obs, mu_obs, inv_cov, model='hrs'):
 # 4. 執行
 # ==========================================
 if __name__ == "__main__":
-    z, mu, inv_cov = load_data_v66(z_min=0.1)
+    z, mu, inv_cov = load_data_v67(z_min=0.1)
     if z is not None:
-        nwalkers, steps = 32, 600
+        nwalkers, steps = 32, 800
         
-        # 這裡改用 2 參數模型：Om, Gamma
-        print("[*] 正在透過 ODE 解構全息能量流...")
+        print("[*] 正在計算「能量濃度-時間」耦合演化...")
         sampler = emcee.EnsembleSampler(nwalkers, 2, log_likelihood, args=(z, mu, inv_cov, 'hrs'))
-        pos = [0.3, 0.01] + 1e-3*np.random.randn(nwalkers, 2)
+        pos = [0.31, 0.05] + 1e-3*np.random.randn(nwalkers, 2)
         sampler.run_mcmc(pos, steps, progress=True)
 
-        # 獲取結果
-        flat_samples = sampler.get_chain(discard=200, flat=True)
-        best_idx = np.argmax(sampler.get_log_prob(discard=200, flat=True))
+        flat_samples = sampler.get_chain(discard=300, flat=True)
+        best_idx = np.argmax(sampler.get_log_prob(discard=300, flat=True))
         om_b, gamma_b = flat_samples[best_idx]
         
-        # 計算 BIC
-        max_lp = np.max(sampler.get_log_prob(discard=200, flat=True))
-        bic_hrs = 2 * np.log(len(z)) - 2 * max_lp # 2 參數
+        max_lp = np.max(sampler.get_log_prob(discard=300, flat=True))
+        bic_hrs = 2 * np.log(len(z)) - 2 * max_lp 
         
-        # 基準 LCDM (1 參數: Om)
         sampler_l = emcee.EnsembleSampler(nwalkers, 1, log_likelihood, args=(z, mu, inv_cov, 'lcdm'))
-        sampler_l.run_mcmc(0.3 + 1e-3*np.random.randn(nwalkers, 1), steps, progress=True)
-        max_lp_l = np.max(sampler_l.get_log_prob(discard=200, flat=True))
+        sampler_l.run_mcmc(0.31 + 1e-3*np.random.randn(nwalkers, 1), steps, progress=True)
+        max_lp_l = np.max(sampler_l.get_log_prob(discard=300, flat=True))
         bic_lcdm = 1 * np.log(len(z)) - 2 * max_lp_l
         
         print("\n" + "="*50)
-        print("   HRS v6.6.0 全息能量交換報告 (z > 0.1)")
+        print("   HRS v6.7.0 能量濃度交互報告 (z > 0.1)")
         print("="*50)
         print(f" Delta BIC: {bic_lcdm - bic_hrs:.4f}")
         print("-" * 50)
-        print(f" 能量交換率 Gamma : {gamma_b:.4f}")
-        print(f" 物質密度 Om      : {om_b:.4f}")
+        print(f" 交互耦合 Gamma : {gamma_b:.4f}")
+        print(f" 物質密度 Om    : {om_b:.4f}")
         print("="*50)
-        print(f" [分析] 若 Gamma > 0 且 Delta BIC > 0，則支持「能量驅動時間」立論。")
+        print(f" [深度分析] 若 Gamma > 0，代表全息能量隨物質密度演化而釋放。")
 
