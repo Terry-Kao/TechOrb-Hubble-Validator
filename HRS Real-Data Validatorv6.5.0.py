@@ -22,15 +22,14 @@ setup_environment()
 import numpy as np
 import pandas as pd
 import emcee
-import corner
 import matplotlib.pyplot as plt
 import os
 
 # ==========================================
-# 1. 數據載入 (維持 v6.3.4 的深空斷點標準 z > 0.1)
+# 1. 數據載入 (保持 z > 0.1 斷點測試以示嚴謹)
 # ==========================================
-def load_data_wave(z_min=0.1):
-    print(f"[*] v6.4.0 全息球面波啟動：斷點 z > {z_min}")
+def load_data_v65(z_min=0.1):
+    print(f"[*] v6.5.0 啟動：執行「能量-時間」耦合動力學測試 (z > {z_min})")
     dat_file = "Pantheon+SH0ES.dat"
     cov_file = "Pantheon+SH0ES_STAT+SYS.cov"
     
@@ -52,41 +51,50 @@ def load_data_wave(z_min=0.1):
     return z_obs, mu_obs, inv_cov
 
 # ==========================================
-# 2. 全息球面波模型 (Sinc Function)
+# 2. 全息動力學核心 (Energy-Time Evolution)
 # ==========================================
-def theory_mu_wave(z, om, alpha, beta, model='hrs'):
+def theory_mu_dynamics(z, om, w0, wa):
+    """
+    om: 物質密度
+    w0, wa: 全息流體的狀態方程參數 (CPL parametrization)
+    這代表了能量變化如何驅動膨脹(時間流動)
+    """
     c = 299792.458
-    z_integ = np.linspace(0, np.max(z)*1.1, 1000)
-    Ez = np.sqrt(om * (1 + z_integ)**3 + (1 - om))
+    # a = 1 / (1+z)
+    a_integ = np.linspace(1.0, 1.0/(1.0 + np.max(z)*1.1), 1000)
+    z_integ = 1.0/a_integ - 1.0
     
-    if model == 'hrs_wave':
-        # 全息球面波公式: sinc(z/alpha) = sin(z/alpha) / (z/alpha)
-        # 防止 z=0 除以零
-        x = np.maximum(z_integ / alpha, 1e-9)
-        correction = 1.0 + beta * (np.sin(x) / x)
-        hz = Ez * correction
-    else:
-        hz = Ez
-        
-    inv_hz = 1.0 / hz
-    dc_cum = np.cumsum(inv_hz) * (z_integ[1] - z_integ[0]) * c
-    dc_interp = np.interp(z, z_integ, dc_cum)
+    # 全息流體的能量演化項 (基於 CPL 模型演化)
+    # rho_hol ~ a^(-3(1+w0+wa)) * exp(-3*wa*(1-a))
+    f_a = a_integ**(-3*(1 + w0 + wa)) * np.exp(-3 * wa * (1 - a_integ))
+    
+    # 總哈伯演化 E(z)
+    ol = 1.0 - om # 假設平坦宇宙，剩下的就是全息能量
+    Ez = np.sqrt(om * (1 + z_integ)**3 + ol * f_a)
+    
+    # 距離積分
+    inv_hz = 1.0 / Ez
+    # 這裡積分需要小心，因為 z_integ 是降序
+    dc_cum = np.abs(np.cumsum(inv_hz) * (z_integ[1] - z_integ[0])) * c
+    dc_interp = np.interp(z, z_integ[::-1], dc_cum[::-1])
     dl = (1 + z) * dc_interp
     return 5.0 * np.log10(np.maximum(dl, 1e-10)) + 25.0
 
 # ==========================================
-# 3. 似然函數 (帶解析邊際化)
+# 3. 似然函數 (解析邊際化)
 # ==========================================
 def log_likelihood(theta, z, mu, inv_cov, model_type):
     if model_type == 'lcdm':
-        om = theta[0]; alpha, beta = 1.0, 0.0
+        om = theta[0]
+        w0, wa = -1.0, 0.0 # 標準暗能量
     else:
-        om, alpha, beta = theta
+        om, w0, wa = theta
     
+    # 物理先驗
     if not (0.2 < om < 0.5): return -np.inf
-    if model_type == 'hrs_wave' and not (0.01 < alpha < 5.0 and -1.0 < beta < 1.0): return -np.inf
+    if model_type == 'hrs_dyn' and not (-2.0 < w0 < -0.5 and -2.0 < wa < 2.0): return -np.inf
 
-    mu_model = theory_mu_wave(z, om, alpha, beta, model_type)
+    mu_model = theory_mu_dynamics(z, om, w0, wa)
     diff = mu - mu_model
     delta = np.sum(np.dot(inv_cov, diff)) / np.sum(inv_cov)
     diff_corr = diff - delta
@@ -94,37 +102,36 @@ def log_likelihood(theta, z, mu, inv_cov, model_type):
     return -0.5 * chisq
 
 # ==========================================
-# 4. 執行
+# 4. 執行與對齊
 # ==========================================
 if __name__ == "__main__":
-    z, mu, inv_cov = load_data_wave(z_min=0.1)
+    z, mu, inv_cov = load_data_v65(z_min=0.1)
     
     if z is not None:
-        nwalkers, steps = 32, 1500 # 增加步數以確保收斂
+        nwalkers, steps = 32, 1000
         
-        print("\n[*] 正在計算全息球面波干涉...")
-        sampler_w = emcee.EnsembleSampler(nwalkers, 3, log_likelihood, args=(z, mu, inv_cov, 'hrs_wave'))
-        # 初始值設定
-        pos = [0.31, 0.5, 0.1] + 1e-3*np.random.randn(nwalkers, 3)
-        sampler_w.run_mcmc(pos, steps, progress=True)
+        print("\n[*] 正在計算「全息能量-時間」演化軌跡...")
+        sampler_d = emcee.EnsembleSampler(nwalkers, 3, log_likelihood, args=(z, mu, inv_cov, 'hrs_dyn'))
+        pos = [0.3, -1.1, 0.1] + 1e-3*np.random.randn(nwalkers, 3)
+        sampler_d.run_mcmc(pos, steps, progress=True)
         
-        # 基準模型 LCDM
         sampler_l = emcee.EnsembleSampler(nwalkers, 1, log_likelihood, args=(z, mu, inv_cov, 'lcdm'))
-        sampler_l.run_mcmc(0.31 + 1e-3*np.random.randn(nwalkers, 1), steps, progress=True)
+        sampler_l.run_mcmc(0.3 + 1e-3*np.random.randn(nwalkers, 1), steps, progress=True)
 
-        # 統計
+        # 統計分析
         def get_metrics(sampler, k):
-            lp = sampler.get_log_prob(discard=500, flat=True)
-            return k * np.log(len(z)) - 2*np.max(lp), sampler.get_chain(discard=500, flat=True)[np.argmax(lp)]
+            lp = sampler.get_log_prob(discard=300, flat=True)
+            return k * np.log(len(z)) - 2*np.max(lp), sampler.get_chain(discard=300, flat=True)[np.argmax(lp)]
 
         bic_l, _ = get_metrics(sampler_l, 1)
-        bic_w, theta_w = get_metrics(sampler_w, 3)
+        bic_d, theta_d = get_metrics(sampler_d, 3)
 
         print("\n" + "="*50)
-        print("   HRS v6.4.0 全息球面波測試報告")
+        print("   HRS v6.5.0 能量-時間耦合報告 (z > 0.1)")
         print("="*50)
-        print(f" Delta BIC (深空): {bic_l - bic_w:.4f}")
+        print(f" Delta BIC: {bic_l - bic_d:.4f}")
         print("-" * 50)
-        print(f" 最佳參數 Om:{theta_w[0]:.4f}, Alpha:{theta_w[1]:.4f}, Beta:{theta_w[2]:.4f}")
+        print(f" 最佳參數 Om:{theta_d[0]:.4f}, w0:{theta_d[1]:.4f}, wa:{theta_d[2]:.4f}")
+        print(f" 結論: { '支持新動力學' if bic_l - bic_d > 0 else '仍受阻於 LCDM' }")
         print("="*50)
 
