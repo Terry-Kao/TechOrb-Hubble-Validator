@@ -26,29 +26,31 @@ from scipy.integrate import quad
 import os
 
 # ==========================================
-# 1. v12.0.0 核心：自適應反饋矩陣 (AFC)
+# 1. 核心模型：自適應反饋補償 (AFC)
 # ==========================================
-def feedback_correction(z, K, alpha):
+def stability_compensation(z, K, alpha):
     """
-    K: 反饋強度 (係數)
-    alpha: 資訊爆炸的斜率 (反映演化速度)
+    K: 反饋補償強度
+    alpha: 資訊爆炸的演化斜率 (代表系統對演化速率的敏感度)
     """
-    # 模擬資訊演化速度：晚期宇宙 (低 z) 資訊增加最快
-    # 這裡使用一個反饋函數，模擬系統為了維持穩定而產生的補償
-    info_change_rate = np.exp(-alpha * z)
+    # 模擬資訊產出率 (Information Production Rate)
+    # 在晚期宇宙 (z 靠近 0)，演化速率達到峰值
+    dI_dz = np.exp(-alpha * z)
     
-    # 補償項：正比於資訊改變率
-    # 邏輯：改變越快，補償越強 (扭曲越大)
-    correction = K * info_change_rate
-    return 1.0 + correction
+    # 【v12.0.0 核心創新】：動態補償項
+    # 這裡的邏輯是：系統為了補償資訊噴發帶來的擾動，
+    # 會產生一個「自適應扭曲」來維持整體的穩定態。
+    # 這是一個非線性的指數補償。
+    return np.exp(K * dI_dz)
 
 def E_inv_v12(z, om, K, alpha):
+    # 背景時空：標準 LCDM
     ol = 1.0 - om
     E_lcdm = np.sqrt(om * (1+z)**3 + ol)
     
-    # 套用自適應反饋
-    adj = feedback_correction(z, K, alpha)
-    H_obs = E_lcdm * adj
+    # 套用自適應反饋補償
+    # 這裡 H_obs 是觀測者在扭曲架構下看到的膨脹率
+    H_obs = E_lcdm * stability_compensation(z, K, alpha)
     
     return 1.0 / np.maximum(H_obs, 1e-10)
 
@@ -61,31 +63,73 @@ def get_dl_v12(z_list, om, K, alpha):
     return np.array(dl_list)
 
 # ==========================================
-# 2. 統計擬合與執行
+# 2. 統計擬合函數 (Log-Likelihood)
 # ==========================================
 def log_likelihood(theta, z_obs, mu_obs, inv_cov):
     om, K, alpha = theta
-    if not (0.2 < om < 0.45): return -np.inf
-    if not (-0.5 < K < 0.5): return -np.inf  # 強度先驗
-    if not (0.1 < alpha < 30.0): return -np.inf # 速率先驗
-
-    dl = get_dl_v12(z_obs, om, K, alpha)
-    mu_model = 5.0 * np.log10(np.maximum(dl, 1e-10)) + 25.0
     
-    diff = mu_obs - mu_model
-    delta = np.sum(np.dot(inv_cov, diff)) / np.sum(inv_cov)
-    chi2 = np.dot(diff - delta, np.dot(inv_cov, diff - delta))
-    return -0.5 * chi2
+    # 嚴格的物理先驗 (Priors)
+    if not (0.25 < om < 0.35): return -np.inf
+    # K 可以是正或負，代表「加速補償」或「延遲補償」
+    if not (-0.3 < K < 0.3): return -np.inf
+    # alpha 決定了補償發生的紅移範圍
+    if not (0.1 < alpha < 20.0): return -np.inf
 
-def run_v12():
-    print("[*] 啟動 v12.0.0：自適應反饋補償矩陣 (AFC)...")
-    # 數據加載部分 (省略，同前)
-    # ...
+    try:
+        dl = get_dl_v12(z_obs, om, K, alpha)
+        mu_model = 5.0 * np.log10(np.maximum(dl, 1e-10)) + 25.0
+        
+        diff = mu_obs - mu_model
+        # 邊緣化哈伯常數 H0 的影響
+        delta = np.sum(np.dot(inv_cov, diff)) / np.sum(inv_cov)
+        chi2 = np.dot(diff - delta, np.dot(inv_cov, diff - delta))
+        return -0.5 * chi2
+    except:
+        return -np.inf
+
+# ==========================================
+# 3. 執行 MCMC 分析
+# ==========================================
+def run_v12_analysis():
+    print("[*] HRS v12.0.0: Adaptive Feedback Compensation (AFC) 啟動...")
     
+    # 數據檢查
+    dat_file, cov_file = "Pantheon+SH0ES.dat", "Pantheon+SH0ES_STAT+SYS.cov"
+    if not os.path.exists(dat_file):
+        print("[-] 找不到 Pantheon+ 數據文件，請確認環境。")
+        return
+
+    df = pd.read_csv(dat_file, sep=r'\s+')
+    z, mu = df['zHD'].values, df['m_b_corr'].values
+    raw_cov = np.fromfile(cov_file, sep=' ')[1:].reshape((len(z), len(z)))
+    inv_cov = np.linalg.inv(raw_cov + np.eye(len(z)) * 1e-5)
+
     nwalkers, steps = 32, 1000
     sampler = emcee.EnsembleSampler(nwalkers, 3, log_likelihood, args=(z, mu, inv_cov))
-    p0 = [0.31, 0.05, 5.0] + 1e-4 * np.random.randn(nwalkers, 3)
+    
+    # 初始位置：從之前的 v11 經驗微調
+    p0 = [0.30, 0.05, 10.0] + 1e-4 * np.random.randn(nwalkers, 3)
+    
+    print("[*] 開始馬可夫鏈蒙地卡羅 (MCMC) 採樣，請稍候...")
     sampler.run_mcmc(p0, steps, progress=True)
     
-    # 診斷報告
-    # ...
+    # 獲取結果
+    flat_samples = sampler.get_chain(discard=400, flat=True)
+    max_lp_idx = np.argmax(sampler.get_log_prob(discard=400, flat=True))
+    best_fit = flat_samples[max_lp_idx]
+    
+    print("\n" + "="*50)
+    print("   HRS v12.0.0 自適應反饋補償報告")
+    print("="*50)
+    print(f" 反饋補償強度 (K)    : {best_fit[1]:.4f}")
+    print(f" 資訊演化斜率 (Alpha): {best_fit[2]:.4f}")
+    print(f" 物質密度背景 (Om)   : {best_fit[0]:.4f}")
+    print("-" * 50)
+    print(" [判讀指南]")
+    print(" 1. 若 K 為正，代表系統為了應對資訊增長，產生了觀測上的加速效應。")
+    print(" 2. Alpha 越高，代表這個補償越集中在現代宇宙 (低紅移)。")
+    print("="*50)
+
+if __name__ == "__main__":
+    run_v12_analysis()
+
