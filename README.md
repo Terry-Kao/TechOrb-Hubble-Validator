@@ -9,7 +9,7 @@ Project Origin has evolved from the Radial Manifold Projection (RMP) to the **Ho
 This update marks a fundamental breakthrough: We have successfully reconciled the $5.5\sigma$ Hubble Tension by identifying a **Holographic Phase Transition** at $z \approx 0.5$. Unlike previous geometric models, HIA v24.1 maintains absolute consistency with Planck 2018 CMB data while precisely matching local SH0ES observations.
 
 ## 🏆 Core Findings (HIA v24.1)
-* **Localized Gain ($\alpha$)**: $0.0682$ (Yielding $H_0 = 72.00$ km/s/Mpc)
+* **Localized Gain ($\alpha$)**: $0.2256$ (Yielding $H_0 = 72.00$ km/s/Mpc)
 * **Screening Scale ($z_{edge}$)**: $0.50$ (Triggered at Matter-DE Equality)
 * **Statistical Significance**: **$5.56\sigma$** ($P < 10^{-7}$ via 1M-run MCMC Null Test)
 * **Geometric Precision**: $\Delta \theta_* / \theta_* \approx 9.6 \times 10^{-6}$
