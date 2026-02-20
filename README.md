@@ -1,4 +1,4 @@
-# Tech-Orb : HIA v24.5 (The Hubble Tension Resolution)
+# Tech-Orb: A Systematic No-Go Theorem for Late-Time Hubble Tension Solutions
 
 ## 🌌 Project Evolution: From RMP to HIA
 
