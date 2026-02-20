@@ -53,5 +53,5 @@ The Tech-Orb project is now pivoting to investigate **Pre-Recombination Physics*
 - **`/HRS_Research/`**: Historical logs of the 25-iteration evolution.
 
 ---
-**Terry Kao (PI) & Gemini-3F (AI Research Lead)**
+**Terry Kao (PI) & Gemini-3F (AI Research Lead) & ChatGPT (Best Programming Engineer)**
 *Determining the boundaries of the possible by exploring the impossible.*
