@@ -1,36 +1,27 @@
-# Technical Manuscript: The HIA No-Go Theorem
+# Historical Exclusion Study: Tested HIA Late-Time Subclasses
 
-## 📝 Overview
-This directory contains the formal academic documentation and numerical evidence for the **HIA No-Go Theorem**. 
+> **Governance notice (2026-10-20):** This directory preserves a February 2026 negative-result study. Its evidence applies only to the tested kinematic, screened-gravity, and smooth-disformal implementations under their recorded assumptions. It is **not** a universal no-go theorem for every late-time Hubble-tension model. Universal wording in historical filenames and manuscript text is superseded by this notice and by `validators/late_time/EXCLUSION_MAP_V1_V25.md`.
 
-Through 25 iterations of the Holographic Information Alignment (HIA) framework, we systematically tested the feasibility of resolving the Hubble Tension via late-time ($z < 0.5$) modifications. This repository serves as a formal record of the physical boundaries that render such solutions non-viable.
+## Overview
 
-## 📄 Key Files
-- `manuscript.tex`: The complete LaTeX source code for the paper *"A Comprehensive No-Go Theorem for Late-Time Local Modifications to the Hubble Tension"*.
-- `Evidence_Code_v25.py`: The final disformal ray-tracing engine used to calculate the GW170817 causality violation.
-- `Numerical_Audit_Log.md`: A summary of the 24 previous failed iterations and the specific constraints they triggered.
+Through HIA v1–v25, this project explored selected late-time (`z < 0.5`) modifications. The retained code, manuscript, plot, and audit log are historical evidence of those experiments and their failure modes; they do not demonstrate exhaustive coverage of theory space.
 
-## 🔬 Core Numerical Evidence
+## Files
 
-### 1. The Disformal Causality Violation (The "10-Year Lead")
-To produce a distance modulus shift of $\Delta\mu \approx 0.17$ mag (required to bridge the $H_0$ gap), the disformal coupling strength $D_0$ must be of order $10^7$ to $10^8$ $Mpc^2$. 
-- **Result:** At $z = 0.009$ (the distance of GW170817), this coupling induces a photon-arrival lead of **$-3.10 \times 10^8$ seconds**.
-- **Observational Limit:** $\Delta t_{GW} \approx 1.7$ seconds.
-- **Verdict:** Falsified by **8 orders of magnitude**.
+- `manuscript.tex`: historical manuscript, now explicitly retitled and scoped as an exclusion study.
+- `Evidence_Code_v25.py`: stored disformal ray-tracing implementation used for the recorded numerical result.
+- `Numerical_Audit_Log.md`: historical iteration narrative; current interpretation is bounded by the exclusion map.
+- `hia_disformal_raytrace.png`: stored output image; full R0-style provenance has not been frozen.
 
-### 2. The Screening Suppression (White Dwarf Paradox)
-We simulated the effect of a $11.23\%$ increase in $G_{eff}$ inside a white dwarf core to alter SNIa absolute luminosity.
-- **Result:** Due to the high Newtonian potential ($\Phi_N \approx 6.79 \times 10^{-4}$), the Chameleon/Symmetron screening effect suppresses the internal gain to **$< 0.02\%$**.
-- **Verdict:** The fifth force is physically unable to penetrate the progenitor core to induce the necessary luminosity shift.
+## Bounded Findings
 
-### 3. The Kinematic Tension (The $H_{base}$ Minimum)
-To preserve the Planck CMB acoustic scale $\theta_*$ while introducing a $z < 0.5$ expansion gain, the baseline $H_{base}$ was optimized as a free parameter.
-- **Result:** $H_{base}$ consistently collapsed to **$< 60$ km/s/Mpc**.
-- **Verdict:** This results in a cosmic age significantly exceeding the limits set by the oldest observed globular clusters and BBN.
+1. **Tested smooth disformal implementation:** the coupling used to obtain the target distance-modulus shift produced a recorded photon/GW timing difference incompatible with the adopted GW170817 constraint.
+2. **Tested screened-gravity implementation:** under its stated screening assumptions, the white-dwarf interior did not obtain the required `G_eff` shift while Solar-System constraints were imposed.
+3. **Tested kinematic patch family:** acoustic-angle compensation drove its baseline parameters into tension with the physical constraints adopted in that analysis.
 
-## ⚖️ Citation & Usage
-This work is intended as a **Negative Result Reference**. Researchers exploring late-time modifications (varying G, disformal optics, or local $H(z)$ gains) are encouraged to use these numerical benchmarks to verify their own models against GW170817 and Stellar Screening constraints.
+These are `EXCLUDED: IMPLEMENTATION` or `EXCLUDED: SUBCLASS` historical results—not statements that all late-time physics is impossible.
 
----
-**"A theory is only as strong as the boundaries it cannot cross."**
-*Tech-Orb Research Group | February 2026*
+## Reuse Warning
+
+Before reuse, independently audit model equations, parameter domain, units, code, provenance, external constraints, and numerical tolerances. The old optimizer and ray-tracing results are not a multi-probe likelihood and do not validate Tech-Orb Foundation.
+
