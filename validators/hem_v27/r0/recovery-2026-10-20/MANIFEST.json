@@ -6,7 +6,10 @@
   "gate": {
     "pipeline": "BLOCKED",
     "model": "NOT APPLICABLE",
-    "clean_room_reproduced": false
+    "clean_room_reproduced": false,
+    "tolerance_contract_frozen": true,
+    "environment_blocker": "ENV-02",
+    "model_verdict": "NOT APPLICABLE"
   },
   "candidate_class": {
     "repository": "https://github.com/lesgourg/class_public",
@@ -94,6 +97,20 @@
       "sha256": "9311f9636d36983b3a73d823858d95651ae4a14766c028d61ead067c5ad39b40",
       "repository_path": null,
       "availability": "local_only"
+    },
+    {
+      "source_path": null,
+      "bytes": 3363,
+      "sha256": "2c6cbfe8eae93b3411171136da6cec06a3ee6dceeeccd3790f2c1bfe642cb8f2",
+      "repository_path": "validators/hem_v27/r0/recovery-2026-10-20/TOLERANCE_CONTRACT.md",
+      "availability": "committed_pre_run_contract"
+    },
+    {
+      "source_path": null,
+      "bytes": 1267,
+      "sha256": "094af6e22166dfb7164d463609cc34b8b549e1b261882596de2860f6a27a8d08",
+      "repository_path": "validators/hem_v27/r0/recovery-2026-10-20/ENVIRONMENT_CHECK_POST_REBOOT.json",
+      "availability": "committed_environment_evidence"
     }
   ]
 }

@@ -27,13 +27,16 @@ The upstream tag `v3.2.0` resolves on GitHub to `aa92943e4ab86b56970953589b4897a
 
 ## Blockers and stop point
 
-1. **ENV-01:** WSL lists only `docker-desktop`. Docker client 29.2.1 returns Server=null and cannot connect to `dockerDesktopLinuxEngine`; the Linux engine pipe is absent. No clean-room runtime is available through the inspected tools. No service was started or software installed.
+1. **ENV-01 (closed after reboot):** Docker Desktop 4.61.0 and Linux engine 29.2.1 are now running and reachable. See `ENVIRONMENT_CHECK_POST_REBOOT.json`.
+2. **ENV-02 (active):** Docker stores its data VHDX on C:. Creating a container would therefore create task-related metadata or writable layers outside the authorized H: root. The only existing WSL distro is `docker-desktop`; it can see the H: mount but has no gcc, make, Python, or git. No container, image, distro, build, or numerical run was created.
 2. **PROV-01:** Original compiler/dependency versions, build log, runtime environment, executable identity, and source-to-output linkage are missing.
 3. **RAW-01:** The runner deletes generated per-run INIs and raw CLASS files, and captures stdout without archiving it. Only derived outputs were recovered.
 4. **BASE-01:** Historical neutrino settings inherit `N_ncdm=0` and `N_eff=3.044`. They differ from the explicit massive-neutrino Planck example. See `BASELINE_COMPARISON.md`.
-5. **TOL-01:** Historical tolerances were not frozen. A justified comparison contract must be recorded before a new independent rerun and must not be tuned after seeing rerun deviations.
+5. **TOL-01 (closed for the first rerun):** `TOLERANCE_CONTRACT.md` was frozen before any independent numerical run. Its criteria cannot be relaxed after seeing results.
 
-R1–R4 remain NOT STARTED. A recovered file/hash check cannot pass R0. Once a clean Linux environment with all writes confined to the authorized H: workspace is available, follow `REPRODUCTION_PLAN.md` and retain every input, environment setting, build/run log, and raw output.
+R1–R4 remain NOT STARTED. A recovered file/hash check cannot pass R0. Once a clean Linux environment with all task writes, container metadata, caches, temporary files, logs, and outputs confined to the authorized H: workspace is available, follow `REPRODUCTION_PLAN.md` and retain every input, environment setting, build/run log, and raw output.
+
+The reboot check changes only environment evidence. It does not change the R0 verdict: **BLOCKED / NOT PASSED**.
 
 ## Historical wording
 

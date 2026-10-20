@@ -1,0 +1,29 @@
+{
+  "inspection_date": "2026-10-20",
+  "phase": "post_reboot",
+  "docker_desktop": {
+    "version": "4.61.0 (219004)",
+    "status": "running",
+    "engine_version": "29.2.1",
+    "engine_os_arch": "linux/amd64",
+    "context": "desktop-linux",
+    "engine_reachable": true,
+    "existing_images": [
+      "ai_sandbox_runner:latest@sha256:10b27954fb579ab96ff43360e994d231603ad68453072c059873b7b05937aa1b",
+      "node:24-alpine@sha256:7fddd9ddeae8196abf4a3ef2de34e11f7b1a722119f91f28ddf1e99dcafdf114"
+    ]
+  },
+  "wsl": {
+    "distros": ["docker-desktop"],
+    "version": 2,
+    "docker_desktop_tools": {"gcc": false, "make": false, "python3": false, "git": false},
+    "h_mount_visible": true
+  },
+  "storage": {
+    "docker_data_vhdx": "C:\\Users\\tkkus\\AppData\\Local\\Docker\\wsl\\disk\\docker_data.vhdx",
+    "authorized_task_root": "H:\\AI_Products\\AI_Factory_Workspace\\",
+    "container_creation_safe_under_policy": false
+  },
+  "blocker": "ENV-02: Docker engine recovered, but creating a container would create task-related metadata or writable layers in the Docker data VHDX on C:. The sole existing WSL distro lacks the required build/runtime tools. No container, image, distro, build, or numerical run was created.",
+  "clean_room_reproduced": false
+}

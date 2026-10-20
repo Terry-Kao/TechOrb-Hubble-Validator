@@ -41,9 +41,18 @@
 
 **Scope:** Freeze inspected candidate runner/notebook, patched RECFAST source, complete tracked diff, small historical summary and source/output hashes. Record that N_ncdm=0 is inherited from CLASS defaults and distinguish the 0.06 eV neutrino comparison. Larger outputs remain local and indexed by checksum.
 
-**Unresolved:** ENV-01 (no available Docker Linux engine), PROV-01 (historical build/runtime identity), RAW-01 (deleted INI/raw outputs), BASE-01 (baseline conventions), TOL-01 (rerun tolerance contract). Source-to-output attribution and independent clean-room reproduction remain unproved.
+**Unresolved:** ENV-02 (available Docker engine stores container data on unauthorized C:; sole existing WSL distro lacks toolchain), PROV-01 (historical build/runtime identity), RAW-01 (deleted INI/raw outputs), and BASE-01 (baseline conventions). Source-to-output attribution and independent clean-room reproduction remain unproved. ENV-01 is closed after the reboot; TOL-01 is closed by the pre-run contract.
 
 **Promotion condition:** A separate auditable clean-room gate report must resolve these blockers and satisfy GATE_PROTOCOL.md before any R0 PASS decision. Any recovered mismatch remains visible and prevents promotion.
+
+## D-2026-10-20-06 — Freeze first-rerun tolerances; retain BLOCKED after reboot
+
+**Status:** Proposed in R0 recovery draft PR; no gate promotion
+**Decision:** Freeze `TOLERANCE_CONTRACT.md` before any numerical rerun. Close ENV-01 because Docker Desktop and its Linux engine became reachable after reboot. Open ENV-02 because Docker's data VHDX is on C: and the only existing WSL distro lacks the required toolchain.
+
+**Execution consequence:** Do not create a container, image, distro, build, or numerical output until a pre-existing clean Linux runtime can keep all task artifacts, metadata, caches, temporary files, logs, and outputs within the authorized H: tree.
+
+**Gate consequence:** R0 remains BLOCKED / NOT PASSED; model verdict remains NOT APPLICABLE; R1-R4 remain NOT STARTED.
 
 ## Decision Entry Template
 

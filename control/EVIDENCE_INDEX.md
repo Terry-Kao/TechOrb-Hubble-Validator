@@ -50,6 +50,8 @@ This index distinguishes current control documents from preserved historical evi
 | R0-RESULTS-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/historical_outputs/` | Historical summary CSV; REPRO-BLOCKED |
 | R0-BASELINE-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/BASELINE_COMPARISON.md` | Reconstructed inputs and explicit neutrino convention comparison; no numerical rerun |
 | R0-ENV-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/ENVIRONMENT_CHECK.json` | Docker server unavailable; clean room not run |
+| R0-ENV-POST-REBOOT-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/ENVIRONMENT_CHECK_POST_REBOOT.json` | Engine reachable; C:-hosted Docker data violates H:-only boundary; no run |
+| R0-TOLERANCE-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/TOLERANCE_CONTRACT.md` | Binding criteria frozen before first clean-room rerun |
 | R0-CHECKS-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/RECOVERY_CHECKS.json` | Notebook equality, ZIP contents and source-hunk match; no scientific acceptance |
 
 ## Remaining Evidence Blocking R0
@@ -58,6 +60,6 @@ This index distinguishes current control documents from preserved historical evi
 - original compiler/dependency/environment identities and build/run logs;
 - original per-run INIs and raw CLASS outputs, deleted by the runner;
 - baseline convention audit, including N_ncdm=0 versus Σmν=0.06 eV;
-- available clean-room environment, frozen rerun tolerances and independent rerun.
+- an H:-confined clean-room environment and independent rerun under the frozen tolerance contract.
 
 Tracking: [issue #3](https://github.com/Terry-Kao/TechOrb-Hubble-Validator/issues/3). R0 remains BLOCKED / NOT PASSED.

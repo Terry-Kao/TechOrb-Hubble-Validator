@@ -28,7 +28,7 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 
 | Gate | State | Reason |
 |---|---|---|
-| R0 Reproducibility Freeze | BLOCKED / NOT PASSED | Candidate source/patch/hash metadata recovered; clean-room runtime, original run provenance and raw outputs remain missing. |
+| R0 Reproducibility Freeze | BLOCKED / NOT PASSED | Candidate source/patch/hash metadata and a pre-run tolerance contract are frozen. Docker engine recovered after reboot, but its C:-hosted data VHDX violates the authorized H:-only task-artifact boundary; original run provenance and raw outputs also remain missing. |
 | R1 Baseline Definition Audit | NOT STARTED | Depends on R0. |
 | R2 Published Model Reproduction | NOT STARTED | Depends on R1. |
 | R3 Full Multi-Probe Likelihood | NOT STARTED | Depends on R2. |
@@ -47,4 +47,6 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 
 See [recovery package](../validators/hem_v27/r0/recovery-2026-10-20/README.md) and [issue #3](https://github.com/Terry-Kao/TechOrb-Hubble-Validator/issues/3). The inspected candidate uses CLASS v3.2.0 RECFAST, with implicit N_ncdm=0. Runner/notebook/source and small historical table are frozen; larger outputs are indexed by SHA256. The patch applied to fixed upstream source matches the recovered source exactly.
 
-Docker Linux engine is unavailable and WSL lists only docker-desktop. No independent clean-room reproduction was run. R0 pipeline is BLOCKED, model verdict NOT APPLICABLE. R1–R4 remain NOT STARTED. File identity does not establish historical production provenance or physical validity.
+After reboot, Docker Desktop 4.61.0 and Linux engine 29.2.1 became reachable. The engine's data VHDX is on C:, so container creation would violate the H:-only task-artifact boundary. The sole `docker-desktop` WSL distro can see H: but lacks gcc, make, Python and git. No container, image, distro, build, or numerical run was created.
+
+The first-rerun tolerance contract is now frozen. R0 remains BLOCKED, model verdict NOT APPLICABLE, and R1–R4 remain NOT STARTED. File identity and an unexecuted contract do not establish historical production provenance, numerical reproduction, or physical validity.
