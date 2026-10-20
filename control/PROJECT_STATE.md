@@ -20,15 +20,15 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 | F1 Taiji Dual Topology | ANSATZ | PROVISIONAL | Candidate global topology only. |
 | F2 Formula / Quantity Geometry | OPEN QUESTION | PROVISIONAL | No canonical construction or observable consequence. |
 | HIA v1–v25 late-time routes | EXCLUDED: SUBCLASS | HISTORICAL | Tested kinematic, screened-gravity, and smooth-disformal implementations are bounded by their recorded assumptions; not a universal no-go. |
-| HEM v26.4 | DERIVED computational claim | REPRO-BLOCKED | Sensitivity/degeneracy experiment only; Candidate recovery package frozen on this branch; historical production identity and clean-room rerun remain missing. |
-| HEM v27 | Validator protocol | PROVISIONAL | R0 not yet passed; R1–R4 not started. |
+| HEM v26.4 | DERIVED computational claim | HISTORICAL | Sensitivity/degeneracy experiment only. Frozen candidate rerun completed and failed 2/52 declared comparisons; historical production identity remains incomplete. |
+| HEM v27 | Validator protocol | PROVISIONAL | R0 FAIL; R1–R4 not started. |
 | Magnetogenesis action | ANSATZ / Candidate Bridge | PROVISIONAL | Not Foundation canon. |
 
 ## Gate State
 
 | Gate | State | Reason |
 |---|---|---|
-| R0 Reproducibility Freeze | BLOCKED / NOT PASSED | Candidate source/patch/hash metadata and a pre-run tolerance contract are frozen. Docker engine recovered after reboot, but its C:-hosted data VHDX violates the authorized H:-only task-artifact boundary; original run provenance and raw outputs also remain missing. |
+| R0 Reproducibility Freeze | FAIL | Authorized Docker clean-room execution completed. Unmodified control passed exactly, but 2 of 52 frozen historical field comparisons failed. Historical PROV-01/RAW-01 remain limitations, not rerun blockers. |
 | R1 Baseline Definition Audit | NOT STARTED | Depends on R0. |
 | R2 Published Model Reproduction | NOT STARTED | Depends on R1. |
 | R3 Full Multi-Probe Likelihood | NOT STARTED | Depends on R2. |
@@ -47,6 +47,6 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 
 See [recovery package](../validators/hem_v27/r0/recovery-2026-10-20/README.md) and [issue #3](https://github.com/Terry-Kao/TechOrb-Hubble-Validator/issues/3). The inspected candidate uses CLASS v3.2.0 RECFAST, with implicit N_ncdm=0. Runner/notebook/source and small historical table are frozen; larger outputs are indexed by SHA256. The patch applied to fixed upstream source matches the recovered source exactly.
 
-After reboot, Docker Desktop 4.61.0 and Linux engine 29.2.1 became reachable. The engine's data VHDX is on C:, so container creation would violate the H:-only task-artifact boundary. The sole `docker-desktop` WSL distro can see H: but lacks gcc, make, Python and git. No container, image, distro, build, or numerical run was created.
+The user explicitly authorized normal Docker/WSL system-level C: writes on 2026-10-20 while retaining all controllable project artifacts on H:. ENV-02 is closed. A Debian 12.12 Docker clean room built clean upstream and scientific-only patched binaries from exact commit `aa92943e4ab86b56970953589b4897adf2bd0f99`. The unmodified control passed with zero difference across 2499 multipoles.
 
-The first-rerun tolerance contract is now frozen. R0 remains BLOCKED, model verdict NOT APPLICABLE, and R1–R4 remain NOT STARTED. File identity and an unexecuted contract do not establish historical production provenance, numerical reproduction, or physical validity.
+The four-case comparison completed against the pre-run frozen contract. Fifty of 52 field checks passed; `max_residual_final_pct` failed for `Mode1_b1.40` and `Mode2_b1.35`. R0 is therefore FAIL, not BLOCKED. Model verdict remains NOT APPLICABLE and R1–R4 remain NOT STARTED. Historical PROV-01/RAW-01 are retained separately from the clean-room candidate-source verdict.

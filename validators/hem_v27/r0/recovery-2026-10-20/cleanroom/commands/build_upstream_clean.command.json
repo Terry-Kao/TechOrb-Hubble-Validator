@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "make",
+    "clean"
+  ],
+  "cwd": "/work/source_upstream",
+  "exit_code": 0
+}

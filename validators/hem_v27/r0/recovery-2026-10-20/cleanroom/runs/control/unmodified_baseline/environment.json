@@ -1,0 +1,9 @@
+{
+  "HIA_B_CLUMPING": "1.0",
+  "HIA_LYA_EXP": "0.0",
+  "source": "/work/source_upstream",
+  "source_commit": "aa92943e4ab86b56970953589b4897adf2bd0f99",
+  "binary_sha256": "4cfa533864efcb8abd0894f3898d91e2b92582ede4aff865184a5986bb0bdf3e",
+  "ini_sha256": "36e4c811a5299632d2c9d5a400bf260e4246bceabd54b3c50f6a862bfac23ab2",
+  "explicit_neutrino": false
+}

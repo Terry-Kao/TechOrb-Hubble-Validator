@@ -1,6 +1,8 @@
 # HEM v27 R0 recovery — 2026-10-20
 
-**Pipeline verdict: BLOCKED. Model verdict: NOT APPLICABLE.**
+**Pipeline verdict: FAIL. Model verdict: NOT APPLICABLE.**
+
+The clean-room reproduction is complete. See `R0_CLEANROOM_REPORT.md` and `cleanroom/`. The frozen candidate misses 2 of 52 declared historical field comparisons. The earlier recovery narrative below is retained as pre-run provenance and is superseded where it describes ENV-02 or the absence of a rerun.
 
 This package freezes candidate v26.4 artifacts actually inspected under `H:\AI_Products\AI_Factory_Workspace\TechOrb-Hubble-Validator`. The recovery resolves source/file identity for this candidate set. It does not prove which executable, build environment, or source bytes produced the historical CSV; missing run/build logs prevent that attribution. The controlling work item is [issue #3](https://github.com/Terry-Kao/TechOrb-Hubble-Validator/issues/3).
 
@@ -26,6 +28,8 @@ The upstream tag `v3.2.0` resolves on GitHub to `aa92943e4ab86b56970953589b4897a
 - No recovered file was executed or modified. No task artifact was created on C: or another drive.
 
 ## Blockers and stop point
+
+> Historical pre-run checkpoint: ENV-02 was subsequently closed by explicit user authorization on 2026-10-20. The clean-room run then completed and R0 was adjudicated FAIL. PROV-01 and RAW-01 below remain limitations of the original historical run, not blockers to the new rerun verdict.
 
 1. **ENV-01 (closed after reboot):** Docker Desktop 4.61.0 and Linux engine 29.2.1 are now running and reachable. See `ENVIRONMENT_CHECK_POST_REBOOT.json`.
 2. **ENV-02 (active):** Docker stores its data VHDX on C:. Creating a container would therefore create task-related metadata or writable layers outside the authorized H: root. The only existing WSL distro is `docker-desktop`; it can see the H: mount but has no gcc, make, Python, or git. No container, image, distro, build, or numerical run was created.

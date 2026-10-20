@@ -4,12 +4,17 @@
   "source_root": "H:\\AI_Products\\AI_Factory_Workspace\\TechOrb-Hubble-Validator",
   "scope": "candidate v26.4 artifacts recovered from local storage; historical production identity is not proven",
   "gate": {
-    "pipeline": "BLOCKED",
+    "pipeline": "FAIL",
     "model": "NOT APPLICABLE",
-    "clean_room_reproduced": false,
+    "clean_room_reproduced": true,
     "tolerance_contract_frozen": true,
-    "environment_blocker": "ENV-02",
-    "model_verdict": "NOT APPLICABLE"
+    "environment_blocker": null,
+    "model_verdict": "NOT APPLICABLE",
+    "comparison_rows": 52,
+    "comparison_pass": 50,
+    "comparison_fail": 2,
+    "cleanroom_report": "R0_CLEANROOM_REPORT.md",
+    "historical_limitations": ["PROV-01", "RAW-01"]
   },
   "candidate_class": {
     "repository": "https://github.com/lesgourg/class_public",

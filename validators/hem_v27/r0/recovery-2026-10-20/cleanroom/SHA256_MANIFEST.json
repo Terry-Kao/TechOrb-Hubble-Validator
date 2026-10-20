@@ -1,0 +1,1852 @@
+[
+  {
+    "path": "outputs/ENVIRONMENT_MANIFEST.json",
+    "bytes": 1644,
+    "sha256": "43dd7786f9757537bfedcce89cd49c3871dbe99145e678e0290b518d29cc3845"
+  },
+  {
+    "path": "outputs/R0_NUMERICAL_VERDICT.json",
+    "bytes": 86,
+    "sha256": "f5581915ad6ee977be571b85fc2d6a5db60098b9d11018a49b0d4695fd97f960"
+  },
+  {
+    "path": "outputs/UNMODIFIED_CONTROL.json",
+    "bytes": 152,
+    "sha256": "4afa1d62cf49815747149e8641dcaa560e3d71b9a9f0e804061bc4b96ce7b83c"
+  },
+  {
+    "path": "outputs/commands/build_patched.command.json",
+    "bytes": 106,
+    "sha256": "a96cf2f9096a30256c1771b5b63877aff9833db6492a21328b8cf50a9f6829a7"
+  },
+  {
+    "path": "outputs/commands/build_patched.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/commands/build_patched.stdout.log",
+    "bytes": 8266,
+    "sha256": "b650fa8d29bbe03839176cedcab562a0a9968938e7aaee3feda705a4f8330e82"
+  },
+  {
+    "path": "outputs/commands/build_patched_clean.command.json",
+    "bytes": 95,
+    "sha256": "19550f036e773f19bad8348bfa8d76b25d17cb281a8cd061fc4450e8d8b51c7b"
+  },
+  {
+    "path": "outputs/commands/build_patched_clean.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/commands/build_patched_clean.stdout.log",
+    "bytes": 162,
+    "sha256": "00ea4ec9767b8a3c76bf57945a609f840da83ce478f7f16324709f73a871d30f"
+  },
+  {
+    "path": "outputs/commands/build_upstream.command.json",
+    "bytes": 107,
+    "sha256": "97329dd40f9107d9e2294fb839c581258aeb060ff969707f3cf288ceff6b9efc"
+  },
+  {
+    "path": "outputs/commands/build_upstream.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/commands/build_upstream.stdout.log",
+    "bytes": 8333,
+    "sha256": "30d6f765a08d3b4a8eda776ca5506ab07e2c5c368408872158b6ea688a2cbfaa"
+  },
+  {
+    "path": "outputs/commands/build_upstream_clean.command.json",
+    "bytes": 96,
+    "sha256": "5d33feb72445a05a2abef789f24e608ef1c53a5639a19683dbe6550cda1bd815"
+  },
+  {
+    "path": "outputs/commands/build_upstream_clean.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/commands/build_upstream_clean.stdout.log",
+    "bytes": 165,
+    "sha256": "dc12dc8d6c9ec6e5b5dd7979c7017583075ef90673d1880b2a8187e976d0e367"
+  },
+  {
+    "path": "outputs/derived/clean_room_final_residuals.png",
+    "bytes": 208818,
+    "sha256": "21ca724d1bd4de8e716a4f19aa96df318a61dc4008d7bfc5d62882776c6f9776"
+  },
+  {
+    "path": "outputs/derived/clean_room_residual_curves.csv",
+    "bytes": 573742,
+    "sha256": "b14cbb81312a8342900b8630f639c63163ee0b00521ea5e9f527047127e4b435"
+  },
+  {
+    "path": "outputs/derived/clean_room_results.csv",
+    "bytes": 1323,
+    "sha256": "23bfe72c0429f907c4c768f0dbd993001e257fee1fdcc569aebb7580c298bdc7"
+  },
+  {
+    "path": "outputs/derived/tolerance_comparison.csv",
+    "bytes": 4754,
+    "sha256": "039ceab38a1cb13842d8a0392df767def33216bd1f973df2b6a58e0562391ffb"
+  },
+  {
+    "path": "outputs/runs/control/patched_b1_eta0/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "c53f8938edfcdd4652f897186bab37f4a54bdb84c2867430e0441a4cb02e4948"
+  },
+  {
+    "path": "outputs/runs/control/patched_b1_eta0/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "e67f0a70c226d7b9edd44a705fc23da03e4bba444d8c9fd56f69e34d7e70e413"
+  },
+  {
+    "path": "outputs/runs/control/patched_b1_eta0/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "3215c15895ef16f4d059343100d7c11f7ae620cfccb1f6ae9d67a0583715d83c"
+  },
+  {
+    "path": "outputs/runs/control/patched_b1_eta0/environment.json",
+    "bytes": 354,
+    "sha256": "df5dbcb4cb6ec98dfe188bde9b52003ccedc321c38a8aacfeecf16f89dd4282a"
+  },
+  {
+    "path": "outputs/runs/control/patched_b1_eta0/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/control/patched_b1_eta0/input.ini",
+    "bytes": 337,
+    "sha256": "ff781f00c198c0c4683f3c095a286b410d6a576080c28389c0cb646abe183290"
+  },
+  {
+    "path": "outputs/runs/control/patched_b1_eta0/parsed.json",
+    "bytes": 144,
+    "sha256": "05759df2ed64474f477b3716516e959a9c2320dccd66ad994e3e164ab7ea73e6"
+  },
+  {
+    "path": "outputs/runs/control/patched_b1_eta0/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/control/patched_b1_eta0/stdout.log",
+    "bytes": 2230,
+    "sha256": "8a7da375f734d79d33318895440b63d1c96698f2f9307856c3bb048c33307e2c"
+  },
+  {
+    "path": "outputs/runs/control/unmodified_baseline/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "c53f8938edfcdd4652f897186bab37f4a54bdb84c2867430e0441a4cb02e4948"
+  },
+  {
+    "path": "outputs/runs/control/unmodified_baseline/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "e67f0a70c226d7b9edd44a705fc23da03e4bba444d8c9fd56f69e34d7e70e413"
+  },
+  {
+    "path": "outputs/runs/control/unmodified_baseline/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "3215c15895ef16f4d059343100d7c11f7ae620cfccb1f6ae9d67a0583715d83c"
+  },
+  {
+    "path": "outputs/runs/control/unmodified_baseline/environment.json",
+    "bytes": 355,
+    "sha256": "6b78c134c4dbf8b1c0b7a73723b2cff3a27c4257c4cd0e1621ea70bbe61b04c2"
+  },
+  {
+    "path": "outputs/runs/control/unmodified_baseline/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/control/unmodified_baseline/input.ini",
+    "bytes": 341,
+    "sha256": "36e4c811a5299632d2c9d5a400bf260e4246bceabd54b3c50f6a862bfac23ab2"
+  },
+  {
+    "path": "outputs/runs/control/unmodified_baseline/parsed.json",
+    "bytes": 148,
+    "sha256": "1f1ffb5ddb1f124c64c935230eac289ba58048087324ac4e2b9819a7d40d19e9"
+  },
+  {
+    "path": "outputs/runs/control/unmodified_baseline/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/control/unmodified_baseline/stdout.log",
+    "bytes": 2230,
+    "sha256": "8a7da375f734d79d33318895440b63d1c96698f2f9307856c3bb048c33307e2c"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_final/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "602b998f5ec94436b51af1be6b2b0e41f8168ce7344a9ddd385ec27bae81cb54"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_final/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "940d5c28d39c36f69eae01a5a425ec219b74fb5f5ff9eb9c44834a23fd388c06"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_final/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "6ebabd98536c8b052bb886096d94970efccd0d302705ec7332cc4d72bcae26b7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_final/environment.json",
+    "bytes": 354,
+    "sha256": "03576ce863849104f5ddf69243a3cb34a4b857d6ba91f7bc491f64baf56294bb"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_final/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_final/input.ini",
+    "bytes": 342,
+    "sha256": "b67d4f7da5049924367f9a4de28a12428e998b1337a258602d4f4b345c2d47fe"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_final/parsed.json",
+    "bytes": 149,
+    "sha256": "2710f2a90015bc23de1ace887c9d9c3ec6c98f3798c142f277cc1f39fb61df8c"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_final/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_final/stdout.log",
+    "bytes": 2230,
+    "sha256": "41be2c51fdd4a5e2ed3977d41e208a42f3e50ba4dc95d57f9277ceb0d4f7cc1e"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_fixedh/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "c53f8938edfcdd4652f897186bab37f4a54bdb84c2867430e0441a4cb02e4948"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_fixedh/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "708fddf6b06189aca635adc0a1ae5aa1b0d7fed9a9e40e7767a1c576443e37c1"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_fixedh/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "461f3c4f7eee7dfa4b20162724b581bd7e82a4f772c6d9dd1229f747e812ba1b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_fixedh/environment.json",
+    "bytes": 354,
+    "sha256": "d1fda81ccc36c6e8fba93b4f66c2c55ac764a9721f1d421ea45f7f882b7b9ece"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_fixedh/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_fixedh/input.ini",
+    "bytes": 343,
+    "sha256": "85c21d6cd60107956faf981bae530c123e82a06bafbdb06c7b6eff2a8a230dc5"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_fixedh/parsed.json",
+    "bytes": 150,
+    "sha256": "fdbc663005b7d16df4c956e3dbfc3324428539d5dc6d7ed029d430fb64a669f2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_fixedh/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_fixedh/stdout.log",
+    "bytes": 2230,
+    "sha256": "803c897e9646c10c5d969c84c8a36a6b7e0cad916266e2f9af9b5548d408e7fe"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter0/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a604bc0aceef80ed3fc749e7129bbeb832e369c9874bb7c58a7920b0b7629a57"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter0/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "44908c9ac3b0134995cf3ebe21cdf6e3428668c78417bc5f0f7160524b03ecd8"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter0/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "7ff5a4e8e9c7b61c557dfde550a30d5df9a0ddd20d5ed427f7d295664c1a4c2f"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter0/environment.json",
+    "bytes": 354,
+    "sha256": "397bba47773032d4c685919ef4357e5e73f424554f114e7687f62789386e1c94"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter0/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter0/input.ini",
+    "bytes": 342,
+    "sha256": "baf68a89b0234af949a39feeba921a79349de066401447ec9a8acc7f6f7dbc10"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter0/parsed.json",
+    "bytes": 149,
+    "sha256": "9117e6243f263781cc3e82591682c5c51f9419b25b43206d7cc3f3538d20201c"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter0/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter0/stdout.log",
+    "bytes": 2230,
+    "sha256": "269105ed135e11f5047d3c9ebd40653d45eb93e20f70e505a958dab0e5512980"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter1/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a995b5ee2727aa86e0367074bc5b81647df9d2819b429cf87c586b22e11f0a2d"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter1/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "e2fd659a78735a4c949bc3ce91140c26d5a6deb76f1c395b43e5b733ae487bd6"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter1/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "9b0240b6c4e9c7cc538d35084234f4ea3b9584b8a97edd01f694887956bed7ba"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter1/environment.json",
+    "bytes": 354,
+    "sha256": "9c675cf63162d191878cac66169a5780c94431f45b094c82c3b090e18d321415"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter1/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter1/input.ini",
+    "bytes": 342,
+    "sha256": "c6d14f362bd38bf85dc3df88b0aacb4dc722c60cd5dcfd857550eae2dd2692bb"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter1/parsed.json",
+    "bytes": 148,
+    "sha256": "a3988cc8740294f4384cb9236500f02d723050ce5bbfabe922379a900e1e21f8"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter1/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter1/stdout.log",
+    "bytes": 2229,
+    "sha256": "ecc9aba7be08495e46179f85fe9a48aeb896196cfc47183d639393c105f43a38"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter2/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "d33cbca37017a2f9525ac41af524e85b0fb24fae78bca9bda78f09eaee1fa0c1"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter2/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "149a0b83af0f22302d3e8590c8cf0b50da3d849d57f91005dc7c288830fe0aee"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter2/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "b4851799d9e87b0a3249ebba236bf115fc3ba19140429db749034bfb90c34270"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter2/environment.json",
+    "bytes": 354,
+    "sha256": "e18ddbe3be4191ff634d1e1d3711d4c0ae9e789415716982a38c735d63bc386b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter2/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter2/input.ini",
+    "bytes": 342,
+    "sha256": "58fca6ef314303d4b595fd52e76e62fedaab5a015e24af438326c6c20c246787"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter2/parsed.json",
+    "bytes": 149,
+    "sha256": "31eab999847206ac50fba5bd0fc7e1c98a0b0cab5691b327bd6ce21e4ad753a4"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter2/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter2/stdout.log",
+    "bytes": 2230,
+    "sha256": "1fe2c72c1c037cad88bbc9a2c4fa5f069b8745a6acd72f051e9a345e411a040b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter3/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "602b998f5ec94436b51af1be6b2b0e41f8168ce7344a9ddd385ec27bae81cb54"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter3/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "41f892a0a65742ce5d3794fe23d41040b23d1905f8cbf03b4032783d9ae533b3"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter3/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "6ebabd98536c8b052bb886096d94970efccd0d302705ec7332cc4d72bcae26b7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter3/environment.json",
+    "bytes": 354,
+    "sha256": "19c2b6979f96ae3996bad9a45fcd8e06efb630e4fac9807e5e6f59b0b32bbd27"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter3/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter3/input.ini",
+    "bytes": 342,
+    "sha256": "fbf1d746b8ae3a80a731b1deac867e239cfaf08790411a896783c5aa8570c8e1"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter3/parsed.json",
+    "bytes": 149,
+    "sha256": "a6b204336e50a7fd663d6d514dcc902a2fae96c4db466f83b3ea61c70a47c815"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter3/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_iter3/stdout.log",
+    "bytes": 2230,
+    "sha256": "41be2c51fdd4a5e2ed3977d41e208a42f3e50ba4dc95d57f9277ceb0d4f7cc1e"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_locked/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "602b998f5ec94436b51af1be6b2b0e41f8168ce7344a9ddd385ec27bae81cb54"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_locked/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "41f892a0a65742ce5d3794fe23d41040b23d1905f8cbf03b4032783d9ae533b3"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_locked/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "6ebabd98536c8b052bb886096d94970efccd0d302705ec7332cc4d72bcae26b7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_locked/environment.json",
+    "bytes": 354,
+    "sha256": "9938f5c5f05e8e8f3605d3dd66640362c443177a10ef07595688b420741db7b6"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_locked/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_locked/input.ini",
+    "bytes": 343,
+    "sha256": "0153d493d08fe595db8c1eb95f4c051a20957ddfc8b2e98e7f1f95ecf9c1f067"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_locked/parsed.json",
+    "bytes": 150,
+    "sha256": "f3934dcd81d09341794c43d7ee5e1459c18ac6369ac94f04f4d4642495ae9d18"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_locked/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_locked/stdout.log",
+    "bytes": 2230,
+    "sha256": "41be2c51fdd4a5e2ed3977d41e208a42f3e50ba4dc95d57f9277ceb0d4f7cc1e"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_naive/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "3bdf92102c20bd86a1a00cf89bf1a8fec727bb79a6b1016463532bb14707ee0e"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_naive/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "eabcb6f3e0e45975d8dc2bc37361766f11b2692f786557e9f9bc2de68d97a2bf"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_naive/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "cf49640abd2476c750e02289c4ea089ea7b62cf9419b98ae53e42ab36b9f2ec0"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_naive/environment.json",
+    "bytes": 354,
+    "sha256": "a17762bf323b8980d6c2ac6d14445df90e75de52bc3f4498476a7e48da9cfb5e"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_naive/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_naive/input.ini",
+    "bytes": 342,
+    "sha256": "031000d5e5effdc10d0a3fd2a3f117dfb5e1ba0ad8cb804cecc901907eb0930f"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_naive/parsed.json",
+    "bytes": 148,
+    "sha256": "37043fddf0346a331ea731473c001a8c9d33deec55a702732a5f7a452a7cdeda"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_naive/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_naive/stdout.log",
+    "bytes": 2230,
+    "sha256": "303203d6d81002a402c3e38e90afc94152d67a844038da46d0509d65b3d3f695"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_opt1/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "602b998f5ec94436b51af1be6b2b0e41f8168ce7344a9ddd385ec27bae81cb54"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_opt1/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "1aefffe1ddbc545ee60b58f301ed76cc4652171021b7428cc17c495201b3ece5"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_opt1/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "6ebabd98536c8b052bb886096d94970efccd0d302705ec7332cc4d72bcae26b7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_opt1/environment.json",
+    "bytes": 354,
+    "sha256": "783bda2402afc013ca4e83786462689ea6034b74a0eae15f4072ef3b0e343a91"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_opt1/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_opt1/input.ini",
+    "bytes": 341,
+    "sha256": "ee748b632bda313d12931bc53457ed6b37cdb292ee9fe3808c603cc8432bdddd"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_opt1/parsed.json",
+    "bytes": 148,
+    "sha256": "3d47c798f2594f212f2258d7f672d7e9cfcd0661d06e193b68fc4dffb9322797"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_opt1/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.40_opt1/stdout.log",
+    "bytes": 2230,
+    "sha256": "41be2c51fdd4a5e2ed3977d41e208a42f3e50ba4dc95d57f9277ceb0d4f7cc1e"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_final/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a72254c2eac5a39b7de30b69fb061d6c2576399f92909184dc96f0b7e439c5e2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_final/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "025fe5cadc93dfa96151fd3cf2f6dd7d190575469974abc7e0e4cb1d59b3c2bd"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_final/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "29bd5332e918d67a53408cb40953051fde6be17bac4781228ec73d356e0349d7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_final/environment.json",
+    "bytes": 354,
+    "sha256": "b19cfde8fe967d28adff767d8bdd7f2106a7faa4fd13e1befce849b0df28e382"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_final/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_final/input.ini",
+    "bytes": 342,
+    "sha256": "668719999f64bf4adaf5213f19e805c2056336f897196ac0e5f7c740255fca6a"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_final/parsed.json",
+    "bytes": 148,
+    "sha256": "e157c6293ad9cf8167b6e488f1fb989ba9c11b517fb7e1edcc0e1a4113c202dd"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_final/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_final/stdout.log",
+    "bytes": 2230,
+    "sha256": "211eaec63ab668b7c9846200c8ca80b3710362a2afabe0b2234a9c0756a53115"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_fixedh/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "c53f8938edfcdd4652f897186bab37f4a54bdb84c2867430e0441a4cb02e4948"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_fixedh/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "0e376622033d6fa271eb6865b8fe907da117f2c2aa5c9493881b951d44d11bd2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_fixedh/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "e3e41eccfa88ac0e99fef84879388935c1e8315d5fdf94427d62eab91917d9cc"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_fixedh/environment.json",
+    "bytes": 354,
+    "sha256": "a1b2839de652c36e5833c8cb5044c45f1ecc62b67039eef42298cb3a009e6245"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_fixedh/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_fixedh/input.ini",
+    "bytes": 343,
+    "sha256": "2b0069f2273ea00a6a24c5b89e7c9284ce8fbdeaa282cbd35157f23e7d523deb"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_fixedh/parsed.json",
+    "bytes": 150,
+    "sha256": "a960c30e6a86139eb43ef67c16640cd6972dbcf78a8fe1d10a87f4e8086f705b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_fixedh/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_fixedh/stdout.log",
+    "bytes": 2230,
+    "sha256": "bd81ef52ac3ba9fe2a6cbccbb471463fbab144a74fc56ca7419e8b1e2762b3a5"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter0/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a604bc0aceef80ed3fc749e7129bbeb832e369c9874bb7c58a7920b0b7629a57"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter0/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "4f6a297bf6c502900ccb40fe20848a5667c040200e1b3efbcd3c7695ef6596f0"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter0/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "85314900b4b35c3dab155011566353ea72a7970bdcec3cccb642fefd1fba81b2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter0/environment.json",
+    "bytes": 354,
+    "sha256": "bcf7d133d59f217e486440d64503c284a53337ba72c4937925be23f5e238f03c"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter0/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter0/input.ini",
+    "bytes": 342,
+    "sha256": "e3c6d83b36208a5888189c6fc25570eac4032d18f6638cc17eb334e806d47dfd"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter0/parsed.json",
+    "bytes": 150,
+    "sha256": "6206e281891105dfcb2fc2146ac9947179e9850d08284a48032175a53ff04fe4"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter0/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter0/stdout.log",
+    "bytes": 2230,
+    "sha256": "f111eedada564c368d1b61a313ecbeca17eef9ce5400ae87be527451aed2e038"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter1/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a995b5ee2727aa86e0367074bc5b81647df9d2819b429cf87c586b22e11f0a2d"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter1/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "418e1e666ff4ed6f847e65dbe46bfec4912890d1c7f73376356d9437f8b0fdb5"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter1/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "57351f329e2e4b7fbb1ceff7debeff3757894a9a7e91eec91883d5f82dfd76c9"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter1/environment.json",
+    "bytes": 354,
+    "sha256": "0cc1990e10635350f640e8f2293e3d913f0f4fe0db447caa6eadab349525a9e0"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter1/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter1/input.ini",
+    "bytes": 342,
+    "sha256": "d0c04d65c4c53a1be63c6013056282c9babdb44038ddb5b1f522255d8eb9b6df"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter1/parsed.json",
+    "bytes": 149,
+    "sha256": "7f87a2335d85ee2d6e1537386fe8716e628dfc1bec48f4b3e5de6a3996de4ad1"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter1/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter1/stdout.log",
+    "bytes": 2229,
+    "sha256": "afbc8bfc7bcce6f40860689261926ecb33c1284171709d0dc272bc48d22b945a"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter2/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "271bccea81ecac79040aee6bc0c261223d552b364561af6517b157169215a0bd"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter2/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "aa67a61b7d92e4286ba1b847aecb4133f04f23df979780cc2602273c190c7e60"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter2/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "5718eb480ba57cea97f06989712dc1b199c32fb266e5243554f5c20d9b190cd3"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter2/environment.json",
+    "bytes": 354,
+    "sha256": "266cdec9e60d836bd7c0ba5ee2468bc62f5d3af383f24050133281f66f1c0576"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter2/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter2/input.ini",
+    "bytes": 342,
+    "sha256": "d50517cb6b9b4182eaa00df15d31396b3a4edc594be02288fb3a4d20c25440d5"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter2/parsed.json",
+    "bytes": 149,
+    "sha256": "2a6d52f30e0d5b4aed7873a9ad1fc3d75f22e6ce4219cd46323b5b5bef71c7d6"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter2/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter2/stdout.log",
+    "bytes": 2230,
+    "sha256": "21cafe16165f9516720a09b7269fc1c085867678e3d0d278943032def547bc57"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter3/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a72254c2eac5a39b7de30b69fb061d6c2576399f92909184dc96f0b7e439c5e2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter3/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "5481deda2365eef21f9ce181e5da0cf18897a47b2ecd88f364a965d80debcf91"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter3/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "29bd5332e918d67a53408cb40953051fde6be17bac4781228ec73d356e0349d7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter3/environment.json",
+    "bytes": 354,
+    "sha256": "91847ea6a9d45c9804fafb9b3de21ace1bebb76011222a0a48d38c2aede777f7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter3/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter3/input.ini",
+    "bytes": 342,
+    "sha256": "6479fc56f76c649a96ac046c939b77e87fe64d3a59881185e0fec977c2a2ce14"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter3/parsed.json",
+    "bytes": 148,
+    "sha256": "e67e7ab75dbb02510a7c496be78fdd8c38f93389ba4bdc70b31e48cfc2a0d283"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter3/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_iter3/stdout.log",
+    "bytes": 2230,
+    "sha256": "211eaec63ab668b7c9846200c8ca80b3710362a2afabe0b2234a9c0756a53115"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_locked/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a72254c2eac5a39b7de30b69fb061d6c2576399f92909184dc96f0b7e439c5e2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_locked/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "5481deda2365eef21f9ce181e5da0cf18897a47b2ecd88f364a965d80debcf91"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_locked/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "29bd5332e918d67a53408cb40953051fde6be17bac4781228ec73d356e0349d7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_locked/environment.json",
+    "bytes": 354,
+    "sha256": "6168c1513cac6e624be1c3b6645222f12df3e4e145e29f2c33501f2b8339fc2c"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_locked/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_locked/input.ini",
+    "bytes": 343,
+    "sha256": "2d20b5e0c1314260ebf1df40ab2d5278f39be0b46f134ed1d5fb4b010eda6c0b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_locked/parsed.json",
+    "bytes": 149,
+    "sha256": "4872a941e393bfa9d68838ad2ee7677da8e5473128a948048579ec759f61ba17"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_locked/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_locked/stdout.log",
+    "bytes": 2230,
+    "sha256": "211eaec63ab668b7c9846200c8ca80b3710362a2afabe0b2234a9c0756a53115"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_naive/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "edeb18ae9915f892e5fe9cad274b96ef716e312dc2fbf03930e52b9aa3173876"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_naive/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "37bd83d9cdaeacac44a291c56c45a97e9828dc3f972da4283d8c2b93cbedf579"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_naive/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "088ecad8e422dcd272fd33d7ab4c583a7bf6d0bcdf449ed2b8f0d5d5d6f90174"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_naive/environment.json",
+    "bytes": 354,
+    "sha256": "4bd205e832847dd17cad405d2e209414915403021f28f25fa83094328a4c2fba"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_naive/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_naive/input.ini",
+    "bytes": 342,
+    "sha256": "cf8907200f0926977fe78fcc9eed788ed0455e9a7ff475c6a0a2cce46feb35b0"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_naive/parsed.json",
+    "bytes": 150,
+    "sha256": "094efa563c460a7cc25aa16d3e39870f9c3cc1b4250d1b85ac99d9402223719d"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_naive/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_naive/stdout.log",
+    "bytes": 2230,
+    "sha256": "999d155f2395547063b25a5a07eaffa1bbb9cd345bd3eb8be151c917f5f3358f"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_opt1/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a72254c2eac5a39b7de30b69fb061d6c2576399f92909184dc96f0b7e439c5e2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_opt1/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "ebfb48a836985012142fa4b9cbc9ab9ab529050b16bdf2953be688316b629d56"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_opt1/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "29bd5332e918d67a53408cb40953051fde6be17bac4781228ec73d356e0349d7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_opt1/environment.json",
+    "bytes": 354,
+    "sha256": "5536cb884ab2b261f94eb73e3ec5b9a5488ad085b407fbb400dd33d1f4e25263"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_opt1/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_opt1/input.ini",
+    "bytes": 341,
+    "sha256": "6c972be87b4a3326718003689672e9d7547a63d6d68bc4222d48ef4853833d11"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_opt1/parsed.json",
+    "bytes": 147,
+    "sha256": "1e76ed01d7334998408ced418a276b8f11423ae2d0e0ade68e77ea6f49980cd7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_opt1/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode1_b1.60_opt1/stdout.log",
+    "bytes": 2230,
+    "sha256": "211eaec63ab668b7c9846200c8ca80b3710362a2afabe0b2234a9c0756a53115"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_final/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "31a3093e7515441c24583baa9f42960ae450c5492e25acd36c40739aca7805de"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_final/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "2c6cb01d8eb31abd761d097ec3af241492faa679145f150d0a8041ed6891f756"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_final/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "b0c59613e5c650fb3172dac57ac0430108e50aa22df411f27f1142fb732b228b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_final/environment.json",
+    "bytes": 355,
+    "sha256": "02664e34dc6df59c0297c3ca415b41e7e477b892559049e8ad747a8dc0efc5de"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_final/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_final/input.ini",
+    "bytes": 342,
+    "sha256": "b41d29bff7e622859463721bd005676d596b52f7cecfa0bc4b434836bcff3d99"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_final/parsed.json",
+    "bytes": 150,
+    "sha256": "b0d9d5fb6b6206cbba39b158be53b027bf3e9a86744bdc65d1535471cf627cc8"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_final/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_final/stdout.log",
+    "bytes": 2230,
+    "sha256": "aed2736f79c64db99a2f66989615bfd0092f8a6d8d00f9839c39a89ee43b87d5"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_fixedh/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "c53f8938edfcdd4652f897186bab37f4a54bdb84c2867430e0441a4cb02e4948"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_fixedh/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "cac5703dbc96a949ecab951fbdb34f0623be871160cec7d582db3b6932725ac9"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_fixedh/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "f55c4cf73fa07156d3307eb03d5e87154ff872c85c1b71064b3d294d9d744ba1"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_fixedh/environment.json",
+    "bytes": 355,
+    "sha256": "bcda0c593f5c4a3b71eb86723f71056da2ad245e35c5d64d019412d99fc0f1a0"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_fixedh/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_fixedh/input.ini",
+    "bytes": 343,
+    "sha256": "63f240be0832bd8d0c0daad71738d57a347ceb99123afcea786fb3236d2c6d9f"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_fixedh/parsed.json",
+    "bytes": 150,
+    "sha256": "865fd43820268af14f2071c4327a7c4172c6c7e460f75beb40e85e429bb6264a"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_fixedh/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_fixedh/stdout.log",
+    "bytes": 2230,
+    "sha256": "16304457a78cf53d60e4c40310572fd281ee8aaedbe9cacd966492888288678d"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter0/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a604bc0aceef80ed3fc749e7129bbeb832e369c9874bb7c58a7920b0b7629a57"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter0/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "76eb2de0f5a0eb8b450a8c1d5beab4ffe5e213711056ac256ac5873e15be97b5"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter0/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "d44009605c256f526e506da17f1cd8917adddfb379af2b94166229dc581a64fe"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter0/environment.json",
+    "bytes": 355,
+    "sha256": "9e6100b82740e00ccd630c52789b5837d15c6562d20cd49914ac4ac953e3a1b8"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter0/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter0/input.ini",
+    "bytes": 342,
+    "sha256": "01ba62f3c7ba641dd734197c72ea0059c996815d02b25efc615e137f362e1b1e"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter0/parsed.json",
+    "bytes": 150,
+    "sha256": "5033e97b65ec87909872351b4de0b9536707d1a9ff2dc11f0c762e142a115106"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter0/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter0/stdout.log",
+    "bytes": 2230,
+    "sha256": "9256db7561a569348ac3af59d86b30a166494fbaecd8602b52fe10e38a4221bf"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter1/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a995b5ee2727aa86e0367074bc5b81647df9d2819b429cf87c586b22e11f0a2d"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter1/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "94c8ec4aec8e52a5b1034389e8eb4025b767ed6edc60396272a48853e58aac58"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter1/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "2b86fd2f34fa470c4bf2c33ffc2b938cec17db9865755f21bff9c0a6dc5a7897"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter1/environment.json",
+    "bytes": 355,
+    "sha256": "09e6ea2a4725b52a90c67acb5b542b49c66f7141740f3d04f8055352bf63a180"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter1/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter1/input.ini",
+    "bytes": 342,
+    "sha256": "5c2c6d1128f034eca9693e310dbed0f2c3312a06385db9dd4cf944ff295cba2b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter1/parsed.json",
+    "bytes": 150,
+    "sha256": "83986ce6c3c51252e6f8472ae985dc8d697f9face308f8037bcf7e59e200fcbf"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter1/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter1/stdout.log",
+    "bytes": 2229,
+    "sha256": "fc629923409bed6a96315901e0dfbd36f3b7f87799b0453bdf5d633e1afa78d8"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter2/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "1ed09e683d588e4ca2ebc7e7d90ef6067fa6c8dc3afb3362790ba4eb79cefe63"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter2/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "46cc670b3a60bf4c334b730d542739bbe8bdb7a20fa747562c650c1bb4643319"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter2/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "e8d938f65d9ea26cd4c44e7f4cc66fcc1a5f108746bc2e0abe8fdf1b4100705c"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter2/environment.json",
+    "bytes": 355,
+    "sha256": "4848f0d32c100ebd87d164402ffbc3f1b35b6dd6bf34634fb71fc89b7f38ce50"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter2/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter2/input.ini",
+    "bytes": 342,
+    "sha256": "65b6ce751d7278abe2330ab21acf2ab9f930060ee01845440e48f82232d5281d"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter2/parsed.json",
+    "bytes": 150,
+    "sha256": "b0d8044788aaf43553865074a51b0157766b245fc4704a0fc4cd289aae94d035"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter2/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter2/stdout.log",
+    "bytes": 2230,
+    "sha256": "c359cfb9fd941dc08ba21121817e5186aace292713c50af1ecbb83de79a6448e"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter3/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "31a3093e7515441c24583baa9f42960ae450c5492e25acd36c40739aca7805de"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter3/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "8cbef762ed45e73738f2a6fd8c2cde12fa27a6814578b77f144ca07e791367a0"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter3/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "b0c59613e5c650fb3172dac57ac0430108e50aa22df411f27f1142fb732b228b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter3/environment.json",
+    "bytes": 355,
+    "sha256": "3e37e949f11a8de6438cfc3be4f95cdcdc27020d9b739bcc731c136cc6eeb261"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter3/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter3/input.ini",
+    "bytes": 342,
+    "sha256": "03f1fe3753204831fb33cd5c86501a2cc9a37869b7b50e683c6470fac82942e9"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter3/parsed.json",
+    "bytes": 150,
+    "sha256": "c8b24e21bdd2ae343f6ab04cc00cfaad8bc12cac4b00c4d07bc506e8c238d159"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter3/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_iter3/stdout.log",
+    "bytes": 2230,
+    "sha256": "aed2736f79c64db99a2f66989615bfd0092f8a6d8d00f9839c39a89ee43b87d5"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_locked/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "31a3093e7515441c24583baa9f42960ae450c5492e25acd36c40739aca7805de"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_locked/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "8cbef762ed45e73738f2a6fd8c2cde12fa27a6814578b77f144ca07e791367a0"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_locked/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "b0c59613e5c650fb3172dac57ac0430108e50aa22df411f27f1142fb732b228b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_locked/environment.json",
+    "bytes": 355,
+    "sha256": "46cbd1dd35828e160b8f9d666f21d9a7c165e498e61d4be7d3ff159630a30e6f"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_locked/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_locked/input.ini",
+    "bytes": 343,
+    "sha256": "99d8de4c10945ac8561cecd9f17515e374d40c0fdc1a1f58098230dc5ff0651f"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_locked/parsed.json",
+    "bytes": 151,
+    "sha256": "afaf383749d4a550b3e2bb8c4c8c4f5c5fec4a99783533b3a201079cbb312dc5"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_locked/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_locked/stdout.log",
+    "bytes": 2230,
+    "sha256": "aed2736f79c64db99a2f66989615bfd0092f8a6d8d00f9839c39a89ee43b87d5"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_naive/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "9edb08ce8ed0ce89060ec10a3285ffaa45190cc2fa8926aea73c985b68a6cc00"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_naive/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "feffd811235893dcc75aece8e5a03399d804a71912555b895d77e032f9f4a6b6"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_naive/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "1d4d4a0ff7d5c47baa4ed33ad0285ae578d0fc6261bc03b917bf67cd67bd9398"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_naive/environment.json",
+    "bytes": 355,
+    "sha256": "2945e23764a4888097f5bf6f681c90c32bb45551272195f0dfe3b32cc205b718"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_naive/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_naive/input.ini",
+    "bytes": 342,
+    "sha256": "dcc619dd31babdd38694b38a92ff42daf9a0557ce24e9d8bd1bccc17c85fc779"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_naive/parsed.json",
+    "bytes": 149,
+    "sha256": "0af925b1dd0c523bb6342947d80e4c864028d41f9852287c508f058419d0befe"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_naive/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_naive/stdout.log",
+    "bytes": 2230,
+    "sha256": "ee3afa95d256e317f3d2095d4bfe462f5de76605a460c0d94470f8a14c7f81c7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_opt1/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "31a3093e7515441c24583baa9f42960ae450c5492e25acd36c40739aca7805de"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_opt1/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "74d821376a15283339d4f5fbd63774e0d8053531133691c941a5dc257a6276f4"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_opt1/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "b0c59613e5c650fb3172dac57ac0430108e50aa22df411f27f1142fb732b228b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_opt1/environment.json",
+    "bytes": 355,
+    "sha256": "ffb40e7a7db78dd0708c08ff0bef9d96b5e8bca8ee830b171fde79965c7ef824"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_opt1/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_opt1/input.ini",
+    "bytes": 341,
+    "sha256": "5a554076cdda9c7f78e495cf7587e7a4126c328036e2e7fa5bf5a78766fc4893"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_opt1/parsed.json",
+    "bytes": 149,
+    "sha256": "941fc30e766c3a87d0b6de5d3d511a8d5e7eb80f20d0785099a7ccbdec382210"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_opt1/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.35_opt1/stdout.log",
+    "bytes": 2230,
+    "sha256": "aed2736f79c64db99a2f66989615bfd0092f8a6d8d00f9839c39a89ee43b87d5"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_final/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "0e772809bf2b90da827517e7e9d2d4b8f308d4b42908ab3c6d501ba7bc011979"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_final/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "f32dd36a45c2b20b33a36eb311ad185b980e7c2d66e89a13d6b07c7c90056273"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_final/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "36677227aa5aa6e02317d4822a7b57d6129ada9dcdded3d67f814ee06576d2a2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_final/environment.json",
+    "bytes": 354,
+    "sha256": "c26218e4b1d147f7274dcb570502c5948a15ebc3be2afeed178fe811aef1f4e7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_final/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_final/input.ini",
+    "bytes": 342,
+    "sha256": "89cd672a94bf1a72aa7eb893112c8c5d1dd1884eeaecfcf1c6e2f5a528023d72"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_final/parsed.json",
+    "bytes": 150,
+    "sha256": "72ab8c0d4cd1601004c2331a292fb1e4f6c968d3b426fda54cfd8e159e37547c"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_final/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_final/stdout.log",
+    "bytes": 2230,
+    "sha256": "c12e7614b76c056d8d26af57b5b929d0946531b58a65080f09435271d081ca89"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_fixedh/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "c53f8938edfcdd4652f897186bab37f4a54bdb84c2867430e0441a4cb02e4948"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_fixedh/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "4497aa8dbd21a6b97398693259fc8f42985372a85aef68d2843178050ff4325d"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_fixedh/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "5f8cd72b45941e63a3f4a7b21a61c9105465b03644b5aba1e917caaa326f9ed6"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_fixedh/environment.json",
+    "bytes": 354,
+    "sha256": "e2de137dab1cf98638ca2afde69a73fc9f7078fb573267799bbeef7bd67742cb"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_fixedh/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_fixedh/input.ini",
+    "bytes": 343,
+    "sha256": "3241a58388823efab57537383232c456b2cbc32a334f85611dd88642216f151f"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_fixedh/parsed.json",
+    "bytes": 150,
+    "sha256": "2999d973ee42c7055f4fb92bb6a7a87ee119e990543c9730ca9162d760cee88c"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_fixedh/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_fixedh/stdout.log",
+    "bytes": 2230,
+    "sha256": "0aeebe981a374f2be46acfd23a5c90ce13730cb0c7311dd1777a3a44a6943f5d"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter0/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a604bc0aceef80ed3fc749e7129bbeb832e369c9874bb7c58a7920b0b7629a57"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter0/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "cff6c9b22eeb2863be2e369eb69c8cab45d6246c406a40b195c7845c7547cb6d"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter0/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "e9caae4f289749caf9cf33640b7e83b3448490dfee0a9ae20cf87ca065bd8e88"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter0/environment.json",
+    "bytes": 354,
+    "sha256": "14e23b26910af52d4a2dce1186852d16089cf4e9c18651797a31656f86192ece"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter0/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter0/input.ini",
+    "bytes": 342,
+    "sha256": "1d5df36f5dcf1ef76e566818d88d6f7463773ca3019d20f3a659eef9757c7ebb"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter0/parsed.json",
+    "bytes": 150,
+    "sha256": "8dbda2e283c8729e9ccb20de91f151600ce9a741d6b98d55da5463cb6a9c10e1"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter0/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter0/stdout.log",
+    "bytes": 2230,
+    "sha256": "30aacc7436e988a99565c17718dda620c0bf94a13d7d75d19db076f45edd3598"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter1/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "a995b5ee2727aa86e0367074bc5b81647df9d2819b429cf87c586b22e11f0a2d"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter1/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "5970e7d236baf9dc46454172702e0fbd61723307d911742373b05f2825c722dd"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter1/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "ee0c1e6b9a56dfb71ab5db42d75d397a4f979f0c08659013dfd002515dd7d6df"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter1/environment.json",
+    "bytes": 354,
+    "sha256": "e3a5f0cc298638155f3b9f9f793f5d06011b84e92a7d36c3d5c16e6d2fdba12b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter1/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter1/input.ini",
+    "bytes": 342,
+    "sha256": "c2100b10fdff46885a8ac4d7963f0ee8664a34ba5a849a4875354c32ff428793"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter1/parsed.json",
+    "bytes": 150,
+    "sha256": "ac93481cb2f69f63bb0edd9468d50baae57f8df064d772a1305c53c9266b7ae7"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter1/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter1/stdout.log",
+    "bytes": 2229,
+    "sha256": "587552aacb8ed0791380244a08c66ecd06b2c88a6c61f5796ad4f8570010b7f4"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter2/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "30f1ad4e8ec2d31cf09af31c004b153fe3b5ca06bed1b578da3c845c02be1252"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter2/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "24f0e6cff8a7510d6fe8718d96d66bfdbfe760955d69d88728aed07b55dc7bed"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter2/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "06aea6b2ad853ae8c1a3dee799e9ca7e8aa5872db0cab600574127514faece60"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter2/environment.json",
+    "bytes": 354,
+    "sha256": "8f8f4ad1abce6994497f1caeac8cc62254f5a2b3a49bd5549eecce2fa00bd01f"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter2/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter2/input.ini",
+    "bytes": 342,
+    "sha256": "af866ee5a2c3d69468e6314ca58d8d10a5af8c0b1d52b093ad865ca29d8c46e3"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter2/parsed.json",
+    "bytes": 150,
+    "sha256": "78308fea1579e53a9686363c7e3a2d4397b61bc4664f86fc54d1b0fabcd76079"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter2/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter2/stdout.log",
+    "bytes": 2230,
+    "sha256": "18eb28a865259ffcd9dfd201491dd656f859c3a3d87f281e44fe983cff1f0d3c"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter3/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "0e772809bf2b90da827517e7e9d2d4b8f308d4b42908ab3c6d501ba7bc011979"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter3/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "455fc95199187838d76e726b16fc7eb51b251906261b291b95f910683b742b83"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter3/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "36677227aa5aa6e02317d4822a7b57d6129ada9dcdded3d67f814ee06576d2a2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter3/environment.json",
+    "bytes": 354,
+    "sha256": "9ebc50f3ecf731fa13b9d963c06769d2853cfed5514bfbfeedcd0f6775157866"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter3/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter3/input.ini",
+    "bytes": 342,
+    "sha256": "e28252d2c650ca51bc386772afeb47ca641be4a0fda5154ef1e30527e571acb9"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter3/parsed.json",
+    "bytes": 150,
+    "sha256": "3ae8b1ebc7970f91876694854d6f396e4be4b11c59f3f0273fda23c3e865084d"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter3/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_iter3/stdout.log",
+    "bytes": 2230,
+    "sha256": "c12e7614b76c056d8d26af57b5b929d0946531b58a65080f09435271d081ca89"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_locked/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "0e772809bf2b90da827517e7e9d2d4b8f308d4b42908ab3c6d501ba7bc011979"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_locked/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "455fc95199187838d76e726b16fc7eb51b251906261b291b95f910683b742b83"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_locked/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "36677227aa5aa6e02317d4822a7b57d6129ada9dcdded3d67f814ee06576d2a2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_locked/environment.json",
+    "bytes": 354,
+    "sha256": "83e1496e772a0ad3586572ed1d57e29a2a72b639674d4f93292b4f15586bf67e"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_locked/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_locked/input.ini",
+    "bytes": 343,
+    "sha256": "7e8a6ec26ae294c1f1b726271cc92ef475ff992ed56b42099de0eea56c1e9148"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_locked/parsed.json",
+    "bytes": 151,
+    "sha256": "1f039490fcf0456a63da03e9d244d9f04a85a4a7fe4de1cfec5223ddf904e86f"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_locked/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_locked/stdout.log",
+    "bytes": 2230,
+    "sha256": "c12e7614b76c056d8d26af57b5b929d0946531b58a65080f09435271d081ca89"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_naive/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "f1ee2f5bf17dea55ade9dd69aba01816965aa933f20a017059e070c4a22313d9"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_naive/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "79012ba4e8dcf5461944db25a413fc36082d902152592e949687187a1caeb25e"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_naive/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "84b512a193c20db5900aa04b2d38aebbca06f67acd0c014badcf62175563638b"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_naive/environment.json",
+    "bytes": 354,
+    "sha256": "00ba1871d50b451186c82b060b05e36988e054f282e34e8632db26e9130e558c"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_naive/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_naive/input.ini",
+    "bytes": 342,
+    "sha256": "7b45d78102c0a495a788641e05d6bbcfe4d5385c9fe9cf8dc138d660316095a1"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_naive/parsed.json",
+    "bytes": 150,
+    "sha256": "becfe14fb919e47e6c86fc20d3cd9155bac4e089773d6c19102195f318abcc96"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_naive/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_naive/stdout.log",
+    "bytes": 2230,
+    "sha256": "6313caae2676bc66a4dd9b202f6d142a059a879e048f6c48ebd5fbd4fb481c02"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_opt1/class_00_background.dat",
+    "bytes": 1431679,
+    "sha256": "0e772809bf2b90da827517e7e9d2d4b8f308d4b42908ab3c6d501ba7bc011979"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_opt1/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "1fbfb5667de2601daeffaec842a27b361834c7b56fdffd625e1779143d69cd5c"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_opt1/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "36677227aa5aa6e02317d4822a7b57d6129ada9dcdded3d67f814ee06576d2a2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_opt1/environment.json",
+    "bytes": 354,
+    "sha256": "0a5552d475cbd9afecc4b8990e90103c03ff77c48990b839574e57422a4ff2d2"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_opt1/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_opt1/input.ini",
+    "bytes": 341,
+    "sha256": "a4a46c6292777d462501e0c35fb04b60df9afffa40f493fb3a01da210ba01440"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_opt1/parsed.json",
+    "bytes": 149,
+    "sha256": "199abfa305b5b6bfb11fb1d9c99b6422ca26a69563d4279ec261bd054dec7576"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_opt1/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/historical/Mode2_b1.40_opt1/stdout.log",
+    "bytes": 2230,
+    "sha256": "c12e7614b76c056d8d26af57b5b929d0946531b58a65080f09435271d081ca89"
+  },
+  {
+    "path": "outputs/runs/standard_comparison/explicit_sum_mnu_0p06/class_00_background.dat",
+    "bytes": 1581729,
+    "sha256": "c7738efc2f101e4abb9f029a711f0742205a27179cb390b87ffffd6e1b28cb25"
+  },
+  {
+    "path": "outputs/runs/standard_comparison/explicit_sum_mnu_0p06/class_00_cl.dat",
+    "bytes": 267785,
+    "sha256": "a2cd0b5a00f2d65d2f77362cfe73d01b95190929eaecbef9d665051d06eace9c"
+  },
+  {
+    "path": "outputs/runs/standard_comparison/explicit_sum_mnu_0p06/class_00_thermodynamics.dat",
+    "bytes": 8557352,
+    "sha256": "32d1c5ba2635a7f6237dcf8d65c55e349df0262d2cfb4cbcf53bf8ccc3ccc4e7"
+  },
+  {
+    "path": "outputs/runs/standard_comparison/explicit_sum_mnu_0p06/environment.json",
+    "bytes": 353,
+    "sha256": "ba912b258cd1b98ccbe9844427411c72a382e3d6819b2f03d117080cb88dda5b"
+  },
+  {
+    "path": "outputs/runs/standard_comparison/explicit_sum_mnu_0p06/exit_code.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "outputs/runs/standard_comparison/explicit_sum_mnu_0p06/input.ini",
+    "bytes": 421,
+    "sha256": "99ccfd206a9e52586ee29d7f96b164f1e672754bd37b42afb7bcc44c9fbc0e23"
+  },
+  {
+    "path": "outputs/runs/standard_comparison/explicit_sum_mnu_0p06/parsed.json",
+    "bytes": 163,
+    "sha256": "876e0c74741da43c010f1ff3c7401053c629b20c26434dc9ad217d250c7818b6"
+  },
+  {
+    "path": "outputs/runs/standard_comparison/explicit_sum_mnu_0p06/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "outputs/runs/standard_comparison/explicit_sum_mnu_0p06/stdout.log",
+    "bytes": 2821,
+    "sha256": "853d910dcf5b00eec3bc4b4babd1c12375546ca1a9004249ae957289ec370d0c"
+  }
+]

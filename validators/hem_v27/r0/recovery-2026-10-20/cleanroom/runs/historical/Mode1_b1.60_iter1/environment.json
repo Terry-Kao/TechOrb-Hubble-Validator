@@ -1,0 +1,9 @@
+{
+  "HIA_B_CLUMPING": "1.6",
+  "HIA_LYA_EXP": "0.0",
+  "source": "/work/source_patched",
+  "source_commit": "aa92943e4ab86b56970953589b4897adf2bd0f99",
+  "binary_sha256": "c4adc6aeeea1428b26b5fcebba2ea4d1db1ca50d2e3cc960faf1d8e7bac18f30",
+  "ini_sha256": "d0c04d65c4c53a1be63c6013056282c9babdb44038ddb5b1f522255d8eb9b6df",
+  "explicit_neutrino": false
+}

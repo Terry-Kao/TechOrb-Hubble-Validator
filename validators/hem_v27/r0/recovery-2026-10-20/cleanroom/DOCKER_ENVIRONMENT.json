@@ -1,0 +1,21 @@
+{
+  "authorization_date": "2026-10-20",
+  "authorization": "Existing Docker Desktop and WSL may use default C: system components, VHDX, container metadata/layers, engine cache, and unavoidable runtime writes; controllable Tech-Orb artifacts remain on H:.",
+  "docker_desktop": "4.61.0 (219004)",
+  "docker_client": "29.2.1",
+  "docker_engine": "29.2.1",
+  "engine_os": "linux",
+  "engine_architecture": "amd64",
+  "kernel": "6.6.87.2-microsoft-standard-WSL2",
+  "image_tag": "techorb-r0:2026-10-20",
+  "image_digest": "sha256:14d858b5c2009fd6e9d5f0621c6d9554f66782dfa3201dd21bf4b26218c48a0a",
+  "base_image": "debian:12.12-slim",
+  "base_image_digest": "sha256:d5d3f9c23164ea16f31852f95bd5959aad1c5e854332fe00f7b3a20fcc9f635c",
+  "run_network": "none",
+  "bind_mount": "H:\\AI_Products\\AI_Factory_Workspace\\TechOrb-Hubble-Validator-R0-cleanroom-20261020 -> /work",
+  "raw_archive": {
+    "path": "H:\\AI_Products\\AI_Factory_Workspace\\TechOrb-Hubble-Validator-R0-cleanroom-20261020\\R0_CLEANROOM_RAW_EVIDENCE_2026-10-20.zip",
+    "bytes": 107752158,
+    "sha256": "23dfceb04e68cba4677186e4984c9b3c784259232d5b0f817ce6472c098f15d6"
+  }
+}

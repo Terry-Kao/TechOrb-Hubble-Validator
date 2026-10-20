@@ -54,6 +54,19 @@
 
 **Gate consequence:** R0 remains BLOCKED / NOT PASSED; model verdict remains NOT APPLICABLE; R1-R4 remain NOT STARTED.
 
+## D-2026-10-20-07 — Authorize Docker system writes and adjudicate R0 FAIL
+
+**Status:** Executed on the R0 recovery branch; pending PR review.
+**Decision:** Close ENV-02 after the user explicitly authorized existing Docker Desktop and WSL to use their default C: system components, VHDX, metadata, layers and caches. Keep controllable Tech-Orb source, inputs, logs, raw outputs, derived artifacts, manifests and reports on H:.
+
+**Execution:** Exact CLASS commit `aa92943e4ab86b56970953589b4897adf2bd0f99` was built as clean upstream and scientific-only patched source in Docker. The unmodified control passed exactly. Historical and explicit-0.06-eV baselines were kept separate. All four declared cases completed without changing `b`, `n_s`, `A_s`, `H0`, the model, or the frozen tolerances.
+
+**Adjudication:** 50/52 field comparisons passed. `max_residual_final_pct` failed for `Mode1_b1.40` (delta 0.0030040430 > 0.0005) and `Mode2_b1.35` (delta 0.0009771732 > 0.0005). R0 pipeline state changes from BLOCKED to **FAIL**. Model verdict remains NOT APPLICABLE. R1-R4 remain NOT STARTED.
+
+**Provenance boundary:** PROV-01 and RAW-01 remain historical limitations because original historical build/run identity and raw files are missing. The new rerun itself has complete raw evidence and provenance, so those historical limitations do not override the completed candidate-source FAIL.
+
+**Evidence:** `validators/hem_v27/r0/recovery-2026-10-20/R0_CLEANROOM_REPORT.md` and `cleanroom/`.
+
 ## Decision Entry Template
 
 - ID / date

@@ -1,0 +1,29 @@
+{
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+  "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+  "numpy": "1.24.2",
+  "pandas": "1.5.3",
+  "matplotlib": "3.6.3",
+  "upstream_commit": "aa92943e4ab86b56970953589b4897adf2bd0f99",
+  "patched_commit": "aa92943e4ab86b56970953589b4897adf2bd0f99",
+  "gcc": {
+    "exit_code": 0,
+    "stdout": "gcc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "stderr": ""
+  },
+  "make": {
+    "exit_code": 0,
+    "stdout": "GNU Make 4.3\nBuilt for x86_64-pc-linux-gnu\nCopyright (C) 1988-2020 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n",
+    "stderr": ""
+  },
+  "git": {
+    "exit_code": 0,
+    "stdout": "git version 2.39.5\n",
+    "stderr": ""
+  },
+  "pip": {
+    "exit_code": 0,
+    "stdout": "appdirs==1.4.4\nattrs==22.2.0\nbeniget==0.4.1\nBrotli==1.0.9\ncontourpy==1.0.7\ncycler==0.11.0\ndecorator==5.1.1\nfonttools==4.38.0\nfs==2.4.16\ngast==0.5.2\nkiwisolver==0.0.0\nlxml==4.9.2\nlz4==4.0.2+dfsg\nmatplotlib==3.6.3\nmpmath==0.0.0\nnumpy==1.24.2\npackaging==23.0\npandas==1.5.3\nPillow==9.4.0\nply==3.11\npyparsing==3.0.9\npython-dateutil==2.8.2\npythran==0.11.0\npytz==2022.7.1\nscipy==1.10.1\nsix==1.16.0\nsympy==1.11.1\nufoLib2==0.14.0\n",
+    "stderr": ""
+  }
+}

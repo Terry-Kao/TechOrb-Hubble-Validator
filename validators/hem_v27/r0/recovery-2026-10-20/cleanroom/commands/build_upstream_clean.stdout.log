@@ -1,0 +1,5 @@
+rm -rf /work/source_upstream/build;
+rm -f libclass.a
+rm -f /work/source_upstream/python/classy.c
+rm -rf /work/source_upstream/python/build
+rm -f python/autosetup.py

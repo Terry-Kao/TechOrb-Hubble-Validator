@@ -1,0 +1,5 @@
+rm -rf /work/source_patched/build;
+rm -f libclass.a
+rm -f /work/source_patched/python/classy.c
+rm -rf /work/source_patched/python/build
+rm -f python/autosetup.py

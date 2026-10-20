@@ -53,13 +53,14 @@ This index distinguishes current control documents from preserved historical evi
 | R0-ENV-POST-REBOOT-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/ENVIRONMENT_CHECK_POST_REBOOT.json` | Engine reachable; C:-hosted Docker data violates H:-only boundary; no run |
 | R0-TOLERANCE-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/TOLERANCE_CONTRACT.md` | Binding criteria frozen before first clean-room rerun |
 | R0-CHECKS-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/RECOVERY_CHECKS.json` | Notebook equality, ZIP contents and source-hunk match; no scientific acceptance |
+| R0-REPORT-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/R0_CLEANROOM_REPORT.md` | Completed clean-room report; R0 FAIL, model verdict NOT APPLICABLE |
+| R0-CLEANROOM-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/cleanroom/` | Dockerfile, scientific-only patch, harness, environment/control/verdict records, commands/logs/INIs, derived tables/figure and complete raw-file SHA-256 manifest |
 
-## Remaining Evidence Blocking R0
+## Historical provenance limitations retained after R0 FAIL
 
 - provenance tying candidate source and binary to the historical numerical run;
 - original compiler/dependency/environment identities and build/run logs;
 - original per-run INIs and raw CLASS outputs, deleted by the runner;
-- baseline convention audit, including N_ncdm=0 versus Σmν=0.06 eV;
-- an H:-confined clean-room environment and independent rerun under the frozen tolerance contract.
+- full downstream baseline convention audit beyond the separate historical and explicit Σmν=0.06 eV tracks.
 
-Tracking: [issue #3](https://github.com/Terry-Kao/TechOrb-Hubble-Validator/issues/3). R0 remains BLOCKED / NOT PASSED.
+These limitations do not erase the new run's complete provenance or convert its two tolerance mismatches to UNKNOWN. Tracking: [issue #3](https://github.com/Terry-Kao/TechOrb-Hubble-Validator/issues/3). R0 is FAIL; R1-R4 remain NOT STARTED.
