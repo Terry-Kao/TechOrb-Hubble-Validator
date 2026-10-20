@@ -2,7 +2,14 @@
 
 All notable governance and research-state changes are recorded here. Historical numerical artifacts retain their own version history.
 
-## Unreleased — Governance Reset
+## Unreleased — R0 Candidate Artifact Recovery
+
+- Freeze inspected candidate v26.4 runner, notebook, RECFAST source, complete tracked diff, historical summary CSV and SHA256 manifest.
+- Record implicit N_ncdm=0 and provide labelled reconstructed baseline / 0.06 eV comparison inputs.
+- Record unavailable clean-room runtime and missing original provenance/raw outputs; R0 remains BLOCKED / NOT PASSED.
+- Update control state, decisions, ledger references and evidence index.
+
+## 2026-10-20 — Governance Reset (PR #2)
 
 ### Added
 

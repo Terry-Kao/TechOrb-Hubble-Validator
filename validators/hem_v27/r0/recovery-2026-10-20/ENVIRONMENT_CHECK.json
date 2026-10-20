@@ -1,0 +1,10 @@
+{
+  "inspection_date": "2026-10-20",
+  "wsl_exit": 0,
+  "wsl": "docker-desktop",
+  "docker_exit": 1,
+  "docker": "{\"Client\":{\"Version\":\"29.2.1\",\"ApiVersion\":\"1.53\",\"DefaultAPIVersion\":\"1.53\",\"GitCommit\":\"a5c7197\",\"GoVersion\":\"go1.25.6\",\"Os\":\"windows\",\"Arch\":\"amd64\",\"BuildTime\":\"Mon Feb  2 17:20:16 2026\",\"Context\":\"desktop-linux\"},\"Server\":null}\r\nfailed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.\r\n",
+  "clean_room_reproduced": false,
+  "services_started": false,
+  "software_installed": false
+}
