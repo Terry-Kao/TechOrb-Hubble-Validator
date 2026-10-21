@@ -82,13 +82,15 @@
 
 ## D-2026-10-21-09 — Freeze R1 baseline audit before execution
 
-**Status:** Pre-registered on the R1 branch; numerical work not executed.
+**Status:** Executed after pre-registration; PASS pending PR final review.
 
 **Decision:** Separate the historical-v26.4 RECFAST / implicit-`N_ncdm=0` control from the canonical-modern HyRec / explicit-one-species `sum m_nu = 0.06 eV` adjudicative baseline. Freeze inputs, audited quantities, tolerances and evidence requirements before viewing R1 results.
 
 **Rules:** No target `H0` gate; no parameter adjustment after inspection; HyRec-versus-RECFAST is diagnostic only; R1 PASS is not physical validation.
 
 **Evidence:** `validators/hem_v27/r1/` and Issue #5.
+
+**Adjudication:** Historical control artifacts are exact. Two pristine-source canonical HyRec runs are byte-identical across all declared raw output families and all frozen identity/consistency checks pass. The first dirty-source attempt is preserved and excluded. Pipeline verdict: **PASS**. Model verdict: **NOT APPLICABLE**.
 
 ## Decision Entry Template
 

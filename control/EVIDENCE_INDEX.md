@@ -81,4 +81,7 @@ The R0-H package resolves the historical environment and producer identity for t
 | R1-SPEC-20261021 | `validators/hem_v27/r1/BASELINE_SPEC.md` | Frozen two-track baseline definition; no numerical result |
 | R1-TOL-20261021 | `validators/hem_v27/r1/TOLERANCE_CONTRACT.md` | Binding pre-execution acceptance contract |
 | R1-CHECKLIST-20261021 | `validators/hem_v27/r1/AUDIT_CHECKLIST.md` | Required audit and evidence inventory |
-| R1-MANIFEST-20261021 | `validators/hem_v27/r1/MANIFEST.json` | Pre-execution skeleton; verdict null |
+| R1-MANIFEST-20261021 | `validators/hem_v27/r1/MANIFEST.json` | Completed manifest; pipeline PASS, model NOT APPLICABLE |
+| R1-REPORT-20261021 | `validators/hem_v27/r1/evidence-2026-10-21/R1_AUDIT_REPORT.md` | Completed R1 PASS report; model NOT APPLICABLE |
+| R1-RESULT-20261021 | `validators/hem_v27/r1/evidence-2026-10-21/R1_AUDIT_RESULT.json` | Machine-readable frozen-contract checks |
+| R1-SHA256-20261021 | `validators/hem_v27/r1/evidence-2026-10-21/SHA256SUMS.txt` | Full H:-workspace manifest; 1,080/1,080 verified |

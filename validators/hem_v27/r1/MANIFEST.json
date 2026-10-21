@@ -1,17 +1,22 @@
 {
   "schema_version": "1.0",
   "gate": "HEM v27 R1 Baseline Definition Audit",
-  "status": "PRE_REGISTERED_NOT_EXECUTED",
+  "status": "COMPLETED",
   "issue": 5,
+  "pull_request": 6,
   "base_main_commit": "c36fda902500971a01c5b4cc54c2c34aa5bfae86",
-  "preregistration_commit": null,
+  "preregistration_commit": "79247c1e97d433c38d0f1fc0f1e9366866f5e475",
   "frozen_class_commit": "aa92943e4ab86b56970953589b4897adf2bd0f99",
   "workspace_root": "H:\\AI_Products\\AI_Factory_Workspace\\TechOrb-Hubble-Validator-R1-baseline-audit-20261021",
+  "master_manifest": "manifests/SHA256SUMS.txt",
+  "master_manifest_entries": 1080,
+  "master_manifest_verification": "1080 parsed, 0 missing, 0 mismatch",
   "tracks": {
     "historical_v26_4": {
       "role": "historical_control",
       "neutrino_convention": "implicit historical runner; N_ncdm=0",
-      "recombination": "RECFAST"
+      "recombination": "RECFAST",
+      "result": "PASS; three primary artifacts byte-identical to R0-H"
     },
     "canonical_modern": {
       "role": "adjudicative_baseline",
@@ -19,9 +24,14 @@
       "N_ncdm": 1,
       "m_ncdm_eV": [0.06],
       "T_ncdm": [0.7137658555036082],
-      "recombination": "HyRec"
+      "recombination": "HyRec",
+      "result": "PASS; two independent runs byte-identical across eight raw table families"
     }
   },
-  "artifacts": [],
-  "verdict": null
+  "rejected_attempts": [
+    "attempt 1 retained but excluded: copied source tree had 241 dirty paths before build"
+  ],
+  "pipeline_verdict": "PASS",
+  "model_verdict": "NOT APPLICABLE",
+  "r2_numeric_work": "NOT STARTED"
 }

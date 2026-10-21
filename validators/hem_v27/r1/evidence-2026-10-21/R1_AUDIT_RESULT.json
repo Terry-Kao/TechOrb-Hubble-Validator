@@ -1,0 +1,127 @@
+{
+  "gate": "HEM v27 R1 Baseline Definition Audit",
+  "preregistration_commit": "79247c1e97d433c38d0f1fc0f1e9366866f5e475",
+  "pipeline_verdict": "PASS",
+  "model_verdict": "NOT APPLICABLE",
+  "checks": {
+    "source_commit_exact": true,
+    "pristine_source_from_git_archive": true,
+    "first_attempt_rejected_and_preserved": true,
+    "all_exit_codes_zero": true,
+    "canonical_raw_outputs_exact": true,
+    "canonical_scalar_outputs_exact": true,
+    "historical_control_exact": true,
+    "H0_h_consistent": true,
+    "omega_b_consistent": true,
+    "omega_cdm_consistent": true,
+    "distinct_positive_sound_horizons": true
+  },
+  "canonical_hyrec": {
+    "N_eff": 3.046,
+    "z_star": 1085.136276,
+    "z_d": 1059.927633,
+    "r_s_zstar_Mpc": 144.493574,
+    "r_d_Mpc": 147.054325,
+    "theta_star_100": 1.044142,
+    "sigma8_total": 0.811764
+  },
+  "canonical_run2": {
+    "N_eff": 3.046,
+    "z_star": 1085.136276,
+    "z_d": 1059.927633,
+    "r_s_zstar_Mpc": 144.493574,
+    "r_d_Mpc": 147.054325,
+    "theta_star_100": 1.044142,
+    "sigma8_total": 0.811764
+  },
+  "canonical_densities": {
+    "h": 0.6732117,
+    "H0_over_100_residual": 0.0,
+    "Omega_b": 0.049386824645482226,
+    "Omega_cdm": 0.2650127795051692,
+    "Omega_ncdm": 0.0014074931639995402,
+    "Omega_m": 0.31580709731465095,
+    "omega_b_relation_residual": 3.9517000782751666e-15,
+    "omega_cdm_relation_residual": 4.235500838944972e-14
+  },
+  "recfast_minus_hyrec_diagnostic": {
+    "N_eff": 0.0,
+    "z_star": 0.020124000000123488,
+    "z_d": 0.009761000000025888,
+    "r_s_zstar_Mpc": -0.0017119999999977153,
+    "r_d_Mpc": -0.0008830000000159544,
+    "theta_star_100": -1.2999999999818712e-05,
+    "sigma8_total": null
+  },
+  "canonical_artifact_comparisons": [
+    {
+      "artifact": "00_background.dat",
+      "run1_sha256": "e604b53d26146d271ed8070f8f38551cc4a13931a99bae1bb82ad6cb7fe63f64",
+      "run2_sha256": "e604b53d26146d271ed8070f8f38551cc4a13931a99bae1bb82ad6cb7fe63f64",
+      "exact": true
+    },
+    {
+      "artifact": "00_thermodynamics.dat",
+      "run1_sha256": "47a134303360159634e63ff0cce8d2be2b8bcd87a14eb42799b1bba7eaf35033",
+      "run2_sha256": "47a134303360159634e63ff0cce8d2be2b8bcd87a14eb42799b1bba7eaf35033",
+      "exact": true
+    },
+    {
+      "artifact": "00_cl.dat",
+      "run1_sha256": "8e104ac3f4980b8a74c086fe21e118b152da53e0cd0e0ab2ee4083c64b52a6d9",
+      "run2_sha256": "8e104ac3f4980b8a74c086fe21e118b152da53e0cd0e0ab2ee4083c64b52a6d9",
+      "exact": true
+    },
+    {
+      "artifact": "00_cl_lensed.dat",
+      "run1_sha256": "6f17c9a5add9a2fa75e7cc4ffb96f2ef5b0b6ba005c828afb73104527802c5c6",
+      "run2_sha256": "6f17c9a5add9a2fa75e7cc4ffb96f2ef5b0b6ba005c828afb73104527802c5c6",
+      "exact": true
+    },
+    {
+      "artifact": "00_pk.dat",
+      "run1_sha256": "608b2d4e623d3c57d99653ae70638452f246bffe2c2aae46086146be0fc3d457",
+      "run2_sha256": "608b2d4e623d3c57d99653ae70638452f246bffe2c2aae46086146be0fc3d457",
+      "exact": true
+    },
+    {
+      "artifact": "00_pk_cb.dat",
+      "run1_sha256": "261244ddb3bb2a4885ab3d6e04f65ac886b4273128932ef5153a56c835f82119",
+      "run2_sha256": "261244ddb3bb2a4885ab3d6e04f65ac886b4273128932ef5153a56c835f82119",
+      "exact": true
+    },
+    {
+      "artifact": "00_pk_nl.dat",
+      "run1_sha256": "cf912bda3a0c61a4cea4e2ae555db5abca9e34cde8e87026ae821daed2b9eda5",
+      "run2_sha256": "cf912bda3a0c61a4cea4e2ae555db5abca9e34cde8e87026ae821daed2b9eda5",
+      "exact": true
+    },
+    {
+      "artifact": "00_pk_cb_nl.dat",
+      "run1_sha256": "68ee18e363e0b0c15b62d93349cf55cab1acdbf9bf0448013b3c215885198aa4",
+      "run2_sha256": "68ee18e363e0b0c15b62d93349cf55cab1acdbf9bf0448013b3c215885198aa4",
+      "exact": true
+    }
+  ],
+  "historical_artifact_comparisons": [
+    {
+      "artifact": "hem_class_v26_4_exact_lock_results.csv",
+      "expected_sha256": "81d840b89fd1888c306f53fd02a4ac9ef678eecc239039fa4e458f574f2f83d1",
+      "actual_sha256": "81d840b89fd1888c306f53fd02a4ac9ef678eecc239039fa4e458f574f2f83d1",
+      "exact": true
+    },
+    {
+      "artifact": "hem_class_v26_4_residual_curves.csv",
+      "expected_sha256": "50a9334e5f833eb0af793c130e349bf4472dbedc1b4403fb4ccad520ca806d2e",
+      "actual_sha256": "50a9334e5f833eb0af793c130e349bf4472dbedc1b4403fb4ccad520ca806d2e",
+      "exact": true
+    },
+    {
+      "artifact": "hem_class_v26_4_summary.png",
+      "expected_sha256": "4bc87d7841e940c3264ac04defec5703b19d648e882641d105f6db121272b607",
+      "actual_sha256": "4bc87d7841e940c3264ac04defec5703b19d648e882641d105f6db121272b607",
+      "exact": true
+    }
+  ],
+  "rejected_attempt_1_dirty_paths_count": 241
+}

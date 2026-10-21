@@ -8,6 +8,7 @@ All notable governance and research-state changes are recorded here. Historical 
 
 - Freeze separate historical-v26.4 and canonical-modern baseline tracks before R1 numerical execution.
 - Freeze the canonical neutrino sector, HyRec backend, audited quantities, tolerances and evidence checklist without an H0 target gate.
+- Complete R1 as pipeline PASS after rejecting and preserving one dirty-source harness attempt; retain model verdict NOT APPLICABLE and leave R2 numerical work unstarted.
 
 - Reconstruct the historical Alpine environment with a 137/137 package-version match.
 - Reproduce the historical CLASS binary and three primary artifacts bit-for-bit.
