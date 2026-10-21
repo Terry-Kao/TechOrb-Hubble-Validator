@@ -1,0 +1,34 @@
+{
+  "inspection_date": "2026-10-20",
+  "notebook_runner_text_equal": true,
+  "notebook_execution_count": null,
+  "notebook_stored_output_count": 0,
+  "summary_case_ids": [
+    "Mode1_b1.40",
+    "Mode2_b1.35",
+    "Mode2_b1.40",
+    "Mode1_b1.60"
+  ],
+  "logs_outside_class": [],
+  "bundle_entries": [
+    {
+      "FullName": "hem_class_v26_4_exact_lock_results.csv",
+      "Length": 1319
+    },
+    {
+      "FullName": "hem_class_v26_4_residual_curves.csv",
+      "Length": 573881
+    },
+    {
+      "FullName": "hem_class_v26_4_summary.png",
+      "Length": 522605
+    }
+  ],
+  "independent_rerun": false,
+  "patch_check": {
+    "upstream_commit": "aa92943e4ab86b56970953589b4897adf2bd0f99",
+    "upstream_source_url": "https://github.com/lesgourg/class_public/blob/aa92943e4ab86b56970953589b4897adf2bd0f99/external/RecfastCLASS/wrap_recfast.c",
+    "matching_insertion_locations": 1,
+    "applied_hunk_equals_recovered_source": true
+  }
+}

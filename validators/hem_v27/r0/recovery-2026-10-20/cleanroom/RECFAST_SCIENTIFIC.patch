@@ -1,0 +1,20 @@
+diff --git a/external/RecfastCLASS/wrap_recfast.c b/external/RecfastCLASS/wrap_recfast.c
+index f389efd..10bb58f 100644
+--- a/external/RecfastCLASS/wrap_recfast.c
++++ b/external/RecfastCLASS/wrap_recfast.c
+@@ -139,6 +139,15 @@ int recfast_dx_H_dz(struct thermodynamics* pth, struct thermorecfast * pre, doub
+     break;
+   }
+   K = pre->CK/Hz;
++  /* HIA_V26_DUAL_PATCH */
++  if (getenv("HIA_B_CLUMPING") != NULL) {
++    double b_clump = atof(getenv("HIA_B_CLUMPING"));
++    double eta_lya = (getenv("HIA_LYA_EXP") != NULL) ? atof(getenv("HIA_LYA_EXP")) : 0.0;
++    if (b_clump > 0.0) {
++      Rdown *= b_clump;
++      if (eta_lya != 0.0) K *= pow(b_clump, -eta_lya);
++    }
++  }
+ 
+   /* following is from recfast 1.5 */
+   /** - Adjust the K constant with double gaussian fit */

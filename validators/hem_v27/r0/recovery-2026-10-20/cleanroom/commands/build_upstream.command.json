@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "make",
+    "class",
+    "-j4"
+  ],
+  "cwd": "/work/source_upstream",
+  "exit_code": 0
+}

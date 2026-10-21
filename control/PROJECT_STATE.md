@@ -1,7 +1,7 @@
 # Project State
 
-**As of:** 2026-10-20  
-**Authority:** repository `main` after approved merge; this document describes the proposed Governance Reset until then.
+**As of:** 2026-10-21
+**Authority:** repository `main` after approved merge; this branch proposes the final R0 adjudication.
 
 ## Integrated Verdict
 
@@ -20,16 +20,16 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 | F1 Taiji Dual Topology | ANSATZ | PROVISIONAL | Candidate global topology only. |
 | F2 Formula / Quantity Geometry | OPEN QUESTION | PROVISIONAL | No canonical construction or observable consequence. |
 | HIA v1–v25 late-time routes | EXCLUDED: SUBCLASS | HISTORICAL | Tested kinematic, screened-gravity, and smooth-disformal implementations are bounded by their recorded assumptions; not a universal no-go. |
-| HEM v26.4 | DERIVED computational claim | REPRO-BLOCKED | Sensitivity/degeneracy experiment only; R0 evidence package absent from this repository. |
-| HEM v27 | Validator protocol | PROVISIONAL | R0 not yet passed; R1–R4 not started. |
+| HEM v26.4 | DERIVED computational claim | HISTORICAL + REPRODUCIBLE | CLASS-level sensitivity/degeneracy experiment only. Historical Alpine environment rerun is exact; no posterior or physical validation. |
+| HEM v27 | Validator protocol | PROVISIONAL | R0 PASS for reproducibility; model verdict NOT APPLICABLE; R1 not yet executed. |
 | Magnetogenesis action | ANSATZ / Candidate Bridge | PROVISIONAL | Not Foundation canon. |
 
 ## Gate State
 
 | Gate | State | Reason |
 |---|---|---|
-| R0 Reproducibility Freeze | NOT PASSED | No frozen source/environment/input/output manifest and independent rerun recorded here. |
-| R1 Baseline Definition Audit | NOT STARTED | Depends on R0. |
+| R0 Reproducibility Freeze | PASS | Historical Alpine environment and binary were reconciled; 52/52 fields and primary artifacts reproduce exactly. Debian 12 remains a cross-environment portability sensitivity FAIL (50/52). |
+| R1 Baseline Definition Audit | NOT STARTED | R0 prerequisite is satisfied; R1 requires a separately frozen pre-registration before execution. |
 | R2 Published Model Reproduction | NOT STARTED | Depends on R1. |
 | R3 Full Multi-Probe Likelihood | NOT STARTED | Depends on R2. |
 | R4 Physicality Benchmark | NOT STARTED | Depends on R3 and a declared physical bridge. |
@@ -42,3 +42,15 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 - BBN is an early-universe consistency constraint for magnetogenesis/PMF models, not a direct recombination-closure back-test.
 - AI agreement cannot supply empirical, mathematical, or reproducibility evidence.
 
+
+## R0 Recovery Checkpoint — 2026-10-20
+
+See [recovery package](../validators/hem_v27/r0/recovery-2026-10-20/README.md) and [issue #3](https://github.com/Terry-Kao/TechOrb-Hubble-Validator/issues/3). The inspected candidate uses CLASS v3.2.0 RECFAST, with implicit N_ncdm=0. Runner/notebook/source and small historical table are frozen; larger outputs are indexed by SHA256. The patch applied to fixed upstream source matches the recovered source exactly.
+
+The user explicitly authorized normal Docker/WSL system-level C: writes on 2026-10-20 while retaining all controllable project artifacts on H:. ENV-02 is closed. A Debian 12.12 Docker clean room built clean upstream and scientific-only patched binaries from exact commit `aa92943e4ab86b56970953589b4897adf2bd0f99`. The unmodified control passed with zero difference across 2499 multipoles.
+
+The Debian four-case comparison completed against the pre-run frozen contract. Fifty of 52 field checks passed; `max_residual_final_pct` failed for `Mode1_b1.40` and `Mode2_b1.35`. This result is retained as cross-environment portability sensitivity evidence.
+
+## R0-H Closure — 2026-10-21
+
+The recovered historical Alpine 3.20.10 / musl / GCC 13.2.1 environment matches all 137 recorded package versions. Rebuilding at the historical path produced the historical CLASS binary bit-for-bit, and the unmodified historical runner reproduced all 52 frozen fields and all three primary artifacts exactly. R0 is therefore PASS for historical reproducibility. The physical-model verdict remains NOT APPLICABLE; v26.4 remains only `[DERIVED][HISTORICAL][REPRODUCIBLE]` CLASS-level sensitivity/degeneracy evidence.

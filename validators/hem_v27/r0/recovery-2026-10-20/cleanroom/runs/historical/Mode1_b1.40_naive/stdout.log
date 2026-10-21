@@ -1,0 +1,40 @@
+Reading input parameters
+ -> matched budget equations by adjusting Omega_Lambda = 0.697184
+Running CLASS version v3.2.0
+Computing background
+Chose ndf15 as generic_evolver
+ -> age = 13.737655 Gyr
+ -> conformal age = 14158.338730 Mpc
+ -> N_eff = 3.044 (summed over all species that are non-relativistic at early times) 
+ -> radiation/matter equality at z = 3387.166894
+    corresponding to conformal time = 113.341191 Mpc
+ ---------------------------- Budget equation ----------------------- 
+ ---> Nonrelativistic Species 
+-> Bayrons                        Omega = 0.0478145       , omega = 0.022383       
+-> Cold Dark Matter               Omega = 0.254912        , omega = 0.11933        
+ ---> Relativistic Species 
+-> Photons                        Omega = 5.28277e-05     , omega = 2.47298e-05    
+-> Ultra-relativistic relics      Omega = 3.65206e-05     , omega = 1.70961e-05    
+ ---> Other Content 
+-> Cosmological Constant          Omega = 0.697184        , omega = 0.326367       
+ ---> Total budgets 
+ Radiation                        Omega = 8.93483e-05     , omega = 4.18259e-05     
+ Non-relativistic                 Omega = 0.302727        , omega = 0.141713        
+ Other Content                    Omega = 0.697184        , omega = 0.326367        
+ TOTAL                            Omega = 1               , omega = 0.468122        
+ -------------------------------------------------------------------- 
+Computing thermodynamics using RecFastCLASS (based on v1.5)
+ -> with primordial helium mass fraction Y_He = 0.2454
+ -> recombination (maximum of visibility function) at z = 1113.854560
+    corresponding to conformal time = 276.298824 Mpc
+    with comoving sound horizon = 142.551899 Mpc
+    angular diameter distance = 12.451884 Mpc
+    sound horizon angle 100*theta_s = 1.026880
+    Thomson optical depth crosses one at z_* = 1110.568566
+    giving an angle 100*theta_* = 1.028929
+ -> baryon drag stops at z = 1082.901838
+    corresponding to conformal time = 282.175499 Mpc
+    with comoving sound horizon rs = 145.219623 Mpc
+ -> reionization with optical depth = 0.054408
+    corresponding to conformal time = 5140.829063 Mpc
+ -> free-streaming approximation can be turned on as soon as tau=355.236 Mpc

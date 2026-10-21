@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "make",
+    "clean"
+  ],
+  "cwd": "/work/source_patched",
+  "exit_code": 0
+}

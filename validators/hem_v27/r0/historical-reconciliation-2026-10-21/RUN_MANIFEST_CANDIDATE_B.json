@@ -1,0 +1,43 @@
+{
+  "candidate_id": "CANDIDATE_B",
+  "adjudicative_status": "PRIMARY_ADJUDICATION_RUN",
+  "run_start_utc": "2026-10-20T17:06:19.880484+00:00",
+  "run_end_utc": "2026-10-20T17:09:51.616903+00:00",
+  "exit_code": 0,
+  "command": "python3 run_colab_v26_4.py",
+  "runner_path": "05_primary_runs/run_colab_v26_4.py",
+  "runner_size_bytes": 14068,
+  "runner_sha256": "260bbe8642a9a7d6b0c6ad1734697e4087990d8ffb2c305145fbbf2274ddfb9e",
+  "runner_modified": false,
+  "wrap_recfast_sha256": "ab460fc673088078cca27b250652a4698ced1802c7b10aeadb4cd658a47cf75f",
+  "compiled_class_binary_sha256": "9357f9d55b5423b9a10387e1deddf6a42d4c2af964f6f370f191b0bc9ba1694d",
+  "compiled_class_binary_size_bytes": 3854240,
+  "stdout_log": "05_primary_runs/primary_stdout.log",
+  "stderr_log": "05_primary_runs/primary_stderr.log",
+  "outputs": {
+    "hem_class_v26_4_exact_lock_results.csv": {
+      "path": "05_primary_runs/hia_v26_4_outputs/hem_class_v26_4_exact_lock_results.csv",
+      "size_bytes": 1319,
+      "sha256": "81d840b89fd1888c306f53fd02a4ac9ef678eecc239039fa4e458f574f2f83d1",
+      "sha1": "0f7049c33269aac9356aa38b425f70410cbcc8f2"
+    },
+    "hem_class_v26_4_residual_curves.csv": {
+      "path": "05_primary_runs/hia_v26_4_outputs/hem_class_v26_4_residual_curves.csv",
+      "size_bytes": 573881,
+      "sha256": "50a9334e5f833eb0af793c130e349bf4472dbedc1b4403fb4ccad520ca806d2e",
+      "sha1": "18c4eb9d9a996cff511c1c2bc653fed660e5f0fb"
+    },
+    "hem_class_v26_4_summary.png": {
+      "path": "05_primary_runs/hia_v26_4_outputs/hem_class_v26_4_summary.png",
+      "size_bytes": 522605,
+      "sha256": "4bc87d7841e940c3264ac04defec5703b19d648e882641d105f6db121272b607",
+      "sha1": "540168f639c4c39c1118a58a2d8ba3b69197b949"
+    },
+    "hem_class_v26_4_bundle.zip": {
+      "path": "05_primary_runs/hem_class_v26_4_bundle.zip",
+      "size_bytes": 747227,
+      "sha256": "47b1060689b2ec208c091e312460a308179ea89dd83a35126c273cb40a8d0cd4",
+      "sha1": "dde4fc8f99e46f75135e6432c722bf6a5b93ea83"
+    }
+  }
+}

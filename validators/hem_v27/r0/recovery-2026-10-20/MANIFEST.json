@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "inspection_date": "2026-10-20",
+  "source_root": "H:\\AI_Products\\AI_Factory_Workspace\\TechOrb-Hubble-Validator",
+  "scope": "candidate v26.4 artifacts recovered from local storage; historical production identity is not proven",
+  "gate": {
+    "pipeline": "FAIL",
+    "model": "NOT APPLICABLE",
+    "clean_room_reproduced": true,
+    "tolerance_contract_frozen": true,
+    "environment_blocker": null,
+    "model_verdict": "NOT APPLICABLE",
+    "comparison_rows": 52,
+    "comparison_pass": 50,
+    "comparison_fail": 2,
+    "cleanroom_report": "R0_CLEANROOM_REPORT.md",
+    "historical_limitations": ["PROV-01", "RAW-01"]
+  },
+  "candidate_class": {
+    "repository": "https://github.com/lesgourg/class_public",
+    "tag": "v3.2.0",
+    "commit": "aa92943e4ab86b56970953589b4897adf2bd0f99",
+    "tag_verified_via_github": true,
+    "tracked_diff": "CLASS_FULL_DIFF.patch",
+    "status": [
+      " M CPU.py",
+      " M doc/input/make1.sh",
+      " M doc/input/make2.sh",
+      " M external/RecfastCLASS/wrap_recfast.c"
+    ],
+    "recombination": "RECFAST",
+    "hyrec_executed": false,
+    "precision_overrides_in_runner": false
+  },
+  "files": [
+    {
+      "source_path": "HRS_Research/Colab/run_colab_v26_4.py",
+      "bytes": 14068,
+      "sha256": "260bbe8642a9a7d6b0c6ad1734697e4087990d8ffb2c305145fbbf2274ddfb9e",
+      "repository_path": "validators/hem_v27/r0/recovery-2026-10-20/sources/run_colab_v26_4.py",
+      "availability": "committed_snapshot"
+    },
+    {
+      "source_path": "HRS_Research/Colab/TechOrb_v26_4_CLASS_Pipeline.ipynb",
+      "bytes": 18909,
+      "sha256": "f3a335ca7598788b433a764d0b075c576eb5322bd5ec141f7c772fb1689632e0",
+      "repository_path": "validators/hem_v27/r0/recovery-2026-10-20/sources/TechOrb_v26_4_CLASS_Pipeline.ipynb",
+      "availability": "committed_snapshot"
+    },
+    {
+      "source_path": "HRS_Research/Colab/class_hia_v26/external/RecfastCLASS/wrap_recfast.c",
+      "bytes": 15174,
+      "sha256": "ab460fc673088078cca27b250652a4698ced1802c7b10aeadb4cd658a47cf75f",
+      "repository_path": "validators/hem_v27/r0/recovery-2026-10-20/sources/CLASS/external/RecfastCLASS/wrap_recfast.c",
+      "availability": "committed_snapshot"
+    },
+    {
+      "source_path": "HRS_Research/Colab/class_hia_v26/source/input.c",
+      "bytes": 231772,
+      "sha256": "f16826b597d361eeccd6a7bf360ae3c9cdb0ee544c326cb2cbb8f8acefc3171d",
+      "repository_path": null,
+      "availability": "local_only"
+    },
+    {
+      "source_path": "HRS_Research/Colab/class_hia_v26/include/precisions.h",
+      "bytes": 39116,
+      "sha256": "b1d40edc6e649b3ec04688a27dcbdf4fb3c538b4f9b8c786e513b866e4157bb5",
+      "repository_path": null,
+      "availability": "local_only"
+    },
+    {
+      "source_path": "HRS_Research/Colab/hia_v26_4_outputs/hem_class_v26_4_exact_lock_results.csv",
+      "bytes": 1319,
+      "sha256": "81d840b89fd1888c306f53fd02a4ac9ef678eecc239039fa4e458f574f2f83d1",
+      "repository_path": "validators/hem_v27/r0/recovery-2026-10-20/historical_outputs/hem_class_v26_4_exact_lock_results.csv",
+      "availability": "committed_snapshot"
+    },
+    {
+      "source_path": "HRS_Research/Colab/hia_v26_4_outputs/hem_class_v26_4_residual_curves.csv",
+      "bytes": 573881,
+      "sha256": "50a9334e5f833eb0af793c130e349bf4472dbedc1b4403fb4ccad520ca806d2e",
+      "repository_path": null,
+      "availability": "local_only"
+    },
+    {
+      "source_path": "HRS_Research/Colab/hia_v26_4_outputs/hem_class_v26_4_summary.png",
+      "bytes": 522605,
+      "sha256": "4bc87d7841e940c3264ac04defec5703b19d648e882641d105f6db121272b607",
+      "repository_path": null,
+      "availability": "local_only"
+    },
+    {
+      "source_path": "HRS_Research/Colab/class_hia_v26/base_2018_plikHM_TTTEEE_lowl_lowE_lensing.ini",
+      "bytes": 1453,
+      "sha256": "549160924345dad88be62b182c53e13f419a47dfabc032fe5303ad57a2ff2d7d",
+      "repository_path": "validators/hem_v27/r0/recovery-2026-10-20/configs/upstream_planck2018.ini",
+      "availability": "committed_snapshot"
+    },
+    {
+      "source_path": "HRS_Research/v26_4_CLASS_Results/hem_class_v26_4_bundle.zip",
+      "bytes": 747227,
+      "sha256": "9311f9636d36983b3a73d823858d95651ae4a14766c028d61ead067c5ad39b40",
+      "repository_path": null,
+      "availability": "local_only"
+    },
+    {
+      "source_path": null,
+      "bytes": 3363,
+      "sha256": "2c6cbfe8eae93b3411171136da6cec06a3ee6dceeeccd3790f2c1bfe642cb8f2",
+      "repository_path": "validators/hem_v27/r0/recovery-2026-10-20/TOLERANCE_CONTRACT.md",
+      "availability": "committed_pre_run_contract"
+    },
+    {
+      "source_path": null,
+      "bytes": 1267,
+      "sha256": "094af6e22166dfb7164d463609cc34b8b549e1b261882596de2860f6a27a8d08",
+      "repository_path": "validators/hem_v27/r0/recovery-2026-10-20/ENVIRONMENT_CHECK_POST_REBOOT.json",
+      "availability": "committed_environment_evidence"
+    }
+  ]
+}

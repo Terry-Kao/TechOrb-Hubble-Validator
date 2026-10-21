@@ -6,9 +6,9 @@ This index distinguishes current control documents from preserved historical evi
 
 | Evidence ID | Path | Role | Status |
 |---|---|---|---|
-| CTRL-STATE | `control/PROJECT_STATE.md` | Integrated current state | PROVISIONAL until merged |
-| CTRL-GOV | `control/SCIENTIFIC_GOVERNANCE.md` | Claim and gate rules | PROVISIONAL until merged |
-| CTRL-LEDGER | `control/EPISTEMIC_LEDGER.md` | Claim registry | PROVISIONAL until merged |
+| CTRL-STATE | `control/PROJECT_STATE.md` | Integrated current state | Governance approved in PR #2; scientific claims retain their ledger status |
+| CTRL-GOV | `control/SCIENTIFIC_GOVERNANCE.md` | Claim and gate rules | Governance approved in PR #2; scientific claims retain their ledger status |
+| CTRL-LEDGER | `control/EPISTEMIC_LEDGER.md` | Claim registry | Governance approved in PR #2; scientific claims retain their ledger status |
 | FND-SPEC | `foundation/FOUNDATION_V1_SPEC.md` | Foundation scope | PROVISIONAL |
 | FND-REQ | `foundation/MATHEMATICAL_REQUIREMENTS.md` | Minimum mathematical/physical requirements | PROVISIONAL |
 | VAL-HEM27 | `validators/hem_v27/GATE_PROTOCOL.md` | Canonical validator protocol | PROVISIONAL |
@@ -39,13 +39,37 @@ This index distinguishes current control documents from preserved historical evi
 |---|---|---|
 | REVIEW-4AI-2026-10 | `reviews/2026-10-four-ai-review/README.md` | Critique provenance only; AI agreement is not evidence |
 
-## Missing Evidence Blocking HEM v27 R0
+## HEM v27 R0 Candidate Recovery — 2026-10-20
 
-- exact v26.4 source tree and patch locations;
-- dependency/environment lock and CLASS/HyRec versions;
-- complete baseline and modified parameter files;
-- neutrino-sector definition, including mass convention;
-- data/input identities and hashes;
-- executable commands, raw logs, spectra, derived tables, and hashes;
-- independent clean rerun with declared tolerances.
+| Evidence ID | Path | Status / scope |
+|---|---|---|
+| R0-RECOVERY-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/README.md` | Inspected candidate files; historical producer identity unproved |
+| R0-MANIFEST-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/MANIFEST.json` | SHA256 and storage locations; larger files local only |
+| R0-SOURCE-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/sources/` | Byte-preserved runner/notebook/patched RECFAST source |
+| R0-DIFF-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/CLASS_FULL_DIFF.patch` | Complete tracked diff against aa92943e4ab86b56970953589b4897adf2bd0f99 |
+| R0-RESULTS-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/historical_outputs/` | Historical summary CSV; REPRO-BLOCKED |
+| R0-BASELINE-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/BASELINE_COMPARISON.md` | Reconstructed inputs and explicit neutrino convention comparison; no numerical rerun |
+| R0-ENV-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/ENVIRONMENT_CHECK.json` | Docker server unavailable; clean room not run |
+| R0-ENV-POST-REBOOT-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/ENVIRONMENT_CHECK_POST_REBOOT.json` | Engine reachable; C:-hosted Docker data violates H:-only boundary; no run |
+| R0-TOLERANCE-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/TOLERANCE_CONTRACT.md` | Binding criteria frozen before first clean-room rerun |
+| R0-CHECKS-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/RECOVERY_CHECKS.json` | Notebook equality, ZIP contents and source-hunk match; no scientific acceptance |
+| R0-REPORT-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/R0_CLEANROOM_REPORT.md` | Completed clean-room report; R0 FAIL, model verdict NOT APPLICABLE |
+| R0-CLEANROOM-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/cleanroom/` | Dockerfile, scientific-only patch, harness, environment/control/verdict records, commands/logs/INIs, derived tables/figure and complete raw-file SHA-256 manifest |
 
+## R0-H Historical Environment Reconciliation — 2026-10-21
+
+| Evidence ID | Path | Status / scope |
+|---|---|---|
+| R0H-REPORT-20261021 | `validators/hem_v27/r0/historical-reconciliation-2026-10-21/R0H_FINAL_REPORT.md` | R0 PASS for historical reproducibility; model NOT APPLICABLE |
+| R0H-FIELDS-20261021 | `validators/hem_v27/r0/historical-reconciliation-2026-10-21/FIELD_COMPARISON_CANDIDATE_B.csv` | 52/52 exact; preserves Debian 50/52 comparison |
+| R0H-ENV-20261021 | `validators/hem_v27/r0/historical-reconciliation-2026-10-21/ENV_LOCK_CANDIDATE_B.json` | 137/137 historical package-version match |
+| R0H-BINARY-20261021 | `validators/hem_v27/r0/historical-reconciliation-2026-10-21/HISTORICAL_BINARY_FORENSICS.md` | Bit-for-bit binary reproduction at historical path |
+
+## Historical provenance and portability record retained after R0 PASS
+
+- provenance tying candidate source and binary to the historical numerical run;
+- original compiler/dependency/environment identities and build/run logs;
+- original per-run INIs and raw CLASS outputs, deleted by the runner;
+- full downstream baseline convention audit beyond the separate historical and explicit Σmν=0.06 eV tracks.
+
+The R0-H package resolves the historical environment and producer identity for the adjudicated artifacts. The Debian 12 mismatch remains visible as portability-sensitivity evidence. R0 PASS is limited to reproducibility; R1–R4 remain separate gates.
