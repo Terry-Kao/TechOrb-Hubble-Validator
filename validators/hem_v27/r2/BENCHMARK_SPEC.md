@@ -23,6 +23,6 @@
 
 Interpolate reproduction output to admitted reference redshifts without extrapolation. Compare `x_e` in linear space for Fig. 2 and log10 space for Fig. 3. Preserve every point, mask decision and residual. Do not optimize parameters or alter cosmology. A PASS requires all mandatory control checks and every admitted reference point to satisfy the frozen contract.
 
-## Current blocker
+## Reference admission
 
-Neither the paper nor author repository supplies machine-readable Fig. 2/3 curves, their raw plotting files, or a complete command/config that identifies the plotted bytes. Digitization has not yet been independently completed and frozen. Therefore no numerical execution is authorized by this specification.
+No author machine-readable Fig. 2/3 table was located. The official arXiv v3 source supplies standalone vector figure PDFs, from which independent vector and 1200 dpi raster extractions have been frozen. `FIG2_REFERENCE.csv`, `FIG3_REFERENCE.csv`, their masks/hashes and `TOLERANCE_CONTRACT.md` now authorize a separate numerical-reproduction work. No numerical execution occurred in the reference-recovery work.

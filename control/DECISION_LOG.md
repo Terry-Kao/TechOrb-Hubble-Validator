@@ -92,6 +92,21 @@
 
 **Adjudication:** Historical control artifacts are exact. Two pristine-source canonical HyRec runs are byte-identical across all declared raw output families and all frozen identity/consistency checks pass. The first dirty-source attempt is preserved and excluded. Pipeline verdict: **PASS**. Model verdict: **NOT APPLICABLE**.
 
+## D-2026-10-21-10 — Freeze R2 reference data and tolerances before execution
+
+**Status:** Proposed in Draft PR #8; numerical execution not performed.
+**Decision:** Admit independently digitized Fig. 2/3 references from the author-submitted vector PDFs in official arXiv `2108.02747v3`; freeze row masks and pointwise tolerances before any R2 model output exists.
+
+**Recovery result:** No author machine-readable Fig. 2/3 table or plotting script was located. Method A extracts vector paths; Method B independently traces a 1200 dpi raster. Only reference-vs-reference dispersion determines masks and uncertainty.
+
+**Tolerance:** Fig. 2 `x_e` absolute `0.012`; Fig. 2 `g` absolute `0.00025 Mpc^-1`; Fig. 3 `log10(x_e)` absolute `0.045 dex`. Every admitted point must pass; no aggregate escape clause.
+
+**License boundary:** The pinned author CLASS fork has no repository-level license. Do not commit its source bytes; retain local scientific inspection/execution only and record identities/hashes.
+
+**Consequence:** R2 changes from reference-data BLOCKED to **REFERENCE ADMISSION COMPLETE — NUMERICAL EXECUTION AUTHORIZED BUT NOT YET RUN**. A separate work is required to execute and adjudicate R2.
+
+**Evidence:** `validators/hem_v27/r2/REFERENCE_RECOVERY_REPORT.md`, `REFERENCE_DATA_MANIFEST.md`, `FIG2_REFERENCE.csv`, `FIG3_REFERENCE.csv`, digitization method/uncertainty records, and `TOLERANCE_CONTRACT.md`.
+
 ## Decision Entry Template
 
 - ID / date

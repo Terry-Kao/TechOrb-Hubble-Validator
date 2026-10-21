@@ -85,3 +85,14 @@ The R0-H package resolves the historical environment and producer identity for t
 | R1-REPORT-20261021 | `validators/hem_v27/r1/evidence-2026-10-21/R1_AUDIT_REPORT.md` | Completed R1 PASS report; model NOT APPLICABLE |
 | R1-RESULT-20261021 | `validators/hem_v27/r1/evidence-2026-10-21/R1_AUDIT_RESULT.json` | Machine-readable frozen-contract checks |
 | R1-SHA256-20261021 | `validators/hem_v27/r1/evidence-2026-10-21/SHA256SUMS.txt` | Full H:-workspace manifest; 1,080/1,080 verified |
+
+## HEM v27 R2 Reference Admission — 2026-10-21
+
+| Evidence ID | Path | Status / scope |
+|---|---|---|
+| R2-RECOVERY-20261021 | `validators/hem_v27/r2/REFERENCE_RECOVERY_REPORT.md` | Primary-source recovery and admission decision; no numerical run |
+| R2-MANIFEST-20261021 | `validators/hem_v27/r2/REFERENCE_DATA_MANIFEST.md` | Official-source and derived-reference byte identities |
+| R2-FIG2-20261021 | `validators/hem_v27/r2/FIG2_REFERENCE.csv` | Frozen Fig. 2 reference rows and masks |
+| R2-FIG3-20261021 | `validators/hem_v27/r2/FIG3_REFERENCE.csv` | Frozen Fig. 3 reference rows and masks |
+| R2-DIGITIZE-20261021 | `validators/hem_v27/r2/DIGITIZATION_METHOD_A.md`; `DIGITIZATION_METHOD_B.md`; `DIGITIZATION_UNCERTAINTY.md` | Independent vector/raster methods and uncertainty |
+| R2-TOL-20261021 | `validators/hem_v27/r2/TOLERANCE_CONTRACT.md` | PRE-EXECUTION REFERENCE/TOLERANCE FREEZE |

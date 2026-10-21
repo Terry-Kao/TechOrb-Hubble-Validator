@@ -30,7 +30,7 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 |---|---|---|
 | R0 Reproducibility Freeze | PASS | Historical Alpine environment and binary were reconciled; 52/52 fields and primary artifacts reproduce exactly. Debian 12 remains a cross-environment portability sensitivity FAIL (50/52). |
 | R1 Baseline Definition Audit | PASS | Historical artifacts match R0-H exactly; two pristine-source canonical HyRec runs are byte-identical across eight raw output families and satisfy every frozen consistency check. |
-| R2 Published Model Reproduction | NOT STARTED | R1 prerequisite is satisfied; only an R2 issue/spec entry may be created before separate pre-registration review. |
+| R2 Published Model Reproduction | REFERENCE ADMISSION COMPLETE / NOT RUN | Fig. 2/3 references, masks and tolerances are frozen from independent vector/raster extraction; numerical execution is authorized only as a separate work and has not occurred. |
 | R3 Full Multi-Probe Likelihood | NOT STARTED | Depends on R2. |
 | R4 Physicality Benchmark | NOT STARTED | Depends on R3 and a declared physical bridge. |
 
@@ -58,3 +58,7 @@ The recovered historical Alpine 3.20.10 / musl / GCC 13.2.1 environment matches 
 ## R1 Closure — 2026-10-21
 
 R1 was pre-registered at `79247c1e97d433c38d0f1fc0f1e9366866f5e475` before numerical execution. The first canonical attempt was rejected and preserved because its copied source tree was dirty. The accepted attempt used a pristine Git archive of CLASS v3.2.0 `aa92943e4ab86b56970953589b4897adf2bd0f99`. Historical control artifacts matched exactly; canonical HyRec Run 1 and Run 2 were byte-identical for background, thermodynamics, unlensed/lensed CMB and linear/nonlinear matter spectra. R1 pipeline verdict is PASS; model verdict is NOT APPLICABLE. R2 numerical work is not started.
+
+## R2 Reference Admission Freeze — 2026-10-21
+
+Official arXiv v3 source preserves Figs. 2, 3 and 18 as standalone Matplotlib vector PDFs. No author raw Fig. 2/3 table was found. Independent vector-path and 1200 dpi raster extractions froze pointwise references, explicit masks and geometry-derived tolerances before any model run. R2 numerical execution is authorized but not yet run; no R2 pipeline/model verdict exists.

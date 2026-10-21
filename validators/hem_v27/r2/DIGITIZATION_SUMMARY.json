@@ -1,0 +1,92 @@
+{
+  "Fig2:xe_standard": {
+    "raster_matches": 81,
+    "grid_points": 81,
+    "dispersion": {
+      "n": 81,
+      "median": 0.0017199776443971061,
+      "p95": 0.00963342588630793,
+      "max": 0.07111353930238878
+    }
+  },
+  "Fig2:xe_m3": {
+    "raster_matches": 81,
+    "grid_points": 81,
+    "dispersion": {
+      "n": 81,
+      "median": 0.0005304394183595074,
+      "p95": 0.0013641586405626627,
+      "max": 0.0035580382299189584
+    }
+  },
+  "Fig2:g_standard": {
+    "raster_matches": 81,
+    "grid_points": 81,
+    "dispersion": {
+      "n": 81,
+      "median": 3.265950871345826e-05,
+      "p95": 0.00020530939621647877,
+      "max": 0.0006719554438821781
+    }
+  },
+  "Fig2:g_m3": {
+    "raster_matches": 81,
+    "grid_points": 81,
+    "dispersion": {
+      "n": 81,
+      "median": 2.081711602757411e-05,
+      "p95": 4.266200961135398e-05,
+      "max": 7.116417600718894e-05
+    }
+  },
+  "Fig3:M3": {
+    "raster_matches": 126,
+    "grid_points": 126,
+    "dispersion": {
+      "n": 126,
+      "median": 0.0030973539783838433,
+      "p95": 0.011837473617815952,
+      "max": 0.025299492302696208
+    }
+  },
+  "Fig3:zero_zone_LCDM": {
+    "raster_matches": 126,
+    "grid_points": 126,
+    "dispersion": {
+      "n": 126,
+      "median": 0.006031393241239802,
+      "p95": 0.05676477288953896,
+      "max": 0.13547652011257894
+    }
+  },
+  "Fig3:minus_zone": {
+    "raster_matches": 97,
+    "grid_points": 126,
+    "dispersion": {
+      "n": 97,
+      "median": 0.002130534715837573,
+      "p95": 0.010964467127174278,
+      "max": 0.013792992928083891
+    }
+  },
+  "Fig3:plus_zone": {
+    "raster_matches": 111,
+    "grid_points": 126,
+    "dispersion": {
+      "n": 111,
+      "median": 0.003725362255565745,
+      "p95": 0.014346380433647221,
+      "max": 0.020114907032619422
+    }
+  },
+  "Fig3:simple_clumping": {
+    "raster_matches": 126,
+    "grid_points": 126,
+    "dispersion": {
+      "n": 126,
+      "median": 0.0019603459401270618,
+      "p95": 0.004120614865250949,
+      "max": 0.004339030230895435
+    }
+  }
+}
