@@ -56,11 +56,20 @@ This index distinguishes current control documents from preserved historical evi
 | R0-REPORT-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/R0_CLEANROOM_REPORT.md` | Completed clean-room report; R0 FAIL, model verdict NOT APPLICABLE |
 | R0-CLEANROOM-20261020 | `validators/hem_v27/r0/recovery-2026-10-20/cleanroom/` | Dockerfile, scientific-only patch, harness, environment/control/verdict records, commands/logs/INIs, derived tables/figure and complete raw-file SHA-256 manifest |
 
-## Historical provenance limitations retained after R0 FAIL
+## R0-H Historical Environment Reconciliation — 2026-10-21
+
+| Evidence ID | Path | Status / scope |
+|---|---|---|
+| R0H-REPORT-20261021 | `validators/hem_v27/r0/historical-reconciliation-2026-10-21/R0H_FINAL_REPORT.md` | R0 PASS for historical reproducibility; model NOT APPLICABLE |
+| R0H-FIELDS-20261021 | `validators/hem_v27/r0/historical-reconciliation-2026-10-21/FIELD_COMPARISON_CANDIDATE_B.csv` | 52/52 exact; preserves Debian 50/52 comparison |
+| R0H-ENV-20261021 | `validators/hem_v27/r0/historical-reconciliation-2026-10-21/ENV_LOCK_CANDIDATE_B.json` | 137/137 historical package-version match |
+| R0H-BINARY-20261021 | `validators/hem_v27/r0/historical-reconciliation-2026-10-21/HISTORICAL_BINARY_FORENSICS.md` | Bit-for-bit binary reproduction at historical path |
+
+## Historical provenance and portability record retained after R0 PASS
 
 - provenance tying candidate source and binary to the historical numerical run;
 - original compiler/dependency/environment identities and build/run logs;
 - original per-run INIs and raw CLASS outputs, deleted by the runner;
 - full downstream baseline convention audit beyond the separate historical and explicit Σmν=0.06 eV tracks.
 
-These limitations do not erase the new run's complete provenance or convert its two tolerance mismatches to UNKNOWN. Tracking: [issue #3](https://github.com/Terry-Kao/TechOrb-Hubble-Validator/issues/3). R0 is FAIL; R1-R4 remain NOT STARTED.
+The R0-H package resolves the historical environment and producer identity for the adjudicated artifacts. The Debian 12 mismatch remains visible as portability-sensitivity evidence. R0 PASS is limited to reproducibility; R1–R4 remain separate gates.

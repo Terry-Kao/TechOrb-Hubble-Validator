@@ -2,7 +2,14 @@
 
 All notable governance and research-state changes are recorded here. Historical numerical artifacts retain their own version history.
 
-## Unreleased — R0 Candidate Artifact Recovery
+## Unreleased — R0 Historical Environment Reconciliation
+
+- Reconstruct the historical Alpine environment with a 137/137 package-version match.
+- Reproduce the historical CLASS binary and three primary artifacts bit-for-bit.
+- Adjudicate R0 PASS for historical reproducibility while retaining Debian 12 50/52 as cross-environment portability sensitivity evidence.
+- Keep the physical-model verdict NOT APPLICABLE and v26.4 bounded to `[DERIVED][HISTORICAL][REPRODUCIBLE]` CLASS-level sensitivity/degeneracy evidence.
+
+## 2026-10-20 — R0 Candidate Artifact Recovery
 
 - Freeze inspected candidate v26.4 runner, notebook, RECFAST source, complete tracked diff, historical summary CSV and SHA256 manifest.
 - Record implicit N_ncdm=0 and provide labelled reconstructed baseline / 0.06 eV comparison inputs.

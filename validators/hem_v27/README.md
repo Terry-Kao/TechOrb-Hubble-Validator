@@ -6,7 +6,7 @@ HEM v27 is the Reproducibility, Likelihood & Physicality Gate for early-universe
 
 ## Starting State
 
-HEM v26.4 is classified as a CLASS-level sensitivity/degeneracy experiment and is **REPRO-BLOCKED** until R0. Its `H0` acoustic-angle lock is not a posterior, theory-to-theory TT RMS is not a likelihood, and the run does not establish a viable PMF/magnetogenesis model.
+HEM v26.4 is classified as a `[DERIVED][HISTORICAL][REPRODUCIBLE]` CLASS-level sensitivity/degeneracy experiment after R0. Its `H0` acoustic-angle lock is not a posterior, theory-to-theory TT RMS is not a likelihood, and the run does not establish a viable PMF/magnetogenesis model.
 
 ## Canonical Gates
 

@@ -67,6 +67,19 @@
 
 **Evidence:** `validators/hem_v27/r0/recovery-2026-10-20/R0_CLEANROOM_REPORT.md` and `cleanroom/`.
 
+## D-2026-10-21-08 — Reconcile historical environment and close R0 PASS
+
+**Status:** Executed on the R0 recovery branch; pending PR review.
+**Decision:** R0 pipeline verdict is **PASS** for historical v26.4 reproducibility. Model verdict remains **NOT APPLICABLE**.
+
+**Evidence:** Alpine 3.20.10 historical environment reconstructed with 137/137 package-version match; historical binary reproduced bit-for-bit; 52/52 frozen fields and the three primary artifacts reproduce exactly. See `validators/hem_v27/r0/historical-reconciliation-2026-10-21/`.
+
+**Preserved contrary evidence:** Debian 12 remains 50/52 and is classified as cross-environment numerical portability sensitivity evidence. Its raw evidence and failure verdict are not deleted.
+
+**Bounded scope:** v26.4 is `[DERIVED][HISTORICAL][REPRODUCIBLE]` CLASS-level sensitivity/degeneracy evidence only. This does not establish a posterior, solve the Hubble tension, or validate HEM/Tech-Orb physics.
+
+**Consequence:** R1 may start only after its baseline specification, tolerance contract, audit checklist, and manifest skeleton are frozen before numerical inspection.
+
 ## Decision Entry Template
 
 - ID / date
