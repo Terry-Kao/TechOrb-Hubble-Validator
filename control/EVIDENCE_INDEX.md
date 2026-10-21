@@ -73,3 +73,12 @@ This index distinguishes current control documents from preserved historical evi
 - full downstream baseline convention audit beyond the separate historical and explicit Σmν=0.06 eV tracks.
 
 The R0-H package resolves the historical environment and producer identity for the adjudicated artifacts. The Debian 12 mismatch remains visible as portability-sensitivity evidence. R0 PASS is limited to reproducibility; R1–R4 remain separate gates.
+
+## HEM v27 R1 Pre-registration — 2026-10-21
+
+| Evidence ID | Path | Status / scope |
+|---|---|---|
+| R1-SPEC-20261021 | `validators/hem_v27/r1/BASELINE_SPEC.md` | Frozen two-track baseline definition; no numerical result |
+| R1-TOL-20261021 | `validators/hem_v27/r1/TOLERANCE_CONTRACT.md` | Binding pre-execution acceptance contract |
+| R1-CHECKLIST-20261021 | `validators/hem_v27/r1/AUDIT_CHECKLIST.md` | Required audit and evidence inventory |
+| R1-MANIFEST-20261021 | `validators/hem_v27/r1/MANIFEST.json` | Pre-execution skeleton; verdict null |

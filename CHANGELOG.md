@@ -4,6 +4,11 @@ All notable governance and research-state changes are recorded here. Historical 
 
 ## Unreleased — R0 Historical Environment Reconciliation
 
+### R1 pre-registration
+
+- Freeze separate historical-v26.4 and canonical-modern baseline tracks before R1 numerical execution.
+- Freeze the canonical neutrino sector, HyRec backend, audited quantities, tolerances and evidence checklist without an H0 target gate.
+
 - Reconstruct the historical Alpine environment with a 137/137 package-version match.
 - Reproduce the historical CLASS binary and three primary artifacts bit-for-bit.
 - Adjudicate R0 PASS for historical reproducibility while retaining Debian 12 50/52 as cross-environment portability sensitivity evidence.

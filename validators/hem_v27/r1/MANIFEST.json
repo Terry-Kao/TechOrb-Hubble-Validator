@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "gate": "HEM v27 R1 Baseline Definition Audit",
+  "status": "PRE_REGISTERED_NOT_EXECUTED",
+  "issue": 5,
+  "base_main_commit": "c36fda902500971a01c5b4cc54c2c34aa5bfae86",
+  "preregistration_commit": null,
+  "frozen_class_commit": "aa92943e4ab86b56970953589b4897adf2bd0f99",
+  "workspace_root": "H:\\AI_Products\\AI_Factory_Workspace\\TechOrb-Hubble-Validator-R1-baseline-audit-20261021",
+  "tracks": {
+    "historical_v26_4": {
+      "role": "historical_control",
+      "neutrino_convention": "implicit historical runner; N_ncdm=0",
+      "recombination": "RECFAST"
+    },
+    "canonical_modern": {
+      "role": "adjudicative_baseline",
+      "N_ur": 2.046,
+      "N_ncdm": 1,
+      "m_ncdm_eV": [0.06],
+      "T_ncdm": [0.7137658555036082],
+      "recombination": "HyRec"
+    }
+  },
+  "artifacts": [],
+  "verdict": null
+}

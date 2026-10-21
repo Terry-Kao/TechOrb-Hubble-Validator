@@ -29,7 +29,7 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 | Gate | State | Reason |
 |---|---|---|
 | R0 Reproducibility Freeze | PASS | Historical Alpine environment and binary were reconciled; 52/52 fields and primary artifacts reproduce exactly. Debian 12 remains a cross-environment portability sensitivity FAIL (50/52). |
-| R1 Baseline Definition Audit | NOT STARTED | R0 prerequisite is satisfied; R1 requires a separately frozen pre-registration before execution. |
+| R1 Baseline Definition Audit | PRE-REGISTERED / NOT EXECUTED | R0 prerequisite is satisfied. The two-track baseline specification and tolerances are frozen on the R1 branch before numerical inspection. |
 | R2 Published Model Reproduction | NOT STARTED | Depends on R1. |
 | R3 Full Multi-Probe Likelihood | NOT STARTED | Depends on R2. |
 | R4 Physicality Benchmark | NOT STARTED | Depends on R3 and a declared physical bridge. |

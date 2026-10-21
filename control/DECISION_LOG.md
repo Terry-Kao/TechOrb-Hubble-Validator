@@ -80,6 +80,16 @@
 
 **Consequence:** R1 may start only after its baseline specification, tolerance contract, audit checklist, and manifest skeleton are frozen before numerical inspection.
 
+## D-2026-10-21-09 — Freeze R1 baseline audit before execution
+
+**Status:** Pre-registered on the R1 branch; numerical work not executed.
+
+**Decision:** Separate the historical-v26.4 RECFAST / implicit-`N_ncdm=0` control from the canonical-modern HyRec / explicit-one-species `sum m_nu = 0.06 eV` adjudicative baseline. Freeze inputs, audited quantities, tolerances and evidence requirements before viewing R1 results.
+
+**Rules:** No target `H0` gate; no parameter adjustment after inspection; HyRec-versus-RECFAST is diagnostic only; R1 PASS is not physical validation.
+
+**Evidence:** `validators/hem_v27/r1/` and Issue #5.
+
 ## Decision Entry Template
 
 - ID / date
