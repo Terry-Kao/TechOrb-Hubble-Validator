@@ -21,7 +21,7 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 | F2 Formula / Quantity Geometry | OPEN QUESTION | PROVISIONAL | No canonical construction or observable consequence. |
 | HIA v1–v25 late-time routes | EXCLUDED: SUBCLASS | HISTORICAL | Tested kinematic, screened-gravity, and smooth-disformal implementations are bounded by their recorded assumptions; not a universal no-go. |
 | HEM v26.4 | DERIVED computational claim | HISTORICAL + REPRODUCIBLE | CLASS-level sensitivity/degeneracy experiment only. Historical Alpine environment rerun is exact; no posterior or physical validation. |
-| HEM v27 | Validator protocol | PROVISIONAL | R0 PASS for reproducibility; model verdict NOT APPLICABLE; R1 not yet executed. |
+| HEM v27 | Validator protocol | PROVISIONAL | R0 and R1 pipeline verdicts are PASS; both model verdicts are NOT APPLICABLE. R2 numerical work is not started. |
 | Magnetogenesis action | ANSATZ / Candidate Bridge | PROVISIONAL | Not Foundation canon. |
 
 ## Gate State
