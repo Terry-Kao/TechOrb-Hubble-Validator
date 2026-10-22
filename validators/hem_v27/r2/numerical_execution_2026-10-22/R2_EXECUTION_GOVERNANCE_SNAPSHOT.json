@@ -1,0 +1,85 @@
+{
+  "snapshot_utc": "2026-10-22T17:29:00.222662+00:00",
+  "gate": "HEM v27 R2 \u2014 Published Model Reproduction",
+  "repository": "Terry-Kao/TechOrb-Hubble-Validator",
+  "github_main_sha": "402b6e908986bcbdfc62f74df15f50001a08fab3",
+  "r2_branch_name": "hem-v27-r2-published-model-reproduction",
+  "r2_branch_sha": "e6a8a4f016254a1acd22f110f75fb46b017d26c7",
+  "pr_8": {
+    "number": 8,
+    "title": "HEM v27 R2 ??REFERENCE IDENTITY RE-FROZEN ??READY, NOT RUN",
+    "state": "OPEN",
+    "isDraft": true,
+    "headRefName": "hem-v27-r2-published-model-reproduction",
+    "headRefOid": "e6a8a4f016254a1acd22f110f75fb46b017d26c7",
+    "baseRefName": "main",
+    "baseRefOid": "402b6e908986bcbdfc62f74df15f50001a08fab3"
+  },
+  "issue_7": {
+    "number": 7,
+    "title": "HEM v27 R2 ??Reference identity re-frozen; numerical reproduction not run",
+    "state": "OPEN"
+  },
+  "frozen_governance_commits": {
+    "r2_pre_registration_sha": "85821e5581d6464746e457e5af9f721dd17d0201",
+    "original_reference_tolerance_freeze_sha": "1f2ca42ec4f3b1a112108fa41f72103e323d1f44",
+    "artifact_identity_refreeze_sha": "f9037a9a19d1591d25e3ea98acfa8ce6468bdb43",
+    "post_push_verification_head_sha": "e6a8a4f016254a1acd22f110f75fb46b017d26c7"
+  },
+  "canonical_references": {
+    "FIG2_REFERENCE.csv": {
+      "git_blob_sha1": "6ac9cccff730f8110d9392d4ab75e3e81b5f3146",
+      "bytes": 28499,
+      "sha256": "a079416fdf59e040233f4fecc67f5d8f920ff038a654c8c7758a4c7aab051a05",
+      "encoding": "UTF-8, LF",
+      "verified_from_git_object": true
+    },
+    "FIG3_REFERENCE.csv": {
+      "git_blob_sha1": "602dedb0d62246829b8d837232eb5dae33c3b807",
+      "bytes": 62797,
+      "sha256": "10a160e50d5f67b11d678ce7beb709b2c782846eb2f8fff9f39177782c32c719",
+      "encoding": "UTF-8, LF",
+      "verified_from_git_object": true
+    }
+  },
+  "frozen_tolerances": {
+    "Fig2_xe": {
+      "observable": "x_e",
+      "space": "linear",
+      "tolerance_abs": 0.012,
+      "unit": "dimensionless"
+    },
+    "Fig2_g": {
+      "observable": "g",
+      "space": "linear",
+      "tolerance_abs": 0.00025,
+      "unit": "Mpc^-1"
+    },
+    "Fig3_log10_xe": {
+      "observable": "log10(x_e)",
+      "space": "log10",
+      "tolerance_abs": 0.045,
+      "unit": "dex"
+    }
+  },
+  "frozen_benchmark": {
+    "paper": "Rashkovetskyi, Munoz, Eisenstein & Dvorkin (2021), PRD 104, 103517, DOI: 10.1103/PhysRevD.104.103517, arXiv: 2108.02747v3",
+    "model": "M3 three-zone baryon-clumping model",
+    "author_repository": "https://github.com/misharash/class_public",
+    "author_commit": "4fdab292a223a0ab331e98613ad98e38a3a2d0de",
+    "primary_backend": "recfast_3zones_lowlevel",
+    "parameters": {
+      "delta_m": -0.9,
+      "delta_p": "5/3 (1.6666666666666667)",
+      "f2V_f0": "1/3 (0.3333333333333333)",
+      "b_derived": 1.0,
+      "f_minus_derived": "100/231",
+      "f_plus_derived": "18/77",
+      "Delta_minus_derived": 0.1,
+      "Delta_0_derived": 1.0,
+      "Delta_plus_derived": "8/3"
+    },
+    "paper_cosmology_ini": "base_2018_plikHM_TTTEEE_lowl_lowE_lensing.ini"
+  },
+  "numerical_execution_started_prior_to_snapshot": false
+}

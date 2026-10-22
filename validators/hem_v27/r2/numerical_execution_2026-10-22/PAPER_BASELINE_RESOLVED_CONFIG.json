@@ -1,0 +1,115 @@
+{
+  "gate": "HEM v27 R2 \u2014 Published Model Reproduction",
+  "phase": "Phase D \u2014 Paper Cosmology Input Freeze",
+  "frozen_at_utc": "2026-10-22T17:50:45Z",
+  "source_ini": {
+    "filename": "base_2018_plikHM_TTTEEE_lowl_lowE_lensing.ini",
+    "author_commit": "4fdab292a223a0ab331e98613ad98e38a3a2d0de",
+    "git_blob_sha1": "9107122999cccb3bb7a82e616fcdc9333953203a",
+    "bytes": 1432,
+    "sha256": "223d409e04dc072c829ccabcc799be4d5f129da1b39b353e6748053419d0a5fe"
+  },
+  "explicit_ini_parameters": {
+    "H0": 67.32117,
+    "h": 0.6732117,
+    "omega_b": 0.0223828,
+    "N_ur": 2.03066666667,
+    "omega_cdm": 0.1201075,
+    "N_ncdm": 1,
+    "omega_ncdm": 0.0006451439,
+    "YHe": 0.2454006,
+    "tau_reio": 0.05430842,
+    "n_s": 0.9660499,
+    "A_s": 2.100549e-09,
+    "non_linear": "halofit",
+    "output": "tCl,pCl,lCl,mPk",
+    "lensing": "yes",
+    "write_warnings": "yes",
+    "write_parameters": "yes"
+  },
+  "derived_and_default_resolved_parameters": {
+    "Omega_b": 0.04938682464547351,
+    "Omega_cdm": 0.26501277950507574,
+    "Omega_ncdm": 0.0014234862778739433,
+    "Omega_m": 0.31582309042842316,
+    "Omega_k": 0.0,
+    "K": 0.0,
+    "T_cmb": 2.7255,
+    "T_ncdm_default": 0.71611,
+    "deg_ncdm_default": 1.0,
+    "m_ncdm_approx_eV": 0.060088702846,
+    "YHe_treatment": "explicit numeric value 0.2454006 (not BBN lookup)",
+    "reio_parametrization": "reio_camb",
+    "reionization_exponent": 1.5,
+    "reionization_width": 0.5,
+    "helium_fullreio_redshift": 3.5,
+    "helium_fullreio_width": 0.5,
+    "gauge": "synchronous",
+    "k_pivot_Mpc_inv": 0.05,
+    "alpha_s": 0.0,
+    "l_scalar_max": 2500,
+    "delta_l_max_for_lensing": 500,
+    "P_k_max_Mpc_inv": 1.0,
+    "z_pk": [
+      0.0
+    ],
+    "recfast_precision_defaults": {
+      "recfast_z_initial": 10000.0,
+      "recfast_Nz0": 20000,
+      "tol_thermo_integration": 0.01,
+      "recfast_Heswitch": 6,
+      "recfast_fudge_He": 0.86,
+      "recfast_Hswitch": 1,
+      "recfast_fudge_H": 1.14,
+      "recfast_delta_fudge_H": -0.015,
+      "recfast_H_frac": 0.001
+    }
+  },
+  "recombination_configurations": {
+    "standard_control": {
+      "recombination": "recfast",
+      "Delta": 1.0
+    },
+    "m3_primary_benchmark": {
+      "recombination": "recfast_3zones_lowlevel",
+      "delta_m": -0.9,
+      "delta_p_exact_fraction": "5/3",
+      "delta_p_float64": 1.6666666666666667,
+      "f2V_exact_fraction": "1/3",
+      "f2V_float64": 0.3333333333333333,
+      "derived_b": 1.0,
+      "derived_Delta1": 0.1,
+      "derived_Delta2": 1.0,
+      "derived_Delta3": 2.6666666666666665,
+      "derived_f1V": 0.4329004329004329,
+      "derived_f2V": 0.3333333333333333,
+      "derived_f3V": 0.23376623376623376
+    }
+  },
+  "run_ini_manifests": {
+    "standard_control_run1.ini": {
+      "sha256": "e3257ca223c261aa19f1954582015ed870d9a1160836b24d9bd8bd5a982124c0",
+      "bytes": 1677,
+      "root": "/mnt/host/h/AI_Products/AI_Factory_Workspace/TechOrb-Hubble-Validator-R2-numerical-reproduction-20261022/05_standard_control_run1/standard_run1_",
+      "is_m3": false
+    },
+    "standard_control_run2.ini": {
+      "sha256": "3eec8338e50add1124e3da3f69c056b3f86b8b5608ea46e95c0d12844cd9b41e",
+      "bytes": 1677,
+      "root": "/mnt/host/h/AI_Products/AI_Factory_Workspace/TechOrb-Hubble-Validator-R2-numerical-reproduction-20261022/06_standard_control_run2/standard_run2_",
+      "is_m3": false
+    },
+    "m3_run1.ini": {
+      "sha256": "4bc97bf7125bb3e32528eefdf290918876c9f032801842daceb9b7149eecad6d",
+      "bytes": 1742,
+      "root": "/mnt/host/h/AI_Products/AI_Factory_Workspace/TechOrb-Hubble-Validator-R2-numerical-reproduction-20261022/07_m3_run1/m3_run1_",
+      "is_m3": true
+    },
+    "m3_run2.ini": {
+      "sha256": "baf2e0606c5a86a77d92c0a4a413dc09c935b65fdf815449cbac0a7d24cd2296",
+      "bytes": 1742,
+      "root": "/mnt/host/h/AI_Products/AI_Factory_Workspace/TechOrb-Hubble-Validator-R2-numerical-reproduction-20261022/08_m3_run2/m3_run2_",
+      "is_m3": true
+    }
+  }
+}

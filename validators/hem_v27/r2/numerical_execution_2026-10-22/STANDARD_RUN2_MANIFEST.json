@@ -1,0 +1,77 @@
+{
+  "gate": "HEM v27 R2 \u2014 Published Model Reproduction",
+  "role": "Phase F \u2014 Standard Control Run 2",
+  "directory": "06_standard_control_run2",
+  "binary_sha256": "306713df0c2d6a5976f37871ca07e9943c2948ee9581c129701138587035e464",
+  "command": "./class /mnt/host/h/AI_Products/AI_Factory_Workspace/TechOrb-Hubble-Validator-R2-numerical-reproduction-20261022/06_standard_control_run2/standard_control_run2.ini",
+  "start_utc": "2026-10-22T17:54:07Z",
+  "end_utc": "2026-10-22T17:54:16Z",
+  "exit_code": 0,
+  "input_ini": {
+    "filename": "standard_control_run2.ini",
+    "bytes": 1677,
+    "sha256": "3eec8338e50add1124e3da3f69c056b3f86b8b5608ea46e95c0d12844cd9b41e"
+  },
+  "stdout": {
+    "filename": "stdout.log",
+    "bytes": 2392,
+    "sha256": "2fbf5039d0c6a882e866c24cfdae4d5c230ccd17cb46861e8f621ced8df93508"
+  },
+  "stderr": {
+    "filename": "stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "outputs": {
+    "background.dat": {
+      "filename": "standard_run2_background.dat",
+      "bytes": 2435469,
+      "sha256": "704df4d6b35e7d2b197f748647c5aae35792dec54373125b14867cc21be2f5ec"
+    },
+    "thermodynamics.dat": {
+      "filename": "standard_run2_thermodynamics.dat",
+      "bytes": 5158168,
+      "sha256": "4b4f123e184df0dac8df46b740ed5ebf81563741b0d1deda6c5ababfed1b79bd"
+    },
+    "cl.dat": {
+      "filename": "standard_run2_cl.dat",
+      "bytes": 546507,
+      "sha256": "c8c4d19cd7ac02a931f0a113900e7d1f33d53ff84468c38950cc1ad92502b01e"
+    },
+    "cl_lensed.dat": {
+      "filename": "standard_run2_cl_lensed.dat",
+      "bytes": 455514,
+      "sha256": "bb96d9d33f63d9e42754c69672304291d73a8e94eb3722cac7b5644c1ec2b316"
+    },
+    "pk.dat": {
+      "filename": "standard_run2_pk.dat",
+      "bytes": 32256,
+      "sha256": "021ac8c350c584e176beb5a5ce189a7e5ac7e1a3cb014e0b9bf9ef0a8a26bda8"
+    },
+    "pk_cb.dat": {
+      "filename": "standard_run2_pk_cb.dat",
+      "bytes": 32256,
+      "sha256": "9d6457fd2309dca57575503b5f396cd8258413362d9f63e028e3931516513341"
+    },
+    "pk_cb_nl.dat": {
+      "filename": "standard_run2_pk_cb_nl.dat",
+      "bytes": 32256,
+      "sha256": "958cf684fb4ed74ae8a63dce4351d3df8928595c0451fc5018d481dd0bfd99ae"
+    },
+    "pk_nl.dat": {
+      "filename": "standard_run2_pk_nl.dat",
+      "bytes": 32256,
+      "sha256": "2aed92c433514e9334045958bd0e1bcc4db74d42d91c76f19a817f80b958993a"
+    },
+    "parameters.ini": {
+      "filename": "standard_run2_parameters.ini",
+      "bytes": 942,
+      "sha256": "738b8a05bead53eae29a5d012a01e56f9f9625c8d0ee44e17288ef7966105608"
+    },
+    "unused_parameters": {
+      "filename": "standard_run2_unused_parameters",
+      "bytes": 98,
+      "sha256": "e76a02f37de78d2f359533a8eb788a605d8470587f7e6c938bc4f1bcd50c75d6"
+    }
+  }
+}

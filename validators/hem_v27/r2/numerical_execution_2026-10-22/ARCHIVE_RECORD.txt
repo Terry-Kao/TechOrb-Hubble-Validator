@@ -1,0 +1,1 @@
+path=/mnt/host/h/AI_Products/AI_Factory_Workspace/TechOrb-Hubble-Validator-R2-numerical-reproduction-20261022/R2_PUBLISHED_MODEL_REPRODUCTION_EVIDENCE_2026-10-22.tar.gz size=651475815 sha256=ca5cd2d6e6f02fccc38021a5509eab3bfbd13e3e364a4b079d68aaef906bbdc7 file_count=1388 archive_manifest_OK=1325 archive_manifest_notOK=0

@@ -92,6 +92,48 @@
 
 **Adjudication:** Historical control artifacts are exact. Two pristine-source canonical HyRec runs are byte-identical across all declared raw output families and all frozen identity/consistency checks pass. The first dirty-source attempt is preserved and excluded. Pipeline verdict: **PASS**. Model verdict: **NOT APPLICABLE**.
 
+## D-2026-10-21-10 — Freeze R2 reference data and tolerances before execution
+
+**Status:** Proposed in Draft PR #8; numerical execution not performed.
+**Decision:** Admit independently digitized Fig. 2/3 references from the author-submitted vector PDFs in official arXiv `2108.02747v3`; freeze row masks and pointwise tolerances before any R2 model output exists.
+
+**Recovery result:** No author machine-readable Fig. 2/3 table or plotting script was located. Method A extracts vector paths; Method B independently traces a 1200 dpi raster. Only reference-vs-reference dispersion determines masks and uncertainty.
+
+**Tolerance:** Fig. 2 `x_e` absolute `0.012`; Fig. 2 `g` absolute `0.00025 Mpc^-1`; Fig. 3 `log10(x_e)` absolute `0.045 dex`. Every admitted point must pass; no aggregate escape clause.
+
+**License boundary:** The pinned author CLASS fork has no repository-level license. Do not commit its source bytes; retain local scientific inspection/execution only and record identities/hashes.
+
+**Consequence:** R2 changes from reference-data BLOCKED to **REFERENCE ADMISSION COMPLETE — NUMERICAL EXECUTION AUTHORIZED BUT NOT YET RUN**. A separate work is required to execute and adjudicate R2.
+
+**Evidence:** `validators/hem_v27/r2/REFERENCE_RECOVERY_REPORT.md`, `REFERENCE_DATA_MANIFEST.md`, `FIG2_REFERENCE.csv`, `FIG3_REFERENCE.csv`, digitization method/uncertainty records, and `TOLERANCE_CONTRACT.md`.
+
+## D-2026-10-22-11 — R2 pre-execution reference identity repair and re-freeze
+
+**Status:** Executed on Draft PR #8; pending maintainer review and merge.
+
+**Decision:** Retain the original canonical Fig. 2/3 SHA-256 values and define them precisely as the LF Git blob byte streams already committed before execution at `1f2ca42`. Re-freeze that identity before any R2 numerical work.
+
+**Forensic finding:** The Independent Replication Audit reported overall `PARTIALLY CONFIRMED — ANOMALIES FOUND` after hashing Windows CRLF materializations (`e2ac0de1...`, `cdde7d526...`). Direct Git-object recovery found exact canonical blobs `6ac9ccc...` (28,499 bytes, SHA-256 `a079416f...`) and `602dedb...` (62,797 bytes, SHA-256 `10a160e5...`) at `1f2ca42`, its reflog predecessors, and PR head. CRLF-to-LF conversion accounts for the byte-count and hash differences exactly; no other bytes differ.
+
+**Scientific invariance:** Full schema/content validation passed. Curve values, Method A/B fields, row ordering, grids, masks, exclusion reasons, admitted counts, numeric precision, tolerances and benchmark selection are unchanged. The audit independently supports the geometry and the frozen `0.012`, `0.00025 Mpc^-1`, and `0.045 dex` tolerances.
+
+**R0 bounded correction:** The same direct-object check confirms that historical runner `260bbe...` and patch `ab460f...` are the LF Git blob bytes. `b911db...` and `382b93...` are CRLF Windows working-tree representations, not contradictory committed snapshots. R0 PASS, 52/52, exact binary/output reproduction and R1 PASS are unchanged.
+
+**Consequence:** Reference identity is re-frozen before any R2 numerical execution. R2 numerical execution was not performed in this repair. It is authorized only as a separate future work; PR #8 remains Draft and unmerged.
+
+**Evidence:** `validators/hem_v27/r2/R2_REFERENCE_IDENTITY_REPAIR_REPORT.md`, `REFERENCE_DATA_MANIFEST.md`, and the 2026-10-22 Independent Replication Audit workspace.
+
+## D-R2-EXEC-20261022 — R2 numerical execution verdict BLOCKED
+
+- **Status / owner:** Recorded by executor (Antigravity) under the R2 execution specification; awaiting Terry's governance review.
+- **Changed gate:** R2 Published Model Reproduction.
+- **Previous state:** REFERENCE IDENTITY RE-FROZEN / NUMERICAL EXECUTION AUTHORIZED / NOT RUN.
+- **New state:** BLOCKED — mandatory Fig. 3 observables `minus_zone`, `plus_zone`, `simple_clumping` not legally extractable from pinned author code under the frozen pre-registration (spec §19, §24, §35).
+- **Numerical facts:** controls and M3 byte-identical (run1 = run2); 560/560 adjudicable admitted points PASS (0 FAIL); non-adjudicative read-only diagnostic dump 334/334 within tolerance.
+- **Evidence:** `validators/hem_v27/r2/numerical_execution_2026-10-22/R2_NUMERICAL_REPRODUCTION_REPORT.md`; local archive `R2_PUBLISHED_MODEL_REPRODUCTION_EVIDENCE_2026-10-22.tar.gz` (651,475,815 B, SHA-256 `ca5cd2d6e6f02fccc38021a5509eab3bfbd13e3e364a4b079d68aaef906bbdc7`, 1,388 files; 1,325/1,325 manifest entries OK).
+- **Scope / objections:** No tolerance, mask, backend, cosmology or b change. Neutrino-treatment text discrepancy unresolved. Diagnostic dump was built before the stop rule was fully applied; preserved, non-adjudicative.
+- **Rollback / supersession:** Superseded only by a new pre-registered extraction-route decision committed before any re-adjudication.
+
 ## Decision Entry Template
 
 - ID / date

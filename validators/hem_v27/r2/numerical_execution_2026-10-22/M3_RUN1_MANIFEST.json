@@ -1,0 +1,77 @@
+{
+  "gate": "HEM v27 R2 \u2014 Published Model Reproduction",
+  "role": "Phase G \u2014 M3 Primary Benchmark Run 1",
+  "directory": "07_m3_run1",
+  "binary_sha256": "306713df0c2d6a5976f37871ca07e9943c2948ee9581c129701138587035e464",
+  "command": "./class /mnt/host/h/AI_Products/AI_Factory_Workspace/TechOrb-Hubble-Validator-R2-numerical-reproduction-20261022/07_m3_run1/m3_run1.ini",
+  "start_utc": "2026-10-22T17:54:16Z",
+  "end_utc": "2026-10-22T17:54:24Z",
+  "exit_code": 0,
+  "input_ini": {
+    "filename": "m3_run1.ini",
+    "bytes": 1742,
+    "sha256": "4bc97bf7125bb3e32528eefdf290918876c9f032801842daceb9b7149eecad6d"
+  },
+  "stdout": {
+    "filename": "stdout.log",
+    "bytes": 2372,
+    "sha256": "3d2d192eb262dfb06b402ce0335775b17fc9edba17dc5280406b1f749db76d5c"
+  },
+  "stderr": {
+    "filename": "stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "outputs": {
+    "background.dat": {
+      "filename": "m3_run1_background.dat",
+      "bytes": 2435469,
+      "sha256": "704df4d6b35e7d2b197f748647c5aae35792dec54373125b14867cc21be2f5ec"
+    },
+    "thermodynamics.dat": {
+      "filename": "m3_run1_thermodynamics.dat",
+      "bytes": 5158168,
+      "sha256": "a19ec3c05ac095398aafadca331cd2f66bc2a1c96a350e85242b85e39327506b"
+    },
+    "cl.dat": {
+      "filename": "m3_run1_cl.dat",
+      "bytes": 546507,
+      "sha256": "996e62030e09aec4ef2514190ddd93c121542c679a772d37d096bd2c2cc3a1bc"
+    },
+    "cl_lensed.dat": {
+      "filename": "m3_run1_cl_lensed.dat",
+      "bytes": 455514,
+      "sha256": "529a74dcdf56d79e78fde222c04e5db6afcaf4f796646f27bb1ca79ecefaa418"
+    },
+    "pk.dat": {
+      "filename": "m3_run1_pk.dat",
+      "bytes": 32048,
+      "sha256": "f1c0a1716b813efda41fdfa320333c65f9a047cb9954beb2a1cdea061b8b4b51"
+    },
+    "pk_cb.dat": {
+      "filename": "m3_run1_pk_cb.dat",
+      "bytes": 32048,
+      "sha256": "0be352dbe2eb286bbbe04a92e9b3989774bc1dc6dfeeb12560b29c15d4524656"
+    },
+    "pk_cb_nl.dat": {
+      "filename": "m3_run1_pk_cb_nl.dat",
+      "bytes": 32048,
+      "sha256": "79bc4b12b34f505e7cf075498473fe8c98cae16f0ea901276d98fe720fefc96a"
+    },
+    "pk_nl.dat": {
+      "filename": "m3_run1_pk_nl.dat",
+      "bytes": 32048,
+      "sha256": "44890cafff7aa8cacbe581dcfee02a13f7e33d4f9ed10d3744c7712e194b51ad"
+    },
+    "parameters.ini": {
+      "filename": "m3_run1_parameters.ini",
+      "bytes": 1007,
+      "sha256": "9a27ac6af59f0b422d25f73dfe9fa2d36b86722e6d7e852473c00ae86b2d010f"
+    },
+    "unused_parameters": {
+      "filename": "m3_run1_unused_parameters",
+      "bytes": 98,
+      "sha256": "e76a02f37de78d2f359533a8eb788a605d8470587f7e6c938bc4f1bcd50c75d6"
+    }
+  }
+}

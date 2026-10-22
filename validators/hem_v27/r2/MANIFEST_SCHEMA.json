@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HEM v27 R2 evidence manifest",
+  "type": "object",
+  "required": ["gate", "paper", "source", "environment", "inputs", "reference_data", "runs", "artifacts", "verdict"],
+  "properties": {
+    "gate": {"const": "HEM v27 R2"},
+    "paper": {"type": "object", "required": ["doi", "arxiv", "version", "locators"]},
+    "source": {"type": "object", "required": ["repository", "commit", "tree_sha256", "dirty_paths_before_build"]},
+    "environment": {"type": "object", "required": ["container_digest", "os", "compiler", "libc", "commands"]},
+    "inputs": {"type": "array", "items": {"$ref": "#/$defs/artifact"}},
+    "reference_data": {"type": "array", "items": {"$ref": "#/$defs/artifact"}},
+    "runs": {"type": "array", "items": {"type": "object", "required": ["id", "role", "command", "exit_code", "stdout_sha256", "stderr_sha256"]}},
+    "artifacts": {"type": "array", "items": {"$ref": "#/$defs/artifact"}},
+    "verdict": {"type": "object", "required": ["pipeline", "model", "scope"]}
+  },
+  "$defs": {
+    "artifact": {"type": "object", "required": ["path", "sha256", "bytes"], "properties": {"path": {"type": "string"}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "bytes": {"type": "integer", "minimum": 0}}}
+  }
+}
