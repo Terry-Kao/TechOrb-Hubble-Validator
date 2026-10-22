@@ -96,3 +96,8 @@ The R0-H package resolves the historical environment and producer identity for t
 | R2-FIG3-20261021 | `validators/hem_v27/r2/FIG3_REFERENCE.csv` | Frozen Fig. 3 reference rows and masks |
 | R2-DIGITIZE-20261021 | `validators/hem_v27/r2/DIGITIZATION_METHOD_A.md`; `DIGITIZATION_METHOD_B.md`; `DIGITIZATION_UNCERTAINTY.md` | Independent vector/raster methods and uncertainty |
 | R2-TOL-20261021 | `validators/hem_v27/r2/TOLERANCE_CONTRACT.md` | PRE-EXECUTION REFERENCE/TOLERANCE FREEZE |
+| R2-ID-REPAIR-20261022 | `validators/hem_v27/r2/R2_REFERENCE_IDENTITY_REPAIR_REPORT.md` | Old-hash recovery, LF/CRLF byte-level adjudication, full schema/content validation and post-repair verification |
+
+Canonical R2 identities are the LF Git blobs: Fig. 2 SHA-256 `a079416fdf59e040233f4fecc67f5d8f920ff038a654c8c7758a4c7aab051a05`; Fig. 3 SHA-256 `10a160e50d5f67b11d678ce7beb709b2c782846eb2f8fff9f39177782c32c719`. Windows CRLF working-tree representations have different non-canonical transport hashes.
+
+The local Independent Replication Audit evidence package at `H:\AI_Products\AI_Factory_Workspace\TechOrb-Hubble-Validator-Independent-Audit-20261022` is supporting external audit evidence, not a committed repository artifact. It reports overall `PARTIALLY CONFIRMED — ANOMALIES FOUND`, independently supports R2 geometry/tolerances, and preserves the CRLF materializations that triggered this repair.

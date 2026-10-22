@@ -1,7 +1,7 @@
 # R2 Reference Recovery Report
 
-Date: 2026-10-21
-Decision: **REFERENCE ADMISSION COMPLETE — NUMERICAL EXECUTION AUTHORIZED BUT NOT YET RUN**
+Date: 2026-10-21; identity re-adjudicated 2026-10-22
+Decision: **REFERENCE IDENTITY RE-FROZEN — NUMERICAL EXECUTION AUTHORIZED BUT NOT YET RUN**
 
 ## Boundary observed
 
@@ -23,6 +23,12 @@ The full visible `misharash/class_public` Git history and refs, relevant deleted
 
 The resulting mandatory references are `FIG2_REFERENCE.csv` and `FIG3_REFERENCE.csv`; exact hashes are in `REFERENCE_DATA_MANIFEST.md`.
 
+## 2026-10-22 identity recovery
+
+The Independent Replication Audit correctly recovered and supported the reference geometry and tolerance envelope, but hashed CRLF working-tree/archive materializations (`e2ac0de1...`, `cdde7d526...`) and concluded that the manifest identities were inconsistent. Direct inspection of the Git object database found the declared exact bytes as LF blobs `6ac9ccc...` and `602dedb...` in the original pre-execution freeze commit `1f2ca42` and its reflog predecessors. CRLF-to-LF normalization of the preserved working files reproduces the declared sizes and SHA-256 values exactly; there is no content, ordering, precision, mask, or row mutation.
+
+Accordingly, the original intended freeze artifacts were recovered with complete pre-execution provenance and retain canonical status. The canonical hashes are not superseded; the ambiguous phrase "committed bytes" is superseded by the precise phrase "canonical Git blob bytes." See `R2_REFERENCE_IDENTITY_REPAIR_REPORT.md`.
+
 ## Admission
 
 All four Fig. 2 curves are admitted with narrow row masks. All five Fig. 3 curves are admitted, with dashed/occluded samples masked explicitly. Fig. 18 is preserved and vector-extractable but deferred from the mandatory gate because Fig. 2/3 already provide a complete deterministic recombination benchmark and the Fig. 18 spectra are secondary under `BENCHMARK_SPEC.md`.
@@ -33,4 +39,4 @@ The author CLASS fork has no repository-level LICENSE/COPYING file at the pinned
 
 ## Gate conclusion
 
-Reference quality is sufficient to predeclare auditable pointwise tolerances without seeing a local model result. The selected benchmark remains unchanged. This work authorizes a separate `R2 Numerical Reproduction` work but performs none of it.
+Reference quality and canonical byte identity are sufficient to predeclare auditable pointwise tolerances without seeing a local model result. The selected benchmark remains unchanged. This work authorizes a separate `R2 Numerical Reproduction` work but performs none of it.

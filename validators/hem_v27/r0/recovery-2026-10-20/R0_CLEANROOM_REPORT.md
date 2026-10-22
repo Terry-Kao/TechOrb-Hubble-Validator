@@ -22,7 +22,7 @@ The tolerance was not changed after observing results. This is a completed numer
 
 - Upstream CLASS commit: `aa92943e4ab86b56970953589b4897adf2bd0f99` (`v3.2.0`).
 - Patched checkout: same commit plus only the frozen RECFAST scientific hunk.
-- Patched `wrap_recfast.c` SHA-256 matches the frozen recovered candidate: `382b93b8b2ca8df2b6932ca40b18ab201145008a1308ef5c115a6e84ee83eb27`.
+- Canonical historical/frozen `wrap_recfast.c` is the LF Git blob (15,174 bytes), SHA-256 `ab460fc673088078cca27b250652a4698ced1802c7b10aeadb4cd658a47cf75f`. A Windows CRLF working-tree materialization is 15,547 bytes and hashes to `382b93b8b2ca8df2b6932ca40b18ab201145008a1308ef5c115a6e84ee83eb27`; it is content-equivalent after CRLF-to-LF conversion but is not the canonical byte identity.
 - The three executable-bit-only differences in `CPU.py`, `doc/input/make1.sh`, and `doc/input/make2.sh` were excluded.
 - Docker Desktop: 4.61.0; engine/client 29.2.1; Linux `amd64`; kernel `6.6.87.2-microsoft-standard-WSL2`.
 - Image: `techorb-r0@sha256:14d858b5c2009fd6e9d5f0621c6d9554f66782dfa3201dd21bf4b26218c48a0a`.

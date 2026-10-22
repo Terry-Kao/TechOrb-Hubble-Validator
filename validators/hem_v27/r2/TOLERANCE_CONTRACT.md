@@ -1,6 +1,8 @@
-# Frozen Tolerance Contract — PRE-EXECUTION REFERENCE/TOLERANCE FREEZE
+# Frozen Tolerance Contract — PRE-EXECUTION REFERENCE IDENTITY RE-FREEZE
 
-Status: **COMPLETE / NUMERICAL EXECUTION AUTHORIZED BUT NOT YET RUN**. Frozen on 2026-10-21 without producing, opening, or using local R2 model output.
+Status: **REFERENCE IDENTITY RE-FROZEN / NUMERICAL EXECUTION AUTHORIZED BUT NOT YET RUN**. Frozen on 2026-10-21 and byte-identity reverified on 2026-10-22 without producing, opening, or using local R2 model output.
+
+Canonical references are the LF Git blobs recorded in `REFERENCE_DATA_MANIFEST.md`: Fig. 2 `a079416f...` and Fig. 3 `10a160e5...`. Windows CRLF materializations have different transport/checkout hashes and are non-canonical. The identity repair changes no curve value, row, mask, uncertainty, interpolation rule, aggregation rule, or numerical tolerance.
 
 ## Reference observables and domains
 
@@ -30,3 +32,5 @@ The reference source is the author-submitted standalone vector figure PDF inside
 PASS requires every admitted point for every mandatory curve to satisfy its per-point tolerance. There is no mean/RMS escape clause. Missing reproduction coverage, extrapolation, non-finite values, changed masks, or any admitted-point exceedance is FAIL. Exact source/input identities, zero exit status, clean source state, and declared repeatability checks remain mandatory. Fig. 18 is non-adjudicative in this freeze.
 
 Any change to reference bytes, rows, masks, tolerances, interpolation or aggregation requires a new reviewed pre-execution amendment before another numerical run.
+
+The 2026-10-22 Independent Replication Audit independently supported all admitted reference geometry and the unchanged tolerances (`0.012`, `0.00025 Mpc^-1`, `0.045 dex`) while reporting overall `PARTIALLY CONFIRMED — ANOMALIES FOUND`. Its R2 identity anomaly is resolved by direct Git-blob recovery documented in `R2_REFERENCE_IDENTITY_REPAIR_REPORT.md`; the audit's independent scientific comparisons remain supporting evidence.

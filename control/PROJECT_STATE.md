@@ -1,7 +1,7 @@
 # Project State
 
-**As of:** 2026-10-21
-**Authority:** repository `main` after approved merge; this branch proposes the final R0 adjudication.
+**As of:** 2026-10-22
+**Authority:** repository `main` after approved merge; this draft branch proposes the R2 reference-identity repair and re-freeze.
 
 ## Integrated Verdict
 
@@ -30,7 +30,7 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 |---|---|---|
 | R0 Reproducibility Freeze | PASS | Historical Alpine environment and binary were reconciled; 52/52 fields and primary artifacts reproduce exactly. Debian 12 remains a cross-environment portability sensitivity FAIL (50/52). |
 | R1 Baseline Definition Audit | PASS | Historical artifacts match R0-H exactly; two pristine-source canonical HyRec runs are byte-identical across eight raw output families and satisfy every frozen consistency check. |
-| R2 Published Model Reproduction | REFERENCE ADMISSION COMPLETE / NOT RUN | Fig. 2/3 references, masks and tolerances are frozen from independent vector/raster extraction; numerical execution is authorized only as a separate work and has not occurred. |
+| R2 Published Model Reproduction | REFERENCE IDENTITY RE-FROZEN / NOT RUN | Canonical Fig. 2/3 identities are the LF Git blobs already present at pre-execution commit `1f2ca42`; masks and tolerances are unchanged and independently supported. Numerical execution is authorized only as a separate work and has not occurred. |
 | R3 Full Multi-Probe Likelihood | NOT STARTED | Depends on R2. |
 | R4 Physicality Benchmark | NOT STARTED | Depends on R3 and a declared physical bridge. |
 
@@ -62,3 +62,7 @@ R1 was pre-registered at `79247c1e97d433c38d0f1fc0f1e9366866f5e475` before numer
 ## R2 Reference Admission Freeze — 2026-10-21
 
 Official arXiv v3 source preserves Figs. 2, 3 and 18 as standalone Matplotlib vector PDFs. No author raw Fig. 2/3 table was found. Independent vector-path and 1200 dpi raster extractions froze pointwise references, explicit masks and geometry-derived tolerances before any model run. R2 numerical execution is authorized but not yet run; no R2 pipeline/model verdict exists.
+
+## R2 Reference Identity Repair — 2026-10-22
+
+The Independent Replication Audit returned overall `PARTIALLY CONFIRMED — ANOMALIES FOUND`: it independently supported the reference geometry and unchanged tolerances, but compared Windows CRLF materializations against hashes declared for canonical LF Git blobs. Direct object-database recovery found Fig. 2 blob `6ac9ccc...` / SHA-256 `a079416f...` and Fig. 3 blob `602dedb...` / SHA-256 `10a160e5...` in the original pre-execution commit `1f2ca42`. CRLF-only working representations explain `e2ac0de1...` / `cdde7d526...` exactly. No scientific content changed and no R2 numerical run occurred. The reference identity is re-frozen; execution remains a separate future work.

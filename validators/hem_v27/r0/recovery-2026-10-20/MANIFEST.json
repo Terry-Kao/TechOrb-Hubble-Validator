@@ -3,6 +3,7 @@
   "inspection_date": "2026-10-20",
   "source_root": "H:\\AI_Products\\AI_Factory_Workspace\\TechOrb-Hubble-Validator",
   "scope": "candidate v26.4 artifacts recovered from local storage; historical production identity is not proven",
+  "byte_identity_note_2026_10_22": "For text files, sha256 and bytes identify canonical LF Git blob bytes. Windows CRLF working-tree representations have different transport hashes: runner b911db1b2d7fd15ef5d3f59b0cabb47fd5a61fdad86376bf046868bdb8ce0209 (14358 bytes) and wrap_recfast.c 382b93b8b2ca8df2b6932ca40b18ab201145008a1308ef5c115a6e84ee83eb27 (15547 bytes). Direct Git-object extraction verifies the LF committed snapshots equal the historical originals exactly.",
   "gate": {
     "pipeline": "FAIL",
     "model": "NOT APPLICABLE",
