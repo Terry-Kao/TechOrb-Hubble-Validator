@@ -78,6 +78,11 @@ CRLF-to-LF conversion reproduces both canonical hashes exactly. This clarificati
 
 ## Post-repair verification and gate
 
-Fresh PR-head verification must hash raw Git blob bytes, not an OS-converted checkout. The canonical hashes must equal `REFERENCE_DATA_MANIFEST.md`; any mismatch keeps R2 on HOLD. The repair commit must remain earlier than any numerical execution, PR #8 remains Draft/unmerged, and R2 numerical execution remains outside this work.
+The pre-execution identity re-freeze commit is `f9037a9a19d1591d25e3ea98acfa8ce6468bdb43`. After push, GitHub reported that exact PR #8 head while the PR remained Draft. Fresh GitHub Contents/Git Blobs API reads returned:
 
-Subject to fresh GitHub PR-head verification after push, the gate conclusion is: **READY FOR R2 NUMERICAL REPRODUCTION**. This authorizes only a separate bounded future work; it does not mean R2 has run or passed.
+- Fig. 2 blob `6ac9cccff730f8110d9392d4ab75e3e81b5f3146`, 28,499 bytes, SHA-256 `a079416fdf59e040233f4fecc67f5d8f920ff038a654c8c7758a4c7aab051a05`;
+- Fig. 3 blob `602dedb0d62246829b8d837232eb5dae33c3b807`, 62,797 bytes, SHA-256 `10a160e50d5f67b11d678ce7beb709b2c782846eb2f8fff9f39177782c32c719`.
+
+Both equal `REFERENCE_DATA_MANIFEST.md` exactly. The re-freeze remains earlier than any R2 numerical execution because no such execution occurred. PR #8 remains Draft/unmerged and R2 numerical execution remains outside this work.
+
+Gate conclusion: **READY FOR R2 NUMERICAL REPRODUCTION**. This authorizes only a separate bounded future work; it does not mean R2 has run or passed.
