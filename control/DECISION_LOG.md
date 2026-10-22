@@ -123,6 +123,17 @@
 
 **Evidence:** `validators/hem_v27/r2/R2_REFERENCE_IDENTITY_REPAIR_REPORT.md`, `REFERENCE_DATA_MANIFEST.md`, and the 2026-10-22 Independent Replication Audit workspace.
 
+## D-R2-EXEC-20261022 — R2 numerical execution verdict BLOCKED
+
+- **Status / owner:** Recorded by executor (Antigravity) under the R2 execution specification; awaiting Terry's governance review.
+- **Changed gate:** R2 Published Model Reproduction.
+- **Previous state:** REFERENCE IDENTITY RE-FROZEN / NUMERICAL EXECUTION AUTHORIZED / NOT RUN.
+- **New state:** BLOCKED — mandatory Fig. 3 observables `minus_zone`, `plus_zone`, `simple_clumping` not legally extractable from pinned author code under the frozen pre-registration (spec §19, §24, §35).
+- **Numerical facts:** controls and M3 byte-identical (run1 = run2); 560/560 adjudicable admitted points PASS (0 FAIL); non-adjudicative read-only diagnostic dump 334/334 within tolerance.
+- **Evidence:** `validators/hem_v27/r2/numerical_execution_2026-10-22/R2_NUMERICAL_REPRODUCTION_REPORT.md`; local archive `R2_PUBLISHED_MODEL_REPRODUCTION_EVIDENCE_2026-10-22.tar.gz` (651,475,815 B, SHA-256 `ca5cd2d6e6f02fccc38021a5509eab3bfbd13e3e364a4b079d68aaef906bbdc7`, 1,388 files; 1,325/1,325 manifest entries OK).
+- **Scope / objections:** No tolerance, mask, backend, cosmology or b change. Neutrino-treatment text discrepancy unresolved. Diagnostic dump was built before the stop rule was fully applied; preserved, non-adjudicative.
+- **Rollback / supersession:** Superseded only by a new pre-registered extraction-route decision committed before any re-adjudication.
+
 ## Decision Entry Template
 
 - ID / date

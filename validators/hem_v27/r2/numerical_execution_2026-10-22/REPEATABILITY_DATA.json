@@ -1,0 +1,458 @@
+[
+  {
+    "file_a": "05_standard_control_run1/standard_run1_background.dat",
+    "file_b": "06_standard_control_run2/standard_run2_background.dat",
+    "sha256_a": "704df4d6b35e7d2b197f748647c5aae35792dec54373125b14867cc21be2f5ec",
+    "sha256_b": "704df4d6b35e7d2b197f748647c5aae35792dec54373125b14867cc21be2f5ec",
+    "bytes_a": 2435469,
+    "bytes_b": 2435469,
+    "byte_identical": true,
+    "shape": [
+      4620,
+      21
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "standard_run1_vs_run2",
+    "table": "background.dat"
+  },
+  {
+    "file_a": "05_standard_control_run1/standard_run1_thermodynamics.dat",
+    "file_b": "06_standard_control_run2/standard_run2_thermodynamics.dat",
+    "sha256_a": "4b4f123e184df0dac8df46b740ed5ebf81563741b0d1deda6c5ababfed1b79bd",
+    "sha256_b": "4b4f123e184df0dac8df46b740ed5ebf81563741b0d1deda6c5ababfed1b79bd",
+    "bytes_a": 5158168,
+    "bytes_b": 5158168,
+    "byte_identical": true,
+    "shape": [
+      20466,
+      10
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "standard_run1_vs_run2",
+    "table": "thermodynamics.dat"
+  },
+  {
+    "file_a": "05_standard_control_run1/standard_run1_cl.dat",
+    "file_b": "06_standard_control_run2/standard_run2_cl.dat",
+    "sha256_a": "c8c4d19cd7ac02a931f0a113900e7d1f33d53ff84468c38950cc1ad92502b01e",
+    "sha256_b": "c8c4d19cd7ac02a931f0a113900e7d1f33d53ff84468c38950cc1ad92502b01e",
+    "bytes_a": 546507,
+    "bytes_b": 546507,
+    "byte_identical": true,
+    "shape": [
+      2999,
+      8
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "standard_run1_vs_run2",
+    "table": "cl.dat"
+  },
+  {
+    "file_a": "05_standard_control_run1/standard_run1_cl_lensed.dat",
+    "file_b": "06_standard_control_run2/standard_run2_cl_lensed.dat",
+    "sha256_a": "bb96d9d33f63d9e42754c69672304291d73a8e94eb3722cac7b5644c1ec2b316",
+    "sha256_b": "bb96d9d33f63d9e42754c69672304291d73a8e94eb3722cac7b5644c1ec2b316",
+    "bytes_a": 455514,
+    "bytes_b": 455514,
+    "byte_identical": true,
+    "shape": [
+      2499,
+      8
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "standard_run1_vs_run2",
+    "table": "cl_lensed.dat"
+  },
+  {
+    "file_a": "05_standard_control_run1/standard_run1_pk.dat",
+    "file_b": "06_standard_control_run2/standard_run2_pk.dat",
+    "sha256_a": "021ac8c350c584e176beb5a5ce189a7e5ac7e1a3cb014e0b9bf9ef0a8a26bda8",
+    "sha256_b": "021ac8c350c584e176beb5a5ce189a7e5ac7e1a3cb014e0b9bf9ef0a8a26bda8",
+    "bytes_a": 32256,
+    "bytes_b": 32256,
+    "byte_identical": true,
+    "shape": [
+      617,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "standard_run1_vs_run2",
+    "table": "pk.dat"
+  },
+  {
+    "file_a": "05_standard_control_run1/standard_run1_pk_cb.dat",
+    "file_b": "06_standard_control_run2/standard_run2_pk_cb.dat",
+    "sha256_a": "9d6457fd2309dca57575503b5f396cd8258413362d9f63e028e3931516513341",
+    "sha256_b": "9d6457fd2309dca57575503b5f396cd8258413362d9f63e028e3931516513341",
+    "bytes_a": 32256,
+    "bytes_b": 32256,
+    "byte_identical": true,
+    "shape": [
+      617,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "standard_run1_vs_run2",
+    "table": "pk_cb.dat"
+  },
+  {
+    "file_a": "05_standard_control_run1/standard_run1_pk_cb_nl.dat",
+    "file_b": "06_standard_control_run2/standard_run2_pk_cb_nl.dat",
+    "sha256_a": "958cf684fb4ed74ae8a63dce4351d3df8928595c0451fc5018d481dd0bfd99ae",
+    "sha256_b": "958cf684fb4ed74ae8a63dce4351d3df8928595c0451fc5018d481dd0bfd99ae",
+    "bytes_a": 32256,
+    "bytes_b": 32256,
+    "byte_identical": true,
+    "shape": [
+      617,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "standard_run1_vs_run2",
+    "table": "pk_cb_nl.dat"
+  },
+  {
+    "file_a": "05_standard_control_run1/standard_run1_pk_nl.dat",
+    "file_b": "06_standard_control_run2/standard_run2_pk_nl.dat",
+    "sha256_a": "2aed92c433514e9334045958bd0e1bcc4db74d42d91c76f19a817f80b958993a",
+    "sha256_b": "2aed92c433514e9334045958bd0e1bcc4db74d42d91c76f19a817f80b958993a",
+    "bytes_a": 32256,
+    "bytes_b": 32256,
+    "byte_identical": true,
+    "shape": [
+      617,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "standard_run1_vs_run2",
+    "table": "pk_nl.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_background.dat",
+    "file_b": "08_m3_run2/m3_run2_background.dat",
+    "sha256_a": "704df4d6b35e7d2b197f748647c5aae35792dec54373125b14867cc21be2f5ec",
+    "sha256_b": "704df4d6b35e7d2b197f748647c5aae35792dec54373125b14867cc21be2f5ec",
+    "bytes_a": 2435469,
+    "bytes_b": 2435469,
+    "byte_identical": true,
+    "shape": [
+      4620,
+      21
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_run2",
+    "table": "background.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_thermodynamics.dat",
+    "file_b": "08_m3_run2/m3_run2_thermodynamics.dat",
+    "sha256_a": "a19ec3c05ac095398aafadca331cd2f66bc2a1c96a350e85242b85e39327506b",
+    "sha256_b": "a19ec3c05ac095398aafadca331cd2f66bc2a1c96a350e85242b85e39327506b",
+    "bytes_a": 5158168,
+    "bytes_b": 5158168,
+    "byte_identical": true,
+    "shape": [
+      20466,
+      10
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_run2",
+    "table": "thermodynamics.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_cl.dat",
+    "file_b": "08_m3_run2/m3_run2_cl.dat",
+    "sha256_a": "996e62030e09aec4ef2514190ddd93c121542c679a772d37d096bd2c2cc3a1bc",
+    "sha256_b": "996e62030e09aec4ef2514190ddd93c121542c679a772d37d096bd2c2cc3a1bc",
+    "bytes_a": 546507,
+    "bytes_b": 546507,
+    "byte_identical": true,
+    "shape": [
+      2999,
+      8
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_run2",
+    "table": "cl.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_cl_lensed.dat",
+    "file_b": "08_m3_run2/m3_run2_cl_lensed.dat",
+    "sha256_a": "529a74dcdf56d79e78fde222c04e5db6afcaf4f796646f27bb1ca79ecefaa418",
+    "sha256_b": "529a74dcdf56d79e78fde222c04e5db6afcaf4f796646f27bb1ca79ecefaa418",
+    "bytes_a": 455514,
+    "bytes_b": 455514,
+    "byte_identical": true,
+    "shape": [
+      2499,
+      8
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_run2",
+    "table": "cl_lensed.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_pk.dat",
+    "file_b": "08_m3_run2/m3_run2_pk.dat",
+    "sha256_a": "f1c0a1716b813efda41fdfa320333c65f9a047cb9954beb2a1cdea061b8b4b51",
+    "sha256_b": "f1c0a1716b813efda41fdfa320333c65f9a047cb9954beb2a1cdea061b8b4b51",
+    "bytes_a": 32048,
+    "bytes_b": 32048,
+    "byte_identical": true,
+    "shape": [
+      613,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_run2",
+    "table": "pk.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_pk_cb.dat",
+    "file_b": "08_m3_run2/m3_run2_pk_cb.dat",
+    "sha256_a": "0be352dbe2eb286bbbe04a92e9b3989774bc1dc6dfeeb12560b29c15d4524656",
+    "sha256_b": "0be352dbe2eb286bbbe04a92e9b3989774bc1dc6dfeeb12560b29c15d4524656",
+    "bytes_a": 32048,
+    "bytes_b": 32048,
+    "byte_identical": true,
+    "shape": [
+      613,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_run2",
+    "table": "pk_cb.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_pk_cb_nl.dat",
+    "file_b": "08_m3_run2/m3_run2_pk_cb_nl.dat",
+    "sha256_a": "79bc4b12b34f505e7cf075498473fe8c98cae16f0ea901276d98fe720fefc96a",
+    "sha256_b": "79bc4b12b34f505e7cf075498473fe8c98cae16f0ea901276d98fe720fefc96a",
+    "bytes_a": 32048,
+    "bytes_b": 32048,
+    "byte_identical": true,
+    "shape": [
+      613,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_run2",
+    "table": "pk_cb_nl.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_pk_nl.dat",
+    "file_b": "08_m3_run2/m3_run2_pk_nl.dat",
+    "sha256_a": "44890cafff7aa8cacbe581dcfee02a13f7e33d4f9ed10d3744c7712e194b51ad",
+    "sha256_b": "44890cafff7aa8cacbe581dcfee02a13f7e33d4f9ed10d3744c7712e194b51ad",
+    "bytes_a": 32048,
+    "bytes_b": 32048,
+    "byte_identical": true,
+    "shape": [
+      613,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_run2",
+    "table": "pk_nl.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_background.dat",
+    "file_b": "03_build/diagnostic_zone_dump/out/diag_m3_background.dat",
+    "sha256_a": "704df4d6b35e7d2b197f748647c5aae35792dec54373125b14867cc21be2f5ec",
+    "sha256_b": "704df4d6b35e7d2b197f748647c5aae35792dec54373125b14867cc21be2f5ec",
+    "bytes_a": 2435469,
+    "bytes_b": 2435469,
+    "byte_identical": true,
+    "shape": [
+      4620,
+      21
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_readonly_diagnostic_build",
+    "table": "background.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_thermodynamics.dat",
+    "file_b": "03_build/diagnostic_zone_dump/out/diag_m3_thermodynamics.dat",
+    "sha256_a": "a19ec3c05ac095398aafadca331cd2f66bc2a1c96a350e85242b85e39327506b",
+    "sha256_b": "a19ec3c05ac095398aafadca331cd2f66bc2a1c96a350e85242b85e39327506b",
+    "bytes_a": 5158168,
+    "bytes_b": 5158168,
+    "byte_identical": true,
+    "shape": [
+      20466,
+      10
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_readonly_diagnostic_build",
+    "table": "thermodynamics.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_cl.dat",
+    "file_b": "03_build/diagnostic_zone_dump/out/diag_m3_cl.dat",
+    "sha256_a": "996e62030e09aec4ef2514190ddd93c121542c679a772d37d096bd2c2cc3a1bc",
+    "sha256_b": "996e62030e09aec4ef2514190ddd93c121542c679a772d37d096bd2c2cc3a1bc",
+    "bytes_a": 546507,
+    "bytes_b": 546507,
+    "byte_identical": true,
+    "shape": [
+      2999,
+      8
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_readonly_diagnostic_build",
+    "table": "cl.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_cl_lensed.dat",
+    "file_b": "03_build/diagnostic_zone_dump/out/diag_m3_cl_lensed.dat",
+    "sha256_a": "529a74dcdf56d79e78fde222c04e5db6afcaf4f796646f27bb1ca79ecefaa418",
+    "sha256_b": "529a74dcdf56d79e78fde222c04e5db6afcaf4f796646f27bb1ca79ecefaa418",
+    "bytes_a": 455514,
+    "bytes_b": 455514,
+    "byte_identical": true,
+    "shape": [
+      2499,
+      8
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_readonly_diagnostic_build",
+    "table": "cl_lensed.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_pk.dat",
+    "file_b": "03_build/diagnostic_zone_dump/out/diag_m3_pk.dat",
+    "sha256_a": "f1c0a1716b813efda41fdfa320333c65f9a047cb9954beb2a1cdea061b8b4b51",
+    "sha256_b": "f1c0a1716b813efda41fdfa320333c65f9a047cb9954beb2a1cdea061b8b4b51",
+    "bytes_a": 32048,
+    "bytes_b": 32048,
+    "byte_identical": true,
+    "shape": [
+      613,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_readonly_diagnostic_build",
+    "table": "pk.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_pk_cb.dat",
+    "file_b": "03_build/diagnostic_zone_dump/out/diag_m3_pk_cb.dat",
+    "sha256_a": "0be352dbe2eb286bbbe04a92e9b3989774bc1dc6dfeeb12560b29c15d4524656",
+    "sha256_b": "0be352dbe2eb286bbbe04a92e9b3989774bc1dc6dfeeb12560b29c15d4524656",
+    "bytes_a": 32048,
+    "bytes_b": 32048,
+    "byte_identical": true,
+    "shape": [
+      613,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_readonly_diagnostic_build",
+    "table": "pk_cb.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_pk_cb_nl.dat",
+    "file_b": "03_build/diagnostic_zone_dump/out/diag_m3_pk_cb_nl.dat",
+    "sha256_a": "79bc4b12b34f505e7cf075498473fe8c98cae16f0ea901276d98fe720fefc96a",
+    "sha256_b": "79bc4b12b34f505e7cf075498473fe8c98cae16f0ea901276d98fe720fefc96a",
+    "bytes_a": 32048,
+    "bytes_b": 32048,
+    "byte_identical": true,
+    "shape": [
+      613,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_readonly_diagnostic_build",
+    "table": "pk_cb_nl.dat"
+  },
+  {
+    "file_a": "07_m3_run1/m3_run1_pk_nl.dat",
+    "file_b": "03_build/diagnostic_zone_dump/out/diag_m3_pk_nl.dat",
+    "sha256_a": "44890cafff7aa8cacbe581dcfee02a13f7e33d4f9ed10d3744c7712e194b51ad",
+    "sha256_b": "44890cafff7aa8cacbe581dcfee02a13f7e33d4f9ed10d3744c7712e194b51ad",
+    "bytes_a": 32048,
+    "bytes_b": 32048,
+    "byte_identical": true,
+    "shape": [
+      613,
+      2
+    ],
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "rms_delta": 0.0,
+    "first_mismatch": "NONE",
+    "pair": "m3_run1_vs_readonly_diagnostic_build",
+    "table": "pk_nl.dat"
+  }
+]

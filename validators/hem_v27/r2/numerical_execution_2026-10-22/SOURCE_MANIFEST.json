@@ -1,0 +1,27 @@
+{
+  "admission_utc": "2026-10-22T17:30:27.632703+00:00",
+  "repository": "https://github.com/misharash/class_public",
+  "pinned_commit": "4fdab292a223a0ab331e98613ad98e38a3a2d0de",
+  "verified_head_commit": "4fdab292a223a0ab331e98613ad98e38a3a2d0de",
+  "git_tree_sha1": "cebbcc1fc3133fb1d951d381e568fa1932a1aae4",
+  "git_ls_tree_sha256": "41a0cbdd1117ec0ca4dbd2b3ced53cdfd8338ca0a17e371b7568e6ecd3c3e9d6",
+  "commit_author": "Michael Rashkovetskyi <misharash@gmail.com>",
+  "commit_date": "Tue Dec 7 19:51:43 2021 -0500",
+  "commit_subject": "Updated README with fork description",
+  "pristine_tar_archive": {
+    "path": "01_source_admission/misharash_class_public_4fdab292a223.tar",
+    "bytes": 7813120,
+    "sha256": "0efba26e2bfbdd6f689c796b3c711b589ccf63d128fca03c0cc70389282f1637"
+  },
+  "paper_baseline_ini_in_source": {
+    "relative_path": "base_2018_plikHM_TTTEEE_lowl_lowE_lensing.ini",
+    "git_blob_sha1": "9107122999cccb3bb7a82e616fcdc9333953203a",
+    "bytes": 1432,
+    "sha256": "223d409e04dc072c829ccabcc799be4d5f129da1b39b353e6748053419d0a5fe"
+  },
+  "unexpected_dirty_paths_count": 0,
+  "unexpected_dirty_paths": [],
+  "source_diff_vs_pinned_commit": "",
+  "license_status": "UNKNOWN (no repository-level LICENSE/COPYING file at pinned commit; local scientific inspection/execution only; source bytes MUST NOT be committed to Tech-Orb repository)",
+  "admission_status": "ADMITTED_PRISTINE"
+}

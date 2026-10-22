@@ -16,9 +16,9 @@
 - [x] Fresh-read PR-head Git blobs and verify manifest hash equality after the identity repair.
 - [x] Resolve source-code license status or document permitted local-use boundary.
 - [x] Create pristine H: reference-recovery workspace and verify the R2 branch checkout starts clean.
-- [ ] Run standard/reference control twice.
-- [ ] Run published M3 benchmark without Tech-Orb modifications.
-- [ ] Compare all admitted observables and adjudicate against the frozen contract.
-- [ ] Preserve logs, inputs, diffs, raw outputs, environment identity and SHA256 manifest.
+- [x] Run standard/reference control twice. (byte-identical)
+- [x] Run published M3 benchmark without Tech-Orb modifications. (twice, byte-identical)
+- [ ] Compare all admitted observables and adjudicate against the frozen contract. **BLOCKED**: 6/9 curves adjudicated (560/560 PASS); 3 Fig. 3 zone curves lack a frozen extraction route.
+- [x] Preserve logs, inputs, diffs, raw outputs, environment identity and SHA256 manifest. (1,325/1,325 OK)
 
 Reference identity is re-frozen. The unchecked execution items belong to a separate `R2 Numerical Reproduction` work and remained forbidden throughout this work.

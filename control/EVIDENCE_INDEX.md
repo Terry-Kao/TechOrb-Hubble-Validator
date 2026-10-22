@@ -97,7 +97,10 @@ The R0-H package resolves the historical environment and producer identity for t
 | R2-DIGITIZE-20261021 | `validators/hem_v27/r2/DIGITIZATION_METHOD_A.md`; `DIGITIZATION_METHOD_B.md`; `DIGITIZATION_UNCERTAINTY.md` | Independent vector/raster methods and uncertainty |
 | R2-TOL-20261021 | `validators/hem_v27/r2/TOLERANCE_CONTRACT.md` | PRE-EXECUTION REFERENCE/TOLERANCE FREEZE |
 | R2-ID-REPAIR-20261022 | `validators/hem_v27/r2/R2_REFERENCE_IDENTITY_REPAIR_REPORT.md` | Old-hash recovery, LF/CRLF byte-level adjudication, full schema/content validation and post-repair verification |
+| R2-EXEC-20261022 | `validators/hem_v27/r2/numerical_execution_2026-10-22/` | R2 numerical execution: report, repeatability, pointwise comparisons, manifests, diagnostic figures, SHA256SUMS; verdict BLOCKED |
 
 Canonical R2 identities are the LF Git blobs: Fig. 2 SHA-256 `a079416fdf59e040233f4fecc67f5d8f920ff038a654c8c7758a4c7aab051a05`; Fig. 3 SHA-256 `10a160e50d5f67b11d678ce7beb709b2c782846eb2f8fff9f39177782c32c719`. Windows CRLF working-tree representations have different non-canonical transport hashes.
 
 The local Independent Replication Audit evidence package at `H:\AI_Products\AI_Factory_Workspace\TechOrb-Hubble-Validator-Independent-Audit-20261022` is supporting external audit evidence, not a committed repository artifact. It reports overall `PARTIALLY CONFIRMED — ANOMALIES FOUND`, independently supports R2 geometry/tolerances, and preserves the CRLF materializations that triggered this repair.
+
+The full R2 numerical evidence archive `R2_PUBLISHED_MODEL_REPRODUCTION_EVIDENCE_2026-10-22.tar.gz` (651,475,815 B, SHA-256 `ca5cd2d6e6f02fccc38021a5509eab3bfbd13e3e364a4b079d68aaef906bbdc7`, 1,388 files; 1,325/1,325 manifest entries OK) is stored locally under `H:\AI_Products\AI_Factory_Workspace\TechOrb-Hubble-Validator-R2-numerical-reproduction-20261022` and is not committed (contains author source of undeclared license and large raw outputs).

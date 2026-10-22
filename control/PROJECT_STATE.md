@@ -21,7 +21,7 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 | F2 Formula / Quantity Geometry | OPEN QUESTION | PROVISIONAL | No canonical construction or observable consequence. |
 | HIA v1–v25 late-time routes | EXCLUDED: SUBCLASS | HISTORICAL | Tested kinematic, screened-gravity, and smooth-disformal implementations are bounded by their recorded assumptions; not a universal no-go. |
 | HEM v26.4 | DERIVED computational claim | HISTORICAL + REPRODUCIBLE | CLASS-level sensitivity/degeneracy experiment only. Historical Alpine environment rerun is exact; no posterior or physical validation. |
-| HEM v27 | Validator protocol | PROVISIONAL | R0 and R1 pipeline verdicts are PASS; both model verdicts are NOT APPLICABLE. R2 numerical work is not started. |
+| HEM v27 | Validator protocol | PROVISIONAL | R0 and R1 pipeline verdicts are PASS; both model verdicts are NOT APPLICABLE. R2 numerical execution ran on 2026-10-22: verdict BLOCKED (mandatory Fig. 3 zone curves not legally extractable from pinned author code). |
 | Magnetogenesis action | ANSATZ / Candidate Bridge | PROVISIONAL | Not Foundation canon. |
 
 ## Gate State
@@ -30,8 +30,8 @@ HIA, HEM, the Hubble tension, CLASS, and HyRec are validators or concrete implem
 |---|---|---|
 | R0 Reproducibility Freeze | PASS | Historical Alpine environment and binary were reconciled; 52/52 fields and primary artifacts reproduce exactly. Debian 12 remains a cross-environment portability sensitivity FAIL (50/52). |
 | R1 Baseline Definition Audit | PASS | Historical artifacts match R0-H exactly; two pristine-source canonical HyRec runs are byte-identical across eight raw output families and satisfy every frozen consistency check. |
-| R2 Published Model Reproduction | REFERENCE IDENTITY RE-FROZEN / NOT RUN | Canonical Fig. 2/3 identities are the LF Git blobs already present at pre-execution commit `1f2ca42`; masks and tolerances are unchanged and independently supported. Numerical execution is authorized only as a separate work and has not occurred. |
-| R3 Full Multi-Probe Likelihood | NOT STARTED | Depends on R2. |
+| R2 Published Model Reproduction | BLOCKED | Numerical execution 2026-10-22. Controls and M3 runs byte-identical; 6/9 mandatory curves adjudicable from the unmodified author binary, 560/560 admitted points PASS. Fig. 3 `minus_zone`, `plus_zone`, `simple_clumping` are not exposed by commit `4fdab29` and the frozen spec defines no extraction route; a read-only diagnostic dump (0/334 FAIL) is NON-ADJUDICATIVE. Unblocking requires a new pre-registered extraction decision. |
+| R3 Full Multi-Probe Likelihood | NOT STARTED / NOT AUTHORIZED | Depends on R2 PASS; R2 is BLOCKED. |
 | R4 Physicality Benchmark | NOT STARTED | Depends on R3 and a declared physical bridge. |
 
 ## Hard Boundaries
@@ -66,3 +66,7 @@ Official arXiv v3 source preserves Figs. 2, 3 and 18 as standalone Matplotlib ve
 ## R2 Reference Identity Repair — 2026-10-22
 
 The Independent Replication Audit returned overall `PARTIALLY CONFIRMED — ANOMALIES FOUND`: it independently supported the reference geometry and unchanged tolerances, but compared Windows CRLF materializations against hashes declared for canonical LF Git blobs. Direct object-database recovery found Fig. 2 blob `6ac9ccc...` / SHA-256 `a079416f...` and Fig. 3 blob `602dedb...` / SHA-256 `10a160e5...` in the original pre-execution commit `1f2ca42`. CRLF-only working representations explain `e2ac0de1...` / `cdde7d526...` exactly. No scientific content changed and no R2 numerical run occurred. The reference identity is re-frozen; execution remains a separate future work.
+
+## R2 Numerical Execution — 2026-10-22 — BLOCKED
+
+Executed fail-closed in `H:\AI_Products\AI_Factory_Workspace\TechOrb-Hubble-Validator-R2-numerical-reproduction-20261022` from pristine `misharash/class_public@4fdab292a223a0ab331e98613ad98e38a3a2d0de` (0 dirty paths) in the locked Alpine 3.20.10 environment. Standard and M3 runs were each byte-identical across two repetitions (8/8 output tables). Fig. 2 (4 curves) and Fig. 3 `M3`/`zero_zone_LCDM` pass every admitted point (560/560; worst margin 23% of tolerance, `g_m3`). Fig. 3 `minus_zone`, `plus_zone` and `simple_clumping` cannot be obtained from the unmodified author binary (zone tables freed in memory; simple clumping not an input option) and the frozen pre-registration gives no extraction procedure, so under the execution specification R2 = BLOCKED. A read-only diagnostic dump reproduces those curves (334/334 admitted points within tolerance) but is classified NON-ADJUDICATIVE. A text discrepancy (spec says massless neutrinos; frozen author `.ini` uses one 0.06 eV species) is recorded as unresolved. Evidence: `validators/hem_v27/r2/numerical_execution_2026-10-22/`; local archive `R2_PUBLISHED_MODEL_REPRODUCTION_EVIDENCE_2026-10-22.tar.gz` (651,475,815 B, SHA-256 `ca5cd2d6e6f02fccc38021a5509eab3bfbd13e3e364a4b079d68aaef906bbdc7`, 1,388 files; 1,325/1,325 manifest entries OK). HEM physical validity NOT ESTABLISHED; Tech-Orb NOT VALIDATED; R3 NOT AUTHORIZED.

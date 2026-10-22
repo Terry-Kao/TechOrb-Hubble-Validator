@@ -1,0 +1,41 @@
+{
+  "gate": "HEM v27 R2 \u2014 Published Model Reproduction",
+  "phase": "Phase E \u2014 Pristine Pinned Source Build",
+  "source_archive": {
+    "filename": "misharash_class_public_4fdab292a223.tar",
+    "bytes": 7813120,
+    "sha256": "0efba26e2bfbdd6f689c796b3c711b589ccf63d128fca03c0cc70389282f1637"
+  },
+  "author_commit": "4fdab292a223a0ab331e98613ad98e38a3a2d0de",
+  "pre_build_extracted_tree_sha256": "f1308ef62b919b542a3b5670bff9db6ceea64723754e510424da4bd6f4feea70",
+  "unexpected_dirty_paths_before_build": 0,
+  "build_command": "make clean && make class -j4",
+  "build_start_utc": "2026-10-22T17:53:52Z",
+  "build_end_utc": "2026-10-22T17:53:58Z",
+  "exit_code": 0,
+  "binary": {
+    "filename": "class",
+    "bytes": 3202256,
+    "sha256": "306713df0c2d6a5976f37871ca07e9943c2948ee9581c129701138587035e464"
+  },
+  "build_stdout": {
+    "filename": "build_stdout.log",
+    "bytes": 12835,
+    "sha256": "9e1816b7e952491d2bc2831aa1050a029bc82637b0b7e3a08d871f31538eba42"
+  },
+  "build_stderr": {
+    "filename": "build_stderr.log",
+    "bytes": 2086,
+    "sha256": "6624f45400f1fd6e2eedef1b823fe3d5ed2e4aa894f327eb6b1ab2aa8e50a21c"
+  },
+  "linked_libraries": [
+    "/lib/ld-musl-x86_64.so.1 (0x7103bd533000)",
+    "\tlibgomp.so.1 => /usr/lib/libgomp.so.1 (0x7103bd3dc000)",
+    "\tlibc.musl-x86_64.so.1 => /lib/ld-musl-x86_64.so.1 (0x7103bd533000)"
+  ],
+  "network_isolation_check": [
+    "1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN qlen 1000",
+    "    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00"
+  ],
+  "environment_lock_ref": "02_environment/R2_ENVIRONMENT_LOCK.json"
+}
