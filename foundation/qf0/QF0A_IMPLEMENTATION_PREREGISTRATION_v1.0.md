@@ -23,7 +23,7 @@ No implementation phase may modify the protocol, thresholds, Hamiltonians, const
 ## 2. Runtime and dependency contract
 
 - Language: CPython `3.12.x`; the exact patch version must be recorded in each future run manifest.
-- Minimal scientific dependencies: NumPy `2.1.*` and SciPy `1.14.*` only. JSON Schema validation may use `jsonschema 4.23.*` in the validation environment.
+- Minimal scientific dependencies: NumPy `2.1.*` and SciPy `1.14.*` only. Schema validation uses validation-only dependency `jsonschema[format]==4.23.0`, pinned in `qf0a_impl/requirements-validation.txt`.
 - The future lock file must pin exact resolved versions and hashes before source freeze. No large framework, notebook runtime, GPU library, symbolic engine, or plotting stack is permitted without a new reviewed preregistration.
 - Numeric types are `float64` and `complex128`. Silent downgrade, platform-default extended precision, mixed precision, or GPU/tensor precision substitution is forbidden.
 - Every run manifest must capture NumPy/SciPy versions, BLAS/LAPACK vendor and version/build identity, compiler/runtime identity where exposed, and thread configuration.
@@ -111,6 +111,8 @@ logs/
 
 Every regular file except `SHA256SUMS.txt` must be listed in that hash manifest. Raw arrays are immutable little-endian NumPy `.npy` files with explicit `float64`/`complex128` dtype, shape, semantic name, and SHA-256 recorded in the raw-output index. Compressed archives, pickles, object arrays, lossy tables, and result-only screenshots are forbidden as primary evidence.
 
+All machine-readable evidence paths use canonical POSIX-style relative notation with `/`. They must be non-empty, normalized without change, and contain no backslash, drive prefix, absolute prefix, UNC/device prefix, empty segment, `.` segment, or `..` segment. Joining a declared path beneath `foundation/qf0/qf0a_impl/evidence/<run_id>/` must remain inside that run root. Windows forms including `..\outside`, `C:\outside`, `C:/outside`, `\\server\share`, and `\\?\C:\outside` are invalid. Raw-array paths are further confined to `raw/<canonical-name>.npy`.
+
 ## 10. Verdict separation
 
 `QF0A_MACHINE_VERDICT.schema.json` requires independent fields:
@@ -122,9 +124,15 @@ A reproduction `PASS` is a known-result pipeline result only. It cannot establis
 
 ## 11. Raw output and negative-control contracts
 
-`QF0A_RAW_OUTPUT.schema.json` is an index contract: every array declares identifier, relative path, dtype, shape, byte size, SHA-256, protocol section, and whether it is adjudicative. The index records that no outcome was dropped and lists exclusions; hidden exclusions are forbidden.
+`QF0A_RAW_OUTPUT.schema.json` is an index contract: every array declares identifier, relative path, dtype, shape, byte size, SHA-256, protocol section, and whether it is adjudicative. Schema validation restricts shape, format, dtype, positive dimensions/size, SHA-256, and raw-path form. Semantic validation requires `outcome_count_expected == outcome_count_recorded`, `outcomes_dropped == false`, unique array identifiers, unique paths, canonical path confinement, and no duplicate record. QF-0A primary runs permit no outcome exclusions; the `exclusions` array must be empty so it cannot become a result-dependent deletion channel.
 
-`QF0A_NEGATIVE_CONTROL_RESULT.schema.json` requires one record for every frozen negative control, its protocol identity, expected failure mode, observed machine status, evidence hashes, and whether the expected failure occurred. A missing control is `BLOCKED`; a control that unexpectedly passes or cannot be interpreted under the frozen rule is `FAIL`; a mutated or post-hoc control is `INVALIDATED`.
+`QF0A_NEGATIVE_CONTROL_RESULT.schema.json` freezes exactly six Section 12 IDs: `BROKEN_CONSTRAINT`, `PRODUCT_NO_HISTORY`, `WRONG_CONDITIONING`, `HIDDEN_EXTERNAL_TIME`, `CLOCK_SCRAMBLE`, and `POST_HOC_THRESHOLD_MUTATION`. Every record requires the ID, protocol section, expected failure mode, observed status, expected-failure boolean, post-hoc-mutation boolean, canonical evidence path, SHA-256, RFC 3339 UTC timestamp, and reason code. Schema validation limits the array to exactly six and IDs to this vocabulary; semantic validation enforces exact set equality, ID uniqueness, evidence-path uniqueness, and expected-failure semantics. `all_frozen_controls_present=true` is therefore verified from inventory rather than trusted as a producer assertion. A missing control is `BLOCKED`; a control that unexpectedly passes or cannot be interpreted under the frozen rule is `FAIL`; a mutated or post-hoc control is `INVALIDATED`.
+
+## 11.1 Schema and semantic validation boundary
+
+All four schemas must parse and pass `Draft202012Validator.check_schema()`. Instance validation must use `FormatChecker()` so `date-time` is asserted rather than treated as annotation. JSON Schema enforces fields, types, constants, enumerations, formats, item counts, and first-layer path shape. The single Python semantic validator enforces cross-record invariants that JSON Schema cannot cleanly express: canonical path/root confinement, exact six-control set equality and uniqueness, negative-control failure semantics, raw count equality, raw identifier/path uniqueness, and empty exclusions.
+
+Non-adjudicative synthetic fixtures must instantiate all four schemas. Every negative fixture declares its name, intended rejection reason, and expected validation layer (`schema`, `semantic`, or `both`). Any positive fixture rejection or negative fixture acceptance fails the preregistration validator. Fixtures contain artificial contract data only and may not encode frozen QF-0A scientific outputs.
 
 ## 12. Independent-review evidence requirements
 

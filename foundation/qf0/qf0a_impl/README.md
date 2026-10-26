@@ -8,6 +8,7 @@ Present in this checkpoint:
 
 - four JSON Schemas under `schemas/`;
 - the leakage-audit checklist;
-- a structural/static validator under `tests/`.
+- validation-only dependency pin `jsonschema[format]==4.23.0`;
+- a Draft 2020-12/schema/semantic validator and non-adjudicative synthetic fixtures under `tests/`.
 
 Deliberately absent: scientific source modules, environment/result instances, raw arrays, generated outputs, machine verdicts, scientific reports, and evidence runs. The empty future directories `manifests/`, `src/`, and `evidence/` are specified in the preregistration but are not created by this PR.
