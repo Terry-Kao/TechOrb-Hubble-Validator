@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "matrix": "Tech-Orb QF Literature and Collision Matrix",
+  "created_at": "2026-10-26",
+  "scope": "Structure and domain taxonomy only; no literature review completed",
+  "allowed_relations": ["COMPATIBLE", "CONFLICT", "IRRELEVANT"],
+  "allowed_publication_status": ["published", "accepted", "preprint"],
+  "required_entry_fields": [
+    "entry_id",
+    "domain",
+    "citation",
+    "what_it_actually_proves",
+    "assumptions",
+    "related_claim_ids",
+    "relation",
+    "what_it_does_not_prove",
+    "publication_status",
+    "primary_source",
+    "doi",
+    "arxiv",
+    "checked_at"
+  ],
+  "domains": [
+    {
+      "domain_id": "LIT-POT",
+      "name": "problem of time",
+      "purpose": "Hamiltonian constraints, timeless/global formulations, and limits of the inference that external time is unnecessary"
+    },
+    {
+      "domain_id": "LIT-PW",
+      "name": "Page-Wootters",
+      "purpose": "conditional states, ideal/imperfect clocks, interaction effects, and known-result targets for QF-0A"
+    },
+    {
+      "domain_id": "LIT-QRF",
+      "name": "quantum reference frames",
+      "purpose": "reference changes, operational equivalence, subsystem relativity, and frame-consistency requirements"
+    },
+    {
+      "domain_id": "LIT-EG",
+      "name": "entanglement and geometry",
+      "purpose": "scoped geometry/information relations and their regime-specific assumptions"
+    },
+    {
+      "domain_id": "LIT-CE",
+      "name": "causal emergence",
+      "purpose": "causal order, Lorentzian signature, locality, null structure, and reconstruction limits"
+    },
+    {
+      "domain_id": "LIT-LR",
+      "name": "Lorentz recovery",
+      "purpose": "emergent symmetry, preferred-frame constraints, universality, and precision limits"
+    },
+    {
+      "domain_id": "LIT-DR",
+      "name": "decoherence, redundant records, and Quantum Darwinism",
+      "purpose": "robustness, redundancy, accessibility, objectivity limits, and classicalization false positives"
+    }
+  ],
+  "entry_template": {
+    "entry_id": "LIT-<DOMAIN>-<NNN>",
+    "domain": "one domain_id from domains",
+    "citation": "authors, title, venue/version, year",
+    "what_it_actually_proves": ["bounded result stated in the source's own domain"],
+    "assumptions": ["explicit mathematical/physical assumptions and regime"],
+    "related_claim_ids": ["QF-..."],
+    "relation": "COMPATIBLE",
+    "what_it_does_not_prove": ["explicit non-implications for Tech-Orb"],
+    "publication_status": "published",
+    "primary_source": "publisher or canonical preprint URL",
+    "doi": null,
+    "arxiv": null,
+    "checked_at": "YYYY-MM-DD"
+  },
+  "entries": []
+}

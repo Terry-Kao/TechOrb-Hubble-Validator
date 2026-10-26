@@ -1,17 +1,21 @@
 # Tech-Orb Research Program
 
-Tech-Orb is a falsification-first research program investigating whether observed physics can be represented as local effective structure on a deeper physics state manifold. This repository contains both the developing foundation specification and independent validators used to attack concrete implementations.
+Tech-Orb is a falsification-first research program investigating whether effective spacetime can arise from a global constrained relational quantum structure without assuming fundamental classical space or external/meta-time. This repository contains the developing Foundation, effective-model interfaces, and independent validators used to attack concrete implementations.
 
-## Current Status — 2026-10-20
+## Current Status — 2026-10-26
 
 - **Tech-Orb:** mother hypothesis; not an established physical theory.
-- **Foundation v1:** specification stage. F0 contains four hypotheses, F1 is a Taiji topology ansatz, and F2 is a formula/quantity-geometry research module.
+- **Active Foundation proposal:** Relational Quantum Foundation Canon v1.0 with working ontology `Q=(H,A,rho,K,T)`. This is a hypothesis/governance baseline, not evidence.
+- **QF-0A:** known-result relational-time reproduction protocol frozen; implementation and scientific execution not started.
+- **QF-0B/C:** emergent-distance/effective-dimension benchmark skeleton only; thresholds and execution not started.
+- **QF-1/QF-2/QF-3:** deferred. Taiji and BH-J-WH/cyclic topology work are not authorized.
 - **HIA / HEM / Hubble tension / CLASS / HyRec:** validators, not the foundation itself.
-- **HEM v26.4:** a CLASS-level sensitivity and degeneracy experiment only. It does not establish a Hubble-tension solution, a data-preferred posterior, or a physical magnetogenesis model. Until canonical R0 is completed, its evidence status is **REPRO-BLOCKED**.
-- **HEM v27:** next validator line, governed by R0 through R4. No gate is currently recorded as passed in this repository.
+- **HEM v26.4:** a historical/reproducible CLASS-level sensitivity and degeneracy experiment only; no posterior or physical validation.
+- **HEM v27:** R0 and R1 pipeline PASS with model verdict NOT APPLICABLE. R2 is NOT STARTED; this package does not start or modify HEM gates.
+- **PFM:** external SAFE HOLD — COMPLETE / RESUMABLE; not awakened or modified here.
 - **Historical HIA/RMP results:** retained as historical evidence. They constrain tested implementations or subclasses only; they are not universal no-go theorems.
 
-The authoritative project state is [control/PROJECT_STATE.md](control/PROJECT_STATE.md). Claims must be classified in the [Epistemic Ledger](control/EPISTEMIC_LEDGER.md) and traceable through the [Evidence Index](control/EVIDENCE_INDEX.md).
+The authoritative project state is [control/PROJECT_STATE.md](control/PROJECT_STATE.md). New Foundation claims are registered in the [QF Claim Registry](foundation/qf0/CLAIM_REGISTRY_v1.0.md); historical claims remain in the [Epistemic Ledger](control/EPISTEMIC_LEDGER.md), and artifacts are traceable through the [Evidence Index](control/EVIDENCE_INDEX.md).
 
 ## Mother Hypothesis vs. Validators
 
@@ -23,7 +27,15 @@ The authoritative project state is [control/PROJECT_STATE.md](control/PROJECT_ST
 
 Validator success is also scoped: a correct, reproducible pipeline is not evidence that its tested model survives. **Gate PASS and model survival are separate verdicts.**
 
-## Foundation Architecture
+## Active Foundation Architecture
+
+The governing research question, five claim labels, ontology, one-way Foundation → effective model → validators rule, roadmap, rejected literal versions, scope boundaries, and twelve global falsification gates are frozen in [Foundation Canon v1.0](foundation/qf0/FOUNDATION_CANON_v1.0.md).
+
+The active roadmap is QF-0 relational toy-model reproduction/benchmarks → QF-1 Lorentz/GR recovery → QF-2 classicalization → QF-3 separately authorized topology research. PASS at any stage never establishes the next stage. A future QF-0A PASS would be known-result reproduction only and not Tech-Orb evidence.
+
+The older F0/F1/F2 architecture below is preserved as historical/provisional Foundation v1 evidence; it is not deleted or retroactively rewritten.
+
+## Preserved Foundation v1 Architecture
 
 ### F0 — Four core hypotheses
 
@@ -96,11 +108,11 @@ Theory-to-theory spectrum RMS is an engineering diagnostic, not an observational
 
 ## Current Next Actions
 
-1. Complete HEM v27 R0 with a clean-room reproduction manifest and exact hashes.
-2. Audit the baseline parameterization, neutrino assumptions, recombination backend, and `r_s`/`r_d` definitions under R1.
-3. Select published benchmark model(s), datasets, and tolerances for R2 before implementing new physics.
-4. Define the R3 likelihood stack and nuisance treatment without any target-value success rule.
-5. Turn the three top Foundation attacks in [foundation/FALSIFICATION_MATRIX.md](foundation/FALSIFICATION_MATRIX.md) into executable test specifications.
+1. Review and merge (or revise) the bounded QF-0 Foundation initialization package without interpreting merge as scientific validation.
+2. If accepted, create a separate QF-0A implementation authorization bound to the frozen v1.0 protocol before any result inspection.
+3. Independently audit QF-0A for external-time leakage, clock-choice handling, negative controls, and no-new-physics wording.
+4. Resolve every `TBF` item in the QF-0B/C skeleton in a separately reviewed protocol before generating adjudicative benchmarks.
+5. Populate the literature matrix from primary sources without using compatibility or citation similarity as evidence.
 
 No merge into `main` should be interpreted as scientific validation; it records the governed state of the research program.
 

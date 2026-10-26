@@ -1,0 +1,202 @@
+{
+  "schema_version": "1.0",
+  "registry": "Tech-Orb Relational Quantum Foundation Claim Registry",
+  "frozen_at": "2026-10-26",
+  "authority_scope": "QF Foundation claims only; no scientific result",
+  "allowed_labels": [
+    "ESTABLISHED",
+    "COMPATIBLE",
+    "HYPOTHESIS",
+    "ANSATZ",
+    "REJECTED-LITERAL-VERSION"
+  ],
+  "claims": [
+    {
+      "claim_id": "QF-FND-001",
+      "statement": "A global constrained relational quantum structure is a candidate substrate from which effective spacetime could be reconstructed.",
+      "label": "HYPOTHESIS",
+      "mathematical_definition": "Q=(H,A,rho,K,T), with no fundamental classical space or external/meta-time.",
+      "dependencies": [],
+      "supporting_evidence": [
+        "Adjacent constrained-quantum-system and relational-framework results make the question mathematically investigable; this is compatibility context, not evidence that nature instantiates Q."
+      ],
+      "conflicting_evidence": [
+        "No complete derivation of observed 3+1D Lorentzian spacetime, GR, QFT, classicality, and discriminating predictions exists for this candidate."
+      ],
+      "falsification_condition": "Reject the registered substrate implementation if it cannot define valid quantum states/observables/constraints and produce a non-gauge, reference-consistent emergence chain without external time or answer leakage.",
+      "validator": ["Quantum", "Reference", "Predictivity", "Validator Leakage", "Novelty"],
+      "current_verdict": "REGISTERED; UNTESTED FOUNDATION HYPOTHESIS",
+      "last_reviewed": "2026-10-26"
+    },
+    {
+      "claim_id": "QF-TIME-001",
+      "statement": "Effective temporal evolution may emerge relationally from conditioning a constrained global quantum state on an internal clock.",
+      "label": "HYPOTHESIS",
+      "mathematical_definition": "K|Psi>=0 and rho_S|c=Tr_C[(E_c tensor I)rho]/p(c), with an ideal limit reproducing the Page-Wootters-type conditional evolution.",
+      "dependencies": ["QF-FND-001"],
+      "supporting_evidence": [
+        "Known relational-time toy constructions provide an analytic reproduction target."
+      ],
+      "conflicting_evidence": [
+        "Clock imperfections, interactions, finite dimension, and clock-choice dependence can spoil exact unitary conditional evolution."
+      ],
+      "falsification_condition": "Fail QF-0A if evolution requires hidden classical external time, conditional normalization is unstable, clock choices give uncontrolled inequivalent predictions, or thresholds are changed after inspection.",
+      "validator": ["Quantum", "Reference", "Causality"],
+      "current_verdict": "PROTOCOL FROZEN; REPRODUCTION NOT EXECUTED",
+      "last_reviewed": "2026-10-26"
+    },
+    {
+      "claim_id": "QF-DIST-001",
+      "statement": "An effective distance or pseudodistance may be reconstructed from coordinate-free relational data.",
+      "label": "HYPOTHESIS",
+      "mathematical_definition": "d_ij=F(R_ij;theta), with F preregistered and tested for the declared metric or pseudometric axioms.",
+      "dependencies": ["QF-FND-001"],
+      "supporting_evidence": [
+        "Graph, correlation, and information-geometric methods provide candidate reconstruction tools."
+      ],
+      "conflicting_evidence": [
+        "Generic relational matrices need not determine a unique geometry and may encode non-metric structure."
+      ],
+      "falsification_condition": "Reject a candidate reconstruction if it consumes hidden coordinates/dimension, fails its preregistered axioms or distortion thresholds, or cannot beat registered null controls.",
+      "validator": ["Geometry", "Validator Leakage", "Novelty"],
+      "current_verdict": "BENCHMARK SKELETON ONLY; NOT EXECUTED",
+      "last_reviewed": "2026-10-26"
+    },
+    {
+      "claim_id": "QF-DIM-001",
+      "statement": "Effective dimension may be inferred as a scale-dependent property of relational data rather than assumed a priori.",
+      "label": "HYPOTHESIS",
+      "mathematical_definition": "D_eff is estimated from relational operators by at least two independent estimators with calibrated uncertainty and explicit scale dependence.",
+      "dependencies": ["QF-DIST-001"],
+      "supporting_evidence": [
+        "Spectral/diffusion and local-scaling estimators are established tools in their stated mathematical domains."
+      ],
+      "conflicting_evidence": [
+        "Finite size, sampling density, topology, anisotropy, and noise can bias dimension estimates."
+      ],
+      "falsification_condition": "Reject an estimator package if blind 1D/2D/3D targets are not recovered within frozen calibrated uncertainty, if the answer 3 is presupposed, or if estimator disagreement is uncontrolled.",
+      "validator": ["Dimension", "Validator Leakage", "Novelty"],
+      "current_verdict": "BENCHMARK SKELETON ONLY; NOT EXECUTED",
+      "last_reviewed": "2026-10-26"
+    },
+    {
+      "claim_id": "QF-CAUS-001",
+      "statement": "A Lorentzian causal order and null structure may emerge from the relational quantum substrate.",
+      "label": "HYPOTHESIS",
+      "mathematical_definition": "The effective structure must supply a causal relation C and metric/signature equivalent in scope to (-,+,+,+), including controlled null propagation and no-signalling behavior.",
+      "dependencies": ["QF-TIME-001", "QF-DIST-001", "QF-DIM-001"],
+      "supporting_evidence": [
+        "Causal and Lorentzian reconstruction frameworks provide adjacent mathematical tools."
+      ],
+      "conflicting_evidence": [
+        "Neither relational time nor undirected spatial distance alone fixes Lorentzian signature or causal locality."
+      ],
+      "falsification_condition": "Reject the implementation if it yields inconsistent causal order, unexplained preferred frames, prohibited causal cycles, superluminal operational signalling, or no stable null structure.",
+      "validator": ["Causality", "Reference", "Quantum"],
+      "current_verdict": "DEFERRED UNTIL QF-0A/B/C PASS THEIR OWN GATES",
+      "last_reviewed": "2026-10-26"
+    },
+    {
+      "claim_id": "QF-GR-001",
+      "statement": "Any viable Tech-Orb effective spacetime must recover the relevant GR limit and verified relativistic clock, equivalence, covariance, and conservation behavior.",
+      "label": "ESTABLISHED",
+      "mathematical_definition": "The effective low-energy equations must reduce to Einstein dynamics or a declared constrained modification with GR recovered within the claimed domain and precision.",
+      "dependencies": ["QF-CAUS-001"],
+      "supporting_evidence": [
+        "GR and relativistic clock/propagation tests are established constraints in their validated domains."
+      ],
+      "conflicting_evidence": [
+        "No Tech-Orb derivation currently satisfies this recovery requirement."
+      ],
+      "falsification_condition": "Reject any implementation that contradicts verified relativistic behavior in its claimed domain or assumes the GR structure it claims to derive.",
+      "validator": ["GR", "Causality", "Predictivity"],
+      "current_verdict": "REQUIREMENT ESTABLISHED; TECH-ORB RECOVERY NOT DEMONSTRATED",
+      "last_reviewed": "2026-10-26"
+    },
+    {
+      "claim_id": "QF-CLASS-001",
+      "statement": "Classical effective geometry may require robust, redundantly accessible records of geometry-like observables, not decoherence alone.",
+      "label": "HYPOTHESIS",
+      "mathematical_definition": "For selected geometry-like observables G, environment fragments F_k must exhibit preregistered robustness and redundancy/accessibility metrics, including mutual-information or equivalent operational measures.",
+      "dependencies": ["QF-CAUS-001"],
+      "supporting_evidence": [
+        "Decoherence and redundant-record frameworks supply scoped mechanisms for suppression of interference and intersubjective accessibility."
+      ],
+      "conflicting_evidence": [
+        "Redundancy can be insufficient for objectivity and decoherence does not by itself select a unique outcome."
+      ],
+      "falsification_condition": "Reject the implementation if records are not robust, redundant, sufficiently independent and operationally accessible under frozen metrics, or if the interpretation exceeds the measured quantities.",
+      "validator": ["Classicality", "Quantum", "Information"],
+      "current_verdict": "DEFERRED TO QF-2",
+      "last_reviewed": "2026-10-26"
+    },
+    {
+      "claim_id": "QF-TAIJI-001",
+      "statement": "A Taiji-inspired dual-sector relational phase topology may be explored as a deferred global topology.",
+      "label": "ANSATZ",
+      "mathematical_definition": "Candidate sectors S_plus and S_minus joined by a non-geometric junction S_J, without fundamental meta-time or literal shape semantics.",
+      "dependencies": ["QF-GR-001", "QF-CLASS-001"],
+      "supporting_evidence": [
+        "None; the diagram is a hypothesis-generating ansatz only."
+      ],
+      "conflicting_evidence": [
+        "No topology, transition map, consistency proof, or discriminating observable is defined."
+      ],
+      "falsification_condition": "Reject the ansatz if no coherent topology/map compatible with local Lorentzian physics and unitarity/replacement principles can be defined, or if it adds no discriminating content.",
+      "validator": ["Causality", "Information", "Predictivity", "Analogy"],
+      "current_verdict": "DEFERRED; NO QF-3 WORK AUTHORIZED",
+      "last_reviewed": "2026-10-26"
+    },
+    {
+      "claim_id": "QF-BHWH-001",
+      "statement": "A black-hole to non-geometric junction to white-hole transition is a deferred high-risk hypothesis, not an inferred consequence of current Tech-Orb work.",
+      "label": "HYPOTHESIS",
+      "mathematical_definition": "BH <-> J <-> WH is a placeholder requiring a quantum channel/transition law, state spaces, observables, singularity treatment, and consistency constraints.",
+      "dependencies": ["QF-TAIJI-001"],
+      "supporting_evidence": [
+        "Black-hole thermodynamics and information are relevant adjacent research areas but do not establish this transition."
+      ],
+      "conflicting_evidence": [
+        "There is no observational evidence or complete Tech-Orb construction for BH-J-WH or cyclic-universe transfer."
+      ],
+      "falsification_condition": "Reject an implementation that violates causal/unitary consistency, cannot define cross-sector observables, or lacks a discriminating prediction after known alternatives are accounted for.",
+      "validator": ["Information", "Causality", "GR", "Predictivity", "Novelty"],
+      "current_verdict": "DEFERRED HIGH-RISK HYPOTHESIS; NO WORK AUTHORIZED",
+      "last_reviewed": "2026-10-26"
+    },
+    {
+      "claim_id": "QF-REJ-001",
+      "statement": "Information is literally the fourth spacetime coordinate replacing time.",
+      "label": "REJECTED-LITERAL-VERSION",
+      "mathematical_definition": "Rejected form includes ds^2=dI^2+dx^2+dy^2+dz^2 as a fundamental replacement for Lorentzian spacetime.",
+      "dependencies": [],
+      "supporting_evidence": [
+        "None for the literal claim."
+      ],
+      "conflicting_evidence": [
+        "The literal form does not reproduce Lorentzian signature, light cones, or relativistic causal classification."
+      ],
+      "falsification_condition": "The literal version remains rejected unless a new, explicit construction recovers all relevant Lorentzian/causal physics and demonstrates that information is operationally a coordinate rather than a relational quantity; relabelling is insufficient.",
+      "validator": ["Causality", "GR", "Analogy"],
+      "current_verdict": "REJECTED AS FUNDAMENTAL LITERAL MODEL",
+      "last_reviewed": "2026-10-26"
+    },
+    {
+      "claim_id": "QF-REJ-002",
+      "statement": "A higher-dimensional spatial object literally casts observed spacetime as a lower-dimensional geometric shadow.",
+      "label": "REJECTED-LITERAL-VERSION",
+      "mathematical_definition": "Rejected form is an ordinary geometric shadow/projection used as the fundamental quantum emergence mechanism without a quantum state, observable algebra, constraint, reference, or operational map.",
+      "dependencies": [],
+      "supporting_evidence": [
+        "None for the literal claim; projection is retained only as a historical analogy."
+      ],
+      "conflicting_evidence": [
+        "An ordinary geometric projection does not supply quantum composition, conditioning, causal structure, classicalization, or a unique observable bridge."
+      ],
+      "falsification_condition": "The literal version remains rejected unless an explicit non-analogical quantum map and discriminating consequences are supplied; using the words projection or shadow does not meet this condition.",
+      "validator": ["Quantum", "Reference", "Analogy", "Predictivity"],
+      "current_verdict": "REJECTED AS FUNDAMENTAL LITERAL MODEL",
+      "last_reviewed": "2026-10-26"
+    }
+  ]
+}

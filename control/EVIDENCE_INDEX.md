@@ -12,6 +12,14 @@ This index distinguishes current control documents from preserved historical evi
 | FND-SPEC | `foundation/FOUNDATION_V1_SPEC.md` | Foundation scope | PROVISIONAL |
 | FND-REQ | `foundation/MATHEMATICAL_REQUIREMENTS.md` | Minimum mathematical/physical requirements | PROVISIONAL |
 | VAL-HEM27 | `validators/hem_v27/GATE_PROTOCOL.md` | Canonical validator protocol | PROVISIONAL |
+| QF0-CANON-20261026 | `foundation/qf0/FOUNDATION_CANON_v1.0.md` | Active Relational Quantum Foundation governance proposal | FROZEN; no scientific result |
+| QF0-CLAIMS-JSON-20261026 | `foundation/qf0/CLAIM_REGISTRY_v1.0.json` | Machine-readable QF claim registry | FROZEN; structurally validated |
+| QF0-CLAIMS-MD-20261026 | `foundation/qf0/CLAIM_REGISTRY_v1.0.md` | Human-readable QF claim registry | FROZEN; no claim PASS |
+| QF0A-PROTOCOL-20261026 | `foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.0.md` | Relational-time known-result reproduction protocol | FROZEN; NOT EXECUTED |
+| QF0BC-SKELETON-20261026 | `foundation/qf0/QF0BC_BENCHMARK_SPEC_SKELETON_v1.0.md` | Distance/dimension blind benchmark architecture | SKELETON; NOT EXECUTED |
+| QF0-LIT-JSON-20261026 | `foundation/qf0/LITERATURE_COLLISION_MATRIX_v1.0.json` | Machine-readable literature/collision skeleton | EMPTY SKELETON |
+| QF0-LIT-MD-20261026 | `foundation/qf0/LITERATURE_COLLISION_MATRIX_v1.0.md` | Human template and domain taxonomy | EMPTY SKELETON |
+| QF0-REPORT-20261026 | `QF0_FOUNDATION_INITIALIZATION_REPORT_2026-10-26.md` | Scope, validation, limitations, and next gate | GOVERNANCE REPORT; no scientific result |
 
 ## Historical HIA / Late-Time Evidence
 

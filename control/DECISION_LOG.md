@@ -103,3 +103,19 @@
 - scope and unresolved objections
 - rollback/supersession condition
 
+## D-2026-10-26-10 — Initialize the Relational Quantum Foundation and freeze QF-0A protocol
+
+**Status:** Proposed on bounded branch; requires PR review before becoming authoritative on `main`.
+
+**Decision:** Make Global Constrained Relational Quantum Structure / Relational Quantum Foundation the active Tech-Orb research line. Register the working ontology `Q=(H,A,rho,K,T)`, one-way Foundation → effective model → validators governance, the five-label Foundation vocabulary, twelve global falsification gates, and non-skipping rule.
+
+**Frozen scope:** Foundation Canon v1.0, Claim Registry v1.0, QF-0A known-result reproduction protocol, QF-0B/C benchmark skeleton, and Literature & Collision Matrix skeleton.
+
+**Explicit non-actions:** No QF-0A numerical implementation/execution; no new-physics claim; no HEM R2/R3/R4; no PFM change/resume; no Taiji, BH-WH, or cyclic-topology work; no rewrite of historical evidence.
+
+**Superseded active framing:** `foundation/FOUNDATION_V1_SPEC.md` remains preserved as historical/provisional Foundation v1 evidence but no longer defines the active research direction if this decision is merged.
+
+**Evidence:** `foundation/qf0/` and `QF0_FOUNDATION_INITIALIZATION_REPORT_2026-10-26.md`.
+
+**Next gate:** independent review of this initialization package. After acceptance, authorize a separate implementation branch for QF-0A v1.0 that is byte-bound to the frozen protocol before any result inspection.
+
