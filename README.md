@@ -8,10 +8,11 @@ Tech-Orb is a falsification-first research program investigating whether effecti
 - **Active Foundation proposal:** Relational Quantum Foundation Canon v1.0 with working ontology `Q=(H,A,rho,K,T)`. This is a hypothesis/governance baseline, not evidence.
 - **QF-0A:** known-result relational-time reproduction protocol frozen; implementation and scientific execution not started.
 - **QF-0B/C:** emergent-distance/effective-dimension benchmark skeleton only; thresholds and execution not started.
-- **QF-1/QF-2/QF-3:** deferred. Taiji and BH-J-WH/cyclic topology work are not authorized.
+- **QF-0D:** relational spacetime/causality stage restored; it may combine A/B/C only after their separate PASS verdicts. Execution is not authorized.
+- **QF-1/QF-2/QF-3:** deferred. QF-1 is Lorentz/GR low-energy recovery; Taiji and BH-J-WH/cyclic topology work are not authorized.
 - **HIA / HEM / Hubble tension / CLASS / HyRec:** validators, not the foundation itself.
 - **HEM v26.4:** a historical/reproducible CLASS-level sensitivity and degeneracy experiment only; no posterior or physical validation.
-- **HEM v27:** R0 and R1 pipeline PASS with model verdict NOT APPLICABLE. R2 is NOT STARTED; this package does not start or modify HEM gates.
+- **HEM v27 dual provenance:** authoritative `main` records R0/R1 pipeline PASS, model verdict NOT APPLICABLE, and R2 = NOT STARTED. Unmerged Draft PR #8 at head `451b2a3875d16fea026fe74748bb3117f2c457ac` contains non-authoritative candidate evidence that R2 numerical execution completed with candidate verdict BLOCKED (560/560 adjudicable PASS; 334/334 diagnostic-only within tolerance; numerical FAIL 0), blocked by missing frozen legal extraction routes for three curves and an unresolved neutrino-baseline discrepancy. PR #9 records provenance only; it neither adjudicates/merges PR #8 nor authorizes R2 amendment/R3/R4.
 - **PFM:** external SAFE HOLD — COMPLETE / RESUMABLE; not awakened or modified here.
 - **Historical HIA/RMP results:** retained as historical evidence. They constrain tested implementations or subclasses only; they are not universal no-go theorems.
 
@@ -31,7 +32,7 @@ Validator success is also scoped: a correct, reproducible pipeline is not eviden
 
 The governing research question, five claim labels, ontology, one-way Foundation → effective model → validators rule, roadmap, rejected literal versions, scope boundaries, and twelve global falsification gates are frozen in [Foundation Canon v1.0](foundation/qf0/FOUNDATION_CANON_v1.0.md).
 
-The active roadmap is QF-0 relational toy-model reproduction/benchmarks → QF-1 Lorentz/GR recovery → QF-2 classicalization → QF-3 separately authorized topology research. PASS at any stage never establishes the next stage. A future QF-0A PASS would be known-result reproduction only and not Tech-Orb evidence.
+The active roadmap is QF-0A emergent time → QF-0B emergent distance → QF-0C effective dimension → QF-0D relational spacetime/causality → QF-1 Lorentz/GR low-energy recovery → QF-2 classicalization → QF-3 Taiji relational phase topology. QF-0D tests causal/Lorentzian structure; QF-1 separately tests local Lorentz/covariance, locality, equivalence behavior, GR dynamics/conservation, and matter/QFT embedding. PASS at any stage never establishes the next stage. A future QF-0A PASS would be known-result reproduction only and not Tech-Orb evidence.
 
 The older F0/F1/F2 architecture below is preserved as historical/provisional Foundation v1 evidence; it is not deleted or retroactively rewritten.
 

@@ -76,7 +76,7 @@ PROTOCOL_MARKERS = {
     "numerical plan": "## 5. Numerical reproduction plan",
     "normalization": "## 6. Normalization, positivity, and constraint checks",
     "unitarity": "## 7. Approximate unitarity checks",
-    "finite clock": "## 8. Finite/imperfect clock error metric",
+    "finite-resolution ideal clock": "## 8. Finite-resolution ideal-clock diagnostic",
     "interaction": "## 9. Interaction sensitivity",
     "two clocks": "## 10. Two clock-choice comparison",
     "seeds": "## 11. Randomness and deterministic settings",
@@ -134,6 +134,40 @@ def main() -> int:
         require(f"`{label}`" in canon, f"Canon missing label {label}", errors)
     for gate in ALLOWED_VALIDATORS:
         require(f"| {gate} |" in canon, f"Canon missing global gate {gate}", errors)
+    for marker in (
+        "| QF-0D |",
+        "QF-0D — Relational Spacetime / Causality",
+        "timelike/spacelike/null classification",
+        "yields only Euclidean geometry",
+        "preferred external clock/frame",
+        "operational superluminal signalling",
+        "QF-1 is a distinct higher layer",
+    ):
+        require(marker in canon, f"Canon missing QF-0D/QF-1 boundary marker: {marker}", errors)
+    require("Authoritative `main` state:" in canon and "Unmerged Draft PR #8 candidate evidence" in canon,
+            "Canon missing HEM R2 dual provenance", errors)
+    for marker in (
+        "451b2a3875d16fea026fe74748bb3117f2c457ac",
+        "560/560 adjudicable points PASS",
+        "334/334 diagnostic-only points within tolerance",
+        "candidate adjudication = BLOCKED",
+    ):
+        require(marker in canon, f"Canon missing PR #8 provenance marker: {marker}", errors)
+
+    project_state = (ROOT / "control" / "PROJECT_STATE.md").read_text(encoding="utf-8")
+    require("QF-0D Relational Spacetime / Causality" in project_state,
+            "Project State missing QF-0D", errors)
+    require("HEM v27 authoritative `main`" in project_state and
+            "HEM v27 Draft PR #8 candidate" in project_state,
+            "Project State missing authoritative/candidate R2 split", errors)
+    require("R2 = NOT STARTED on `main`" in project_state and
+            "R2 CANDIDATE BLOCKED" in project_state,
+            "Project State collapses R2 dual state", errors)
+
+    causality_claim = next((claim for claim in claims if claim["claim_id"] == "QF-CAUS-001"), None)
+    require(causality_claim is not None and "QF-0D" in causality_claim["statement"] and
+            "QF-0D" in causality_claim["current_verdict"],
+            "QF-CAUS-001 is not explicitly assigned to QF-0D", errors)
 
     protocol = (QF0 / "QF0A_FROZEN_PROTOCOL_v1.0.md").read_text(encoding="utf-8")
     for name, marker in PROTOCOL_MARKERS.items():
@@ -146,6 +180,27 @@ def main() -> int:
     ):
         require(explicit_fail in protocol,
                 f"QF-0A missing minimum FAIL gate: {explicit_fail}", errors)
+    require("PROTOCOL FROZEN; REPRODUCTION NOT EXECUTED" in protocol,
+            "QF-0A frozen/not-executed status missing", errors)
+    require("lowest absolute constraint eigenvalue" not in protocol and
+            "lowest absolute eigenvalue" not in protocol,
+            "QF-0A Section 9 retains ambiguous lowest-absolute-eigenvalue selection", errors)
+    for marker in (
+        "W=(-0.5,0.5)",
+        "P_g=\\mathbf 1_W(K(g))",
+        "P_g|\\Psi_0\\rangle",
+        "subspace rank is not exactly `2`",
+        "Rotating the eigensolver basis inside a degenerate subspace leaves the summed projector unchanged",
+        "exact stationary zero mode `|0,0>`",
+        "cannot hijack selection",
+    ):
+        require(marker in protocol, f"QF-0A Section 9 missing repaired continuation marker: {marker}", errors)
+    require("## 8. Finite/imperfect" not in protocol and
+            "does **not** test a realistic imperfect clock" in protocol,
+            "Finite-resolution suite is still presented as a realistic imperfect-clock test", errors)
+    require("pi=[1,6,11,0,5,10,15,4,9,14,3,8,13,2,7,12]" in protocol and
+            "pi(k)=(5k+1) mod 16" in protocol,
+            "Clock-scramble control lacks frozen deterministic identity", errors)
 
     benchmark = (QF0 / "QF0BC_BENCHMARK_SPEC_SKELETON_v1.0.md").read_text(encoding="utf-8")
     for marker in (

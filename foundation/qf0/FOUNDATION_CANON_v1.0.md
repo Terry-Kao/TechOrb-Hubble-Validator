@@ -73,12 +73,21 @@ HEM, Hubble data, CLASS, HyRec, cosmological anomalies, or a good fit may not de
 
 | Stage | Question | Earliest admissible output | Forbidden inference |
 |---|---|---|---|
-| QF-0 | Can controlled toy systems reproduce relational time and blindly reconstruct spatial relations/dimension? | Known-result reproduction and benchmark reports | Nature uses this substrate |
-| QF-1 | Can Lorentzian causality, local Lorentz symmetry, and a GR limit be recovered? | Frozen recovery protocol and bounded derivation | GR is recovered because QF-0 passed |
+| QF-0A | Can a controlled constrained toy system reproduce a known relational-time result? | Known-result reproduction report | Time in nature emerges this way |
+| QF-0B | Can coordinate-free relational data reconstruct distance/metric structure without answer leakage? | Blind distance benchmark report | Physical space has been derived |
+| QF-0C | Can effective dimension be blindly and independently estimated without assuming 3? | Blind dimension benchmark report | Observed dimension has been explained |
+| QF-0D | Can passed QF-0A/B/C ingredients combine into a relational Lorentzian spacetime/causality candidate? | Causal-order and signature benchmark | Lorentz invariance or GR has been recovered |
+| QF-1 | Can local Lorentz invariance/covariance, locality, equivalence-principle-compatible behavior, conservation, GR/Einstein-like dynamics, and matter/QFT embedding be recovered? | Frozen low-energy recovery protocol and bounded derivation | GR is recovered because QF-0D passed |
 | QF-2 | Can geometry-like observables become robust, redundant, operationally accessible classical records? | Classicalization benchmark | Decoherence alone solves measurement or establishes geometry |
-| QF-3 | Are deferred global/topological extensions mathematically coherent and discriminating? | Separately authorized topology protocol | Taiji, BH-WH, or cyclic topology is literal cosmology |
+| QF-3 | Is a deferred Taiji relational phase topology mathematically coherent and discriminating? | Separately authorized topology protocol | Taiji, BH-WH, or cyclic topology is literal cosmology |
 
-QF-0 is divided into QF-0A relational time, QF-0B relational distance, and QF-0C effective dimension. A PASS at QF-0A does not establish QF-0B/C, QF-1, QF-2, QF-3, the full ontology, or any statement about nature. The same non-skipping rule applies at every later gate.
+### QF-0D — Relational Spacetime / Causality
+
+QF-0 is divided into QF-0A relational time, QF-0B relational distance, QF-0C effective dimension, and QF-0D relational spacetime/causality. QF-0D may start only after QF-0A/B/C separately pass their own frozen gates. It must combine internal/relational time, emergent spatial relations/metric, and effective dimension, then test causal order; timelike/spacelike/null classification; a stable null structure/causal cone; a finite invariant propagation-scale candidate; operational agreement under reference change; and Lorentzian rather than purely Euclidean signature.
+
+QF-0D FAILS if it cannot form a causal order/cone, yields only Euclidean geometry, requires a preferred external clock/frame, gives uncontrolled contradictory reference-dependent predictions, produces prohibited causal cycles, or permits operational superluminal signalling. After QF-0D failure, the implementation may be described only as emergent metric, graph geometry, or relational geometry—not emergent spacetime.
+
+QF-1 is a distinct higher layer: it addresses local Lorentz invariance/covariance, locality, equivalence-principle-compatible behavior, GR/Einstein-like dynamics, conservation, and matter/QFT embedding. QF-0D PASS does not establish QF-1. A PASS at QF-0A does not establish QF-0B/C/D or any later layer, the full ontology, or any statement about nature. The same non-skipping rule applies at every later gate.
 
 ## 6. Rejected literal versions
 
@@ -95,7 +104,7 @@ Conditioning, quantum reference frames, or information-theoretic relations may s
 
 ## 7. Current scope boundaries
 
-- **HEM / Hubble / CLASS / HyRec:** validators only. Repository `main` records HEM v27 R0 and R1 pipeline PASS with model verdict NOT APPLICABLE; R2 is NOT STARTED. This work package does not alter those verdicts and does not start R2, R3, or R4.
+- **HEM / Hubble / CLASS / HyRec:** validators only. **Authoritative `main` state:** HEM v27 R0 and R1 pipeline PASS with model verdict NOT APPLICABLE; R2 = NOT STARTED. **Unmerged Draft PR #8 candidate evidence (head `451b2a3875d16fea026fe74748bb3117f2c457ac`):** R2 numerical execution completed; candidate adjudication = BLOCKED; 560/560 adjudicable points PASS, 334/334 diagnostic-only points within tolerance, and numerical FAIL = 0. The candidate blocker is the absence of a frozen legal extraction route for `minus_zone`, `plus_zone`, and `simple_clumping`; the neutrino baseline governance discrepancy also remains unresolved. PR #9 records the existence and provenance of this non-authoritative evidence only to prevent stale-state interpretation or duplicate execution. It does not adjudicate or merge PR #8, does not modify an HEM scientific verdict, and does not authorize an R2 amendment, R3, or R4.
 - **PFM:** external project in `SAFE HOLD — COMPLETE / RESUMABLE`; P0B scientific validity remains `REVISE`. It is not modified or awakened here. It may later serve as a formula/relation verification workbench only after separate governance authorization.
 - **Taiji:** deferred QF-3 dual-sector topology `ANSATZ`; no work starts here.
 - **BH-J-WH / cyclic topology / cross-sector information:** deferred high-risk `HYPOTHESIS`/`ANSATZ`; no work starts here.

@@ -12,7 +12,7 @@ This view summarizes the machine-readable records. The JSON record retains the f
 | QF-TIME-001 | Internal-clock conditioning may yield effective relational time | HYPOTHESIS | QF-FND-001 | Protocol frozen; reproduction not executed |
 | QF-DIST-001 | Coordinate-free relational data may yield distance/pseudodistance | HYPOTHESIS | QF-FND-001 | Benchmark skeleton only |
 | QF-DIM-001 | Effective dimension may be inferred without presupposing 3 | HYPOTHESIS | QF-DIST-001 | Benchmark skeleton only |
-| QF-CAUS-001 | Lorentzian causal order and null structure may emerge | HYPOTHESIS | QF-TIME-001, QF-DIST-001, QF-DIM-001 | Deferred |
+| QF-CAUS-001 | QF-0D may combine time/distance/dimension into Lorentzian causal structure | HYPOTHESIS | QF-TIME-001, QF-DIST-001, QF-DIM-001 | QF-0D; deferred until A/B/C pass |
 | QF-GR-001 | A viable implementation must recover the relevant GR/relativistic limit | ESTABLISHED | QF-CAUS-001 | Requirement established; recovery absent |
 | QF-CLASS-001 | Classical geometry may require robust/redundant accessible records | HYPOTHESIS | QF-CAUS-001 | Deferred to QF-2 |
 | QF-TAIJI-001 | Dual-sector relational phase topology | ANSATZ | QF-GR-001, QF-CLASS-001 | Deferred; QF-3 unauthorized |
@@ -50,11 +50,12 @@ This view summarizes the machine-readable records. The JSON record retains the f
 - **Fail:** blind 1D/2D/3D targets missed under frozen calibration, assumed answer 3, or uncontrolled estimator disagreement.
 - **Validators:** Dimension, Validator Leakage, Novelty.
 
-### QF-CAUS-001 — Lorentzian causality
+### QF-CAUS-001 — QF-0D relational spacetime / causality
 
 - **Definition:** effective causal order, `(-,+,+,+)`-equivalent signature in scope, null propagation, and no-signalling behavior.
 - **Fail:** inconsistent order, unexplained preferred frame, prohibited cycles, signalling, or unstable null structure.
 - **Validators:** Causality, Reference, Quantum.
+- **Stage boundary:** QF-0D combines separately passed QF-0A/B/C ingredients. QF-1, not QF-0D, is responsible for local Lorentz/GR low-energy recovery.
 
 ### QF-GR-001 — GR recovery requirement
 

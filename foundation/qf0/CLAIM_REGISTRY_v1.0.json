@@ -81,7 +81,7 @@
     },
     {
       "claim_id": "QF-CAUS-001",
-      "statement": "A Lorentzian causal order and null structure may emerge from the relational quantum substrate.",
+      "statement": "At QF-0D, passed relational-time, distance, and dimension ingredients may combine into a relational Lorentzian spacetime/causality candidate.",
       "label": "HYPOTHESIS",
       "mathematical_definition": "The effective structure must supply a causal relation C and metric/signature equivalent in scope to (-,+,+,+), including controlled null propagation and no-signalling behavior.",
       "dependencies": ["QF-TIME-001", "QF-DIST-001", "QF-DIM-001"],
@@ -93,7 +93,7 @@
       ],
       "falsification_condition": "Reject the implementation if it yields inconsistent causal order, unexplained preferred frames, prohibited causal cycles, superluminal operational signalling, or no stable null structure.",
       "validator": ["Causality", "Reference", "Quantum"],
-      "current_verdict": "DEFERRED UNTIL QF-0A/B/C PASS THEIR OWN GATES",
+      "current_verdict": "QF-0D; DEFERRED UNTIL QF-0A/B/C PASS THEIR OWN GATES",
       "last_reviewed": "2026-10-26"
     },
     {

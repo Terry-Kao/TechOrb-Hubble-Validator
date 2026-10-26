@@ -9,7 +9,7 @@
 
 Reproduce a finite-dimensional Page–Wootters-type known relational-time result: a globally constrained clock–system state yields normalized conditional system states approximating the reference Schrödinger orbit when conditioned on internal clock outcomes.
 
-This gate tests whether a future implementation correctly reproduces a known toy mechanism under a frozen contract. PASS would be a **reproduction/pipeline verdict only**. It would not be Tech-Orb evidence, would not establish the ontology, would not show that time in nature emerges this way, and would not advance QF-0B/C, QF-1, QF-2, or QF-3.
+This gate tests whether a future implementation correctly reproduces a known toy mechanism under a frozen contract. PASS would be a **reproduction/pipeline verdict only**. It would not be Tech-Orb evidence, would not establish the ontology, would not show that time in nature emerges this way, and would not advance QF-0B, QF-0C, QF-0D, QF-1, QF-2, or QF-3.
 
 No numerical implementation or scientific execution is part of this work package. A schema/link/logic validation of this document is permitted and is not a scientific run.
 
@@ -120,7 +120,7 @@ Primary adjudicative quantities:
 4. Compute the analytic reference density matrices independently from matrix exponentiation of `H_S`.
 5. Compare by fidelity and trace distance; never compare raw vector phase.
 6. Test approximate unitarity using a single system step operator `U_delta=exp(-i H_S Delta_tau)` and compare `rho_S|k+1` with `U_delta rho_S|k U_delta^dagger`.
-7. Execute finite/imperfect-clock, interaction-sensitivity, clock-choice, and negative-control suites without changing this protocol.
+7. Execute the finite-resolution ideal-clock, interaction-sensitivity, clock-choice, and negative-control suites without changing this protocol.
 8. Write raw arrays, environment/package identity, exact command, seed, hashes, and a machine verdict before any interpretation.
 
 No parameter fitting is allowed in the primary reproduction.
@@ -151,15 +151,17 @@ For the primary ideal case:
 
 These are numerical reproduction tolerances, not physical accuracy claims.
 
-## 8. Finite/imperfect clock error metric
+## 8. Finite-resolution ideal-clock diagnostic
 
-The preregistered clock-error summary is
+The preregistered finite-resolution summary is
 
 \[
 E_{clock}=\max_k D(\rho_{S|k},\rho_{ref}(\tau_k)),
 \]
 
 with secondary reports of median trace distance and worst-case normalization error. Future execution must include `d_C in {8,16,32}` while keeping the embedded two-level energy support and the same analytic target.
+
+This suite changes only ideal discrete-clock dimension/resolution and sampling. It does **not** test a realistic imperfect clock. Smeared/nonorthogonal clock POVMs, clock dephasing, finite coherence, an imperfect clock Hamiltonian, and clock-system coupling are future extensions requiring a separately frozen protocol.
 
 Expected ideal discretization behavior is not itself a PASS condition. The suite FAILS if error is non-finite, normalization fails, or increasing clock resolution produces an unexplained deterioration larger than `1e-8` in the ideal construction. Any interpretation of scaling must be descriptive and may not be upgraded to evidence for nature.
 
@@ -171,9 +173,35 @@ Use the frozen family
 K(g)=K_0+g\,V,\qquad V=|1\rangle\langle1|_C\otimes\sigma_x,
 \]
 
-with `g in {0, 1e-4, 1e-3, 1e-2}`. For each nonzero `g`, construct the closest normalized physical/kernel state using the same deterministic eigensolver rule (lowest absolute constraint eigenvalue; tie broken by largest overlap with the `g=0` physical state, then lowest returned index).
+with `g in {0, 1e-4, 1e-3, 1e-2}`. This diagnostic retains `V` and uses the following basis-independent continuation rule; it does not select an individual eigenvector.
 
-Report `E_clock(g)`, constraint residual, and overlap with the primary state. This suite is diagnostic, not part of the primary known-result PASS. It FAILS as an implementation-sensitivity test if results are non-deterministic, the state-selection rule is ambiguous/unreported, or `g=0` does not reproduce the primary case. No post-hoc alternate interaction may replace `V` in v1.0.
+Let the frozen primary history state be `|Psi_0>=(|0,0>+|1,1>)/sqrt(2)`. Define the fixed near-kernel spectral window
+
+\[
+W=(-0.5,0.5)
+\]
+
+and the orthogonal spectral projector
+
+\[
+P_g=\mathbf 1_W(K(g)).
+\]
+
+The continued diagnostic state is uniquely defined by
+
+\[
+|\Psi_g\rangle=\frac{P_g|\Psi_0\rangle}{\|P_g|\Psi_0\rangle\|}.
+\]
+
+Fix its global phase by requiring `<Psi_0|Psi_g>` to be real and nonnegative. At `g=0`, `P_0` projects onto `ker(K_0)=span{|0,0>,|1,1>}`, so this rule recovers `|Psi_0>` exactly.
+
+The unperturbed nonzero spectrum is separated from zero by a gap of `1`, `||V||_2=1`, and the frozen suite has `|g|<=0.01`. Weyl's bound therefore keeps the two eigenvalues continuing from the zero eigenspace within `[-0.01,0.01]` and all other eigenvalues outside `[-0.99,0.99]`; the fixed window selects exactly the two-dimensional relevant spectral subspace throughout the suite. The exact stationary zero mode `|0,0>` may remain inside that subspace, but it cannot hijack selection because no lowest-absolute-eigenvalue eigenvector is chosen: the full projector acts on the frozen history state.
+
+Deterministic numerical construction: perform a Hermitian eigendecomposition of `K(g)` in `complex128`; include every eigenvector whose eigenvalue satisfies strict `-0.5 < lambda < 0.5`; construct `P_g` as the sum of their outer products; project and normalize `|Psi_0>`; then apply the phase rule. Rotating the eigensolver basis inside a degenerate subspace leaves the summed projector unchanged. No returned-eigenvector index or tie rule enters the definition.
+
+The interaction diagnostic is BLOCKED/FAIL if the selected subspace rank is not exactly `2`, any eigenvalue lies within `1e-10` of a window boundary, `||P_g|Psi_0>|| < 1e-12`, projector Hermiticity/idempotence exceeds `1e-12`, the `g=0` state differs from `|Psi_0>` by trace distance above `1e-12`, or repeated allowed seeds/platform runs change the continued density matrix by trace distance above `1e-12`. An eigenvalue crossing at or through the fixed window boundary invalidates this protocol version; the window may not be moved after inspection.
+
+Report `E_clock(g)`, spectral-window eigenvalues/rank, projector residuals, constraint residual, projection norm, and overlap with the primary state. This continued state is a near-kernel spectral-subspace diagnostic, not a claim of an exact interacting physical state. The suite is not part of the primary known-result PASS and cannot be promoted to Tech-Orb evidence. It FAILS if results are non-deterministic, the projector/continuation record is incomplete, or `g=0` does not reproduce the primary case. No post-hoc alternate interaction, spectral window, projector, or selection rule may replace the frozen definitions in v1.0.
 
 ## 10. Two clock-choice comparison
 
@@ -202,7 +230,7 @@ All controls must be run in the same implementation without modifying thresholds
 2. **Product/no-history state:** `|tau_0>_C tensor |psi_0>_S`. It must not reproduce the full conditional orbit; unavailable outcomes must not be silently discarded.
 3. **Wrong conditioning:** use `rho'_S|k=Tr_C(rho)/Tr(rho)` independent of `k`. It must fail orbit fidelity/step checks.
 4. **Hidden external-time construction detector:** reject any artifact whose conditional states were generated first with an external-time loop and only then assembled as the global state, even if numerical values match.
-5. **Clock-scramble control:** apply an unregistered random permutation of clock labels without the mapping supplied to adjudication. It must fail the reference comparison and may not be repaired after inspection.
+5. **Clock-scramble control:** for `d_C=16`, apply the fixed permutation `pi=[1,6,11,0,5,10,15,4,9,14,3,8,13,2,7,12]`, equivalently `pi(k)=(5k+1) mod 16`, to the clock labels without supplying its inverse to adjudication. This is not any registered cyclic map `k -> k+c`. The machine report must record the exact list and formula. It must fail the reference comparison; it may not be resampled, replaced, inverted, or repaired after inspection. An unexpected PASS blocks the gate.
 6. **Post-hoc threshold mutation:** a changed metric, sign convention, tolerance, state, or excluded outcome invalidates the run and yields protocol FAIL.
 
 Control admission requires their expected failure reasons to be visible in the machine report. A control unexpectedly passing blocks the entire gate pending a new protocol version; it may not be explained away inside v1.0.
@@ -230,7 +258,7 @@ QF-0A execution is complete only when:
 - this exact protocol version predates all adjudicative outputs;
 - implementation source and environment are frozen and hashed;
 - the primary analytic reproduction passes every identity, constraint, normalization, positivity, fidelity, trace-distance, and unitary-step threshold;
-- finite-clock, interaction, and both clock-choice suites are reported without post-hoc substitutions;
+- finite-resolution ideal-clock, interaction, and both clock-choice suites are reported without post-hoc substitutions;
 - every negative control produces its registered failure;
 - all seeds/deterministic settings and raw arrays are preserved;
 - a machine-readable verdict and human report distinguish pipeline/reproduction verdict from Foundation/model verdict;
