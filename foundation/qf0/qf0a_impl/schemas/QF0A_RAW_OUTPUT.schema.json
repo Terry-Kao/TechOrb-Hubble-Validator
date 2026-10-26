@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "QF0A_RAW_OUTPUT.schema.json",
+  "title": "QF-0A Raw Output Index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "protocol_file_sha256", "outcome_count_expected", "outcome_count_recorded", "outcomes_dropped", "exclusions", "arrays"],
+  "properties": {
+    "schema_version": {"const": "1.0"}, "run_id": {"type": "string", "minLength": 1},
+    "protocol_file_sha256": {"const": "fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b"},
+    "outcome_count_expected": {"type": "integer", "minimum": 0}, "outcome_count_recorded": {"type": "integer", "minimum": 0},
+    "outcomes_dropped": {"const": false}, "exclusions": {"type": "array", "items": {"type": "object", "required": ["identifier", "preregistered_reason"], "additionalProperties": false, "properties": {"identifier": {"type": "string"}, "preregistered_reason": {"type": "string"}}}},
+    "arrays": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/array"}}
+  },
+  "$defs": {
+    "array": {"type": "object", "additionalProperties": false, "required": ["identifier", "path", "format", "dtype", "shape", "byte_size", "sha256", "protocol_section", "adjudicative"], "properties": {"identifier": {"type": "string", "pattern": "^[A-Za-z0-9._-]+$"}, "path": {"type": "string", "pattern": "^raw/[A-Za-z0-9._/-]+\\.npy$"}, "format": {"const": "npy-little-endian-no-object"}, "dtype": {"enum": ["float64", "complex128"]}, "shape": {"type": "array", "minItems": 1, "items": {"type": "integer", "minimum": 1}}, "byte_size": {"type": "integer", "minimum": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "protocol_section": {"type": "string", "pattern": "^[0-9]+(?:\\.[0-9]+)?$"}, "adjudicative": {"type": "boolean"}}}
+  }
+}

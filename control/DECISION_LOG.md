@@ -105,7 +105,7 @@
 
 ## D-2026-10-26-10 — Initialize the Relational Quantum Foundation and freeze QF-0A protocol
 
-**Status:** Proposed on bounded branch; requires PR review before becoming authoritative on `main`.
+**Status:** MERGED / GOVERNANCE BASELINE on `main` at `4c2920871898add6254902fb3963784e2761d375` through PR #9. This status records governance acceptance, not scientific validation.
 
 **Decision:** Make Global Constrained Relational Quantum Structure / Relational Quantum Foundation the active Tech-Orb research line. Register the working ontology `Q=(H,A,rho,K,T)`, one-way Foundation → effective model → validators governance, the five-label Foundation vocabulary, twelve global falsification gates, and non-skipping rule.
 
@@ -120,4 +120,20 @@
 **Next gate:** independent review of this initialization package. After acceptance, authorize a separate implementation branch for QF-0A v1.0 that is byte-bound to the frozen protocol before any result inspection.
 
 **Independent review repair:** PR #9 received `REVISE`. The same Draft PR now records HEM R2 authoritative-main versus unmerged-PR8 candidate provenance, restores QF-0D as relational spacetime/causality below QF-1, replaces the ambiguous Section 9 eigenvector selection with a fixed basis-independent near-kernel projector continuation, renames the finite-clock suite as a finite-resolution ideal-clock diagnostic, and freezes the clock-scramble permutation. No numerical/scientific execution occurred; re-review is required.
+
+**Closure:** The repaired head `44b76793d8dce3a2a29eecf132bf649e1de19a24` received independent APPROVE and was squash-merged as `4c2920871898add6254902fb3963784e2761d375`. GitHub reported no configured/status checks; this was recorded as `none configured/reported`, not CI PASS.
+
+## D-2026-10-26-11 — Propose QF-0A implementation preregistration v1.0
+
+**Status:** PROPOSED / DRAFT / NOT EXECUTED on bounded branch `qf0a/implementation-preregistration-v1`.
+
+**Decision:** Freeze the future QF-0A implementation source-tree boundary, CPython/runtime and minimal dependency policy, `float64`/`complex128` numeric policy, backend/environment identity, determinism, evidence directory, hashing, leakage controls, raw-output index, negative controls, and machine-verdict separation before scientific source or adjudicative output exists.
+
+**Protocol binding:** `foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.0.md`; Git blob `c11599a058caa8dfb0912c4e00a0656bef4688bd`; SHA-256 `fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b`; authoritative main `4c2920871898add6254902fb3963784e2761d375`.
+
+**Explicit non-actions:** No scientific implementation modules, conditional states, fidelity, trace distance, interaction results, clock-choice results, raw arrays, evidence run, or scientific/machine verdict instance was produced. QF-0B/C/D, QF-1/2/3, HEM, PFM, and topology remain unchanged.
+
+**Evidence:** `foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.0.md` and `foundation/qf0/qf0a_impl/`.
+
+**Next gate:** independent read-only review of this Draft PR. A separately authorized implementation gate is required before source completion or any scientific/numerical execution.
 

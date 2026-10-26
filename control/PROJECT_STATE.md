@@ -1,7 +1,7 @@
 # Project State
 
 **As of:** 2026-10-26
-**Authority:** repository `main` after approved merge; this branch proposes the QF-0 Foundation initialization package and remains non-authoritative until review/merge.
+**Authority:** repository `main` at `4c2920871898add6254902fb3963784e2761d375` is the merged QF-0 Foundation governance baseline. This branch proposes only the QF-0A implementation preregistration and remains non-authoritative until review/merge.
 
 ## Integrated Verdict
 
@@ -14,7 +14,7 @@ The governance direction is Foundation → effective model → validators. HIA, 
 | Item | Epistemic class | Evidence status | Current verdict |
 |---|---|---|---|
 | QF substrate `Q=(H,A,rho,K,T)` | HYPOTHESIS | PROTOCOL-ONLY | Registered candidate; no emergence chain or scientific PASS. |
-| QF-0A Relational Time | HYPOTHESIS | FROZEN PROTOCOL | Known-result reproduction protocol frozen; implementation and execution NOT STARTED. |
+| QF-0A Relational Time | HYPOTHESIS | FROZEN PROTOCOL | Known-result reproduction protocol frozen; scientific implementation and execution NOT STARTED. Implementation preregistration v1.0 is PROPOSED / DRAFT / NOT EXECUTED. |
 | QF-0B Emergent Distance | HYPOTHESIS | SKELETON | Benchmark architecture only; scientific thresholds remain TBF. |
 | QF-0C Effective Dimension | HYPOTHESIS | SKELETON | Blind 1D/2D/3D architecture only; execution NOT STARTED and answer 3 is not assumed. |
 | QF-0D Relational Spacetime / Causality | HYPOTHESIS | DEFERRED | Combines passed A/B/C ingredients and tests causal order, Lorentzian signature/null structure, propagation scale, and reference consistency; execution NOT AUTHORIZED. |

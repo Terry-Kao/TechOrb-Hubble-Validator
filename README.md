@@ -6,7 +6,7 @@ Tech-Orb is a falsification-first research program investigating whether effecti
 
 - **Tech-Orb:** mother hypothesis; not an established physical theory.
 - **Active Foundation proposal:** Relational Quantum Foundation Canon v1.0 with working ontology `Q=(H,A,rho,K,T)`. This is a hypothesis/governance baseline, not evidence.
-- **QF-0A:** known-result relational-time reproduction protocol frozen; implementation and scientific execution not started.
+- **QF-0A:** known-result relational-time reproduction protocol frozen; scientific implementation and execution not started. Implementation preregistration v1.0 is proposed on a separate Draft branch and is byte-bound to the merged protocol.
 - **QF-0B/C:** emergent-distance/effective-dimension benchmark skeleton only; thresholds and execution not started.
 - **QF-0D:** relational spacetime/causality stage restored; it may combine A/B/C only after their separate PASS verdicts. Execution is not authorized.
 - **QF-1/QF-2/QF-3:** deferred. QF-1 is Lorentz/GR low-energy recovery; Taiji and BH-J-WH/cyclic topology work are not authorized.
@@ -109,9 +109,9 @@ Theory-to-theory spectrum RMS is an engineering diagnostic, not an observational
 
 ## Current Next Actions
 
-1. Review and merge (or revise) the bounded QF-0 Foundation initialization package without interpreting merge as scientific validation.
-2. If accepted, create a separate QF-0A implementation authorization bound to the frozen v1.0 protocol before any result inspection.
-3. Independently audit QF-0A for external-time leakage, clock-choice handling, negative controls, and no-new-physics wording.
+1. Independently review the QF-0A implementation preregistration package; do not interpret its eventual merge as scientific validation.
+2. Only after approval, authorize a separate implementation gate bound to the frozen protocol, source manifest, and environment lock before any result inspection.
+3. Independently audit QF-0A implementation for external-time leakage, analytic-reference separation, clock-choice handling, negative controls, and no-new-physics wording.
 4. Resolve every `TBF` item in the QF-0B/C skeleton in a separately reviewed protocol before generating adjudicative benchmarks.
 5. Populate the literature matrix from primary sources without using compatibility or citation similarity as evidence.
 
