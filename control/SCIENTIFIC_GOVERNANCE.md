@@ -25,6 +25,16 @@ Evidence status is independent:
 - `IMPLEMENTATION`: a specific code/configuration/model realization fails.
 - `SUBCLASS`: a defined family fails within declared assumptions and domain.
 
+### 2.1 Relational Quantum Foundation label profile (effective 2026-10-26)
+
+New QF Foundation claims use exactly one primary label: `ESTABLISHED`, `COMPATIBLE`, `HYPOTHESIS`, `ANSATZ`, or `REJECTED-LITERAL-VERSION`, as defined in `foundation/qf0/FOUNDATION_CANON_v1.0.md`. This bounded profile does not rewrite historical ledger entries.
+
+- `ESTABLISHED` maps to a scoped mature external result or verified repository fact; it must not be applied to the Tech-Orb ontology merely because a prerequisite is established.
+- `COMPATIBLE` means absence of a known conflict within a stated scope. It is not evidence or support.
+- `REJECTED-LITERAL-VERSION` retires a literal wording/interpretation. It is narrower than a universal `EXCLUDED` result and cannot be used to claim a no-go theorem.
+
+Every new Foundation claim must include a mathematical definition, dependencies, supporting and conflicting evidence, a fail/falsification condition, validator, current verdict, and review date in the QF claim registry. Claims without an executable fail condition remain concept notes and cannot enter Canon.
+
 ## 3. Evidence Rules
 
 1. A claim must cite inputs, method, code/ref, outputs, uncertainty/tolerance, and scope.
@@ -45,7 +55,7 @@ Evidence status is independent:
 
 ## 5. Foundation and Bridge Governance
 
-Foundation canon contains F0 hypotheses only. F1 and F2 are research modules. A proposed action, mapping, closure, or observable link begins in the Bridge Register as `Candidate` and normally as `ANSATZ` or `HYPOTHESIS`.
+The active Foundation canon is the Relational Quantum Foundation in `foundation/qf0/FOUNDATION_CANON_v1.0.md`. Earlier F0/F1/F2 documents remain historical/provisional evidence and must not be deleted or silently rewritten. A proposed action, mapping, closure, or observable link begins in the Bridge Register as `Candidate` and normally as `ANSATZ` or `HYPOTHESIS`.
 
 Promotion requires:
 
@@ -57,6 +67,8 @@ Promotion requires:
 6. a Decision Log entry with supporting evidence.
 
 Any magnetogenesis action remains a Candidate Bridge / ANSATZ until it meets these conditions.
+
+The evidential direction is one-way: Foundation → effective model → validators. HEM, Hubble/CLASS/HyRec results, anomaly targets, or any other validator may not reverse-define or promote Foundation. A PASS at one layer never establishes the next layer.
 
 ## 6. Negative Results
 
