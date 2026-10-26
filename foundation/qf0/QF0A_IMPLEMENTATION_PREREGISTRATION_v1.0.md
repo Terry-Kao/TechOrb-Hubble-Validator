@@ -44,7 +44,6 @@ The only future implementation paths permitted without revising this preregistra
 foundation/qf0/qf0a_impl/
   README.md
   schemas/
-  manifests/
   src/qf0a/{protocol_binding.py,analytic_reference.py,conditional_state.py,controls.py,audit.py,verdict.py}
   tests/{test_imports.py,test_schema_contracts.py,test_protocol_binding.py,test_static_leakage.py}
   evidence/<run_id>/
@@ -88,6 +87,12 @@ The run manifest must validate against `QF0A_RUN_MANIFEST.schema.json` and recor
 - seeds and determinism/thread environment;
 - evidence paths and hashes for raw output index, controls, machine verdict, human report, and hash manifest.
 
+The canonical `run_id` contract is identical across the run-manifest, raw-output, negative-control, and machine-verdict schemas. Its exact frozen pattern is stored in each schema: length `1..128`, alphanumeric first and last characters, and only alphanumeric, dot, underscore, or hyphen characters internally. It is a single directory name, not a path. Semantic validation independently rejects empty, `.`, `..`, separators, drive/UNC/device semantics, normalization changes, and anything that is not exactly one POSIX component.
+
+All four artifact `run_id` values and the evidence-directory basename must be identical. The evidence root may be constructed only after `run_id` validation, as `foundation/qf0/qf0a_impl/evidence/<run_id>/`; relative paths are then validated and logically confined beneath that exact root. Mixing raw output, controls, or a verdict from another run is provenance substitution and yields `INVALIDATED`.
+
+`timestamp_utc` must be timezone-aware RFC 3339 with suffix `Z` and UTC offset. `timestamp_asia_taipei` must be timezone-aware RFC 3339 with offset `+08:00`. Parsed values must represent the same instant. A missing or typographical mismatch is `BLOCKED`; proven contradictory provenance or post-hoc timestamp rewriting is `INVALIDATED`.
+
 Dirty execution trees are `INVALIDATED`. Missing reproducibility identity or required evidence is `BLOCKED` unless the evidence proves contamination or contract violation, which is `INVALIDATED`.
 
 ## 9. Evidence directory contract
@@ -109,9 +114,11 @@ SHA256SUMS.txt
 logs/
 ```
 
+The root-level names shown above are frozen exactly. Run-manifest references are `environment_manifest.json`, `source_manifest.json`, `raw_output_index.json`, `negative_controls.json`, `leakage_audit.json`, `machine_verdict.json`, `human_report.md`, and `SHA256SUMS.txt`; `source_manifest.sha256` and `run_manifest.json` are also fixed layout members. Synthetic fixtures must use this same layout and may not introduce a `manifests/` subtree.
+
 Every regular file except `SHA256SUMS.txt` must be listed in that hash manifest. Raw arrays are immutable little-endian NumPy `.npy` files with explicit `float64`/`complex128` dtype, shape, semantic name, and SHA-256 recorded in the raw-output index. Compressed archives, pickles, object arrays, lossy tables, and result-only screenshots are forbidden as primary evidence.
 
-All machine-readable evidence paths use canonical POSIX-style relative notation with `/`. They must be non-empty, normalized without change, and contain no backslash, drive prefix, absolute prefix, UNC/device prefix, empty segment, `.` segment, or `..` segment. Joining a declared path beneath `foundation/qf0/qf0a_impl/evidence/<run_id>/` must remain inside that run root. Windows forms including `..\outside`, `C:\outside`, `C:/outside`, `\\server\share`, and `\\?\C:\outside` are invalid. Raw-array paths are further confined to `raw/<canonical-name>.npy`.
+All machine-readable evidence paths use canonical POSIX-style relative notation with `/`. They must be non-empty, normalized without change, and contain no backslash, drive prefix, absolute prefix, UNC/device prefix, empty segment, `.` segment, or `..` segment. The validator must validate `run_id` first, construct the exact run root second, validate the relative path third, and only then check logical confinement. Windows forms including `..\outside`, `C:\outside`, `C:/outside`, `\\server\share`, and `\\?\C:\outside` are invalid. Raw-array paths are further confined to `raw/<canonical-name>.npy`.
 
 ## 10. Verdict separation
 
@@ -132,7 +139,7 @@ A reproduction `PASS` is a known-result pipeline result only. It cannot establis
 
 All four schemas must parse and pass `Draft202012Validator.check_schema()`. Instance validation must use `FormatChecker()` so `date-time` is asserted rather than treated as annotation. JSON Schema enforces fields, types, constants, enumerations, formats, item counts, and first-layer path shape. The single Python semantic validator enforces cross-record invariants that JSON Schema cannot cleanly express: canonical path/root confinement, exact six-control set equality and uniqueness, negative-control failure semantics, raw count equality, raw identifier/path uniqueness, and empty exclusions.
 
-Non-adjudicative synthetic fixtures must instantiate all four schemas. Every negative fixture declares its name, intended rejection reason, and expected validation layer (`schema`, `semantic`, or `both`). Any positive fixture rejection or negative fixture acceptance fails the preregistration validator. Fixtures contain artificial contract data only and may not encode frozen QF-0A scientific outputs.
+Non-adjudicative synthetic fixtures must instantiate all four schemas plus a package object containing those artifacts and the evidence-directory basename. Every negative fixture declares its name, intended rejection reason, and expected validation layer (`schema`, `semantic`, or `both`). Tests cover canonical/attacking run IDs, cross-artifact identity, directory-basename binding, timestamp-pair equivalence, and exact evidence layout while retaining all prior hardening cases. Any positive fixture rejection or negative fixture acceptance fails the preregistration validator. Fixtures contain artificial contract data only and may not encode frozen QF-0A scientific outputs.
 
 ## 12. Independent-review evidence requirements
 

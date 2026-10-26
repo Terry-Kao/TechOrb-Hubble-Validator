@@ -7,14 +7,14 @@
   "required": ["schema_version", "run_id", "protocol", "implementation", "environment", "execution", "determinism", "evidence"],
   "properties": {
     "schema_version": {"const": "1.0"},
-    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9._-]+$"},
+    "run_id": {"$ref": "#/$defs/runId"},
     "protocol": {"$ref": "#/$defs/protocol"},
     "implementation": {
       "type": "object", "additionalProperties": false,
       "required": ["commit_sha", "branch", "dirty", "source_manifest_path", "source_manifest_sha256"],
       "properties": {
         "commit_sha": {"$ref": "#/$defs/gitSha"}, "branch": {"type": "string", "minLength": 1},
-        "dirty": {"const": false}, "source_manifest_path": {"$ref": "#/$defs/relativePath"},
+        "dirty": {"const": false}, "source_manifest_path": {"const": "source_manifest.json"},
         "source_manifest_sha256": {"$ref": "#/$defs/sha256"}
       }
     },
@@ -47,11 +47,12 @@
     "evidence": {
       "type": "object", "additionalProperties": false,
       "required": ["environment_manifest", "raw_output_index", "negative_controls", "leakage_audit", "machine_verdict", "human_report", "hash_manifest"],
-      "properties": {"environment_manifest": {"$ref": "#/$defs/relativePath"}, "raw_output_index": {"$ref": "#/$defs/relativePath"}, "negative_controls": {"$ref": "#/$defs/relativePath"}, "leakage_audit": {"$ref": "#/$defs/relativePath"}, "machine_verdict": {"$ref": "#/$defs/relativePath"}, "human_report": {"$ref": "#/$defs/relativePath"}, "hash_manifest": {"$ref": "#/$defs/relativePath"}}
+      "properties": {"environment_manifest": {"const": "environment_manifest.json"}, "raw_output_index": {"const": "raw_output_index.json"}, "negative_controls": {"const": "negative_controls.json"}, "leakage_audit": {"const": "leakage_audit.json"}, "machine_verdict": {"const": "machine_verdict.json"}, "human_report": {"const": "human_report.md"}, "hash_manifest": {"const": "SHA256SUMS.txt"}}
     }
   },
   "$defs": {
     "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "gitSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "runId": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9._-]{0,126}[A-Za-z0-9])?$"},
     "relativePath": {"type": "string", "pattern": "^(?!/)(?![A-Za-z]:)(?!//)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*$"},
     "threadValue": {"oneOf": [{"const": "UNSET"}, {"type": "string", "pattern": "^[1-9][0-9]*$"}]},
     "protocol": {
