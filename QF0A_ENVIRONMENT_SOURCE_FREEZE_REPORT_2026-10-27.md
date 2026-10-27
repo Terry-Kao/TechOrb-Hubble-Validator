@@ -10,9 +10,9 @@
 - Protocol SHA-256: `fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b`
 - Preregistration Git blob: `0b7e7b7046044e1bb9310df566342073dd46090b`
 - Preregistration SHA-256: `01ec67801dbe1626c4012234e0182284a30b747ed30ea839842a84df052fd395`
-- Source baseline commit: `ebbf3a434aa32e9c50dc931e31ec8f47daa40aab`
+- Source baseline commit: `946965d47fa66d0822cd8023534ee282fddc8f98`
 - Source manifest: `foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.0.json`
-- Source manifest SHA-256: `84c585783e95db626bbdc05a588cdb7aa2a8455f6d5ee65dc7b73c2f061eef44`
+- Source manifest SHA-256: `c8d06cb95095a022870152115c591774c64f4df73e54c5a576054e7ad4d35f27`
 
 ## Exact environment
 
@@ -29,7 +29,7 @@
 
 ## Source freeze and leakage audit
 
-The source inventory contains protocol binding, an independently implemented analytic reference, a direct constrained/conditional path, the exact six frozen control definitions, provenance/static-audit helpers, and verdict-construction logic. The Option-B implementation constructs the complete strict-window projector and does not select a lowest-absolute-eigenvalue eigenvector. No execution CLI exists.
+The source inventory contains protocol binding, an independently implemented analytic reference, a direct constrained/density-conditioning path, the exact six frozen control implementations, provenance/static-audit helpers, and verdict-construction logic. The Option-B scientific API has signature `(operator, state)`, internally fixes `W=(-0.5,0.5)`, checks rank/boundaries/projector residuals/projection norm, and never selects a lowest-absolute-eigenvalue eigenvector. Exact interaction, Clock B, registered map, and coarse-clock construction paths are frozen. No execution CLI exists.
 
 Static leakage audit: `PASS`. The conditional module neither imports nor accepts analytic-reference output; it exposes no external trajectory input, exclusion API, mutable threshold interface, inverse scramble, or cross-program result import. Package import performs no computation.
 
@@ -37,7 +37,7 @@ Static leakage audit: `PASS`. The conditional module neither imports nor accepts
 
 - Foundation package validator: PASS.
 - Preregistration validator: PASS; Draft 2020-12 schemas 4/4, FormatChecker PASS, positive fixtures 8/8, negative fixtures 103/103 expected rejection.
-- Artificial/static source tests: 7/7 PASS.
+- Artificial/static source tests: 20/20 PASS.
 - Protocol blob/SHA-256 binding: PASS.
 - Source manifest: 23/23 entries PASS.
 - Python compilation and JSON parsing: PASS.
