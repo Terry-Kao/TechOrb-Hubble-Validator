@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "QF0A_RUN_MANIFEST.schema.json",
+  "title": "QF-0A Run Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "protocol", "implementation", "environment", "execution", "determinism", "evidence"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "run_id": {"$ref": "#/$defs/runId"},
+    "protocol": {"$ref": "#/$defs/protocol"},
+    "implementation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["commit_sha", "branch", "dirty", "source_manifest_path", "source_manifest_sha256"],
+      "properties": {
+        "commit_sha": {"$ref": "#/$defs/gitSha"}, "branch": {"type": "string", "minLength": 1},
+        "dirty": {"const": false}, "source_manifest_path": {"const": "source_manifest.json"},
+        "source_manifest_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "environment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["os", "kernel", "cpu_architecture", "cpu_model", "python", "packages_lock_sha256", "numpy_version", "scipy_version", "blas_lapack", "locale", "timezone", "numeric_dtypes"],
+      "properties": {
+        "os": {"type": "string"}, "kernel": {"type": "string"}, "cpu_architecture": {"type": "string"}, "cpu_model": {"type": "string"},
+        "python": {"type": "string", "pattern": "^CPython 3\\.12\\."}, "packages_lock_sha256": {"$ref": "#/$defs/sha256"},
+        "numpy_version": {"type": "string", "pattern": "^2\\.1\\."}, "scipy_version": {"type": "string", "pattern": "^1\\.14\\."},
+        "blas_lapack": {"type": "object", "required": ["vendor", "version_or_build"], "properties": {"vendor": {"type": "string"}, "version_or_build": {"type": "string"}}, "additionalProperties": false},
+        "locale": {"type": "string"}, "timezone": {"type": "string"},
+        "numeric_dtypes": {"type": "array", "prefixItems": [{"const": "float64"}, {"const": "complex128"}], "items": false}
+      }
+    },
+    "execution": {
+      "type": "object", "additionalProperties": false,
+      "required": ["timestamp_utc", "timestamp_asia_taipei", "command_line", "cwd"],
+      "properties": {"timestamp_utc": {"type": "string", "format": "date-time"}, "timestamp_asia_taipei": {"type": "string", "format": "date-time"}, "command_line": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "cwd": {"type": "string", "minLength": 1}}
+    },
+    "determinism": {
+      "type": "object", "additionalProperties": false,
+      "required": ["seeds", "thread_environment", "eigensolver_policy", "tolerance_policy"],
+      "properties": {
+        "seeds": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "integer", "minimum": 0}},
+        "thread_environment": {"type": "object", "required": ["OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS"], "additionalProperties": false, "properties": {"OMP_NUM_THREADS": {"$ref": "#/$defs/threadValue"}, "OPENBLAS_NUM_THREADS": {"$ref": "#/$defs/threadValue"}, "MKL_NUM_THREADS": {"$ref": "#/$defs/threadValue"}, "VECLIB_MAXIMUM_THREADS": {"$ref": "#/$defs/threadValue"}, "NUMEXPR_NUM_THREADS": {"$ref": "#/$defs/threadValue"}}},
+        "eigensolver_policy": {"const": "frozen-full-spectral-projector"}, "tolerance_policy": {"const": "frozen-protocol-only"}
+      }
+    },
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["environment_manifest", "raw_output_index", "negative_controls", "leakage_audit", "machine_verdict", "human_report", "hash_manifest"],
+      "properties": {"environment_manifest": {"const": "environment_manifest.json"}, "raw_output_index": {"const": "raw_output_index.json"}, "negative_controls": {"const": "negative_controls.json"}, "leakage_audit": {"const": "leakage_audit.json"}, "machine_verdict": {"const": "machine_verdict.json"}, "human_report": {"const": "human_report.md"}, "hash_manifest": {"const": "SHA256SUMS.txt"}}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "gitSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "runId": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9._-]{0,126}[A-Za-z0-9])?$"},
+    "relativePath": {"type": "string", "pattern": "^(?!/)(?![A-Za-z]:)(?!//)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*$"},
+    "threadValue": {"oneOf": [{"const": "UNSET"}, {"type": "string", "pattern": "^[1-9][0-9]*$"}]},
+    "protocol": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version", "path", "git_blob_sha", "file_sha256", "authoritative_main_sha"],
+      "properties": {"version": {"const": "QF0A_FROZEN_PROTOCOL_v1.0"}, "path": {"const": "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.0.md"}, "git_blob_sha": {"const": "c11599a058caa8dfb0912c4e00a0656bef4688bd"}, "file_sha256": {"const": "fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b"}, "authoritative_main_sha": {"const": "4c2920871898add6254902fb3963784e2761d375"}}
+    }
+  }
+}
