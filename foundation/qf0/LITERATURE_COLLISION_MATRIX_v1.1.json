@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.1",
+  "checked_at": "2026-10-28",
+  "evidence_disclaimer": "Citation and compatibility are not Tech-Orb evidence.",
+  "entries": [
+    {"id":"LIT-PW-001","doi":"10.1103/PhysRevD.27.2885","status":"published","relation":"PRIOR_ART","qf0a_scope":"known conditional-dynamics identity"},
+    {"id":"LIT-PW-002","doi":"10.1103/PhysRevA.89.052122","arxiv":"1310.4691","status":"published","relation":"COMPATIBLE_ILLUSTRATION","qf0a_scope":"not cosmological validation"},
+    {"id":"LIT-PW-003","doi":"10.1103/PhysRevD.92.045033","arxiv":"1504.04215","status":"published","relation":"PRIOR_ART","qf0a_scope":"sequential measurement formalism"},
+    {"id":"LIT-PW-004","doi":"10.22331/q-2019-07-08-160","arxiv":"1712.00081","status":"published","relation":"CHALLENGE_LIMITATION","qf0a_scope":"interaction diagnostic is not interacting PW solution"},
+    {"id":"LIT-QRF-001","doi":"10.1103/PhysRevD.104.066001","arxiv":"1912.00033","status":"published","relation":"PRIOR_ART_AND_SCOPE_LIMIT","qf0a_scope":"Clock B is bookkeeping only"},
+    {"id":"LIT-PW-005","doi":"10.1103/PhysRevD.77.063506","arxiv":"0708.2743","status":"published","relation":"CHALLENGE_LIMITATION","qf0a_scope":"general clock ambiguity untested"},
+    {"id":"LIT-PW-006","doi":"10.1103/PhysRevD.95.043510","arxiv":"1610.04773","status":"published","relation":"COMPATIBILITY_CONTEXT","qf0a_scope":"no novelty/support inference"}
+  ]
+}
