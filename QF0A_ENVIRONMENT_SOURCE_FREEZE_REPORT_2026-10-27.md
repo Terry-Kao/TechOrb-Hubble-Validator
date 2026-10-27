@@ -1,11 +1,13 @@
 # QF-0A Environment + Source Freeze Report — 2026-10-27
 
-**Status:** `PROPOSED / DRAFT / NOT EXECUTED`
+**Status:** `MERGED / ACCEPTED / NOT EXECUTED`
 
 ## Authority and bindings
 
 - PR #10 approved head: `9b29b40156a68797dc36c6ebd7555e9a3515ae4f`
 - PR #10 merge / authoritative main: `2d125671c0d882df6d1de4eb2a0066d5bad989de`
+- PR #11 approved head: `fda04be2e00494599689e86065674dd7d185ca40`
+- PR #11 merge / accepted main: `ffa2a74592596e7c7e64e1a188061c422c71b260`
 - Protocol Git blob: `c11599a058caa8dfb0912c4e00a0656bef4688bd`
 - Protocol SHA-256: `fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b`
 - Preregistration Git blob: `0b7e7b7046044e1bb9310df566342073dd46090b`
@@ -49,4 +51,4 @@ Static leakage audit: `PASS`. The conditional module neither imports nor accepts
 
 No frozen conditional states, fidelity, trace distance, interaction results, clock-comparison results, negative-control scientific behavior, evidence run, raw array, real machine verdict, or scientific verdict was generated or inspected.
 
-The exact next gate is independent read-only review of this Environment + Source Freeze package. QF-0A execution remains unauthorized.
+The Environment + Source Freeze package received independent approval and was merged through PR #11. The exact next gate is **QF-0A External Logic & Scientific Challenge Review — PENDING**. Claude review is advisory independent evidence, not SSOT by itself. QF-0A execution remains unauthorized until Terry/ChatGPT adjudicates that review and issues a separate Scientific Execution Authorization.
