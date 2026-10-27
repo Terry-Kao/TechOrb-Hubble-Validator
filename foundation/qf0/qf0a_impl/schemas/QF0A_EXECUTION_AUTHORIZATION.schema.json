@@ -1,0 +1,24 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"QF0A_EXECUTION_AUTHORIZATION.schema.json",
+  "title":"QF-0A v1.1 Execution Authorization",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["authorization_version","run_id","authorized","protocol_blob","protocol_sha256","preregistration_blob","preregistration_sha256","environment_sha256","source_manifest_sha256","source_baseline_commit","runner_blob","issuer","governance_record","timestamp_utc"],
+  "properties":{
+    "authorization_version":{"const":"1.1"},
+    "run_id":{"type":"string","pattern":"^[A-Za-z0-9](?:[A-Za-z0-9._-]{0,126}[A-Za-z0-9])?$"},
+    "authorized":{"const":true},
+    "protocol_blob":{"const":"3af303a471d99397429d33f77ca512578f40f972"},
+    "protocol_sha256":{"const":"1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"},
+    "preregistration_blob":{"type":"string","pattern":"^[0-9a-f]{40}$"},
+    "preregistration_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "environment_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "source_manifest_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "source_baseline_commit":{"type":"string","pattern":"^[0-9a-f]{40}$"},
+    "runner_blob":{"type":"string","pattern":"^[0-9a-f]{40}$"},
+    "issuer":{"type":"string","minLength":1},
+    "governance_record":{"type":"string","minLength":1},
+    "timestamp_utc":{"type":"string","format":"date-time"}
+  }
+}

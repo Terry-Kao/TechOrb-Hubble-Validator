@@ -1,0 +1,21 @@
+{
+  "schema_version":"1.1",
+  "status":"PROPOSED / STATIC ONLY / NO SCIENCE",
+  "verdict":"PASS",
+  "checks":[
+    {"id":"NO_CALLER_VERDICT","status":"PASS","evidence":"derive_machine_verdict has no pipeline/verdict parameter"},
+    {"id":"NO_THRESHOLD_OVERRIDE","status":"PASS","evidence":"22 frozen thresholds remain immutable; runner exposes no override"},
+    {"id":"REGISTERED_TAU_ONLY","status":"PASS","evidence":"public adjudicative grid has no arguments"},
+    {"id":"FIXED_METRICS","status":"PASS","evidence":"squared pure-reference fidelity and Hermitian trace distance are named functions"},
+    {"id":"NO_RESULT_EXCLUSION","status":"PASS","evidence":"runner/evidence inventory exposes no exclusion interface"},
+    {"id":"CONDITIONAL_BEFORE_ANALYTIC","status":"PASS","evidence":"frozen STAGE_ORDER places conditional persistence/hash before analytic comparison"},
+    {"id":"EXACT_SIX_CONTROLS","status":"PASS","evidence":"ControlId and immutable implementation/adjudication mappings have exact set equality"},
+    {"id":"FIXED_COARSE_REFERENCES","status":"PASS","evidence":"protocol freezes left/right/midpoint, purity and eigenvalue reporting without target selection"},
+    {"id":"AUTHORIZATION_REQUIRED","status":"PASS","evidence":"authorization schema and identity validator precede all scientific stages"},
+    {"id":"NO_FORCE_BYPASS","status":"PASS","evidence":"no force token or alternate runner entry point"},
+    {"id":"CANONICAL_GIT_BYTES","status":"PASS","evidence":"canonical identity uses git show and git rev-parse, not working-tree bytes"},
+    {"id":"ANALYTIC_SEPARATION","status":"PASS","evidence":"analytic_reference and conditional_state do not import each other"},
+    {"id":"NO_CROSS_PROGRAM_IMPORT","status":"PASS","evidence":"static import audit rejects HEM/Hubble/PFM/topology roots"},
+    {"id":"NO_AUTO_EXECUTION","status":"PASS","evidence":"package import is inert and SCIENTIFIC_EXECUTION_AUTHORIZED remains false"}
+  ]
+}

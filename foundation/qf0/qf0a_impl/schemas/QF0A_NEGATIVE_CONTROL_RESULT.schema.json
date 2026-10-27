@@ -6,8 +6,8 @@
   "additionalProperties": false,
   "required": ["schema_version", "run_id", "protocol_file_sha256", "all_frozen_controls_present", "controls"],
   "properties": {
-    "schema_version": {"const": "1.0"}, "run_id": {"$ref": "#/$defs/runId"},
-    "protocol_file_sha256": {"const": "fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b"},
+    "schema_version": {"const": "1.1"}, "run_id": {"$ref": "#/$defs/runId"},
+    "protocol_file_sha256": {"const": "1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"},
     "all_frozen_controls_present": {"const": true},
     "controls": {
       "type": "array",

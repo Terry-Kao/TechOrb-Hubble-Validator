@@ -5,24 +5,24 @@ from __future__ import annotations
 from copy import deepcopy
 
 SHA = "a" * 64
-PROTOCOL_SHA = "fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b"
-PROTOCOL_BLOB = "c11599a058caa8dfb0912c4e00a0656bef4688bd"
-MAIN = "4c2920871898add6254902fb3963784e2761d375"
+PROTOCOL_SHA = "1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"
+PROTOCOL_BLOB = "3af303a471d99397429d33f77ca512578f40f972"
+MAIN = "a9e9a8ec0b637d4a724a6d3baaded83b54c0058e"
 CONTROL_IDS = ("BROKEN_CONSTRAINT", "PRODUCT_NO_HISTORY", "WRONG_CONDITIONING", "HIDDEN_EXTERNAL_TIME", "CLOCK_SCRAMBLE", "POST_HOC_THRESHOLD_MUTATION")
 RUN_ID = "qf0a-20261027-001"
 
 RUN_MANIFEST = {
-    "schema_version": "1.0", "run_id": RUN_ID,
-    "protocol": {"version": "QF0A_FROZEN_PROTOCOL_v1.0", "path": "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.0.md", "git_blob_sha": PROTOCOL_BLOB, "file_sha256": PROTOCOL_SHA, "authoritative_main_sha": MAIN},
+    "schema_version": "1.1", "run_id": RUN_ID,
+    "protocol": {"version": "QF0A_FROZEN_PROTOCOL_v1.1", "path": "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md", "git_blob_sha": PROTOCOL_BLOB, "file_sha256": PROTOCOL_SHA, "authoritative_main_sha": MAIN},
     "implementation": {"commit_sha": "b" * 40, "branch": "synthetic", "dirty": False, "source_manifest_path": "source_manifest.json", "source_manifest_sha256": SHA},
     "environment": {"os": "synthetic", "kernel": "synthetic", "cpu_architecture": "x86_64", "cpu_model": "synthetic", "python": "CPython 3.12.7", "packages_lock_sha256": SHA, "numpy_version": "2.1.3", "scipy_version": "1.14.1", "blas_lapack": {"vendor": "synthetic", "version_or_build": "synthetic"}, "locale": "C", "timezone": "Asia/Taipei", "numeric_dtypes": ["float64", "complex128"]},
     "execution": {"timestamp_utc": "2026-01-01T00:00:00Z", "timestamp_asia_taipei": "2026-01-01T08:00:00+08:00", "command_line": ["python", "synthetic.py"], "cwd": "workspace/qf0a"},
     "determinism": {"seeds": {"synthetic": 1}, "thread_environment": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "UNSET", "VECLIB_MAXIMUM_THREADS": "UNSET", "NUMEXPR_NUM_THREADS": "1"}, "eigensolver_policy": "frozen-full-spectral-projector", "tolerance_policy": "frozen-protocol-only"},
     "evidence": {"environment_manifest": "environment_manifest.json", "raw_output_index": "raw_output_index.json", "negative_controls": "negative_controls.json", "leakage_audit": "leakage_audit.json", "machine_verdict": "machine_verdict.json", "human_report": "human_report.md", "hash_manifest": "SHA256SUMS.txt"},
 }
-MACHINE_VERDICT = {"schema_version": "1.0", "run_id": RUN_ID, "protocol_file_sha256": PROTOCOL_SHA, "pipeline_reproduction_verdict": "BLOCKED", "foundation_model_verdict": "NOT_APPLICABLE", "reason_codes": ["SYNTHETIC_BLOCKED"], "required_evidence_complete": False, "negative_controls_complete": False, "leakage_audit_verdict": "BLOCKED"}
-NEGATIVE_CONTROLS = {"schema_version": "1.0", "run_id": RUN_ID, "protocol_file_sha256": PROTOCOL_SHA, "all_frozen_controls_present": True, "controls": [{"control_id": cid, "protocol_section": "12", "expected_failure_mode": "synthetic expected failure", "observed_status": "FAIL", "expected_failure_observed": True, "post_hoc_mutation": False, "evidence_path": f"controls/{cid.lower()}.json", "evidence_sha256": SHA, "timestamp_utc": "2026-01-01T00:00:00Z", "reason_code": "EXPECTED_FAILURE_OBSERVED"} for cid in CONTROL_IDS]}
-RAW_OUTPUT = {"schema_version": "1.0", "run_id": RUN_ID, "protocol_file_sha256": PROTOCOL_SHA, "outcome_count_expected": 2, "outcome_count_recorded": 2, "outcomes_dropped": False, "exclusions": [], "arrays": [{"identifier": "synthetic_a", "path": "raw/synthetic_a.npy", "format": "npy-little-endian-no-object", "dtype": "float64", "shape": [2], "byte_size": 16, "sha256": SHA, "protocol_section": "3.4", "adjudicative": False}, {"identifier": "synthetic_b", "path": "raw/synthetic_b.npy", "format": "npy-little-endian-no-object", "dtype": "complex128", "shape": [2], "byte_size": 32, "sha256": "b" * 64, "protocol_section": "3.4", "adjudicative": False}]}
+MACHINE_VERDICT = {"schema_version": "1.1", "run_id": RUN_ID, "protocol_file_sha256": PROTOCOL_SHA, "pipeline_reproduction_verdict": "BLOCKED", "foundation_model_verdict": "NOT_APPLICABLE", "reason_codes": ["SYNTHETIC_BLOCKED"], "required_evidence_complete": False, "negative_controls_complete": False, "leakage_audit_verdict": "BLOCKED"}
+NEGATIVE_CONTROLS = {"schema_version": "1.1", "run_id": RUN_ID, "protocol_file_sha256": PROTOCOL_SHA, "all_frozen_controls_present": True, "controls": [{"control_id": cid, "protocol_section": "12", "expected_failure_mode": "synthetic expected failure", "observed_status": "FAIL", "expected_failure_observed": True, "post_hoc_mutation": False, "evidence_path": f"controls/{cid.lower()}.json", "evidence_sha256": SHA, "timestamp_utc": "2026-01-01T00:00:00Z", "reason_code": "EXPECTED_FAILURE_OBSERVED"} for cid in CONTROL_IDS]}
+RAW_OUTPUT = {"schema_version": "1.1", "run_id": RUN_ID, "protocol_file_sha256": PROTOCOL_SHA, "outcome_count_expected": 2, "outcome_count_recorded": 2, "outcomes_dropped": False, "exclusions": [], "arrays": [{"identifier": "synthetic_a", "path": "raw/synthetic_a.npy", "format": "npy-little-endian-no-object", "dtype": "float64", "shape": [2], "byte_size": 16, "sha256": SHA, "protocol_section": "3.4", "adjudicative": False}, {"identifier": "synthetic_b", "path": "raw/synthetic_b.npy", "format": "npy-little-endian-no-object", "dtype": "complex128", "shape": [2], "byte_size": 32, "sha256": "b" * 64, "protocol_section": "3.4", "adjudicative": False}]}
 EVIDENCE_PACKAGE = {"run_manifest": RUN_MANIFEST, "raw_output": RAW_OUTPUT, "negative_controls": NEGATIVE_CONTROLS, "machine_verdict": MACHINE_VERDICT, "evidence_directory_basename": RUN_ID}
 
 def _case(name: str, schema: str, fixture: dict, layer: str, reason: str) -> dict:

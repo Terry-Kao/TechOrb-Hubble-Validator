@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "required": ["schema_version", "run_id", "protocol", "implementation", "environment", "execution", "determinism", "evidence"],
   "properties": {
-    "schema_version": {"const": "1.0"},
+    "schema_version": {"const": "1.1"},
     "run_id": {"$ref": "#/$defs/runId"},
     "protocol": {"$ref": "#/$defs/protocol"},
     "implementation": {
@@ -58,7 +58,7 @@
     "protocol": {
       "type": "object", "additionalProperties": false,
       "required": ["version", "path", "git_blob_sha", "file_sha256", "authoritative_main_sha"],
-      "properties": {"version": {"const": "QF0A_FROZEN_PROTOCOL_v1.0"}, "path": {"const": "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.0.md"}, "git_blob_sha": {"const": "c11599a058caa8dfb0912c4e00a0656bef4688bd"}, "file_sha256": {"const": "fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b"}, "authoritative_main_sha": {"const": "4c2920871898add6254902fb3963784e2761d375"}}
+      "properties": {"version": {"const": "QF0A_FROZEN_PROTOCOL_v1.1"}, "path": {"const": "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md"}, "git_blob_sha": {"const": "3af303a471d99397429d33f77ca512578f40f972"}, "file_sha256": {"const": "1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"}, "authoritative_main_sha": {"const": "a9e9a8ec0b637d4a724a6d3baaded83b54c0058e"}}
     }
   }
 }

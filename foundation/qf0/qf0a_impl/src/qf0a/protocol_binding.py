@@ -7,13 +7,13 @@ from pathlib import Path
 import subprocess
 from types import MappingProxyType
 
-PROTOCOL_PATH = "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.0.md"
-PROTOCOL_VERSION = "QF0A_FROZEN_PROTOCOL_v1.0"
-PROTOCOL_GIT_BLOB = "c11599a058caa8dfb0912c4e00a0656bef4688bd"
-PROTOCOL_SHA256 = "fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b"
-PREREGISTRATION_MAIN = "4c2920871898add6254902fb3963784e2761d375"
-PREREGISTRATION_APPROVED_HEAD = "9b29b40156a68797dc36c6ebd7555e9a3515ae4f"
-PREREGISTRATION_MERGE_MAIN = "2d125671c0d882df6d1de4eb2a0066d5bad989de"
+PROTOCOL_PATH = "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md"
+PROTOCOL_VERSION = "QF0A_FROZEN_PROTOCOL_v1.1"
+PROTOCOL_GIT_BLOB = "3af303a471d99397429d33f77ca512578f40f972"
+PROTOCOL_SHA256 = "1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"
+PREREGISTRATION_PATH = "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md"
+PREREGISTRATION_MAIN = "a9e9a8ec0b637d4a724a6d3baaded83b54c0058e"
+CANONICAL_HASH_POLICY = "git-committed-bytes-v1"
 
 D_C = 16
 D_S = 2
@@ -73,12 +73,12 @@ class ProtocolIdentity:
     git_blob: str = PROTOCOL_GIT_BLOB
     sha256: str = PROTOCOL_SHA256
 
-def verify_protocol_identity(repo_root: Path) -> ProtocolIdentity:
-    path = repo_root / PROTOCOL_PATH
-    if hashlib.sha256(path.read_bytes()).hexdigest() != PROTOCOL_SHA256:
+def verify_protocol_identity(repo_root: Path, commit: str = "HEAD") -> ProtocolIdentity:
+    committed = subprocess.check_output(["git", "show", f"{commit}:{PROTOCOL_PATH}"], cwd=repo_root)
+    if hashlib.sha256(committed).hexdigest() != PROTOCOL_SHA256:
         raise RuntimeError("frozen protocol SHA-256 mismatch")
     blob = subprocess.check_output(
-        ["git", "hash-object", PROTOCOL_PATH], cwd=repo_root, text=True
+        ["git", "rev-parse", f"{commit}:{PROTOCOL_PATH}"], cwd=repo_root, text=True
     ).strip()
     if blob != PROTOCOL_GIT_BLOB:
         raise RuntimeError("frozen protocol Git blob mismatch")

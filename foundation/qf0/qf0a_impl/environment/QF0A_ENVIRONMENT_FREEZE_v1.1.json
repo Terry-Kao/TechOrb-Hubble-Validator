@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.1",
+  "status": "PROPOSED / PRE-EXECUTION REPAIR / NOT EXECUTED",
+  "scientific_environment_unchanged_from_v1_0": true,
+  "python": {"implementation":"CPython","version":"3.12.10","architecture":"AMD64","base_executable_sha256":"4d6f5f81a4bca11191c4c7c6b43632694d0a4ce74e068619d8fdc161d469859a"},
+  "packages": [
+    {"name":"numpy","version":"2.1.3","wheel":"numpy-2.1.3-cp312-cp312-win_amd64.whl","sha256":"0d30c543f02e84e92c4b1f415b7c6b5326cbe45ee7882b6b77db7195fb971e3a"},
+    {"name":"scipy","version":"1.14.1","wheel":"scipy-1.14.1-cp312-cp312-win_amd64.whl","sha256":"2ff38e22128e6c03ff73b6bb0f85f897d2362f8c052e3b8ad00532198fbdae3f"}
+  ],
+  "dependency_lock_canonical_sha256":"9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2",
+  "blas_lapack":{"numpy":"scipy-openblas 0.3.27 ILP64 DYNAMIC_ARCH Haswell","scipy":"scipy-openblas 0.3.27.dev DYNAMIC_ARCH Zen"},
+  "threads":{"OMP_NUM_THREADS":"1","OPENBLAS_NUM_THREADS":"1","MKL_NUM_THREADS":"1","VECLIB_MAXIMUM_THREADS":"1","NUMEXPR_NUM_THREADS":"1"},
+  "numeric_dtypes":["float64","complex128"],
+  "host":{"os":"Microsoft Windows 11 Home","version":"10.0.26200","architecture":"AMD64","cpu":"AMD Ryzen 7 9700X","timezone":"Asia/Taipei"},
+  "git":{"version":"2.56.0.windows.3","core_autocrlf":"true"},
+  "canonical_hash_policy":"git-committed-bytes-v1",
+  "gitattributes":{"git_blob":"3565f993726838565e32016941c4ee2fec65a65a","canonical_sha256":"54f889317ed67cfd9dd599a7d03b9c8a97660cab570fe886ff116e722e322ab7"}
+}

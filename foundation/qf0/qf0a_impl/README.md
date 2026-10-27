@@ -2,7 +2,9 @@
 
 Status: `PREREGISTRATION DRAFT; SCIENTIFIC IMPLEMENTATION NOT CREATED; REPRODUCTION NOT EXECUTED`.
 
-This directory contains contracts only. The binding authority is `../QF0A_IMPLEMENTATION_PREREGISTRATION_v1.0.md`; the frozen scientific protocol is `../QF0A_FROZEN_PROTOCOL_v1.0.md`.
+This directory contains the historical accepted v1.0 freeze and the proposed v1.1 pre-execution repair. The v1.1 binding authorities are `../QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md` and `../QF0A_FROZEN_PROTOCOL_v1.1.md`. v1.0 is preserved as historical process evidence and is superseded for any future execution.
+
+The v1.1 tree includes scientific primitives, frozen metrics, automatic adjudication, a predetermined evidence writer, an authorization schema, and runner orchestration. Their presence does not authorize or perform a run. Scientific execution remains unauthorized.
 
 Present in this checkpoint:
 

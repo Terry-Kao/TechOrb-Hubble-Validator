@@ -66,7 +66,8 @@ def wrong_conditioning(global_density: np.ndarray) -> np.ndarray:
         raise ValueError("global density trace cannot be zero")
     return (reduced / trace).astype(np.complex128, copy=False)
 
-def reject_hidden_external_time(provenance: ConstructionProvenance) -> None:
+def validate_construction_origin_attestation(provenance: ConstructionProvenance) -> None:
+    """Provenance attestation only; final numerical state cannot reveal its origin."""
     if (
         provenance.origin is ConstructionOrigin.EXTERNAL_CLASSICAL_TIME_THEN_PACKAGED
         or provenance.external_time_loop_used
@@ -89,7 +90,7 @@ CONTROL_IMPLEMENTATIONS = MappingProxyType({
     ControlId.BROKEN_CONSTRAINT: broken_constraint_state,
     ControlId.PRODUCT_NO_HISTORY: product_no_history_state,
     ControlId.WRONG_CONDITIONING: wrong_conditioning,
-    ControlId.HIDDEN_EXTERNAL_TIME: reject_hidden_external_time,
+    ControlId.HIDDEN_EXTERNAL_TIME: validate_construction_origin_attestation,
     ControlId.CLOCK_SCRAMBLE: scramble_clock_labels,
     ControlId.POST_HOC_THRESHOLD_MUTATION: detect_post_hoc_mutation,
 })

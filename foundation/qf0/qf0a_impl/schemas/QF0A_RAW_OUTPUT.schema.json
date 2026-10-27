@@ -6,8 +6,8 @@
   "additionalProperties": false,
   "required": ["schema_version", "run_id", "protocol_file_sha256", "outcome_count_expected", "outcome_count_recorded", "outcomes_dropped", "exclusions", "arrays"],
   "properties": {
-    "schema_version": {"const": "1.0"}, "run_id": {"$ref": "#/$defs/runId"},
-    "protocol_file_sha256": {"const": "fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b"},
+    "schema_version": {"const": "1.1"}, "run_id": {"$ref": "#/$defs/runId"},
+    "protocol_file_sha256": {"const": "1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"},
     "outcome_count_expected": {"type": "integer", "minimum": 0}, "outcome_count_recorded": {"type": "integer", "minimum": 0},
     "outcomes_dropped": {"const": false}, "exclusions": {"type": "array", "maxItems": 0, "description": "QF-0A primary run permits no outcome exclusion."},
     "arrays": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/array"}}
