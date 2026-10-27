@@ -125,7 +125,7 @@
 
 ## D-2026-10-26-11 — Propose QF-0A implementation preregistration v1.0
 
-**Status:** PROPOSED / DRAFT / NOT EXECUTED on bounded branch `qf0a/implementation-preregistration-v1`.
+**Status:** MERGED / CONTRACT BASELINE / NOT EXECUTED through PR #10 at `2d125671c0d882df6d1de4eb2a0066d5bad989de`.
 
 **Decision:** Freeze the future QF-0A implementation source-tree boundary, CPython/runtime and minimal dependency policy, `float64`/`complex128` numeric policy, backend/environment identity, determinism, evidence directory, hashing, leakage controls, raw-output index, negative controls, and machine-verdict separation before scientific source or adjudicative output exists.
 
@@ -139,11 +139,23 @@
 
 ## D-2026-10-27-12 — Propose QF-0A Environment + Source Freeze v1.0
 
-**Status:** PROPOSED / DRAFT / NOT EXECUTED on bounded branch `qf0a/environment-source-freeze-v1`.
+**Status:** MERGED / ACCEPTED / NOT EXECUTED through PR #11. Approved head `fda04be2e00494599689e86065674dd7d185ca40`; merge/main `ffa2a74592596e7c7e64e1a188061c422c71b260`.
 
 **Decision:** Bind the approved preregistration to CPython 3.12.10, NumPy 2.1.3, SciPy 1.14.1, hashed Windows AMD64 wheels, OpenBLAS identities, single-thread settings, and a reviewed scientific-source inventory. The analytic and conditional paths are structurally separate; the exact six controls are defined but not run.
 
 **Explicit non-actions:** No frozen conditional-state orbit, fidelity, trace distance, interaction suite, clock suite, scientific negative control, evidence run, or real machine verdict was generated or inspected.
 
-**Next gate:** independent read-only review of the Environment + Source Freeze package. Scientific execution remains unauthorized.
+**Accepted identities:** protocol blob `c11599a058caa8dfb0912c4e00a0656bef4688bd`, protocol SHA-256 `fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b`, environment manifest SHA-256 `6c968cf7a036989efca495fa882fccc8b829d9ddd9ccf7960d849c4d24727791`, dependency lock SHA-256 `9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2`, scientific source baseline `946965d47fa66d0822cd8023534ee282fddc8f98`, and source manifest SHA-256 `c8d06cb95095a022870152115c591774c64f4df73e54c5a576054e7ad4d35f27`.
+
+**Next gate:** QF-0A External Logic & Scientific Challenge Review — PENDING. Scientific execution remains unauthorized.
+
+## D-2026-10-27-13 — Require external logic and scientific challenge before execution authorization
+
+**Status:** PENDING / GOVERNANCE GATE / EXECUTION UNAUTHORIZED.
+
+**Decision:** Obtain an independent cross-model challenge review by Claude before the first adjudicative run. The review must challenge QF-0A mathematics, epistemic interpretation, whether the protocol tests its stated target, implementation/protocol alignment, hidden circularity or answer leakage, falsifiability, negative-control design, and whether execution should proceed unchanged.
+
+**Authority boundary:** Claude review is advisory independent evidence, not GitHub SSOT by itself. Scientific execution remains unauthorized until Terry/ChatGPT adjudicates the review and issues a separate Scientific Execution Authorization.
+
+**Explicit non-actions:** No runner activation, frozen reproduction, resolution/interaction/clock suite, real negative control, evidence run, raw array, machine verdict, fidelity, or trace-distance calculation is authorized by this synchronization.
 

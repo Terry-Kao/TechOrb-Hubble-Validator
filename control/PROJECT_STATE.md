@@ -1,7 +1,7 @@
 # Project State
 
-**As of:** 2026-10-26
-**Authority:** repository `main` at `2d125671c0d882df6d1de4eb2a0066d5bad989de` contains the merged QF-0 Foundation governance baseline and QF-0A implementation-preregistration contract baseline. This branch proposes only Environment + Source Freeze v1.0 and remains non-authoritative until review/merge.
+**As of:** 2026-10-27
+**Authority:** repository `main` at `ffa2a74592596e7c7e64e1a188061c422c71b260` contains the merged QF-0 Foundation governance baseline, QF-0A implementation-preregistration contract baseline, and accepted Environment + Scientific Source Freeze v1.0 from PR #11. This governance-only branch synchronizes that already-issued review verdict; it authorizes no scientific execution.
 
 ## Integrated Verdict
 
@@ -14,7 +14,7 @@ The governance direction is Foundation → effective model → validators. HIA, 
 | Item | Epistemic class | Evidence status | Current verdict |
 |---|---|---|---|
 | QF substrate `Q=(H,A,rho,K,T)` | HYPOTHESIS | PROTOCOL-ONLY | Registered candidate; no emergence chain or scientific PASS. |
-| QF-0A Relational Time | HYPOTHESIS | FROZEN PROTOCOL | Protocol FROZEN / NOT EXECUTED. Implementation preregistration MERGED / CONTRACT BASELINE. Environment + Source Freeze v1.0 PROPOSED / DRAFT / NOT EXECUTED. |
+| QF-0A Relational Time | HYPOTHESIS | FROZEN PROTOCOL | Protocol FROZEN / NOT EXECUTED. Preregistration MERGED / CONTRACT BASELINE / NOT EXECUTED. Environment Freeze and Scientific Source Freeze MERGED / ACCEPTED / NOT EXECUTED. Static Leakage Audit ACCEPTED / STATIC ONLY / NO SCIENCE. External Logic & Scientific Challenge Review PENDING; execution unauthorized. |
 | QF-0B Emergent Distance | HYPOTHESIS | SKELETON | Benchmark architecture only; scientific thresholds remain TBF. |
 | QF-0C Effective Dimension | HYPOTHESIS | SKELETON | Blind 1D/2D/3D architecture only; execution NOT STARTED and answer 3 is not assumed. |
 | QF-0D Relational Spacetime / Causality | HYPOTHESIS | DEFERRED | Combines passed A/B/C ingredients and tests causal order, Lorentzian signature/null structure, propagation scale, and reference consistency; execution NOT AUTHORIZED. |
@@ -29,6 +29,18 @@ The governance direction is Foundation → effective model → validators. HIA, 
 | HEM v27 Draft PR #8 candidate | UNMERGED / NON-AUTHORITATIVE | R2 CANDIDATE BLOCKED | Head `451b2a3875d16fea026fe74748bb3117f2c457ac`: numerical execution completed; 560/560 adjudicable PASS, 334/334 diagnostic-only within tolerance, numerical FAIL 0; three zone/simple-clumping curves lack a frozen legal extraction route and the neutrino baseline discrepancy is unresolved. PR #9 records provenance only and does not adjudicate/merge PR #8. |
 | Magnetogenesis action | ANSATZ / Candidate Bridge | PROVISIONAL | Not Foundation canon. |
 | PFM | EXTERNAL SAFE HOLD | COMPLETE / RESUMABLE | P0B scientific validity REVISE; no PFM work authorized here. |
+
+### QF-0A accepted checkpoint identities
+
+- Foundation Initialization: `MERGED / GOVERNANCE BASELINE`.
+- Frozen Protocol: `FROZEN / NOT EXECUTED`; blob `c11599a058caa8dfb0912c4e00a0656bef4688bd`; SHA-256 `fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b`.
+- Implementation Preregistration v1.0: `MERGED / CONTRACT BASELINE / NOT EXECUTED`.
+- Environment Freeze v1.0: `MERGED / ACCEPTED / NOT EXECUTED`; manifest SHA-256 `6c968cf7a036989efca495fa882fccc8b829d9ddd9ccf7960d849c4d24727791`; dependency-lock SHA-256 `9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2`.
+- Scientific Source Freeze v1.0: `MERGED / ACCEPTED / NOT EXECUTED`; source baseline `946965d47fa66d0822cd8023534ee282fddc8f98`.
+- Source manifest: `foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.0.json`; SHA-256 `c8d06cb95095a022870152115c591774c64f4df73e54c5a576054e7ad4d35f27`.
+- Static Leakage Audit: `ACCEPTED / STATIC ONLY / NO SCIENCE`.
+- PR #11: approved head `fda04be2e00494599689e86065674dd7d185ca40`; merge/main `ffa2a74592596e7c7e64e1a188061c422c71b260`.
+- QF-0A External Logic & Scientific Challenge Review: `PENDING`; scientific execution remains unauthorized.
 
 ## Gate State
 
