@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "gate": "QF0A_ENVIRONMENT_SOURCE_FREEZE",
+  "scientific_execution": "NOT_PERFORMED",
+  "authoritative_main_sha": "2d125671c0d882df6d1de4eb2a0066d5bad989de",
+  "protocol": {
+    "path": "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.0.md",
+    "git_blob": "c11599a058caa8dfb0912c4e00a0656bef4688bd",
+    "sha256": "fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b"
+  },
+  "preregistration": {
+    "approved_head": "9b29b40156a68797dc36c6ebd7555e9a3515ae4f",
+    "merge_main": "2d125671c0d882df6d1de4eb2a0066d5bad989de",
+    "git_blob": "0b7e7b7046044e1bb9310df566342073dd46090b",
+    "sha256": "01ec67801dbe1626c4012234e0182284a30b747ed30ea839842a84df052fd395"
+  },
+  "python": {
+    "implementation": "CPython",
+    "version": "3.12.10",
+    "build": "tags/v3.12.10:0cc8128; MSC v.1943; 64 bit AMD64",
+    "base_executable": "C:/Users/tkkus/AppData/Local/Programs/Python/Python312-QF0A/python.exe",
+    "base_executable_sha256": "4d6f5f81a4bca11191c4c7c6b43632694d0a4ce74e068619d8fdc161d469859a",
+    "installer": "python-3.12.10-amd64.exe from python.org",
+    "installer_sha256": "67b5635e80ea51072b87941312d00ec8927c4db9ba18938f7ad2d27b328b95fb"
+  },
+  "scientific_packages": [
+    {"name": "numpy", "version": "2.1.3", "wheel": "numpy-2.1.3-cp312-cp312-win_amd64.whl", "sha256": "0d30c543f02e84e92c4b1f415b7c6b5326cbe45ee7882b6b77db7195fb971e3a"},
+    {"name": "scipy", "version": "1.14.1", "wheel": "scipy-1.14.1-cp312-cp312-win_amd64.whl", "sha256": "2ff38e22128e6c03ff73b6bb0f85f897d2362f8c052e3b8ad00532198fbdae3f"}
+  ],
+  "validation_dependency": {"requirement": "jsonschema[format]==4.23.0", "scope": "validation_only"},
+  "dependency_lock": {"path": "foundation/qf0/qf0a_impl/environment/requirements-scientific.lock", "sha256": "9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2"},
+  "backend": {
+    "numpy_blas_lapack": "scipy-openblas 0.3.27; USE64BITINT; DYNAMIC_ARCH; NO_AFFINITY; Haswell; MAX_THREADS=24",
+    "numpy_compiler": "MSVC 19.29.30156; Cython 3.0.11",
+    "scipy_blas_lapack": "scipy-openblas 0.3.27.dev; DYNAMIC_ARCH; NO_AFFINITY; Zen; MAX_THREADS=24",
+    "scipy_compilers": "GCC/GFortran 10.3.0; Cython 3.0.11; Pythran 0.16.1",
+    "threading_runtime": "OpenBLAS dynamic architecture; execution environment forces one thread"
+  },
+  "thread_environment": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "VECLIB_MAXIMUM_THREADS": "1", "NUMEXPR_NUM_THREADS": "1"},
+  "host": {
+    "os": "Microsoft Windows 11 Home",
+    "version": "10.0.26200",
+    "build": "26200",
+    "os_architecture": "64-bit",
+    "cpu": "AMD Ryzen 7 9700X 8-Core Processor",
+    "cpu_architecture": "AMD64",
+    "cores": 8,
+    "logical_processors": 16,
+    "locale": "Chinese (Traditional)_Taiwan; code page 950",
+    "timezone": "Asia/Taipei",
+    "filesystem": "Windows NTFS-compatible host; repository paths and evidence manifests use canonical POSIX separators",
+    "working_directory": "repository root"
+  },
+  "numeric_dtypes": ["float64", "complex128"]
+}

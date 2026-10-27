@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "gate": "ENVIRONMENT_SOURCE_FREEZE",
+  "verdict": "PASS",
+  "scientific_execution": "NOT_PERFORMED",
+  "checks": [
+    {"id": "NO_EXTERNAL_TIME_ORBIT", "status": "PASS", "basis": "AST signature audit rejects external_time/trajectory inputs; hidden-lineage control rejects synthetic external-time provenance"},
+    {"id": "ANALYTIC_CONDITIONAL_SEPARATION", "status": "PASS", "basis": "AST import audit proves neither calculation module imports the other"},
+    {"id": "IMMUTABLE_THRESHOLDS", "status": "PASS", "basis": "22 protocol thresholds are held in MappingProxyType; AST audit finds no threshold override API"},
+    {"id": "PROTOCOL_IDENTITY", "status": "PASS", "basis": "Git blob and SHA-256 fail-closed verification"},
+    {"id": "NO_CROSS_PROGRAM_IMPORT", "status": "PASS", "basis": "AST import scan rejects HEM, Hubble, PFM, and topology roots"},
+    {"id": "NO_INVERSE_SCRAMBLE", "status": "PASS", "basis": "only the exact forward permutation function exists; AST audit rejects named inverse helpers"},
+    {"id": "IMMUTABLE_SPECTRAL_WINDOW", "status": "PASS", "basis": "scientific continuation signature is exactly (operator, state) and internally imports frozen (-0.5, 0.5)"},
+    {"id": "NO_EXCLUSION_INTERFACE", "status": "PASS", "basis": "scientific source exposes no outcome exclusion API"},
+    {"id": "NO_IMPORT_EXECUTION", "status": "PASS", "basis": "imports define functions/constants only"},
+    {"id": "NO_GENERATED_OUTPUT", "status": "PASS", "basis": "tests use artificial in-memory values and persist no arrays or verdict"},
+    {"id": "EXACT_CONTROL_IMPLEMENTATIONS", "status": "PASS", "basis": "immutable mapping binds every one of the six ControlId values to a concrete constructor/detector"},
+    {"id": "CLOCK_CHOICE_FROZEN", "status": "PASS", "basis": "Clock B shift/rephase/map and adjacent-outcome coarse POVM paths are fixed in source"},
+    {"id": "INTERACTION_OPERATOR_FROZEN", "status": "PASS", "basis": "source constructs only |1><1|_C tensor sigma_x; interacting API accepts no caller V and validates frozen g inventory"},
+    {"id": "FULL_THRESHOLD_BINDING", "status": "PASS", "basis": "unit test compares the exact 22-name/value mapping one-to-one with protocol sections 6-11"}
+  ]
+}
