@@ -32,7 +32,7 @@ SCHEMAS = {
     "QF0A_RAW_OUTPUT.schema.json",
     "QF0A_NEGATIVE_CONTROL_RESULT.schema.json",
 }
-FORBIDDEN_SOURCE = {"analytic_reference.py", "conditional_state.py", "protocol_binding.py", "controls.py", "audit.py", "verdict.py"}
+AUTHORIZED_FREEZE_SOURCE = {"__init__.py", "analytic_reference.py", "conditional_state.py", "protocol_binding.py", "controls.py", "audit.py", "verdict.py"}
 FORBIDDEN_SUFFIXES = {".npy", ".npz", ".h5", ".hdf5", ".pkl", ".pickle", ".parquet"}
 FORBIDDEN_RESULT_NAMES = {"machine_verdict.json", "raw_output_index.json", "negative_controls.json", "environment_manifest.json", "source_manifest.json", "leakage_audit.json", "SHA256SUMS.txt"}
 RUN_ID_PATTERN = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9._-]{0,126}[A-Za-z0-9])?$")
@@ -291,8 +291,10 @@ def main() -> int:
         if path.suffix.lower() in FORBIDDEN_SUFFIXES:
             errors.append(f"scientific/generated array forbidden in checkpoint: {name}")
         normalized = name.replace("\\", "/")
-        if normalized.startswith("foundation/qf0/qf0a_impl/src/") or path.name in FORBIDDEN_SOURCE:
-            errors.append(f"scientific source module forbidden in checkpoint: {name}")
+        if normalized.startswith("foundation/qf0/qf0a_impl/src/qf0a/") and path.name not in AUTHORIZED_FREEZE_SOURCE:
+            errors.append(f"source outside authorized freeze inventory: {name}")
+        if normalized.startswith("foundation/qf0/qf0a_impl/src/") and not normalized.startswith("foundation/qf0/qf0a_impl/src/qf0a/"):
+            errors.append(f"source outside authorized package: {name}")
         if normalized.startswith("foundation/qf0/qf0a_impl/") and path.name in FORBIDDEN_RESULT_NAMES:
             errors.append(f"result/evidence instance forbidden in checkpoint: {name}")
         if re.search(r"^foundation/qf0/qf0a_impl/(?:evidence|raw)/[^/]+", normalized):
@@ -321,7 +323,7 @@ def main() -> int:
     print("- raw count equality and identifier/path uniqueness rejection: PASS")
     print(f"- protocol blob: {EXPECTED_BLOB}")
     print(f"- protocol SHA-256: {EXPECTED_SHA256}")
-    print("- scientific source/results: ABSENT")
+    print("- authorized source-freeze modules: PRESENT; generated scientific results: ABSENT")
     print("- scientific/numerical execution: NOT PERFORMED")
     return 0
 

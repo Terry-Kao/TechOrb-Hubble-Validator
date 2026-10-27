@@ -137,3 +137,13 @@
 
 **Next gate:** independent read-only review of this Draft PR. A separately authorized implementation gate is required before source completion or any scientific/numerical execution.
 
+## D-2026-10-27-12 — Propose QF-0A Environment + Source Freeze v1.0
+
+**Status:** PROPOSED / DRAFT / NOT EXECUTED on bounded branch `qf0a/environment-source-freeze-v1`.
+
+**Decision:** Bind the approved preregistration to CPython 3.12.10, NumPy 2.1.3, SciPy 1.14.1, hashed Windows AMD64 wheels, OpenBLAS identities, single-thread settings, and a reviewed scientific-source inventory. The analytic and conditional paths are structurally separate; the exact six controls are defined but not run.
+
+**Explicit non-actions:** No frozen conditional-state orbit, fidelity, trace distance, interaction suite, clock suite, scientific negative control, evidence run, or real machine verdict was generated or inspected.
+
+**Next gate:** independent read-only review of the Environment + Source Freeze package. Scientific execution remains unauthorized.
+

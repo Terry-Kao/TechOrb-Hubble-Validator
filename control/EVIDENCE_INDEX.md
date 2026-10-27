@@ -20,7 +20,10 @@ This index distinguishes current control documents from preserved historical evi
 | QF0-LIT-JSON-20261026 | `foundation/qf0/LITERATURE_COLLISION_MATRIX_v1.0.json` | Machine-readable literature/collision skeleton | EMPTY SKELETON |
 | QF0-LIT-MD-20261026 | `foundation/qf0/LITERATURE_COLLISION_MATRIX_v1.0.md` | Human template and domain taxonomy | EMPTY SKELETON |
 | QF0-REPORT-20261026 | `QF0_FOUNDATION_INITIALIZATION_REPORT_2026-10-26.md` | Scope, validation, limitations, and next gate | GOVERNANCE REPORT; no scientific result |
-| QF0A-IMPL-PREREG-20261026 | `foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.0.md` | Runtime, numeric, source, evidence, leakage, and verdict contracts | PROPOSED / DRAFT / NOT EXECUTED |
+| QF0A-IMPL-PREREG-20261026 | `foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.0.md` | Runtime, numeric, source, evidence, leakage, and verdict contracts | MERGED / CONTRACT BASELINE / NOT EXECUTED |
+| QF0A-ENV-SOURCE-FREEZE-20261027 | `QF0A_ENVIRONMENT_SOURCE_FREEZE_REPORT_2026-10-27.md` | Exact Windows/Python/scientific dependency/backend and source freeze | PROPOSED / DRAFT / NOT EXECUTED |
+| QF0A-ENV-FREEZE-20261027 | `foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.0.json` | Machine-readable environment identity and dependency hashes | PROPOSED / DRAFT / NOT EXECUTED |
+| QF0A-STATIC-LEAKAGE-20261027 | `foundation/qf0/qf0a_impl/audit/QF0A_STATIC_LEAKAGE_AUDIT_v1.0.json` | Static analytic/conditional separation and leakage review | PASS / STATIC ONLY / NO SCIENCE |
 | QF0A-IMPL-SCHEMAS-20261026 | `foundation/qf0/qf0a_impl/schemas/` | Run manifest, machine verdict, raw-output index, and negative-control JSON Schemas | DRAFT CONTRACTS; no result instances |
 | QF0A-LEAKAGE-20261026 | `foundation/qf0/qf0a_impl/LEAKAGE_AUDIT_CHECKLIST.md` | External-time, analytic-target, post-hoc, exclusion, scramble, window, and cross-program leakage controls | DRAFT CHECKLIST; NOT EXECUTED |
 | QF0A-STATIC-VALIDATOR-20261026 | `foundation/qf0/qf0a_impl/tests/validate_preregistration.py` | Protocol/hash/schema/status and forbidden-output structural checks | STATIC VALIDATION ONLY; no science |

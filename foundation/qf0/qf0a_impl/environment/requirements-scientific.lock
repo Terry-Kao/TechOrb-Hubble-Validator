@@ -1,0 +1,6 @@
+# CPython 3.12 / Windows x86-64 binary-wheel lock.
+# Install with: python -m pip install --only-binary=:all: --require-hashes -r requirements-scientific.lock
+numpy==2.1.3 \
+    --hash=sha256:0d30c543f02e84e92c4b1f415b7c6b5326cbe45ee7882b6b77db7195fb971e3a
+scipy==1.14.1 \
+    --hash=sha256:2ff38e22128e6c03ff73b6bb0f85f897d2362f8c052e3b8ad00532198fbdae3f
