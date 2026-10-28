@@ -159,3 +159,17 @@
 
 **Explicit non-actions:** No runner activation, frozen reproduction, resolution/interaction/clock suite, real negative control, evidence run, raw array, machine verdict, fidelity, or trace-distance calculation is authorized by this synchronization.
 
+## D-2026-10-28-14 — Accept external REVISE and propose QF-0A v1.1 pre-execution re-freeze
+
+**Status:** PROPOSED / PRE-EXECUTION REPAIR / NOT EXECUTED; execution UNAUTHORIZED.
+
+**Decision:** Accept the independent challenge review as a repair input and block execution pending a versioned v1.1 protocol, preregistration, environment/source/adjudication freeze, and independent read-only re-review. v1.0 remains historical and never executed.
+
+**Pre-result disclosures:** (1) the ideal primary Page–Wootters conditional relation is an exact DFT-based algebraic identity, so expected numerical deviation is machine-precision scale and output is software qualification rather than an unknown prediction; (2) the frozen history-state representation is mathematically equivalent to its registered analytic history representation, so final output cannot distinguish direct constrained construction from equivalent external-time packaging—the rule is a source/provenance attestation; (3) for each registered nonzero `g`, the exact kernel is one-dimensional with stationary `|0,0>` zero mode, and the projected continuation is a near-kernel geometry diagnostic rather than an exact constrained physical state; (4) Clock B tests only registered relabeling, rephasing invariance of POVM elements, and index bookkeeping.
+
+**Evidence boundary:** A future QF-0A PASS is pipeline/software qualification and constructibility evidence only. It is not supporting evidence for time in nature, the Foundation ontology, or QF-0D.
+
+**Execution boundary:** No scientific authorization artifact exists. No registered conditional states, metrics, diagnostic suite, controls, evidence run, or machine verdict may be generated before the v1.1 package passes independent review and a separate authorization is issued.
+
+**Next gate:** Independent read-only review of QF-0A v1.1 Pre-Execution Repair / Re-Freeze.
+

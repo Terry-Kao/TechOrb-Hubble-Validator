@@ -6,7 +6,7 @@ Tech-Orb is a falsification-first research program investigating whether effecti
 
 - **Tech-Orb:** mother hypothesis; not an established physical theory.
 - **Active Foundation proposal:** Relational Quantum Foundation Canon v1.0 with working ontology `Q=(H,A,rho,K,T)`. This is a hypothesis/governance baseline, not evidence.
-- **QF-0A:** protocol frozen and not executed. Implementation preregistration v1.0 is the merged contract baseline. Environment Freeze v1.0 and Scientific Source Freeze v1.0 are merged and accepted; Static Leakage Audit is accepted as static-only evidence. Scientific execution remains unauthorized and not performed.
+- **QF-0A:** v1.0 is historical, superseded for future execution, and never executed. v1.1 is proposed as a pre-execution protocol/preregistration/environment/source/adjudication repair and re-freeze. It remains NOT EXECUTED and UNAUTHORIZED pending independent read-only review. A future PASS would qualify software/pipeline behavior only, not support the Foundation or QF-0D.
 - **QF-0B/C:** emergent-distance/effective-dimension benchmark skeleton only; thresholds and execution not started.
 - **QF-0D:** relational spacetime/causality stage restored; it may combine A/B/C only after their separate PASS verdicts. Execution is not authorized.
 - **QF-1/QF-2/QF-3:** deferred. QF-1 is Lorentz/GR low-energy recovery; Taiji and BH-J-WH/cyclic topology work are not authorized.
@@ -109,9 +109,9 @@ Theory-to-theory spectrum RMS is an engineering diagnostic, not an observational
 
 ## Current Next Actions
 
-1. Complete the pending QF-0A External Logic & Scientific Challenge Review; Claude's review is advisory independent evidence, not SSOT by itself.
-2. Only after Terry/ChatGPT adjudicates that review may a separate Scientific Execution Authorization bind the accepted protocol, source manifest, and environment lock.
-3. Terry/ChatGPT must adjudicate the external challenge review and issue a separate Scientific Execution Authorization before any QF-0A run.
+1. Complete independent read-only review of the QF-0A v1.1 Pre-Execution Repair / Re-Freeze.
+2. Only after approval may Terry/ChatGPT consider a separate identity-bound Scientific Execution Authorization; no authorization exists in this branch.
+3. Preserve the v1.0 review chain as historical process evidence while using v1.1 exclusively for any future execution decision.
 4. Resolve every `TBF` item in the QF-0B/C skeleton in a separately reviewed protocol before generating adjudicative benchmarks.
 5. Populate the literature matrix from primary sources without using compatibility or citation similarity as evidence.
 
