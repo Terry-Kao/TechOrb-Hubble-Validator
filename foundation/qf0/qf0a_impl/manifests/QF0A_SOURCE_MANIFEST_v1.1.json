@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "source_baseline_commit": "68359bca1ee90bf5b6662f46f3e2f51f6b3a8bd6",
+  "source_baseline_commit": "cca6707fd8410f355f9308b948eabf2efeac4c89",
   "scientific_execution": "NOT_PERFORMED",
   "canonical_hash_policy": "git-committed-bytes-v1",
   "files": [
@@ -18,9 +18,9 @@
     },
     {
       "path": "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md",
-      "byte_length": 4746,
-      "git_blob": "af15d76fbe8991e22f054b71c200de484470f7b7",
-      "sha256": "c3bc076e0bc4498c7e5cc87f96164185f4378bb538c3898d0be9e1c09075d4d6"
+      "byte_length": 5544,
+      "git_blob": "4e303e39abe9f389257eb5e91e607a668ff25f8f",
+      "sha256": "5c3ce46eac8459097754c2e52902cd1b785ea77c8fb7264d0683a1db113585e2"
     },
     {
       "path": "foundation/qf0/CLAIM_REGISTRY_v1.1.json",
@@ -42,9 +42,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/README.md",
-      "byte_length": 1220,
-      "git_blob": "72a20c7e15c2820e69eae9c003794dc933cf812d",
-      "sha256": "f7f2f679adcae63fe6db82798bdb9a88343ecd5192722ae282842248e7d89e5f"
+      "byte_length": 1593,
+      "git_blob": "03b41c6bf6a235ed3a8d0145261861b016315b02",
+      "sha256": "334fc6bb04d84676172476c95cf58c78a2e77e86f6b61ece1df6976212c1a017"
     },
     {
       "path": "foundation/qf0/qf0a_impl/LEAKAGE_AUDIT_CHECKLIST.md",
@@ -54,9 +54,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/audit/QF0A_STATIC_LEAKAGE_AUDIT_v1.1.json",
-      "byte_length": 2821,
-      "git_blob": "daf6044a91d12ff209f55811098c22b577c8f396",
-      "sha256": "52f0f7006839c4c6d1cd6022273f91372e34bf87833fc397173c26f9a2819917"
+      "byte_length": 3921,
+      "git_blob": "fe6d77cafc1f9e95b604e6486ab61e473544566e",
+      "sha256": "aca459dd11232c716eda3f016aed22281f65406a86413848fca951c9cab8a126"
     },
     {
       "path": "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json",
@@ -114,9 +114,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/schemas/QF0A_RUN_MANIFEST.schema.json",
-      "byte_length": 5143,
-      "git_blob": "4a17539446830115136c3e028ba0228e168770b4",
-      "sha256": "eaee5528bc87c1c5f94bc65b04148aa2a9fab89170bd9960e69769de91a248dd"
+      "byte_length": 5389,
+      "git_blob": "4fa5b2ed4b1e8d7f4ed23eb0894e1f5f2858fc56",
+      "sha256": "90712c9235602136d329126a93e51e786563842199eb3a224c604d3c2bd59f03"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/__init__.py",
@@ -156,9 +156,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/evidence.py",
-      "byte_length": 3802,
-      "git_blob": "8423833b17d0b01c2e5c27441ba4cfa9fda6e264",
-      "sha256": "dd42df114e7d91aea0cd90dc828942348cf63f62224beaeb8ce2c1e074ee8c9b"
+      "byte_length": 4123,
+      "git_blob": "047db00446d5feb4553848446849899d3a703ba1",
+      "sha256": "b61a2a3f02ac0a99a1676726eafa6f5ab631fb1d0cbc3cf906e2f7dd7ef71fbb"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/metrics.py",
@@ -174,9 +174,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/runner.py",
-      "byte_length": 25951,
-      "git_blob": "7dcfb33a34dbbe89b12804813e336537f9c362bd",
-      "sha256": "36af9b8078ff5a2d39c5213ed8a2f7f5721fcb20e355abbb375aa9f6bbd6fe6c"
+      "byte_length": 25922,
+      "git_blob": "04718bff7f0f05c148deeda824c5098dad85c31d",
+      "sha256": "756078b4357b524ca9b4c1e4c38c21ac56e91c2cfb480e8ec426272bdfc6484b"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/verdict.py",
@@ -186,9 +186,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/fixtures/synthetic_fixtures.py",
-      "byte_length": 13999,
-      "git_blob": "cfd5b7bf555d1d23625547640c6b5abe996d9b00",
-      "sha256": "64a8aceba5d98aa392df083a94c058b39837f66154b17c613815d24f8d03c43c"
+      "byte_length": 14102,
+      "git_blob": "c06065e618a9d28d4200af9bb1206ff98d50deb8",
+      "sha256": "602f3a6b5a7688c6668262d2930be543eae4b085401cdae903c2ea41ab9a8cb3"
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_adjudication_contract.py",
@@ -198,9 +198,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_evidence_contract.py",
-      "byte_length": 3805,
-      "git_blob": "3284d97e785fe02479085bd039c2b651a6528db2",
-      "sha256": "08009b5c7b9b8763c6f8144922ec4932a332f1c4a7a52764da9dd904ab5db07f"
+      "byte_length": 4357,
+      "git_blob": "fc86bd17fb2bca2cc030976fca61e2ad88898210",
+      "sha256": "50f5d3e4ff13cf5233cfc7ae95c4c2d458b8424c9bd43ce04b1feefdabe28d57"
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_source_freeze.py",
@@ -210,9 +210,27 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/validate_preregistration.py",
-      "byte_length": 18026,
-      "git_blob": "1d639e7ad649372adbd672f116229e02fe1fb122",
-      "sha256": "56853d9b748ea6dee1fc32a0e6f256508c3f6f304d463c924c1f03956cfc82dc"
+      "byte_length": 18060,
+      "git_blob": "32dc77c63a15c24672f1c3cd45bb2fecb9ab2f11",
+      "sha256": "e43eccad417e172bab4b3f79251594136b9ffe1753c8380269c0603ea64e31de"
+    },
+    {
+      "path": "foundation/qf0/qf0a_impl/src/qf0a/entrypoint.py",
+      "byte_length": 1278,
+      "git_blob": "04d7c8ad7d16cf75cc683c2be3df50cae99b2fd6",
+      "sha256": "8eee2237bdf44bc9f7fc6e6f268e17c864bd1372fad398b77ee6f322910e0971"
+    },
+    {
+      "path": "foundation/qf0/qf0a_impl/src/qf0a/provenance.py",
+      "byte_length": 6684,
+      "git_blob": "eb3ea7d6b0f5582842220fd22c43f16c0ba7937f",
+      "sha256": "80fd48325555cc86a373bb5e05e606e08914729f5df8cfad3878887bef2bd9fb"
+    },
+    {
+      "path": "foundation/qf0/qf0a_impl/tests/test_runtime_source_identity.py",
+      "byte_length": 5678,
+      "git_blob": "8c79f1d3e34d547b60ef9ce6ca0211e834462369",
+      "sha256": "59e383a1c19389bea0cae110417955c5b8d208448fcd3e6bace170d4350e0f46"
     }
   ]
 }
