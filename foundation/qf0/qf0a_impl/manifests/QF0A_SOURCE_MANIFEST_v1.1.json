@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "source_baseline_commit": "54ac0993de6414cfaaa71e41316224c21d839b02",
+  "source_baseline_commit": "68359bca1ee90bf5b6662f46f3e2f51f6b3a8bd6",
   "scientific_execution": "NOT_PERFORMED",
   "canonical_hash_policy": "git-committed-bytes-v1",
   "files": [
@@ -174,9 +174,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/runner.py",
-      "byte_length": 25643,
-      "git_blob": "e6469c2c6ad6fad1cdcd20f0f8fbcc876da35208",
-      "sha256": "e5762491c33a8d864c9057b588384e25fd449f76c43f5cb2d72fc667cabb5476"
+      "byte_length": 25951,
+      "git_blob": "7dcfb33a34dbbe89b12804813e336537f9c362bd",
+      "sha256": "36af9b8078ff5a2d39c5213ed8a2f7f5721fcb20e355abbb375aa9f6bbd6fe6c"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/verdict.py",
@@ -198,9 +198,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_evidence_contract.py",
-      "byte_length": 3174,
-      "git_blob": "dda1378da914ad393983f79ba159d24263582e42",
-      "sha256": "abc59af1ff61005806cbae50e9325686f42544cd5bfb12516c27b40d531fb827"
+      "byte_length": 3805,
+      "git_blob": "3284d97e785fe02479085bd039c2b651a6528db2",
+      "sha256": "08009b5c7b9b8763c6f8144922ec4932a332f1c4a7a52764da9dd904ab5db07f"
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_source_freeze.py",
