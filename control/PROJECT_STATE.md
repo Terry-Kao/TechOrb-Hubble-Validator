@@ -1,7 +1,7 @@
 # Project State
 
-**As of:** 2026-10-27
-**Authority:** repository `main` at `ffa2a74592596e7c7e64e1a188061c422c71b260` contains the merged QF-0 Foundation governance baseline, QF-0A implementation-preregistration contract baseline, and accepted Environment + Scientific Source Freeze v1.0 from PR #11. This governance-only branch synchronizes that already-issued review verdict; it authorizes no scientific execution.
+**As of:** 2026-10-29
+**Authority:** repository `main` after PR #13 at `d6329a112c5f628ace1650dda1f8016859cc7dd8` contains the QF-0 MERGED / GOVERNANCE BASELINE and the independently approved QF-0A v1.1 pre-execution repair/re-freeze. This governance-only synchronization records acceptance; it creates no execution authorization and authorizes no scientific execution.
 
 ## Integrated Verdict
 
@@ -14,7 +14,7 @@ The governance direction is Foundation → effective model → validators. HIA, 
 | Item | Epistemic class | Evidence status | Current verdict |
 |---|---|---|---|
 | QF substrate `Q=(H,A,rho,K,T)` | HYPOTHESIS | PROTOCOL-ONLY | Registered candidate; no emergence chain or scientific PASS. |
-| QF-0A Relational Time | HYPOTHESIS | PRE-EXECUTION REPAIR | v1.0 HISTORICAL / SUPERSEDED FOR FUTURE EXECUTION / NEVER EXECUTED. v1.1 PROPOSED / PRE-EXECUTION REPAIR / NOT EXECUTED. Scientific execution UNAUTHORIZED pending independent read-only review. |
+| QF-0A Relational Time | HYPOTHESIS | ACCEPTED PRE-EXECUTION QUALIFICATION BASELINE | v1.0 HISTORICAL / SUPERSEDED FOR FUTURE EXECUTION / NEVER EXECUTED. v1.1 FROZEN / ACCEPTED / NOT EXECUTED. Scientific execution UNAUTHORIZED; first qualification run NOT STARTED. |
 | QF-0B Emergent Distance | HYPOTHESIS | SKELETON | Benchmark architecture only; scientific thresholds remain TBF. |
 | QF-0C Effective Dimension | HYPOTHESIS | SKELETON | Blind 1D/2D/3D architecture only; execution NOT STARTED and answer 3 is not assumed. |
 | QF-0D Relational Spacetime / Causality | HYPOTHESIS | DEFERRED | Combines passed A/B/C ingredients and tests causal order, Lorentzian signature/null structure, propagation scale, and reference consistency; execution NOT AUTHORIZED. |
@@ -32,7 +32,7 @@ The governance direction is Foundation → effective model → validators. HIA, 
 
 ### QF-0A accepted checkpoint identities
 
-- Foundation Initialization: `MERGED / GOVERNANCE BASELINE`.
+- QF-0 Foundation: `MERGED / GOVERNANCE BASELINE`.
 - Frozen Protocol: `FROZEN / NOT EXECUTED`; blob `c11599a058caa8dfb0912c4e00a0656bef4688bd`; SHA-256 `fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b`.
 - Implementation Preregistration v1.0: `MERGED / CONTRACT BASELINE / NOT EXECUTED`.
 - Environment Freeze v1.0: `MERGED / ACCEPTED / NOT EXECUTED`; manifest SHA-256 `6c968cf7a036989efca495fa882fccc8b829d9ddd9ccf7960d849c4d24727791`; dependency-lock SHA-256 `9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2`.
@@ -40,14 +40,22 @@ The governance direction is Foundation → effective model → validators. HIA, 
 - Source manifest: `foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.0.json`; SHA-256 `c8d06cb95095a022870152115c591774c64f4df73e54c5a576054e7ad4d35f27`.
 - Static Leakage Audit: `ACCEPTED / STATIC ONLY / NO SCIENCE`.
 - PR #11: approved head `fda04be2e00494599689e86065674dd7d185ca40`; merge/main `ffa2a74592596e7c7e64e1a188061c422c71b260`.
-- QF-0A External Logic & Scientific Challenge Review: `PENDING`; scientific execution remains unauthorized.
+- QF-0A External Logic & Scientific Challenge Review: `COMPLETE`; its `REVISE` verdict led to the accepted v1.1 repair chain below. Scientific execution remains unauthorized.
 
-### QF-0A v1.1 repair checkpoint
+### QF-0A v1.1 accepted pre-execution qualification baseline
 
-- The accepted external challenge verdict was `REVISE`; execution is blocked until the v1.1 repair/re-freeze passes independent review.
-- The ideal primary relation is an exact algebraic known result. Numerical execution can qualify the registered software/pipeline only.
-- v1.1 binds canonical Git committed bytes, a complete source allowlist, automatic adjudication, predetermined evidence, and a separate authorization artifact. This branch contains no authorization and no scientific output.
-- QF-0A PASS is a pipeline qualification prerequisite only; it is not scientific evidence for QF-0D.
+- QF-0A v1.0: `HISTORICAL / SUPERSEDED FOR FUTURE EXECUTION / NEVER EXECUTED`.
+- Protocol v1.1: `FROZEN / ACCEPTED / NOT EXECUTED`; blob `3af303a471d99397429d33f77ca512578f40f972`; SHA-256 `1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a`.
+- Preregistration v1.1: `FROZEN / ACCEPTED / NOT EXECUTED`; blob `4e303e39abe9f389257eb5e91e607a668ff25f8f`; SHA-256 `5c3ce46eac8459097754c2e52902cd1b785ea77c8fb7264d0683a1db113585e2`.
+- Environment Freeze v1.1: `FROZEN / ACCEPTED / NOT EXECUTED`; blob `4bb6f73d5cfd96422829d3f0680ed52c9614e9e0`; SHA-256 `13bd8a95059363a5b2208f36e514e0e7d08b4467f4a0db35e2ce2bf37c41299a`; scientific dependency lock SHA-256 `9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2`.
+- Scientific + Adjudication Source Freeze v1.1: `FROZEN / ACCEPTED / NOT EXECUTED`; source baseline `cca6707fd8410f355f9308b948eabf2efeac4c89`; 38-entry source manifest SHA-256 `6f603981cee63e120ca05a8fba377fe9fd9838c5d97b9cfb9126f61547e328fd`; runner blob `04718bff7f0f05c148deeda824c5098dad85c31d`.
+- Runtime Frozen-Source Identity Closure: `ACCEPTED`.
+- Static Leakage / Provenance Audit: `ACCEPTED / STATIC ONLY / NO SCIENCE`.
+- PR #13: exact reviewed head `b1df673e209dfa93945e008fa7ff2797af6724cf`; squash merge/main `d6329a112c5f628ace1650dda1f8016859cc7dd8`.
+- Final accepted freeze record: `foundation/qf0/qf0a_impl/manifests/QF0A_V1_1_ADJUDICATION_EVIDENCE_REFREEZE_REPORT.md`.
+- `QF0A_V1.1_PRE_EXECUTION_REFREEZE_REPORT_2026-10-28.md` is a `HISTORICAL / SUPERSEDED CHECKPOINT RECORD`; its intermediate identities remain preserved.
+- Scientific Execution: `UNAUTHORIZED / NOT EXECUTED`; First QF-0A Qualification Run: `NOT STARTED`.
+- The ideal primary relation is an exact algebraic known result. A future PASS means only that the frozen implementation/pipeline reproduces the registered known construction under the qualification contract. It is software qualification and constructibility demonstration, not evidence that time emerges in nature, the Foundation is true, external time is absent, clock ambiguity is solved, arbitrary temporal frames are equivalent, interacting relational dynamics are established, or QF-0D is supported.
 
 ## Gate State
 

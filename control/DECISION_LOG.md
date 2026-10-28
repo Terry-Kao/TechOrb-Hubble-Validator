@@ -173,3 +173,21 @@
 
 **Next gate:** Independent read-only review of QF-0A v1.1 Pre-Execution Repair / Re-Freeze.
 
+## D-2026-10-29-15 — Accept QF-0A v1.1 frozen pre-execution qualification baseline
+
+**Status:** MERGED SOURCE BASELINE / GOVERNANCE ACCEPTANCE SYNCHRONIZATION; scientific execution `UNAUTHORIZED / NOT EXECUTED`; first qualification run `NOT STARTED`.
+
+**Decision:** Accept QF-0A v1.1 as the frozen pre-execution software-qualification baseline after the final independent read-only verdict `APPROVE FOR MERGE`. PR #13 exact reviewed head `b1df673e209dfa93945e008fa7ff2797af6724cf` was squash-merged as `d6329a112c5f628ace1650dda1f8016859cc7dd8`. QF-0A v1.0 remains `HISTORICAL / SUPERSEDED FOR FUTURE EXECUTION / NEVER EXECUTED`.
+
+**Challenge and repair chain:** v1.0 was initially frozen; Claude returned `REVISE`, which Terry/ChatGPT accepted. v1.1 repaired the adjudication gap, cross-platform canonical hashing, coarse-clock ambiguity, preregistration allowlist, and epistemic classification. Subsequent ChatGPT re-reviews found incomplete adjudication/evidence wiring and then a runtime HEAD-versus-frozen-source provenance gap. Both were repaired, including Runtime Frozen-Source Identity Closure. Final independent read-only re-review returned `APPROVE FOR MERGE`; PR #13 was then merged without changing reviewed frozen bytes.
+
+**Accepted identities:** Protocol blob `3af303a471d99397429d33f77ca512578f40f972`, SHA-256 `1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a`; Preregistration blob `4e303e39abe9f389257eb5e91e607a668ff25f8f`, SHA-256 `5c3ce46eac8459097754c2e52902cd1b785ea77c8fb7264d0683a1db113585e2`; Environment blob `4bb6f73d5cfd96422829d3f0680ed52c9614e9e0`, SHA-256 `13bd8a95059363a5b2208f36e514e0e7d08b4467f4a0db35e2ce2bf37c41299a`; dependency lock SHA-256 `9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2`; source baseline `cca6707fd8410f355f9308b948eabf2efeac4c89`; 38-entry source manifest SHA-256 `6f603981cee63e120ca05a8fba377fe9fd9838c5d97b9cfb9126f61547e328fd`; runner blob `04718bff7f0f05c148deeda824c5098dad85c31d`.
+
+**Report authority:** `foundation/qf0/qf0a_impl/manifests/QF0A_V1_1_ADJUDICATION_EVIDENCE_REFREEZE_REPORT.md` is the final accepted freeze record. `QF0A_V1.1_PRE_EXECUTION_REFREEZE_REPORT_2026-10-28.md` remains preserved as a `HISTORICAL / SUPERSEDED CHECKPOINT RECORD`.
+
+**Epistemic boundary:** QF-0A is software qualification, known-result reproduction, and constructibility demonstration. A future PASS would mean only that the frozen implementation/pipeline reproduces the registered known mathematical construction under the frozen qualification contract. It would not establish emergent time in nature, validate Tech-Orb Foundation, disprove external time, solve clock ambiguity, prove arbitrary-clock equivalence or interacting relational dynamics, or support QF-0D.
+
+**Explicit non-actions:** No execution authorization was created; no official entrypoint or `FrozenQF0ARunner.execute()` was invoked; no registered states, metrics, suites, controls, evidence directory, or machine verdict was generated or adjudicated.
+
+**Next gate:** QF-0A v1.1 — Identity-Bound Scientific Execution Authorization + First Qualification Run, as a separate task bound to the final authoritative `main` after governance synchronization.
+

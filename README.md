@@ -2,11 +2,11 @@
 
 Tech-Orb is a falsification-first research program investigating whether effective spacetime can arise from a global constrained relational quantum structure without assuming fundamental classical space or external/meta-time. This repository contains the developing Foundation, effective-model interfaces, and independent validators used to attack concrete implementations.
 
-## Current Status — 2026-10-26
+## Current Status — 2026-10-29
 
 - **Tech-Orb:** mother hypothesis; not an established physical theory.
 - **Active Foundation proposal:** Relational Quantum Foundation Canon v1.0 with working ontology `Q=(H,A,rho,K,T)`. This is a hypothesis/governance baseline, not evidence.
-- **QF-0A:** v1.0 is historical, superseded for future execution, and never executed. v1.1 is proposed as a pre-execution protocol/preregistration/environment/source/adjudication repair and re-freeze. It remains NOT EXECUTED and UNAUTHORIZED pending independent read-only review. A future PASS would qualify software/pipeline behavior only, not support the Foundation or QF-0D.
+- **QF-0A:** v1.0 is historical, superseded for future execution, and never executed. The independently approved v1.1 protocol, preregistration, environment, scientific/adjudication source freeze, runtime frozen-source identity closure, and static provenance audit are now FROZEN / ACCEPTED / NOT EXECUTED. Scientific execution remains UNAUTHORIZED and the first qualification run has NOT STARTED. A future PASS would qualify software/pipeline behavior only, not support the Foundation or QF-0D.
 - **QF-0B/C:** emergent-distance/effective-dimension benchmark skeleton only; thresholds and execution not started.
 - **QF-0D:** relational spacetime/causality stage restored; it may combine A/B/C only after their separate PASS verdicts. Execution is not authorized.
 - **QF-1/QF-2/QF-3:** deferred. QF-1 is Lorentz/GR low-energy recovery; Taiji and BH-J-WH/cyclic topology work are not authorized.
@@ -109,8 +109,8 @@ Theory-to-theory spectrum RMS is an engineering diagnostic, not an observational
 
 ## Current Next Actions
 
-1. Complete independent read-only review of the QF-0A v1.1 Pre-Execution Repair / Re-Freeze.
-2. Only after approval may Terry/ChatGPT consider a separate identity-bound Scientific Execution Authorization; no authorization exists in this branch.
+1. Prepare a separate QF-0A v1.1 identity-bound Scientific Execution Authorization against the final authoritative `main`; no authorization exists in this acceptance synchronization.
+2. Only after that separate authorization is reviewed and issued may the first qualification run begin.
 3. Preserve the v1.0 review chain as historical process evidence while using v1.1 exclusively for any future execution decision.
 4. Resolve every `TBF` item in the QF-0B/C skeleton in a separately reviewed protocol before generating adjudicative benchmarks.
 5. Populate the literature matrix from primary sources without using compatibility or citation similarity as evidence.
