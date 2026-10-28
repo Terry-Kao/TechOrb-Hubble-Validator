@@ -21,18 +21,21 @@ from fixtures.synthetic_fixtures import CONTROL_IDS, fixtures
 ROOT = Path(__file__).resolve().parents[4]
 QF0 = ROOT / "foundation" / "qf0"
 IMPL = QF0 / "qf0a_impl"
-PROTOCOL = QF0 / "QF0A_FROZEN_PROTOCOL_v1.0.md"
-SPEC = QF0 / "QF0A_IMPLEMENTATION_PREREGISTRATION_v1.0.md"
-EXPECTED_MAIN = "4c2920871898add6254902fb3963784e2761d375"
-EXPECTED_BLOB = "c11599a058caa8dfb0912c4e00a0656bef4688bd"
-EXPECTED_SHA256 = "fb7969c11e9e2d4b1eebdd2495692dc422eca418bbbaa85bbabcda2815811d8b"
+PROTOCOL = QF0 / "QF0A_FROZEN_PROTOCOL_v1.1.md"
+SPEC = QF0 / "QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md"
+EXPECTED_MAIN = "a9e9a8ec0b637d4a724a6d3baaded83b54c0058e"
+PROTOCOL_COMMIT = "902bdacd0e556d2a19079ab46c6c44d17f665372"
+EXPECTED_BLOB = "3af303a471d99397429d33f77ca512578f40f972"
+EXPECTED_SHA256 = "1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"
 SCHEMAS = {
     "QF0A_RUN_MANIFEST.schema.json",
     "QF0A_MACHINE_VERDICT.schema.json",
     "QF0A_RAW_OUTPUT.schema.json",
     "QF0A_NEGATIVE_CONTROL_RESULT.schema.json",
+    "QF0A_EXECUTION_AUTHORIZATION.schema.json",
 }
-AUTHORIZED_FREEZE_SOURCE = {"__init__.py", "analytic_reference.py", "conditional_state.py", "protocol_binding.py", "controls.py", "audit.py", "verdict.py"}
+FIXTURE_SCHEMAS = SCHEMAS - {"QF0A_EXECUTION_AUTHORIZATION.schema.json"}
+AUTHORIZED_FREEZE_SOURCE = {"__init__.py", "entrypoint.py", "provenance.py", "protocol_binding.py", "analytic_reference.py", "conditional_state.py", "controls.py", "metrics.py", "adjudication.py", "evidence.py", "runner.py", "audit.py", "verdict.py"}
 FORBIDDEN_SUFFIXES = {".npy", ".npz", ".h5", ".hdf5", ".pkl", ".pickle", ".parquet"}
 FORBIDDEN_RESULT_NAMES = {"machine_verdict.json", "raw_output_index.json", "negative_controls.json", "environment_manifest.json", "source_manifest.json", "leakage_audit.json", "SHA256SUMS.txt"}
 RUN_ID_PATTERN = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9._-]{0,126}[A-Za-z0-9])?$")
@@ -222,22 +225,23 @@ def semantic_errors(schema_name: str, instance: object) -> list[str]:
 
 def main() -> int:
     errors: list[str] = []
-    digest = hashlib.sha256(PROTOCOL.read_bytes()).hexdigest()
+    protocol_bytes = subprocess.check_output(["git", "show", f"{PROTOCOL_COMMIT}:foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md"], cwd=ROOT)
+    digest = hashlib.sha256(protocol_bytes).hexdigest()
     if digest != EXPECTED_SHA256:
         errors.append(f"protocol SHA-256 mismatch: {digest}")
-    blob = git("rev-parse", f"{EXPECTED_MAIN}:foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.0.md")
+    blob = git("rev-parse", f"{PROTOCOL_COMMIT}:foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md")
     if blob != EXPECTED_BLOB:
         errors.append(f"protocol Git blob mismatch: {blob}")
 
     if "PROTOCOL FROZEN; REPRODUCTION NOT EXECUTED" not in PROTOCOL.read_text(encoding="utf-8"):
         errors.append("protocol scientific status changed")
-    if "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.0.md" in set(git("diff", "--name-only", EXPECTED_MAIN).splitlines()):
-        errors.append("frozen protocol was modified")
+    if not SPEC.exists():
+        errors.append("v1.1 preregistration missing")
 
     schema_dir = IMPL / "schemas"
     schema_paths = sorted(schema_dir.glob("*.schema.json"))
     if {path.name for path in schema_paths} != SCHEMAS:
-        errors.append("schema inventory differs from frozen four-schema contract")
+        errors.append("schema inventory differs from frozen five-schema contract")
     schemas: dict[str, dict] = {}
     for path in schema_paths:
         try:
@@ -250,7 +254,7 @@ def main() -> int:
     positive, negative, package_positive, package_negative = fixtures()
     format_checker = FormatChecker()
     positive_passed = 0
-    if len(schemas) == 4:
+    if FIXTURE_SCHEMAS.issubset(schemas):
         for name, (schema_name, instance) in positive.items():
             schema_fail = list(Draft202012Validator(schemas[schema_name], format_checker=format_checker).iter_errors(instance))
             semantic_fail = semantic_errors(schema_name, instance)
@@ -260,7 +264,7 @@ def main() -> int:
                 positive_passed += 1
 
     negative_rejected = 0
-    if len(schemas) == 4:
+    if FIXTURE_SCHEMAS.issubset(schemas):
         for case in negative:
             schema_fail = bool(list(Draft202012Validator(schemas[case["schema"]], format_checker=format_checker).iter_errors(case["fixture"])))
             semantic_fail = bool(semantic_errors(case["schema"], case["fixture"]))
@@ -307,7 +311,7 @@ def main() -> int:
         return 1
     print("QF-0A preregistration validation: PASS")
     print(f"- jsonschema: {version('jsonschema')}")
-    print(f"- Draft202012Validator.check_schema: {len(schemas)}/4 PASS")
+    print(f"- Draft202012Validator.check_schema: {len(schemas)}/5 PASS")
     print("- FormatChecker: PASS")
     total_positive = len(positive) + len(package_positive)
     total_negative = len(negative) + len(package_negative)

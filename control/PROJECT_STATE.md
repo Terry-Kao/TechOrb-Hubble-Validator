@@ -14,7 +14,7 @@ The governance direction is Foundation → effective model → validators. HIA, 
 | Item | Epistemic class | Evidence status | Current verdict |
 |---|---|---|---|
 | QF substrate `Q=(H,A,rho,K,T)` | HYPOTHESIS | PROTOCOL-ONLY | Registered candidate; no emergence chain or scientific PASS. |
-| QF-0A Relational Time | HYPOTHESIS | FROZEN PROTOCOL | Protocol FROZEN / NOT EXECUTED. Preregistration MERGED / CONTRACT BASELINE / NOT EXECUTED. Environment Freeze and Scientific Source Freeze MERGED / ACCEPTED / NOT EXECUTED. Static Leakage Audit ACCEPTED / STATIC ONLY / NO SCIENCE. External Logic & Scientific Challenge Review PENDING; execution unauthorized. |
+| QF-0A Relational Time | HYPOTHESIS | PRE-EXECUTION REPAIR | v1.0 HISTORICAL / SUPERSEDED FOR FUTURE EXECUTION / NEVER EXECUTED. v1.1 PROPOSED / PRE-EXECUTION REPAIR / NOT EXECUTED. Scientific execution UNAUTHORIZED pending independent read-only review. |
 | QF-0B Emergent Distance | HYPOTHESIS | SKELETON | Benchmark architecture only; scientific thresholds remain TBF. |
 | QF-0C Effective Dimension | HYPOTHESIS | SKELETON | Blind 1D/2D/3D architecture only; execution NOT STARTED and answer 3 is not assumed. |
 | QF-0D Relational Spacetime / Causality | HYPOTHESIS | DEFERRED | Combines passed A/B/C ingredients and tests causal order, Lorentzian signature/null structure, propagation scale, and reference consistency; execution NOT AUTHORIZED. |
@@ -41,6 +41,13 @@ The governance direction is Foundation → effective model → validators. HIA, 
 - Static Leakage Audit: `ACCEPTED / STATIC ONLY / NO SCIENCE`.
 - PR #11: approved head `fda04be2e00494599689e86065674dd7d185ca40`; merge/main `ffa2a74592596e7c7e64e1a188061c422c71b260`.
 - QF-0A External Logic & Scientific Challenge Review: `PENDING`; scientific execution remains unauthorized.
+
+### QF-0A v1.1 repair checkpoint
+
+- The accepted external challenge verdict was `REVISE`; execution is blocked until the v1.1 repair/re-freeze passes independent review.
+- The ideal primary relation is an exact algebraic known result. Numerical execution can qualify the registered software/pipeline only.
+- v1.1 binds canonical Git committed bytes, a complete source allowlist, automatic adjudication, predetermined evidence, and a separate authorization artifact. This branch contains no authorization and no scientific output.
+- QF-0A PASS is a pipeline qualification prerequisite only; it is not scientific evidence for QF-0D.
 
 ## Gate State
 

@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.1",
+  "inherits": "CLAIM_REGISTRY_v1.0.json",
+  "status": "PROPOSED / PRE-EXECUTION REPAIR / NOT EXECUTED",
+  "amendments": [
+    {
+      "claim_id": "QF-TIME-001",
+      "qf0a_tests": [
+        "software/pipeline implementation of a known relational-time construction",
+        "internal consistency against an exact analytic identity",
+        "constructibility under frozen provenance and evidence contracts"
+      ],
+      "qf0a_does_not_test": [
+        "general clock ambiguity",
+        "arbitrary subsystem factorization",
+        "interacting clock dynamics in the Smith-Ahmadi sense",
+        "imperfect clocks",
+        "absence of external time in nature",
+        "observational distinctiveness of relational time"
+      ],
+      "pass_semantics": "pipeline qualification / constructibility evidence only; never Foundation supporting evidence for nature",
+      "foundation_model_verdict": ["NOT_APPLICABLE", "NOT_ESTABLISHED"]
+    },
+    {
+      "claim_id": "QF-CAUS-001",
+      "dependency_clarification": "QF-0A PASS is a pipeline-qualification prerequisite only, not scientific evidence supporting QF-0D."
+    }
+  ]
+}

@@ -24,21 +24,21 @@ from qf0a.controls import (
     CLOCK_SCRAMBLE, CONTROL_DEFINITIONS, CONTROL_IMPLEMENTATIONS,
     ConstructionOrigin, ConstructionProvenance, broken_constraint_state,
     detect_post_hoc_mutation, product_no_history_state,
-    reject_hidden_external_time, scramble_clock_labels, wrong_conditioning,
+    validate_construction_origin_attestation, scramble_clock_labels, wrong_conditioning,
 )
 from qf0a.protocol_binding import (
     CLOCK_B_SHIFT, D_C, D_S, FROZEN_STRUCTURE, FROZEN_THRESHOLDS,
     INTERACTION_G, SPECTRAL_WINDOW, frozen_binding_snapshot,
     verify_protocol_identity,
 )
-from qf0a.verdict import FoundationVerdict, PipelineVerdict, construct_verdict
+from qf0a.verdict import FoundationVerdict
 
 class SourceFreezeTests(unittest.TestCase):
     def test_execution_remains_locked(self):
         self.assertFalse(SCIENTIFIC_EXECUTION_AUTHORIZED)
 
     def test_protocol_binding(self):
-        self.assertEqual(verify_protocol_identity(ROOT).version, "QF0A_FROZEN_PROTOCOL_v1.0")
+        self.assertEqual(verify_protocol_identity(ROOT).version, "QF0A_FROZEN_PROTOCOL_v1.1")
 
     def test_static_separation(self):
         source = SRC / "qf0a"
@@ -137,9 +137,9 @@ class SourceFreezeTests(unittest.TestCase):
         self.assertTrue(np.allclose(wrong_conditioning(artificial), np.eye(D_S) / D_S))
 
     def test_hidden_time_detector(self):
-        reject_hidden_external_time(ConstructionProvenance(ConstructionOrigin.DIRECT_CONSTRAINED_STATE, False, False))
+        validate_construction_origin_attestation(ConstructionProvenance(ConstructionOrigin.DIRECT_CONSTRAINED_STATE, False, False))
         with self.assertRaisesRegex(ValueError, "external-time"):
-            reject_hidden_external_time(ConstructionProvenance(ConstructionOrigin.EXTERNAL_CLASSICAL_TIME_THEN_PACKAGED, True, True))
+            validate_construction_origin_attestation(ConstructionProvenance(ConstructionOrigin.EXTERNAL_CLASSICAL_TIME_THEN_PACKAGED, True, True))
 
     def test_forward_scramble_only(self):
         values = tuple(range(16))
@@ -154,8 +154,7 @@ class SourceFreezeTests(unittest.TestCase):
             detect_post_hoc_mutation(changed)
 
     def test_verdict_cannot_promote_foundation(self):
-        record = construct_verdict("synthetic-run", PipelineVerdict.PASS, FoundationVerdict.NOT_ESTABLISHED, ("SYNTHETIC",))
-        self.assertEqual(record.foundation_model_verdict, FoundationVerdict.NOT_ESTABLISHED)
+        self.assertEqual({item.value for item in FoundationVerdict}, {"NOT_APPLICABLE", "NOT_ESTABLISHED"})
 
 if __name__ == "__main__":
     unittest.main()

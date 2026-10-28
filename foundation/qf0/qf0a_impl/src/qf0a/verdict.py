@@ -1,14 +1,10 @@
-"""Verdict contract construction only; no scientific adjudication is performed here."""
+"""Machine-verdict projection from frozen adjudication only."""
 from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
 
-class PipelineVerdict(str, Enum):
-    PASS = "PASS"
-    FAIL = "FAIL"
-    BLOCKED = "BLOCKED"
-    INVALIDATED = "INVALIDATED"
+from .adjudication import AdjudicationRecord, derive_pipeline_verdict
 
 class FoundationVerdict(str, Enum):
     NOT_APPLICABLE = "NOT_APPLICABLE"
@@ -17,11 +13,12 @@ class FoundationVerdict(str, Enum):
 @dataclass(frozen=True)
 class VerdictRecord:
     run_id: str
-    pipeline_reproduction_verdict: PipelineVerdict
+    pipeline_reproduction_verdict: str
     foundation_model_verdict: FoundationVerdict
     reason_codes: tuple[str, ...]
 
-def construct_verdict(run_id: str, pipeline: PipelineVerdict, foundation: FoundationVerdict, reason_codes: tuple[str, ...]) -> VerdictRecord:
-    if not run_id or not reason_codes:
-        raise ValueError("run_id and reason_codes are required")
-    return VerdictRecord(run_id, pipeline, foundation, reason_codes)
+def derive_machine_verdict(run_id: str, adjudication_record: AdjudicationRecord, foundation: FoundationVerdict = FoundationVerdict.NOT_APPLICABLE) -> VerdictRecord:
+    if not run_id:
+        raise ValueError("run_id is required")
+    decision = derive_pipeline_verdict(adjudication_record)
+    return VerdictRecord(run_id, decision.verdict.value, foundation, decision.reason_codes)
