@@ -45,7 +45,7 @@ Every one of the 22 thresholds and every required diagnostic is evaluated. Six c
 
 ## Result-blind ordering
 
-The frozen runner sequence is authorization/provenance, direct conditional construction, conditional persistence/hash, analytic reference, metrics, required diagnostics, exact controls, adjudication, and evidence finalization. Analytic output cannot enter the conditional path. There is no result-driven branch.
+The frozen runner sequence is A authorization/provenance; B direct conditional construction plus write-once persistence and hash; C analytic reference; D metrics and required diagnostics; E exact controls; F1 provisional named-threshold evaluation without a final PASS; G1 evidence materialization; G2 schema, inventory, hash, immutability, and completeness validation; F2 final machine-verdict derivation; and G3 final verdict/checksum sealing. Analytic output cannot enter the conditional path. A final PASS cannot exist before G2 establishes evidence completeness. There is no result-driven branch.
 
 ## Authorization contract
 
@@ -53,7 +53,7 @@ Future execution requires a separate schema-valid `execution_authorization.json`
 
 ## Evidence contract
 
-The predetermined inventory includes authorization, run/environment/source manifests, conditional raw arrays, analytic arrays, metric arrays/index, diagnostic records, exactly six controls, leakage audit, machine verdict, human-report metadata, logs, and `SHA256SUMS.txt`. Completeness and canonical paths are machine checked; no post-inspection selection is allowed.
+The predetermined inventory includes authorization, run/environment/source manifests, conditional raw arrays, analytic arrays, metric arrays/index, diagnostic records, exactly six controls, leakage audit, machine verdict, deterministic machine-generated `human_report.md`, logs, and `SHA256SUMS.txt`. `source_manifest.sha256` is the SHA-256 of the exact bytes of the evidence copy `source_manifest.json`. Stage-B conditional arrays are written once and their hashes are rechecked before final adjudication. Completeness and canonical paths are machine checked; no post-inspection selection or overwrite is allowed.
 
 ## Gate
 

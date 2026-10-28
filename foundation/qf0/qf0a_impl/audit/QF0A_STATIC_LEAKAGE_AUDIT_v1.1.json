@@ -16,6 +16,11 @@
     {"id":"CANONICAL_GIT_BYTES","status":"PASS","evidence":"canonical identity uses git show and git rev-parse, not working-tree bytes"},
     {"id":"ANALYTIC_SEPARATION","status":"PASS","evidence":"analytic_reference and conditional_state do not import each other"},
     {"id":"NO_CROSS_PROGRAM_IMPORT","status":"PASS","evidence":"static import audit rejects HEM/Hubble/PFM/topology roots"},
-    {"id":"NO_AUTO_EXECUTION","status":"PASS","evidence":"package import is inert and SCIENTIFIC_EXECUTION_AUTHORIZED remains false"}
+    {"id":"NO_AUTO_EXECUTION","status":"PASS","evidence":"package import is inert and SCIENTIFIC_EXECUTION_AUTHORIZED remains false"},
+    {"id":"ALL_THRESHOLDS_NAMED_AND_WIRED","status":"PASS","evidence":"ThresholdResult is name-keyed; adjudication requires exact set equality with all 22 FROZEN_THRESHOLDS; synthetic tests reject missing and duplicate names"},
+    {"id":"WRITE_ONCE_RAW_EVIDENCE","status":"PASS","evidence":"exclusive-create array writer rejects overwrite and Stage-B hashes are revalidated before final verdict"},
+    {"id":"EVIDENCE_BEFORE_FINAL_PASS","status":"PASS","evidence":"STAGE_ORDER places G2 schema/inventory/hash validation before F2 final verdict"},
+    {"id":"RUN_MANIFEST_SCHEMA_GATE","status":"PASS","evidence":"Draft202012Validator plus FormatChecker validates the completed run_manifest before F2"},
+    {"id":"SOURCE_MANIFEST_EXACT_BYTES","status":"PASS","evidence":"source_manifest.sha256 hashes the exact written evidence/source_manifest.json bytes"}
   ]
 }

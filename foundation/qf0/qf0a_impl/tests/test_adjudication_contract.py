@@ -12,8 +12,9 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(ROOT / "foundation/qf0/qf0a_impl/src"))
 
-from qf0a.adjudication import AdjudicationRecord, ControlObservation, DerivedPipelineVerdict, EXPECTED_CONTROL_REASON, derive_pipeline_verdict
+from qf0a.adjudication import AdjudicationRecord, ControlObservation, DerivedPipelineVerdict, EXPECTED_CONTROL_REASON, ThresholdResult, derive_pipeline_verdict
 from qf0a.controls import ControlId
+from qf0a.protocol_binding import FROZEN_THRESHOLDS
 from qf0a.metrics import _tau_grid, hermiticity_residual, minimum_eigenvalue, pure_reference_fidelity, trace_distance
 from qf0a.runner import FrozenIdentityBundle, STAGE_ORDER, validate_execution_authorization
 from qf0a.verdict import derive_machine_verdict
@@ -22,9 +23,10 @@ def controls(observation=ControlObservation.EXPECTED_FAILURE):
     return tuple((control, observation, EXPECTED_CONTROL_REASON[control]) for control in ControlId)
 
 def record(**changes):
+    results = tuple(ThresholdResult(name, 0.0, "synthetic", limit, True, "SYNTHETIC", f"{name}_FAILED") for name, limit in FROZEN_THRESHOLDS.items())
     data = dict(provenance_contaminated=False, post_hoc_mutation=False, identity_mismatch=False,
                 required_capability_complete=True, required_evidence_complete=True,
-                required_measurements_complete=True, threshold_checks=(True, True),
+                required_measurements_complete=True, threshold_results=results,
                 control_observations=controls(), leakage_audit_pass=True)
     data.update(changes)
     return AdjudicationRecord(**data)
@@ -42,7 +44,9 @@ class AdjudicationContractTests(unittest.TestCase):
     def test_precedence(self):
         self.assertEqual(derive_pipeline_verdict(record(provenance_contaminated=True)).verdict, DerivedPipelineVerdict.INVALIDATED)
         self.assertEqual(derive_pipeline_verdict(record(required_evidence_complete=False)).verdict, DerivedPipelineVerdict.BLOCKED)
-        self.assertEqual(derive_pipeline_verdict(record(threshold_checks=(True, False))).verdict, DerivedPipelineVerdict.FAIL)
+        failed = list(record().threshold_results)
+        failed[0] = ThresholdResult(failed[0].name, 1.0, "synthetic", failed[0].limit, False, "SYNTHETIC", "TRACE_NORMALIZATION_TOL_FAILED")
+        self.assertEqual(derive_pipeline_verdict(record(threshold_results=tuple(failed))).verdict, DerivedPipelineVerdict.FAIL)
         self.assertEqual(derive_pipeline_verdict(record()).verdict, DerivedPipelineVerdict.PASS)
 
     def test_product_zero_probability_is_expected_failure_not_blocked(self):
@@ -56,7 +60,19 @@ class AdjudicationContractTests(unittest.TestCase):
 
     def test_runner_stage_order(self):
         self.assertEqual(STAGE_ORDER[1:3], ("B_CONDITIONAL_OUTPUT_AND_HASH", "C_ANALYTIC_COMPARISON"))
-        self.assertEqual(STAGE_ORDER[-2:], ("F_AUTOMATIC_ADJUDICATION", "G_EVIDENCE_FINALIZATION"))
+        self.assertEqual(STAGE_ORDER[-3:], ("G2_EVIDENCE_VALIDATION", "F2_FINAL_MACHINE_VERDICT", "G3_FINAL_SEALING"))
+
+    def test_all_named_thresholds_required_and_unique(self):
+        self.assertEqual({item.name for item in record().threshold_results}, set(FROZEN_THRESHOLDS))
+        partial = record().threshold_results[:-1]
+        self.assertEqual(derive_pipeline_verdict(record(threshold_results=partial)).verdict, DerivedPipelineVerdict.BLOCKED)
+        duplicate = record().threshold_results[:-1] + (record().threshold_results[0],)
+        self.assertEqual(derive_pipeline_verdict(record(threshold_results=duplicate)).verdict, DerivedPipelineVerdict.BLOCKED)
+
+    def test_runner_wires_every_frozen_threshold_by_name(self):
+        source = inspect.getsource(__import__("qf0a.runner", fromlist=["FrozenQF0ARunner"]).FrozenQF0ARunner._stage_f1_provisional_gate_evaluation)
+        for name in FROZEN_THRESHOLDS:
+            self.assertEqual(source.count(f'"{name}"'), 1, name)
 
     def test_synthetic_authorization(self):
         schema = json.loads((ROOT / "foundation/qf0/qf0a_impl/schemas/QF0A_EXECUTION_AUTHORIZATION.schema.json").read_text())

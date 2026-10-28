@@ -5,6 +5,23 @@ from dataclasses import dataclass
 from enum import Enum
 
 from .controls import ControlId
+from .protocol_binding import FROZEN_THRESHOLDS
+
+@dataclass(frozen=True)
+class ThresholdResult:
+    name: str
+    observed: float | None
+    relation: str
+    limit: float
+    passed: bool
+    scope: str
+    reason_code: str
+
+    def __post_init__(self) -> None:
+        if self.name not in FROZEN_THRESHOLDS:
+            raise ValueError(f"unknown frozen threshold: {self.name}")
+        if self.limit != FROZEN_THRESHOLDS[self.name]:
+            raise ValueError(f"limit mismatch for {self.name}")
 
 class DerivedPipelineVerdict(str, Enum):
     PASS = "PASS"
@@ -37,7 +54,7 @@ class AdjudicationRecord:
     required_capability_complete: bool
     required_evidence_complete: bool
     required_measurements_complete: bool
-    threshold_checks: tuple[bool, ...]
+    threshold_results: tuple[ThresholdResult, ...]
     control_observations: tuple[tuple[ControlId, ControlObservation, str], ...]
     leakage_audit_pass: bool
 
@@ -60,6 +77,9 @@ def derive_pipeline_verdict(record: AdjudicationRecord) -> AdjudicationDecision:
     if not record.required_capability_complete: reasons.append("REQUIRED_CAPABILITY_MISSING")
     if not record.required_evidence_complete: reasons.append("REQUIRED_EVIDENCE_MISSING")
     if not record.required_measurements_complete: reasons.append("REQUIRED_MEASUREMENT_MISSING")
+    names = tuple(item.name for item in record.threshold_results)
+    if len(names) != len(set(names)): reasons.append("THRESHOLD_RESULT_DUPLICATE")
+    if set(names) != set(FROZEN_THRESHOLDS): reasons.append("THRESHOLD_INVENTORY_INCOMPLETE")
     if not record.leakage_audit_pass: reasons.append("LEAKAGE_AUDIT_NOT_PASS")
     if set(controls) != set(ControlId): reasons.append("CONTROL_INVENTORY_INCOMPLETE")
     for control in ControlId:
@@ -69,7 +89,7 @@ def derive_pipeline_verdict(record: AdjudicationRecord) -> AdjudicationDecision:
             reasons.append(f"{control.value}_{observation.value}")
     if reasons:
         return AdjudicationDecision(DerivedPipelineVerdict.BLOCKED, tuple(sorted(set(reasons))))
-    failures = [f"THRESHOLD_{i}_FAILED" for i, passed in enumerate(record.threshold_checks) if not passed]
+    failures = [item.reason_code for item in record.threshold_results if not item.passed]
     for control, observation, reason in record.control_observations:
         if observation is ControlObservation.UNEXPECTED_PASS:
             failures.append(f"{control.value}_UNEXPECTED_PASS")

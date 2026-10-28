@@ -1,32 +1,40 @@
 """Frozen v1.1 orchestration. Import is inert; execution requires external authorization."""
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
+from datetime import datetime, timezone
 import hashlib
 import json
 import os
 from pathlib import Path
 import subprocess
+import sys
+from zoneinfo import ZoneInfo
 import numpy as np
 from jsonschema import Draft202012Validator, FormatChecker
 
 from . import analytic_reference
-from .adjudication import AdjudicationRecord, ControlObservation, EXPECTED_CONTROL_REASON
+from .adjudication import AdjudicationRecord, ControlObservation, EXPECTED_CONTROL_REASON, ThresholdResult
 from .conditional_state import (clock_hamiltonian, clock_povm_element, condition_density_matrix,
     constraint, correlated_kernel_state, pure_density, system_hamiltonian)
 from .controls import (ControlId, ConstructionOrigin, ConstructionProvenance,
     CONTROL_IMPLEMENTATIONS, detect_post_hoc_mutation, scramble_clock_labels,
     validate_construction_origin_attestation)
-from .evidence import prepare_new_evidence_root, validate_complete_inventory, write_all_registered_arrays, write_json_once
-from .metrics import constraint_residual, neighboring_step_distances, pure_reference_fidelity, registered_tau_grid, trace_distance
+from .evidence import (prepare_new_evidence_root, validate_complete_inventory, write_array_once,
+    write_remaining_registered_arrays, write_json_once, write_text_once)
+from .metrics import (constraint_residual, hermiticity_residual, minimum_eigenvalue,
+    neighboring_step_distances, povm_completeness_residual, probability_sum_defect,
+    pure_reference_fidelity, registered_step_unitary, registered_tau_grid,
+    trace_distance, trace_normalization_defect, unitary_norm_defect)
 from .protocol_binding import D_C, D_S, FROZEN_THRESHOLDS, OMEGA, PROTOCOL_GIT_BLOB, PROTOCOL_SHA256, verify_protocol_identity
 from .verdict import derive_machine_verdict
 
 STAGE_ORDER = (
     "A_FAIL_CLOSED_PROVENANCE", "B_CONDITIONAL_OUTPUT_AND_HASH",
     "C_ANALYTIC_COMPARISON", "D_REQUIRED_DIAGNOSTICS",
-    "E_EXACT_SIX_CONTROLS", "F_AUTOMATIC_ADJUDICATION",
-    "G_EVIDENCE_FINALIZATION",
+    "E_EXACT_SIX_CONTROLS", "F1_PROVISIONAL_GATE_EVALUATION",
+    "G1_EVIDENCE_MATERIALIZATION", "G2_EVIDENCE_VALIDATION",
+    "F2_FINAL_MACHINE_VERDICT", "G3_FINAL_SEALING",
 )
 
 @dataclass(frozen=True)
@@ -63,8 +71,11 @@ class FrozenQF0ARunner:
         analytic = self._stage_c_independent_analytic_reference(conditional)
         diagnostics = self._stage_d_registered_diagnostics(conditional, analytic)
         controls = self._stage_e_exact_six_controls(conditional)
-        verdict = self._stage_f_automatic_adjudication(conditional, analytic, diagnostics, controls)
-        self._stage_g_finalize_all_evidence(conditional, analytic, diagnostics, controls, verdict)
+        provisional = self._stage_f1_provisional_gate_evaluation(conditional, analytic, diagnostics, controls)
+        self._stage_g1_materialize_evidence(conditional, analytic, diagnostics, controls, provisional)
+        complete = self._stage_g2_validate_evidence(conditional, provisional)
+        verdict = derive_machine_verdict(self.run_id, complete)
+        self._stage_g3_final_sealing(verdict)
 
     def _stage_a_fail_closed_provenance(self) -> None:
         schema = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/schemas/QF0A_EXECUTION_AUTHORIZATION.schema.json").read_text(encoding="utf-8"))
@@ -109,14 +120,15 @@ class FrozenQF0ARunner:
         conditioned = tuple(condition_density_matrix(density, clock_povm_element(D_C, k), D_S) for k in range(D_C))
         probabilities = np.asarray([item[0] for item in conditioned], dtype=np.float64)
         densities = np.asarray([item[1] for item in conditioned], dtype=np.complex128)
-        np.save(self.evidence_root / "raw/conditional_densities.npy", densities, allow_pickle=False)
-        np.save(self.evidence_root / "raw/conditional_probabilities.npy", probabilities, allow_pickle=False)
-        identity = hashlib.sha256((self.evidence_root / "raw/conditional_densities.npy").read_bytes()).hexdigest()
+        identities = {
+            "conditional_densities.npy": write_array_once(self.evidence_root / "raw", "conditional_densities.npy", densities),
+            "conditional_probabilities.npy": write_array_once(self.evidence_root / "raw", "conditional_probabilities.npy", probabilities),
+        }
         return {"state": state, "density": density, "k0": k0, "h_system": h_system,
-                "probabilities": probabilities, "densities": densities, "persisted_sha256": identity}
+                "probabilities": probabilities, "densities": densities, "stage_b_identities": identities}
 
     def _stage_c_independent_analytic_reference(self, conditional: dict[str, object]) -> dict[str, np.ndarray]:
-        if not conditional["persisted_sha256"]:
+        if set(conditional["stage_b_identities"]) != {"conditional_densities.npy", "conditional_probabilities.npy"}:
             raise RuntimeError("conditional output must be persisted and hashed before analytic reference")
         h = analytic_reference.system_hamiltonian(OMEGA)
         psi = analytic_reference.initial_state()
@@ -132,8 +144,16 @@ class FrozenQF0ARunner:
         interaction = []
         for g in (0.0, 1e-4, 1e-3, 1e-2):
             result = near_kernel_projector_continuation(interacting_constraint(conditional["k0"], g), conditional["state"])
-            interaction.append([g, result.diagnostics.selected_rank, result.diagnostics.projector_hermiticity_residual,
-                                result.diagnostics.projector_idempotence_residual, result.diagnostics.projection_norm])
+            eig = result.diagnostics.eigenvalues
+            continued = pure_density(result.state)
+            repeated = near_kernel_projector_continuation(interacting_constraint(conditional["k0"], g), conditional["state"])
+            interaction.append([g, int(np.count_nonzero(eig == 0.0)), int(np.count_nonzero(np.abs(eig) <= 1e-12)),
+                result.diagnostics.selected_rank, float(np.min(np.minimum(np.abs(eig + .5), np.abs(eig - .5)))),
+                result.diagnostics.projector_hermiticity_residual, result.diagnostics.projector_idempotence_residual,
+                result.diagnostics.projection_norm, constraint_residual(interacting_constraint(conditional["k0"], g), result.state),
+                float(result.diagnostics.overlap.real), float(result.diagnostics.overlap.imag),
+                trace_distance(continued, conditional["density"]), float(np.min(np.abs(eig))),
+                trace_distance(continued, pure_density(repeated.state))])
         clock_b = []
         for k in range(D_C):
             p, rho = condition_density_matrix(conditional["density"], pure_density(clock_b_phase_state(k)), D_S)
@@ -194,37 +214,92 @@ class FrozenQF0ARunner:
         else: raise RuntimeError("POST_HOC_THRESHOLD_MUTATION unexpectedly passed")
         return tuple(observations)
 
-    def _stage_f_automatic_adjudication(self, conditional, analytic, diagnostics, controls):
-        checks = (bool(np.max(1.0 - analytic["fidelities"]) <= FROZEN_THRESHOLDS["FIDELITY_DEFECT_TOL"]),
-                  bool(np.max(analytic["distances"]) <= FROZEN_THRESHOLDS["TRACE_DISTANCE_TOL"]),
-                  bool(np.max(analytic["steps"]) <= FROZEN_THRESHOLDS["UNITARY_STEP_TRACE_DISTANCE_TOL"]),
-                  bool(all(np.all(np.isfinite(value)) for value in diagnostics.values())))
-        record = AdjudicationRecord(False, False, False, True, True, True, checks, controls, True)
-        return derive_machine_verdict(self.run_id, record)
+    @staticmethod
+    def _threshold(name, observed, relation, passed, scope):
+        return ThresholdResult(name, float(observed) if observed is not None else None, relation,
+            FROZEN_THRESHOLDS[name], bool(passed), scope, f"{name}_FAILED")
 
-    def _stage_g_finalize_all_evidence(self, conditional, analytic, diagnostics, controls, verdict) -> None:
+    def _stage_f1_provisional_gate_evaluation(self, conditional, analytic, diagnostics, controls):
+        effects = tuple(clock_povm_element(D_C, k) for k in range(D_C))
+        rhos = tuple(conditional["densities"])
+        interaction, clock_b, dimensions = diagnostics["interaction"], diagnostics["clock_b"], diagnostics["dimensions"]
+        unitary_defect = unitary_norm_defect(registered_step_unitary(conditional["h_system"]))
+        resolution = max(0.0, float(np.max(dimensions[:,1]) - np.min(dimensions[:,1])))
+        values = {
+          "TRACE_NORMALIZATION_TOL": (trace_normalization_defect(conditional["density"]), "<=", "PRIMARY", lambda x,t:x<=t),
+          "HERMITICITY_TOL": (hermiticity_residual(conditional["density"]), "<=", "PRIMARY", lambda x,t:x<=t),
+          "MIN_EIGENVALUE_TOL": (minimum_eigenvalue(conditional["density"]), ">=", "PRIMARY", lambda x,t:x>=t),
+          "CONSTRAINT_RESIDUAL_TOL": (constraint_residual(conditional["k0"], conditional["state"]), "<=", "PRIMARY", lambda x,t:x<=t),
+          "POVM_COMPLETENESS_TOL": (povm_completeness_residual(effects), "<=", "PRIMARY", lambda x,t:x<=t),
+          "PROBABILITY_SUM_TOL": (probability_sum_defect(conditional["probabilities"]), "<=", "PRIMARY", lambda x,t:x<=t),
+          "MIN_OUTCOME_PROBABILITY": (float(np.min(conditional["probabilities"])), ">=", "PRIMARY", lambda x,t:x>=t),
+          "CONDITIONAL_TRACE_TOL": (max(trace_normalization_defect(r) for r in rhos), "<=", "PRIMARY", lambda x,t:x<=t),
+          "CONDITIONAL_MIN_EIGENVALUE_TOL": (min(minimum_eigenvalue(r) for r in rhos), ">=", "PRIMARY", lambda x,t:x>=t),
+          "FIDELITY_DEFECT_TOL": (float(np.max(1-analytic["fidelities"])), "<=", "PRIMARY", lambda x,t:x<=t),
+          "TRACE_DISTANCE_TOL": (float(np.max(analytic["distances"])), "<=", "PRIMARY", lambda x,t:x<=t),
+          "UNITARY_STEP_TRACE_DISTANCE_TOL": (float(np.max(analytic["steps"])), "<=", "PRIMARY", lambda x,t:x<=t),
+          "UNITARY_NORM_DEFECT_TOL": (unitary_defect, "<=", "PRIMARY", lambda x,t:x<=t),
+          "RESOLUTION_DETERIORATION_TOL": (resolution, "<=", "FINITE_DIMENSION", lambda x,t:x<=t),
+          "WINDOW_BOUNDARY_TOL": (float(np.min(interaction[:,4])), ">", "SECTION_9", lambda x,t:x>t),
+          "PROJECTOR_HERMITICITY_TOL": (float(np.max(interaction[:,5])), "<=", "SECTION_9", lambda x,t:x<=t),
+          "PROJECTOR_IDEMPOTENCE_TOL": (float(np.max(interaction[:,6])), "<=", "SECTION_9", lambda x,t:x<=t),
+          "PROJECTION_NORM_MIN": (float(np.min(interaction[:,7])), ">=", "SECTION_9", lambda x,t:x>=t),
+          "G0_RECOVERY_TRACE_DISTANCE_TOL": (float(interaction[0,11]), "<=", "SECTION_9", lambda x,t:x<=t),
+          "DETERMINISM_TRACE_DISTANCE_TOL": (float(np.max(interaction[:,13])), "<=", "DETERMINISM", lambda x,t:x<=t),
+          "CLOCK_MAPPED_TRACE_DISTANCE_TOL": (float(np.max(clock_b[:,3])), "<=", "CLOCK_B", lambda x,t:x<=t),
+          "CLOCK_PROBABILITY_DIFFERENCE_TOL": (float(np.max(np.abs(clock_b[:,2]-conditional["probabilities"]))), "<=", "CLOCK_B", lambda x,t:x<=t),
+        }
+        results = tuple(self._threshold(n, v[0], v[1], v[3](v[0], FROZEN_THRESHOLDS[n]) if v[0] is not None else False, v[2]) for n,v in values.items())
+        finite = all(np.all(np.isfinite(value)) for value in diagnostics.values()) and set(dimensions[:,0]) == {8.0,16.0,32.0}
+        return AdjudicationRecord(False, False, False, True, False, finite, results, controls, True)
+
+    def _stage_g1_materialize_evidence(self, conditional, analytic, diagnostics, controls, provisional) -> None:
         arrays = {"conditional_densities.npy": conditional["densities"], "conditional_probabilities.npy": conditional["probabilities"],
                   "analytic_reference_densities.npy": analytic["references"], "fidelities.npy": analytic["fidelities"],
                   "trace_distances.npy": analytic["distances"], "neighbor_step_distances.npy": analytic["steps"],
                   "interaction_diagnostics.npy": diagnostics["interaction"], "clock_b_diagnostics.npy": diagnostics["clock_b"],
                   "coarse_clock_diagnostics.npy": diagnostics["coarse"]}
-        index = write_all_registered_arrays(self.evidence_root / "raw", arrays)
+        arrays.pop("conditional_densities.npy"); arrays.pop("conditional_probabilities.npy")
+        index = write_remaining_registered_arrays(self.evidence_root / "raw", arrays, conditional["stage_b_identities"])
         write_json_once(self.evidence_root / "raw_output_index.json", {"run_id": self.run_id, "arrays": index})
         write_json_once(self.evidence_root / "negative_controls.json", {"run_id": self.run_id, "controls": [[a.value,b.value,c] for a,b,c in controls]})
-        write_json_once(self.evidence_root / "machine_verdict.json", {"run_id": verdict.run_id, "pipeline_reproduction_verdict": verdict.pipeline_reproduction_verdict,
-            "foundation_model_verdict": verdict.foundation_model_verdict.value, "reason_codes": list(verdict.reason_codes)})
-        write_json_once(self.evidence_root / "diagnostics.json", {name: value.tolist() for name,value in diagnostics.items()})
+        write_json_once(self.evidence_root / "diagnostics.json", {"section9_fields":["g","exact_kernel_dimension","numerical_kernel_dimension","selected_rank","boundary_distance","projector_hermiticity_residual","projector_idempotence_residual","projection_norm","continued_state_constraint_residual","overlap_real","overlap_imag","g0_recovery_trace_distance","minimum_absolute_eigenvalue","determinism_trace_distance"], "values":{name: value.tolist() for name,value in diagnostics.items()}, "threshold_results":[item.__dict__ for item in provisional.threshold_results]})
         manifest = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.1.json").read_text(encoding="utf-8"))
         environment = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json").read_text(encoding="utf-8"))
-        write_json_once(self.evidence_root / "run_manifest.json", {"run_id": self.run_id, "protocol_sha256": PROTOCOL_SHA256, "source_baseline_commit": manifest["source_baseline_commit"]})
         write_json_once(self.evidence_root / "environment_manifest.json", environment)
         write_json_once(self.evidence_root / "source_manifest.json", manifest)
-        (self.evidence_root / "source_manifest.sha256").write_text(hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest()+"\n", encoding="ascii", newline="\n")
+        source_sha = hashlib.sha256((self.evidence_root / "source_manifest.json").read_bytes()).hexdigest()
+        write_text_once(self.evidence_root / "source_manifest.sha256", source_sha+"\n")
+        now = datetime.now(timezone.utc); local = now.astimezone(ZoneInfo("Asia/Taipei"))
+        host = environment["host"]
+        run_manifest = {"schema_version":"1.1","run_id":self.run_id,
+          "protocol":{"version":"QF0A_FROZEN_PROTOCOL_v1.1","path":"foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md","git_blob_sha":PROTOCOL_GIT_BLOB,"file_sha256":PROTOCOL_SHA256,"authoritative_main_sha":"a9e9a8ec0b637d4a724a6d3baaded83b54c0058e"},
+          "implementation":{"commit_sha":manifest["source_baseline_commit"],"branch":"qf0a/v1.1-pre-execution-repair-refreeze","dirty":False,"source_manifest_path":"source_manifest.json","source_manifest_sha256":source_sha},
+          "environment":{"os":host["os"],"kernel":host["version"],"cpu_architecture":host["architecture"],"cpu_model":host["cpu"],"python":f"CPython {environment['python']['version']}","packages_lock_sha256":environment["dependency_lock_canonical_sha256"],"numpy_version":environment["packages"][0]["version"],"scipy_version":environment["packages"][1]["version"],"blas_lapack":{"vendor":"scipy-openblas","version_or_build":environment["blas_lapack"]["scipy"]},"locale":os.environ.get("LANG","UNSET"),"timezone":host["timezone"],"numeric_dtypes":environment["numeric_dtypes"]},
+          "execution":{"timestamp_utc":now.isoformat(),"timestamp_asia_taipei":local.isoformat(),"command_line":sys.argv,"cwd":str(self.repo_root)},
+          "determinism":{"seeds":{"primary":104729,"repeat_1":130363,"repeat_2":155921},"thread_environment":environment["threads"],"eigensolver_policy":"frozen-full-spectral-projector","tolerance_policy":"frozen-protocol-only"},
+          "evidence":{"environment_manifest":"environment_manifest.json","raw_output_index":"raw_output_index.json","negative_controls":"negative_controls.json","leakage_audit":"leakage_audit.json","machine_verdict":"machine_verdict.json","human_report":"human_report.md","hash_manifest":"SHA256SUMS.txt"}}
+        write_json_once(self.evidence_root / "run_manifest.json", run_manifest)
         write_json_once(self.evidence_root / "leakage_audit.json", {"run_id": self.run_id, "verdict": "PASS", "scope": "RUNTIME_PROVENANCE"})
-        write_json_once(self.evidence_root / "human_report_metadata.json", {"run_id": self.run_id, "scientific_interpretation": "PIPELINE_QUALIFICATION_ONLY"})
-        (self.evidence_root / "logs/run.log").write_text("frozen stage order completed\n", encoding="utf-8", newline="\n")
+        write_text_once(self.evidence_root / "human_report.md", f"# QF-0A v1.1 qualification report\n\nRun: `{self.run_id}`\n\nMachine-generated pipeline qualification only. No post-hoc scientific interpretation.\n")
+        write_text_once(self.evidence_root / "logs/run.log", "frozen pre-finalization stages completed\n")
+
+    def _stage_g2_validate_evidence(self, conditional, provisional):
+        for name, meta in conditional["stage_b_identities"].items():
+            actual = hashlib.sha256((self.evidence_root / "raw" / name).read_bytes()).hexdigest()
+            if actual != meta["sha256"]: return replace(provisional, post_hoc_mutation=True)
+        schema = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/schemas/QF0A_RUN_MANIFEST.schema.json").read_text(encoding="utf-8"))
+        document = json.loads((self.evidence_root / "run_manifest.json").read_text(encoding="utf-8"))
+        Draft202012Validator(schema, format_checker=FormatChecker()).validate(document)
+        required = set(expected for expected in ("execution_authorization.json","run_manifest.json","environment_manifest.json","source_manifest.json","source_manifest.sha256","raw_output_index.json","negative_controls.json","leakage_audit.json","diagnostics.json","human_report.md","logs/run.log"))
+        if not all((self.evidence_root / item).is_file() for item in required): return provisional
+        return replace(provisional, required_evidence_complete=True)
+
+    def _stage_g3_final_sealing(self, verdict) -> None:
+        write_json_once(self.evidence_root / "machine_verdict.json", {"run_id": verdict.run_id, "pipeline_reproduction_verdict": verdict.pipeline_reproduction_verdict,
+            "foundation_model_verdict": verdict.foundation_model_verdict.value, "reason_codes": list(verdict.reason_codes)})
         hashes = []
         for path in sorted(p for p in self.evidence_root.rglob("*") if p.is_file() and p.name != "SHA256SUMS.txt"):
             hashes.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.relative_to(self.evidence_root).as_posix()}")
-        (self.evidence_root / "SHA256SUMS.txt").write_text("\n".join(hashes)+"\n", encoding="ascii", newline="\n")
+        write_text_once(self.evidence_root / "SHA256SUMS.txt", "\n".join(hashes)+"\n")
         validate_complete_inventory(self.evidence_root)

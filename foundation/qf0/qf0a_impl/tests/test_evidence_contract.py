@@ -6,13 +6,15 @@ import json
 import subprocess
 import sys
 import unittest
+import tempfile
 from pathlib import Path
+import numpy as np
 
 ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(ROOT / "foundation/qf0/qf0a_impl/src"))
 
 from qf0a.audit import canonical_committed_identity
-from qf0a.evidence import FIXED_RAW_ARRAYS, expected_relative_paths, prepare_new_evidence_root, validate_complete_inventory
+from qf0a.evidence import FIXED_RAW_ARRAYS, expected_relative_paths, prepare_new_evidence_root, validate_complete_inventory, write_array_once, register_existing_array, write_json_once
 
 class EvidenceContractTests(unittest.TestCase):
     def test_canonical_git_bytes_ignore_checkout_newlines(self):
@@ -26,6 +28,24 @@ class EvidenceContractTests(unittest.TestCase):
     def test_fixed_inventory(self):
         self.assertEqual(len(FIXED_RAW_ARRAYS), 9)
         self.assertEqual(len(expected_relative_paths()), 22)
+        self.assertIn("human_report.md", expected_relative_paths())
+        self.assertNotIn("human_report_metadata.json", expected_relative_paths())
+
+    def test_raw_array_write_once_and_hash_lock(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            meta = write_array_once(root, "conditional_probabilities.npy", np.asarray([0.5,0.5], dtype=np.float64))
+            self.assertEqual(register_existing_array(root, "conditional_probabilities.npy", meta["sha256"])["sha256"], meta["sha256"])
+            with self.assertRaises(FileExistsError):
+                write_array_once(root, "conditional_probabilities.npy", np.asarray([1.0], dtype=np.float64))
+            (root / "conditional_probabilities.npy").write_bytes(b"mutated")
+            with self.assertRaises(RuntimeError): register_existing_array(root, "conditional_probabilities.npy", meta["sha256"])
+
+    def test_source_manifest_sha_is_exact_written_bytes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "source_manifest.json"
+            write_json_once(path, {"z":1,"a":2})
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), hashlib.sha256(path.read_bytes()).hexdigest())
 
     def test_empty_root_and_completeness(self):
         root = ROOT / ".qf0a-synthetic-evidence-test"
