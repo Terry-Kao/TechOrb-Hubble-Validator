@@ -48,6 +48,18 @@ class FrozenIdentityBundle:
     source_baseline_commit: str
     runner_blob: str
 
+def build_run_manifest(repo_root: Path, run_id: str, manifest: dict[str, object], environment: dict[str, object], source_sha: str) -> dict[str, object]:
+    """Build provenance only; safe for synthetic schema tests and performs no science."""
+    now = datetime.now(timezone.utc); local = now.astimezone(ZoneInfo("Asia/Taipei"))
+    host = environment["host"]
+    return {"schema_version":"1.1","run_id":run_id,
+      "protocol":{"version":"QF0A_FROZEN_PROTOCOL_v1.1","path":"foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md","git_blob_sha":PROTOCOL_GIT_BLOB,"file_sha256":PROTOCOL_SHA256,"authoritative_main_sha":"a9e9a8ec0b637d4a724a6d3baaded83b54c0058e"},
+      "implementation":{"commit_sha":manifest["source_baseline_commit"],"branch":"qf0a/v1.1-pre-execution-repair-refreeze","dirty":False,"source_manifest_path":"source_manifest.json","source_manifest_sha256":source_sha},
+      "environment":{"os":host["os"],"kernel":host["version"],"cpu_architecture":host["architecture"],"cpu_model":host["cpu"],"python":f"CPython {environment['python']['version']}","packages_lock_sha256":environment["dependency_lock_canonical_sha256"],"numpy_version":environment["packages"][0]["version"],"scipy_version":environment["packages"][1]["version"],"blas_lapack":{"vendor":"scipy-openblas","version_or_build":environment["blas_lapack"]["scipy"]},"locale":os.environ.get("LANG","UNSET"),"timezone":host["timezone"],"numeric_dtypes":environment["numeric_dtypes"]},
+      "execution":{"timestamp_utc":now.isoformat(),"timestamp_asia_taipei":local.isoformat(),"command_line":sys.argv or ["qf0a"],"cwd":str(repo_root)},
+      "determinism":{"seeds":{"primary":104729,"repeat_1":130363,"repeat_2":155921},"thread_environment":environment["threads"],"eigensolver_policy":"frozen-full-spectral-projector","tolerance_policy":"frozen-protocol-only"},
+      "evidence":{"environment_manifest":"environment_manifest.json","raw_output_index":"raw_output_index.json","negative_controls":"negative_controls.json","leakage_audit":"leakage_audit.json","machine_verdict":"machine_verdict.json","human_report":"human_report.md","hash_manifest":"SHA256SUMS.txt"}}
+
 def validate_execution_authorization(document: dict[str, object], schema: dict[str, object], expected: FrozenIdentityBundle) -> None:
     Draft202012Validator(schema, format_checker=FormatChecker()).validate(document)
     for field in expected.__dataclass_fields__:
@@ -270,15 +282,7 @@ class FrozenQF0ARunner:
         write_json_once(self.evidence_root / "source_manifest.json", manifest)
         source_sha = hashlib.sha256((self.evidence_root / "source_manifest.json").read_bytes()).hexdigest()
         write_text_once(self.evidence_root / "source_manifest.sha256", source_sha+"\n")
-        now = datetime.now(timezone.utc); local = now.astimezone(ZoneInfo("Asia/Taipei"))
-        host = environment["host"]
-        run_manifest = {"schema_version":"1.1","run_id":self.run_id,
-          "protocol":{"version":"QF0A_FROZEN_PROTOCOL_v1.1","path":"foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md","git_blob_sha":PROTOCOL_GIT_BLOB,"file_sha256":PROTOCOL_SHA256,"authoritative_main_sha":"a9e9a8ec0b637d4a724a6d3baaded83b54c0058e"},
-          "implementation":{"commit_sha":manifest["source_baseline_commit"],"branch":"qf0a/v1.1-pre-execution-repair-refreeze","dirty":False,"source_manifest_path":"source_manifest.json","source_manifest_sha256":source_sha},
-          "environment":{"os":host["os"],"kernel":host["version"],"cpu_architecture":host["architecture"],"cpu_model":host["cpu"],"python":f"CPython {environment['python']['version']}","packages_lock_sha256":environment["dependency_lock_canonical_sha256"],"numpy_version":environment["packages"][0]["version"],"scipy_version":environment["packages"][1]["version"],"blas_lapack":{"vendor":"scipy-openblas","version_or_build":environment["blas_lapack"]["scipy"]},"locale":os.environ.get("LANG","UNSET"),"timezone":host["timezone"],"numeric_dtypes":environment["numeric_dtypes"]},
-          "execution":{"timestamp_utc":now.isoformat(),"timestamp_asia_taipei":local.isoformat(),"command_line":sys.argv,"cwd":str(self.repo_root)},
-          "determinism":{"seeds":{"primary":104729,"repeat_1":130363,"repeat_2":155921},"thread_environment":environment["threads"],"eigensolver_policy":"frozen-full-spectral-projector","tolerance_policy":"frozen-protocol-only"},
-          "evidence":{"environment_manifest":"environment_manifest.json","raw_output_index":"raw_output_index.json","negative_controls":"negative_controls.json","leakage_audit":"leakage_audit.json","machine_verdict":"machine_verdict.json","human_report":"human_report.md","hash_manifest":"SHA256SUMS.txt"}}
+        run_manifest = build_run_manifest(self.repo_root, self.run_id, manifest, environment, source_sha)
         write_json_once(self.evidence_root / "run_manifest.json", run_manifest)
         write_json_once(self.evidence_root / "leakage_audit.json", {"run_id": self.run_id, "verdict": "PASS", "scope": "RUNTIME_PROVENANCE"})
         write_text_once(self.evidence_root / "human_report.md", f"# QF-0A v1.1 qualification report\n\nRun: `{self.run_id}`\n\nMachine-generated pipeline qualification only. No post-hoc scientific interpretation.\n")
