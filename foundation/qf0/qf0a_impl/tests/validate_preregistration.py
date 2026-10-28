@@ -35,7 +35,7 @@ SCHEMAS = {
     "QF0A_EXECUTION_AUTHORIZATION.schema.json",
 }
 FIXTURE_SCHEMAS = SCHEMAS - {"QF0A_EXECUTION_AUTHORIZATION.schema.json"}
-AUTHORIZED_FREEZE_SOURCE = {"__init__.py", "protocol_binding.py", "analytic_reference.py", "conditional_state.py", "controls.py", "metrics.py", "adjudication.py", "evidence.py", "runner.py", "audit.py", "verdict.py"}
+AUTHORIZED_FREEZE_SOURCE = {"__init__.py", "entrypoint.py", "provenance.py", "protocol_binding.py", "analytic_reference.py", "conditional_state.py", "controls.py", "metrics.py", "adjudication.py", "evidence.py", "runner.py", "audit.py", "verdict.py"}
 FORBIDDEN_SUFFIXES = {".npy", ".npz", ".h5", ".hdf5", ".pkl", ".pickle", ".parquet"}
 FORBIDDEN_RESULT_NAMES = {"machine_verdict.json", "raw_output_index.json", "negative_controls.json", "environment_manifest.json", "source_manifest.json", "leakage_audit.json", "SHA256SUMS.txt"}
 RUN_ID_PATTERN = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9._-]{0,126}[A-Za-z0-9])?$")

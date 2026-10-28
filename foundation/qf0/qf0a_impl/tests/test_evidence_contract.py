@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(ROOT / "foundation/qf0/qf0a_impl/src"))
 
 from qf0a.audit import canonical_committed_identity
-from qf0a.evidence import FIXED_RAW_ARRAYS, expected_relative_paths, prepare_new_evidence_root, validate_complete_inventory, write_array_once, register_existing_array, write_json_once
+from qf0a.evidence import FIXED_RAW_ARRAYS, expected_relative_paths, prepare_new_evidence_root, validate_complete_inventory, write_array_once, register_existing_array, write_json_once, write_source_manifest_with_sha
 from qf0a.runner import build_run_manifest
 
 class EvidenceContractTests(unittest.TestCase):
@@ -45,13 +45,19 @@ class EvidenceContractTests(unittest.TestCase):
 
     def test_source_manifest_sha_is_exact_written_bytes(self):
         with tempfile.TemporaryDirectory() as temp:
-            path = Path(temp) / "source_manifest.json"
-            write_json_once(path, {"z":1,"a":2})
-            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), hashlib.sha256(path.read_bytes()).hexdigest())
+            root = Path(temp)
+            produced = write_source_manifest_with_sha(root, {"z":1,"a":2})
+            stored = (root / "source_manifest.sha256").read_text(encoding="ascii").strip()
+            independent = hashlib.sha256((root / "source_manifest.json").read_bytes()).hexdigest()
+            self.assertEqual((produced, stored), (independent, independent))
+            (root / "source_manifest.json").write_bytes(b'{"mutated":true}\n')
+            self.assertNotEqual(stored, hashlib.sha256((root / "source_manifest.json").read_bytes()).hexdigest())
 
     def test_runner_generated_manifest_validates_frozen_schema(self):
         environment = json.loads((ROOT / "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json").read_text())
-        document = build_run_manifest(ROOT, "synthetic-manifest-only", {"source_baseline_commit":"a"*40}, environment, "b"*64)
+        document = build_run_manifest(ROOT, "synthetic-manifest-only", {"source_baseline_commit":"a"*40}, environment, "b"*64, "c"*40)
+        self.assertEqual(document["implementation"]["current_execution_head"], "c"*40)
+        self.assertEqual(document["implementation"]["source_baseline_commit"], "a"*40)
         schema = json.loads((ROOT / "foundation/qf0/qf0a_impl/schemas/QF0A_RUN_MANIFEST.schema.json").read_text())
         Draft202012Validator(schema, format_checker=FormatChecker()).validate(document)
 

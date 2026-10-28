@@ -21,13 +21,14 @@ from .controls import (ControlId, ConstructionOrigin, ConstructionProvenance,
     CONTROL_IMPLEMENTATIONS, detect_post_hoc_mutation, scramble_clock_labels,
     validate_construction_origin_attestation)
 from .evidence import (prepare_new_evidence_root, validate_complete_inventory, write_array_once,
-    write_remaining_registered_arrays, write_json_once, write_text_once)
+    write_remaining_registered_arrays, write_json_once, write_source_manifest_with_sha, write_text_once)
 from .metrics import (constraint_residual, hermiticity_residual, minimum_eigenvalue,
     neighboring_step_distances, povm_completeness_residual, probability_sum_defect,
     pure_reference_fidelity, registered_step_unitary, registered_tau_grid,
     trace_distance, trace_normalization_defect, unitary_norm_defect)
 from .protocol_binding import D_C, D_S, FROZEN_THRESHOLDS, OMEGA, PROTOCOL_GIT_BLOB, PROTOCOL_SHA256, verify_protocol_identity
 from .verdict import derive_machine_verdict
+from .provenance import ExecutionSourceSeal, verify_execution_head_against_source_manifest
 
 STAGE_ORDER = (
     "A_FAIL_CLOSED_PROVENANCE", "B_CONDITIONAL_OUTPUT_AND_HASH",
@@ -48,15 +49,15 @@ class FrozenIdentityBundle:
     source_baseline_commit: str
     runner_blob: str
 
-def build_run_manifest(repo_root: Path, run_id: str, manifest: dict[str, object], environment: dict[str, object], source_sha: str) -> dict[str, object]:
+def build_run_manifest(repo_root: Path, run_id: str, manifest: dict[str, object], environment: dict[str, object], source_sha: str, current_execution_head: str) -> dict[str, object]:
     """Build provenance only; safe for synthetic schema tests and performs no science."""
     now = datetime.now(timezone.utc); local = now.astimezone(ZoneInfo("Asia/Taipei"))
     host = environment["host"]
     return {"schema_version":"1.1","run_id":run_id,
       "protocol":{"version":"QF0A_FROZEN_PROTOCOL_v1.1","path":"foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md","git_blob_sha":PROTOCOL_GIT_BLOB,"file_sha256":PROTOCOL_SHA256,"authoritative_main_sha":"a9e9a8ec0b637d4a724a6d3baaded83b54c0058e"},
-      "implementation":{"commit_sha":manifest["source_baseline_commit"],"branch":"qf0a/v1.1-pre-execution-repair-refreeze","dirty":False,"source_manifest_path":"source_manifest.json","source_manifest_sha256":source_sha},
+      "implementation":{"commit_sha":current_execution_head,"current_execution_head":current_execution_head,"source_baseline_commit":manifest["source_baseline_commit"],"branch":"qf0a/v1.1-pre-execution-repair-refreeze","dirty":False,"source_manifest_path":"source_manifest.json","source_manifest_sha256":source_sha},
       "environment":{"os":host["os"],"kernel":host["version"],"cpu_architecture":host["architecture"],"cpu_model":host["cpu"],"python":f"CPython {environment['python']['version']}","packages_lock_sha256":environment["dependency_lock_canonical_sha256"],"numpy_version":environment["packages"][0]["version"],"scipy_version":environment["packages"][1]["version"],"blas_lapack":{"vendor":"scipy-openblas","version_or_build":environment["blas_lapack"]["scipy"]},"locale":os.environ.get("LANG","UNSET"),"timezone":host["timezone"],"numeric_dtypes":environment["numeric_dtypes"]},
-      "execution":{"timestamp_utc":now.isoformat(),"timestamp_asia_taipei":local.isoformat(),"command_line":sys.argv or ["qf0a"],"cwd":str(repo_root)},
+      "execution":{"timestamp_utc":now.isoformat(),"timestamp_asia_taipei":local.isoformat(),"python_executable":sys.executable,"command_line":sys.argv or ["qf0a"],"cwd":str(repo_root)},
       "determinism":{"seeds":{"primary":104729,"repeat_1":130363,"repeat_2":155921},"thread_environment":environment["threads"],"eigensolver_policy":"frozen-full-spectral-projector","tolerance_policy":"frozen-protocol-only"},
       "evidence":{"environment_manifest":"environment_manifest.json","raw_output_index":"raw_output_index.json","negative_controls":"negative_controls.json","leakage_audit":"leakage_audit.json","machine_verdict":"machine_verdict.json","human_report":"human_report.md","hash_manifest":"SHA256SUMS.txt"}}
 
@@ -70,12 +71,13 @@ def validate_execution_authorization(document: dict[str, object], schema: dict[s
 
 class FrozenQF0ARunner:
     """No extension hooks, alternate controls/metrics/tau grids, or exclusions."""
-    def __init__(self, repo_root: Path, authorization_path: Path, evidence_root: Path):
+    def __init__(self, repo_root: Path, authorization_path: Path, evidence_root: Path, provenance_seal: ExecutionSourceSeal):
         self.repo_root = repo_root
         self.authorization_path = authorization_path
         self.evidence_root = evidence_root
         self.authorization: dict[str, object] = {}
         self.run_id = ""
+        self.provenance_seal = provenance_seal
 
     def execute(self) -> None:
         self._stage_a_fail_closed_provenance()
@@ -92,26 +94,24 @@ class FrozenQF0ARunner:
     def _stage_a_fail_closed_provenance(self) -> None:
         schema = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/schemas/QF0A_EXECUTION_AUTHORIZATION.schema.json").read_text(encoding="utf-8"))
         document = json.loads(self.authorization_path.read_text(encoding="utf-8"))
-        manifest_path = self.repo_root / "foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.1.json"
-        manifest_bytes = subprocess.check_output(["git", "show", "HEAD:foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.1.json"], cwd=self.repo_root)
-        manifest = json.loads(manifest_bytes)
-        baseline = str(manifest["source_baseline_commit"])
+        current_head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=self.repo_root, text=True).strip()
+        if current_head != self.provenance_seal.current_execution_head:
+            raise RuntimeError("execution HEAD changed after pre-import provenance closure")
         prereg_path = "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md"
         env_path = "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json"
         runner_path = "foundation/qf0/qf0a_impl/src/qf0a/runner.py"
-        prereg_bytes = subprocess.check_output(["git", "show", f"{baseline}:{prereg_path}"], cwd=self.repo_root)
-        env_bytes = subprocess.check_output(["git", "show", f"{baseline}:{env_path}"], cwd=self.repo_root)
         expected = FrozenIdentityBundle(
-            PROTOCOL_GIT_BLOB, PROTOCOL_SHA256,
-            subprocess.check_output(["git", "rev-parse", f"{baseline}:{prereg_path}"], cwd=self.repo_root, text=True).strip(),
-            hashlib.sha256(prereg_bytes).hexdigest(), hashlib.sha256(env_bytes).hexdigest(),
-            hashlib.sha256(manifest_bytes).hexdigest(), baseline,
-            subprocess.check_output(["git", "rev-parse", f"{baseline}:{runner_path}"], cwd=self.repo_root, text=True).strip())
+            str(document["protocol_blob"]), str(document["protocol_sha256"]), str(document["preregistration_blob"]),
+            str(document["preregistration_sha256"]), str(document["environment_sha256"]),
+            str(document["source_manifest_sha256"]), str(document["source_baseline_commit"]), str(document["runner_blob"]))
         validate_execution_authorization(document, schema, expected)
-        verify_protocol_identity(self.repo_root, expected.source_baseline_commit)
+        seal = verify_execution_head_against_source_manifest(self.repo_root, document)
+        if seal != self.provenance_seal:
+            raise RuntimeError("pre-import and Stage-A provenance seals differ")
+        verify_protocol_identity(self.repo_root, current_head)
         if subprocess.check_output(["git", "status", "--porcelain"], cwd=self.repo_root, text=True).strip():
             raise RuntimeError("scientific execution requires a clean tree")
-        runner_blob = subprocess.check_output(["git", "rev-parse", f"{baseline}:{runner_path}"], cwd=self.repo_root, text=True).strip()
+        runner_blob = subprocess.check_output(["git", "rev-parse", f"{current_head}:{runner_path}"], cwd=self.repo_root, text=True).strip()
         if runner_blob != expected.runner_blob:
             raise RuntimeError("runner blob mismatch")
         for variable in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS"):
@@ -279,10 +279,8 @@ class FrozenQF0ARunner:
         manifest = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.1.json").read_text(encoding="utf-8"))
         environment = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json").read_text(encoding="utf-8"))
         write_json_once(self.evidence_root / "environment_manifest.json", environment)
-        write_json_once(self.evidence_root / "source_manifest.json", manifest)
-        source_sha = hashlib.sha256((self.evidence_root / "source_manifest.json").read_bytes()).hexdigest()
-        write_text_once(self.evidence_root / "source_manifest.sha256", source_sha+"\n")
-        run_manifest = build_run_manifest(self.repo_root, self.run_id, manifest, environment, source_sha)
+        source_sha = write_source_manifest_with_sha(self.evidence_root, manifest)
+        run_manifest = build_run_manifest(self.repo_root, self.run_id, manifest, environment, source_sha, self.provenance_seal.current_execution_head)
         write_json_once(self.evidence_root / "run_manifest.json", run_manifest)
         write_json_once(self.evidence_root / "leakage_audit.json", {"run_id": self.run_id, "verdict": "PASS", "scope": "RUNTIME_PROVENANCE"})
         write_text_once(self.evidence_root / "human_report.md", f"# QF-0A v1.1 qualification report\n\nRun: `{self.run_id}`\n\nMachine-generated pipeline qualification only. No post-hoc scientific interpretation.\n")

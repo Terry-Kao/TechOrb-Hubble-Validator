@@ -14,9 +14,9 @@ RUN_ID = "qf0a-20261027-001"
 RUN_MANIFEST = {
     "schema_version": "1.1", "run_id": RUN_ID,
     "protocol": {"version": "QF0A_FROZEN_PROTOCOL_v1.1", "path": "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md", "git_blob_sha": PROTOCOL_BLOB, "file_sha256": PROTOCOL_SHA, "authoritative_main_sha": MAIN},
-    "implementation": {"commit_sha": "b" * 40, "branch": "synthetic", "dirty": False, "source_manifest_path": "source_manifest.json", "source_manifest_sha256": SHA},
+    "implementation": {"commit_sha": "b" * 40, "current_execution_head": "b" * 40, "source_baseline_commit": "c" * 40, "branch": "synthetic", "dirty": False, "source_manifest_path": "source_manifest.json", "source_manifest_sha256": SHA},
     "environment": {"os": "synthetic", "kernel": "synthetic", "cpu_architecture": "x86_64", "cpu_model": "synthetic", "python": "CPython 3.12.7", "packages_lock_sha256": SHA, "numpy_version": "2.1.3", "scipy_version": "1.14.1", "blas_lapack": {"vendor": "synthetic", "version_or_build": "synthetic"}, "locale": "C", "timezone": "Asia/Taipei", "numeric_dtypes": ["float64", "complex128"]},
-    "execution": {"timestamp_utc": "2026-01-01T00:00:00Z", "timestamp_asia_taipei": "2026-01-01T08:00:00+08:00", "command_line": ["python", "synthetic.py"], "cwd": "workspace/qf0a"},
+    "execution": {"timestamp_utc": "2026-01-01T00:00:00Z", "timestamp_asia_taipei": "2026-01-01T08:00:00+08:00", "python_executable": "python", "command_line": ["python", "synthetic.py"], "cwd": "workspace/qf0a"},
     "determinism": {"seeds": {"synthetic": 1}, "thread_environment": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "UNSET", "VECLIB_MAXIMUM_THREADS": "UNSET", "NUMEXPR_NUM_THREADS": "1"}, "eigensolver_policy": "frozen-full-spectral-projector", "tolerance_policy": "frozen-protocol-only"},
     "evidence": {"environment_manifest": "environment_manifest.json", "raw_output_index": "raw_output_index.json", "negative_controls": "negative_controls.json", "leakage_audit": "leakage_audit.json", "machine_verdict": "machine_verdict.json", "human_report": "human_report.md", "hash_manifest": "SHA256SUMS.txt"},
 }

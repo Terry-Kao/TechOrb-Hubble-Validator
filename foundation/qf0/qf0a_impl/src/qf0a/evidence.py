@@ -71,6 +71,13 @@ def write_text_once(path: Path, text: str) -> None:
         raise FileExistsError(f"refusing to overwrite evidence: {path}")
     path.write_text(text, encoding="utf-8", newline="\n")
 
+def write_source_manifest_with_sha(root: Path, payload: object) -> str:
+    manifest_path = root / "source_manifest.json"
+    write_json_once(manifest_path, payload)
+    digest = hashlib.sha256(manifest_path.read_bytes()).hexdigest()
+    write_text_once(root / "source_manifest.sha256", digest + "\n")
+    return digest
+
 def validate_complete_inventory(root: Path) -> None:
     missing = [path for path in expected_relative_paths() if not (root / path).is_file()]
     if missing:

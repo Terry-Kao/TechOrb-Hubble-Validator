@@ -25,9 +25,9 @@ foundation/qf0/qf0a_impl/
   environment/{QF0A_ENVIRONMENT_FREEZE_v1.1.json,QF0A_ENVIRONMENT_FREEZE_v1.1.md,requirements-scientific.txt,requirements-scientific.lock}
   manifests/QF0A_SOURCE_MANIFEST_v1.1.json
   audit/QF0A_STATIC_LEAKAGE_AUDIT_v1.1.json
-  src/qf0a/{__init__.py,protocol_binding.py,analytic_reference.py,conditional_state.py,controls.py,metrics.py,adjudication.py,evidence.py,runner.py,audit.py,verdict.py}
+  src/qf0a/{__init__.py,entrypoint.py,provenance.py,protocol_binding.py,analytic_reference.py,conditional_state.py,controls.py,metrics.py,adjudication.py,evidence.py,runner.py,audit.py,verdict.py}
   tests/fixtures/synthetic_fixtures.py
-  tests/{test_source_freeze.py,test_adjudication_contract.py,test_evidence_contract.py,validate_preregistration.py}
+  tests/{test_source_freeze.py,test_adjudication_contract.py,test_evidence_contract.py,test_runtime_source_identity.py,validate_preregistration.py}
   evidence/<run_id>/
 ```
 
@@ -54,6 +54,8 @@ Future execution requires a separate schema-valid `execution_authorization.json`
 ## Evidence contract
 
 The predetermined inventory includes authorization, run/environment/source manifests, conditional raw arrays, analytic arrays, metric arrays/index, diagnostic records, exactly six controls, leakage audit, machine verdict, deterministic machine-generated `human_report.md`, logs, and `SHA256SUMS.txt`. `source_manifest.sha256` is the SHA-256 of the exact bytes of the evidence copy `source_manifest.json`. Stage-B conditional arrays are written once and their hashes are rechecked before final adjudication. Completeness and canonical paths are machine checked; no post-inspection selection or overwrite is allowed.
+
+Source Freeze identity applies to the committed source actually executed at runtime, not merely to the historical baseline commit. The authorization externally binds the committed source-manifest SHA-256. Before scientific modules are imported by the official fresh-process entry point, every manifest entry at current HEAD must match its frozen blob, byte length, and canonical SHA-256; the active execution inventory must contain no unmanifested path. A later clean commit is executable only when all frozen active entries remain byte-identical and its diff from the baseline is confined to the explicit manifest/re-freeze governance allowlist. Interactive, notebook, and pre-imported scientific-module execution paths are prohibited.
 
 ## Gate
 

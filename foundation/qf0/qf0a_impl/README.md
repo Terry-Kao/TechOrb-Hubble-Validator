@@ -14,3 +14,5 @@ Present in this checkpoint:
 - a Draft 2020-12/schema/semantic validator and non-adjudicative synthetic fixtures under `tests/`.
 
 Deliberately absent: environment/result instances, raw arrays, generated outputs, machine verdicts, scientific reports, and evidence runs. The committed source is inert until a separate identity-bound authorization passes Stage A.
+
+The only supported future execution entry point is a fresh process invoking `python -m qf0a.entrypoint`. It validates the authorization-bound committed HEAD manifest and active source inventory before importing `qf0a.runner`. Interactive/notebook invocation and direct construction of the runner without a pre-import `ExecutionSourceSeal` are unsupported and fail closed.
