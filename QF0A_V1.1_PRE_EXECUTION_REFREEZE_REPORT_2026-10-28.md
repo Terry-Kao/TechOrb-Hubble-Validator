@@ -23,8 +23,8 @@ The external logic/scientific challenge verdict was `REVISE`. This package close
 - Preregistration v1.1: `foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md`; blob `e9d77ac2c17b325491cbf3386ee6036892f02c84`; canonical SHA-256 `285a9aca31a6034f5ff03a719495c80d523ec87e82305ace49e9f059c1bf73e5`.
 - Environment v1.1 JSON: blob `4bb6f73d5cfd96422829d3f0680ed52c9614e9e0`; canonical SHA-256 `13bd8a95059363a5b2208f36e514e0e7d08b4467f4a0db35e2ce2bf37c41299a`.
 - Scientific dependency lock: canonical SHA-256 `9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2`.
-- Scientific/adjudication source baseline: `37c66bf150a94f68abd9e6fd2e16f3cd46be9a16`.
-- Source manifest: `foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.1.json`; 35 entries; SHA-256 `b015c0f34c75020b0166bffbb0c093d5c174eb58a1ea05b12a8a1efb2f54ca5c`.
+- Scientific/adjudication source baseline: `fbaeecb5e9db2e858572d659ef6cc9824d58d5f9`.
+- Source manifest: `foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.1.json`; 35 entries; SHA-256 `26b5ba21a9c1f4038997613888c71258650cad4c07121911599d8e29819a58b7`.
 
 ## Canonical hashing and environment
 

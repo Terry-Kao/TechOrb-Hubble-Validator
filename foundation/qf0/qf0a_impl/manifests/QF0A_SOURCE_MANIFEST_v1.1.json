@@ -1,6 +1,6 @@
 {
   "schema_version":"1.1",
-  "source_baseline_commit":"37c66bf150a94f68abd9e6fd2e16f3cd46be9a16",
+  "source_baseline_commit":"fbaeecb5e9db2e858572d659ef6cc9824d58d5f9",
   "scientific_execution":"NOT_PERFORMED",
   "canonical_hash_policy":"git-committed-bytes-v1",
   "files":[
@@ -32,7 +32,7 @@
     {"path":"foundation/qf0/qf0a_impl/src/qf0a/evidence.py","byte_length":2500,"git_blob":"d0f26d30cf3000a09763989ed5717d5606a926b1","sha256":"6a39272750df52dfe45d14e64eec795c4617d9e711af13fef72c1f653877621f"},
     {"path":"foundation/qf0/qf0a_impl/src/qf0a/metrics.py","byte_length":3343,"git_blob":"b600425c42aa956a5175799d601a351851b939d6","sha256":"12462e7c0b3f6f401ad8db1b58ec04e00fc5cd837306c1843d0eada185fbd4ab"},
     {"path":"foundation/qf0/qf0a_impl/src/qf0a/protocol_binding.py","byte_length":3327,"git_blob":"9d050587f945d8df3f4b2d65842e6adb871c056b","sha256":"1207359e1e59e3280a06bb2b34b8c40cc86b55916847093d60b59959a7b4299e"},
-    {"path":"foundation/qf0/qf0a_impl/src/qf0a/runner.py","byte_length":11506,"git_blob":"781adc3c2f01d2f6729f03eb71121e98d10474b8","sha256":"83b51f3bc46846425ab0ee1b99cec855cb53a1e198648a5e3cf2025e1bd939ba"},
+    {"path":"foundation/qf0/qf0a_impl/src/qf0a/runner.py","byte_length":17584,"git_blob":"1663bc8e06825488e18bec6f93ae8233795b144f","sha256":"61641fa3239f6e0f46e7e5ecd4428c18884f80c5108ab754df564a797214cd0a"},
     {"path":"foundation/qf0/qf0a_impl/src/qf0a/verdict.py","byte_length":909,"git_blob":"2e1d9a649d4aa29ee5039837a6dade28759d1594","sha256":"e624518b9be3c6bbca8ea5a1c69e64ed1f1c84e7baf297616458ec7a9affb6bf"},
     {"path":"foundation/qf0/qf0a_impl/tests/fixtures/synthetic_fixtures.py","byte_length":13999,"git_blob":"cfd5b7bf555d1d23625547640c6b5abe996d9b00","sha256":"64a8aceba5d98aa392df083a94c058b39837f66154b17c613815d24f8d03c43c"},
     {"path":"foundation/qf0/qf0a_impl/tests/test_adjudication_contract.py","byte_length":4484,"git_blob":"3d0bb449dbada3bc322a6f3d68c7371ca7c8c1cf","sha256":"e8f4bb1afb753928b1d6edff1d6735b59a10d2f95a2e624e3f5bb94d9fa84bae"},
