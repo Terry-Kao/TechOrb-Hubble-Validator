@@ -70,10 +70,15 @@ def validate_exact_preverdict_inventory(root: Path) -> None:
 def validate_exact_final_inventory(root: Path) -> None:
     _validate_exact_inventory(root, expected_final_inventory(), "final")
 
-def prepare_new_evidence_root(root: Path) -> None:
-    if root.exists() and any(root.iterdir()):
-        raise RuntimeError("evidence root must be new or empty")
-    root.mkdir(parents=True, exist_ok=True)
+def canonical_evidence_root(repo_root: Path, run_id: str) -> Path:
+    return (Path(repo_root).resolve() / "foundation/qf0/qf0a_impl/evidence" / run_id).resolve()
+
+def prepare_new_evidence_root(root: Path, repo_root: Path | None = None, run_id: str | None = None) -> None:
+    if repo_root is not None and run_id is not None and root.resolve() != canonical_evidence_root(repo_root, run_id):
+        raise RuntimeError("evidence root must equal the canonical repository run path")
+    if root.exists():
+        raise RuntimeError("evidence root must not exist before official execution")
+    root.mkdir(parents=True, exist_ok=False)
     (root / "raw").mkdir()
     (root / "logs").mkdir()
 

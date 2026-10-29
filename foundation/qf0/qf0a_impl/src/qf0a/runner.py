@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 import os
+import platform
 from pathlib import Path
 import subprocess
 import sys
@@ -32,6 +33,8 @@ from .metrics import (constraint_residual, hermiticity_residual, minimum_eigenva
 from .protocol_binding import D_C, D_S, FROZEN_THRESHOLDS, OMEGA, PROTOCOL_GIT_BLOB, PROTOCOL_SHA256, verify_protocol_identity
 from .verdict import derive_machine_verdict
 from .provenance import ExecutionSourceSeal, verify_execution_head_against_source_manifest
+from .provenance import verify_loaded_qf0a_modules
+from .audit import validate_static_separation
 
 STAGE_ORDER = (
     "A_FAIL_CLOSED_PROVENANCE", "B_CONDITIONAL_OUTPUT_AND_HASH",
@@ -71,16 +74,81 @@ def _execution_branch(repo_root: Path, source_seal: ExecutionSourceSeal) -> str:
         return "DETACHED"
     raise RuntimeError("could not determine execution branch context")
 
-def build_run_manifest(repo_root: Path, run_id: str, manifest: dict[str, object], environment: dict[str, object], source_sha: str, source_seal: ExecutionSourceSeal) -> dict[str, object]:
+def _sha256_path(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def observe_runtime_environment(expected: dict[str, object]) -> dict[str, object]:
+    """Observe, then fail closed against the freeze; never relabel expected values as observed."""
+    import scipy
+    implementation = platform.python_implementation()
+    version = platform.python_version()
+    architecture = platform.machine()
+    base_executable = Path(getattr(sys, "_base_executable", sys.executable)).resolve()
+    edition = platform.win32_edition() if sys.platform == "win32" else ""
+    edition = {"Core": "Home", "CoreSingleLanguage": "Home"}.get(edition, edition)
+    os_name = f"Microsoft Windows {platform.release()} {edition}".strip() if sys.platform == "win32" else platform.system()
+    observed = {
+        "implementation": implementation, "version": version, "architecture": architecture,
+        "python_executable": str(Path(sys.executable).resolve()),
+        "base_executable": str(base_executable), "base_executable_sha256": _sha256_path(base_executable),
+        "numpy_version": np.__version__, "scipy_version": scipy.__version__,
+        "os": os_name, "kernel": platform.version(), "cpu_architecture": architecture,
+        "cpu_model": platform.processor(), "thread_environment": {
+            name: os.environ.get(name) for name in expected["threads"]
+        },
+        "numeric_dtypes": [str(np.dtype("float64")), str(np.dtype("complex128"))],
+        "numeric_dtype_sizes": {"float64": np.dtype("float64").itemsize, "complex128": np.dtype("complex128").itemsize},
+    }
+    failures = []
+    exp_python, exp_host = expected["python"], expected["host"]
+    comparisons = {
+        "python implementation": (implementation, exp_python["implementation"]),
+        "python version": (version, exp_python["version"]),
+        "architecture": (architecture.upper(), str(exp_python["architecture"]).upper()),
+        "base executable SHA-256": (observed["base_executable_sha256"], exp_python["base_executable_sha256"]),
+        "NumPy version": (np.__version__, expected["packages"][0]["version"]),
+        "SciPy version": (scipy.__version__, expected["packages"][1]["version"]),
+        "OS": (os_name, exp_host["os"]), "OS version": (platform.version(), exp_host["version"]),
+        "CPU architecture": (architecture.upper(), str(exp_host["architecture"]).upper()),
+        "CPU model": (platform.processor(), exp_host["cpu"]),
+        "numeric dtypes": (observed["numeric_dtypes"], expected["numeric_dtypes"]),
+    }
+    for label, (actual, wanted) in comparisons.items():
+        if actual != wanted:
+            failures.append(f"{label}: observed={actual!r}, expected={wanted!r}")
+    for name, wanted in expected["threads"].items():
+        if observed["thread_environment"][name] != wanted:
+            failures.append(f"thread variable {name}: observed={observed['thread_environment'][name]!r}, expected={wanted!r}")
+    # Both frozen BLAS identities must be observable from the loaded packages.
+    numpy_config = json.dumps(getattr(np.__config__, "CONFIG", {}), sort_keys=True).lower()
+    scipy_config = json.dumps(getattr(scipy.__config__, "CONFIG", {}), sort_keys=True).lower()
+    observed["blas_lapack_observation"] = {"numpy": numpy_config, "scipy": scipy_config}
+    for package, text in (("numpy", numpy_config), ("scipy", scipy_config)):
+        frozen = str(expected["blas_lapack"][package]).lower()
+        version_token = next((token for token in frozen.split() if token[0].isdigit()), "")
+        if "openblas" not in text or not version_token or version_token.replace(".dev", "") not in text.replace(".dev", ""):
+            failures.append(f"{package} BLAS/LAPACK runtime identity does not match freeze")
+    if failures:
+        raise RuntimeError("runtime environment mismatch: " + "; ".join(failures))
+    return observed
+
+def build_run_manifest(repo_root: Path, run_id: str, manifest: dict[str, object], environment: dict[str, object], source_sha: str, source_seal: ExecutionSourceSeal, observed: dict[str, object] | None = None) -> dict[str, object]:
     """Build provenance only; safe for synthetic schema tests and performs no science."""
     now = datetime.now(timezone.utc); local = now.astimezone(ZoneInfo("Asia/Taipei"))
     host = environment["host"]
+    runtime = observed or {
+        "os": host["os"], "kernel": host["version"], "cpu_architecture": host["architecture"],
+        "cpu_model": host["cpu"], "implementation": environment["python"]["implementation"],
+        "version": environment["python"]["version"], "python_executable": sys.executable,
+        "numpy_version": environment["packages"][0]["version"], "scipy_version": environment["packages"][1]["version"],
+        "numeric_dtypes": environment["numeric_dtypes"], "thread_environment": environment["threads"],
+    }
     return {"schema_version":"1.1","run_id":run_id,
       "protocol":{"version":"QF0A_FROZEN_PROTOCOL_v1.1","path":"foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md","git_blob_sha":PROTOCOL_GIT_BLOB,"file_sha256":PROTOCOL_SHA256,"authoritative_main_sha":source_seal.current_execution_head},
       "implementation":{"commit_sha":source_seal.current_execution_head,"current_execution_head":source_seal.current_execution_head,"source_baseline_commit":source_seal.source_baseline_commit,"branch":_execution_branch(repo_root, source_seal),"dirty":False,"source_manifest_path":"source_manifest.json","source_manifest_sha256":source_sha},
-      "environment":{"os":host["os"],"kernel":host["version"],"cpu_architecture":host["architecture"],"cpu_model":host["cpu"],"python":f"CPython {environment['python']['version']}","packages_lock_sha256":environment["dependency_lock_canonical_sha256"],"numpy_version":environment["packages"][0]["version"],"scipy_version":environment["packages"][1]["version"],"blas_lapack":{"vendor":"scipy-openblas","version_or_build":environment["blas_lapack"]["scipy"]},"locale":os.environ.get("LANG","UNSET"),"timezone":host["timezone"],"numeric_dtypes":environment["numeric_dtypes"]},
-      "execution":{"timestamp_utc":now.isoformat(),"timestamp_asia_taipei":local.isoformat(),"python_executable":sys.executable,"command_line":sys.argv or ["qf0a"],"cwd":str(repo_root)},
-      "determinism":{"seeds":{"primary":104729,"repeat_1":130363,"repeat_2":155921},"thread_environment":environment["threads"],"eigensolver_policy":"frozen-full-spectral-projector","tolerance_policy":"frozen-protocol-only"},
+      "environment":{"os":runtime["os"],"kernel":runtime["kernel"],"cpu_architecture":runtime["cpu_architecture"],"cpu_model":runtime["cpu_model"],"python":f"{runtime['implementation']} {runtime['version']}","packages_lock_sha256":environment["dependency_lock_canonical_sha256"],"numpy_version":runtime["numpy_version"],"scipy_version":runtime["scipy_version"],"blas_lapack":{"vendor":"scipy-openblas","version_or_build":environment["blas_lapack"]["scipy"]},"locale":os.environ.get("LANG","UNSET"),"timezone":host["timezone"],"numeric_dtypes":runtime["numeric_dtypes"]},
+      "execution":{"timestamp_utc":now.isoformat(),"timestamp_asia_taipei":local.isoformat(),"python_executable":runtime["python_executable"],"command_line":sys.argv or ["qf0a"],"cwd":os.getcwd()},
+      "determinism":{"seeds":{"primary":104729,"repeat_1":130363,"repeat_2":155921},"thread_environment":runtime["thread_environment"],"eigensolver_policy":"frozen-full-spectral-projector","tolerance_policy":"frozen-protocol-only"},
       "evidence":{"environment_manifest":"environment_manifest.json","raw_output_index":"raw_output_index.json","negative_controls":"negative_controls.json","leakage_audit":"leakage_audit.json","machine_verdict":"machine_verdict.json","human_report":"human_report.md","hash_manifest":"SHA256SUMS.txt"}}
 
 def validate_execution_authorization(document: dict[str, object], schema: dict[str, object], expected: FrozenIdentityBundle) -> None:
@@ -100,6 +168,8 @@ class FrozenQF0ARunner:
         self.authorization: dict[str, object] = {}
         self.run_id = ""
         self.provenance_seal = provenance_seal
+        self.runtime_observation: dict[str, object] = {}
+        self.leakage_audit: dict[str, object] = {}
 
     def execute(self) -> None:
         self._stage_a_fail_closed_provenance()
@@ -130,19 +200,24 @@ class FrozenQF0ARunner:
         seal = verify_execution_head_against_source_manifest(self.repo_root, document)
         if seal != self.provenance_seal:
             raise RuntimeError("pre-import and Stage-A provenance seals differ")
+        module_origins = verify_loaded_qf0a_modules(self.repo_root, current_head)
         verify_protocol_identity(self.repo_root, current_head)
         if subprocess.check_output(["git", "status", "--porcelain"], cwd=self.repo_root, text=True).strip():
             raise RuntimeError("scientific execution requires a clean tree")
         runner_blob = subprocess.check_output(["git", "rev-parse", f"{current_head}:{runner_path}"], cwd=self.repo_root, text=True).strip()
         if runner_blob != expected.runner_blob:
             raise RuntimeError("runner blob mismatch")
-        for variable in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS"):
-            if os.environ.get(variable) != "1":
-                raise RuntimeError(f"thread environment mismatch: {variable}")
+        environment = json.loads((self.repo_root / env_path).read_text(encoding="utf-8"))
+        self.runtime_observation = observe_runtime_environment(environment)
+        leakage_errors = validate_static_separation(self.repo_root / "foundation/qf0/qf0a_impl/src/qf0a")
+        self.leakage_audit = {"verdict": "PASS" if not leakage_errors else "BLOCKED", "errors": leakage_errors,
+                              "verified_module_count": len(module_origins)}
+        if leakage_errors:
+            raise RuntimeError(f"static leakage separation failed: {leakage_errors}")
         self.run_id = str(document["run_id"])
         if self.evidence_root.name != self.run_id:
             raise RuntimeError("evidence directory basename must equal authorized run_id")
-        prepare_new_evidence_root(self.evidence_root)
+        prepare_new_evidence_root(self.evidence_root, self.repo_root, self.run_id)
         write_json_once(self.evidence_root / "execution_authorization.json", document)
         self.authorization = document
 
@@ -308,9 +383,9 @@ class FrozenQF0ARunner:
         environment = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json").read_text(encoding="utf-8"))
         write_json_once(self.evidence_root / "environment_manifest.json", environment)
         source_sha = write_source_manifest_bytes_with_sha(self.evidence_root, committed_manifest)
-        run_manifest = build_run_manifest(self.repo_root, self.run_id, manifest, environment, source_sha, self.provenance_seal)
+        run_manifest = build_run_manifest(self.repo_root, self.run_id, manifest, environment, source_sha, self.provenance_seal, self.runtime_observation)
         write_json_once(self.evidence_root / "run_manifest.json", run_manifest)
-        write_json_once(self.evidence_root / "leakage_audit.json", {"run_id": self.run_id, "verdict": "PASS", "scope": "RUNTIME_PROVENANCE"})
+        write_json_once(self.evidence_root / "leakage_audit.json", {"run_id": self.run_id, "scope": "EXECUTED_STATIC_SEPARATION", **self.leakage_audit})
         write_text_once(self.evidence_root / "human_report.md", f"# QF-0A v1.1 qualification report\n\nRun: `{self.run_id}`\n\nMachine-generated pipeline qualification only. No post-hoc scientific interpretation.\n")
         write_text_once(self.evidence_root / "logs/run.log", "frozen pre-finalization stages completed\n")
 
