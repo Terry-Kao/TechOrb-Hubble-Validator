@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "source_baseline_commit": "5768ab55395f7e0edc8137a9dc2cc4f57d7b264d",
+  "source_baseline_commit": "80403cb383807334066eec482012ed42d4ded0ca",
   "scientific_execution": "NOT_PERFORMED",
   "canonical_hash_policy": "git-committed-bytes-v1",
   "files": [
@@ -35,10 +35,28 @@
       "sha256": "1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"
     },
     {
+      "path": "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md",
+      "byte_length": 7568,
+      "git_blob": "ce92de9e5d2b0dadf8e40f194ddfaf9b94a32844",
+      "sha256": "60d90f23f3369456b24d8af83236f232a745aeb2bb125099725408859237821c"
+    },
+    {
+      "path": "foundation/qf0/qf0a_impl/LEAKAGE_AUDIT_CHECKLIST.md",
+      "byte_length": 2000,
+      "git_blob": "3b38748e069aeb742b1170a8960da41cee740c9f",
+      "sha256": "869b6ece480a500b5cd50e4e0af5e6d9a9adba3250727eeb4ebfcc8eaca80ee2"
+    },
+    {
+      "path": "foundation/qf0/qf0a_impl/README.md",
+      "byte_length": 1593,
+      "git_blob": "03b41c6bf6a235ed3a8d0145261861b016315b02",
+      "sha256": "334fc6bb04d84676172476c95cf58c78a2e77e86f6b61ece1df6976212c1a017"
+    },
+    {
       "path": "foundation/qf0/qf0a_impl/audit/QF0A_STATIC_LEAKAGE_AUDIT_v1.1.json",
-      "byte_length": 4673,
-      "git_blob": "859266a10b4c79be244effe0cd0e644ed513095c",
-      "sha256": "cb3c52a1cd239bc3dad0a26b58e124696985c171265e7d52143711a4b5dadefc"
+      "byte_length": 5595,
+      "git_blob": "da6cc6a2920f497a6ffe7954239d053ba9b35ca2",
+      "sha256": "7e762fb76e2ff8d45385cbe54a22af6549fa05ad4e1b0b1f3214bf45f3ab1430"
     },
     {
       "path": "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json",
@@ -63,18 +81,6 @@
       "byte_length": 80,
       "git_blob": "afbd9e7b2e240fbcdef92aec8c88d0c421abf7c2",
       "sha256": "83cc0e200c81db86e3209c063d958751969400cdcd2ac92a92a2b999566b155f"
-    },
-    {
-      "path": "foundation/qf0/qf0a_impl/LEAKAGE_AUDIT_CHECKLIST.md",
-      "byte_length": 2000,
-      "git_blob": "3b38748e069aeb742b1170a8960da41cee740c9f",
-      "sha256": "869b6ece480a500b5cd50e4e0af5e6d9a9adba3250727eeb4ebfcc8eaca80ee2"
-    },
-    {
-      "path": "foundation/qf0/qf0a_impl/README.md",
-      "byte_length": 1593,
-      "git_blob": "03b41c6bf6a235ed3a8d0145261861b016315b02",
-      "sha256": "334fc6bb04d84676172476c95cf58c78a2e77e86f6b61ece1df6976212c1a017"
     },
     {
       "path": "foundation/qf0/qf0a_impl/requirements-validation.txt",
@@ -156,9 +162,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/evidence.py",
-      "byte_length": 9540,
-      "git_blob": "57e62ab729b381f854553068b4a22ac8e958ebe6",
-      "sha256": "cf23619668c7072c88f114f2d9dc625a26918c576a4efc9abf8c69716dfa4412"
+      "byte_length": 11239,
+      "git_blob": "b7e717d2a4750c94a25bb3a4f3488710b4727388",
+      "sha256": "6686aad1028441d8428c0ad4b76a6c037c58ccac5d33054f2ad21e38987a186b"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/metrics.py",
@@ -180,9 +186,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/runner.py",
-      "byte_length": 29771,
-      "git_blob": "a7c2a4b2dda08ffe5db82da6449769e3113b75b9",
-      "sha256": "aba04e1ecb5f2a25150cfca791d205ce6244400fa4b6bc51684b7578ca2d7ffb"
+      "byte_length": 29651,
+      "git_blob": "1076e3b70a3bed710e306475d5da1a22236bbc79",
+      "sha256": "b9d818b36d5fabd5e112482a5c0cd75eeaf692daf49a0ae91a835fe2166e1b78"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/verdict.py",
@@ -210,9 +216,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_evidence_serialization.py",
-      "byte_length": 9991,
-      "git_blob": "586065734eb75d61800a2fcfe3c9f929d3097a8b",
-      "sha256": "8e9574643f32e2af234ac9d306d75973e8d8c025436e1de3fbf6d9d6c1ec7ba3"
+      "byte_length": 14834,
+      "git_blob": "f26b100fe883fa8395a8049b1fa6359e8572795c",
+      "sha256": "a94262c67f92455137d73d77109fd25486180c8857bf1afb9e071ed2b8eabbf7"
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_post_governance_readiness.py",
@@ -237,12 +243,6 @@
       "byte_length": 18060,
       "git_blob": "32dc77c63a15c24672f1c3cd45bb2fecb9ab2f11",
       "sha256": "e43eccad417e172bab4b3f79251594136b9ffe1753c8380269c0603ea64e31de"
-    },
-    {
-      "path": "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md",
-      "byte_length": 7150,
-      "git_blob": "c02ba034c37034dacf519dd0f343a474156d6f69",
-      "sha256": "e77b7d95065d53cc1bb38a9f89d6228f27f9d754ec5738e15e0f0fadd007c97d"
     }
   ]
 }
