@@ -191,3 +191,19 @@
 
 **Next gate:** QF-0A v1.1 — Identity-Bound Scientific Execution Authorization + First Qualification Run, as a separate task bound to the final authoritative `main` after governance synchronization.
 
+
+## D-2026-10-29-16 — Accept post-governance execution-readiness repair / re-freeze
+
+**Status:** `ACCEPTED / MERGED / NOT EXECUTED`; runtime post-governance readiness closure `ACCEPTED`; scientific execution `UNAUTHORIZED`; first qualification run `NOT STARTED`.
+
+**Decision:** Accept the exact independently approved PR #15 head `c64d13e1559722e02362cdcd17afa4cf8bd05337`, squash-merged as `2c2326ce0828e80ab27428cbc6833e6d30aabc8d`. The final accepted pre-execution baseline had previously been merged through PR #13 and synchronized by PR #14. The first execution-readiness preflight correctly returned `PRE-EXECUTION BLOCKED` because the governance allowlist was too narrow, authoritative-main metadata was stale, branch metadata was stale, and the frozen runtime environment had not yet been provisioned.
+
+**Repair chain:** A-line repaired the three repository blockers and re-froze source at baseline `3c144f0f523800973bcff68f40d59a1e34ed6932`, 39 entries, manifest SHA-256 `ed504e4ddec500de69ea5d2834b532ad17d8f45a5a1d8f8a4489d6a12b132e09`. B-line separately provisioned and verified the frozen Windows environment without invoking QF-0A. Independent review returned `APPROVE FOR MERGE` for PR #15.
+
+**Frozen status:** Protocol v1.1, Preregistration v1.1, Environment Freeze v1.1, and Scientific + Adjudication Source Freeze v1.1 are accepted and not executed. Host-local environment readiness is referenced without claiming GitHub independently measured it.
+
+**Epistemic boundary:** QF-0A remains `SOFTWARE QUALIFICATION / KNOWN-RESULT REPRODUCTION / CONSTRUCTIBILITY DEMONSTRATION`. A future PASS would not validate Tech-Orb Foundation, emergent time in nature, absence of external time, clock ambiguity resolution, arbitrary temporal-frame equivalence, interacting relational dynamics, or QF-0D.
+
+**Explicit non-actions:** No execution authorization, QF-0A evidence root, registered scientific output, machine verdict, or qualification run was created. Scientific execution remains separately gated.
+
+**Next gate:** QF-0A v1.1 — Identity-Bound Scientific Execution Authorization + First Qualification Run.
