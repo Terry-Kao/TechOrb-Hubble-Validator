@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "source_baseline_commit": "cca6707fd8410f355f9308b948eabf2efeac4c89",
+  "source_baseline_commit": "3c144f0f523800973bcff68f40d59a1e34ed6932",
   "scientific_execution": "NOT_PERFORMED",
   "canonical_hash_policy": "git-committed-bytes-v1",
   "files": [
@@ -114,9 +114,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/schemas/QF0A_RUN_MANIFEST.schema.json",
-      "byte_length": 5389,
-      "git_blob": "4fa5b2ed4b1e8d7f4ed23eb0894e1f5f2858fc56",
-      "sha256": "90712c9235602136d329126a93e51e786563842199eb3a224c604d3c2bd59f03"
+      "byte_length": 5362,
+      "git_blob": "6df79a2dc19a28b14bb42d4bb9d77b9bc7b245cd",
+      "sha256": "feb3e4765a417a6b0ea4b39f747d18d9f8c858c17596bb1114108b02edab821d"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/__init__.py",
@@ -174,9 +174,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/runner.py",
-      "byte_length": 25922,
-      "git_blob": "04718bff7f0f05c148deeda824c5098dad85c31d",
-      "sha256": "756078b4357b524ca9b4c1e4c38c21ac56e91c2cfb480e8ec426272bdfc6484b"
+      "byte_length": 26748,
+      "git_blob": "86158c464810f2fa5d265adaadff8c7d99e13ce2",
+      "sha256": "b1567c5cb43c81f8c089ae8cf2972743ab0dfa05cd154ae46c179685dce59c2c"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/verdict.py",
@@ -186,9 +186,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/fixtures/synthetic_fixtures.py",
-      "byte_length": 14102,
-      "git_blob": "c06065e618a9d28d4200af9bb1206ff98d50deb8",
-      "sha256": "602f3a6b5a7688c6668262d2930be543eae4b085401cdae903c2ea41ab9a8cb3"
+      "byte_length": 14137,
+      "git_blob": "deae80f9e14ce20dadbdb2ad1b1611815f04a5e9",
+      "sha256": "7d78653b160ccd0231e0f40ae1751c700a4f47d90a1814efc3cdaddcccfac29c"
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_adjudication_contract.py",
@@ -198,9 +198,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_evidence_contract.py",
-      "byte_length": 4357,
-      "git_blob": "fc86bd17fb2bca2cc030976fca61e2ad88898210",
-      "sha256": "50f5d3e4ff13cf5233cfc7ae95c4c2d458b8424c9bd43ce04b1feefdabe28d57"
+      "byte_length": 4650,
+      "git_blob": "f0535eb1441c8b7de3b81966268793ab2f327141",
+      "sha256": "edae461a0227e1b8b7426b8ddd1383b2dcb1d2f4f304fde5f9fc1168f8f0d36e"
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_source_freeze.py",
@@ -222,15 +222,21 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/provenance.py",
-      "byte_length": 6684,
-      "git_blob": "eb3ea7d6b0f5582842220fd22c43f16c0ba7937f",
-      "sha256": "80fd48325555cc86a373bb5e05e606e08914729f5df8cfad3878887bef2bd9fb"
+      "byte_length": 6797,
+      "git_blob": "0184ba60490cea91441c1b87e9543e0161b38749",
+      "sha256": "80bfb3e73b5c3e29199115b28ea161c08bfbe5d4ba15347f4d3f9edab09a4972"
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_runtime_source_identity.py",
-      "byte_length": 5678,
-      "git_blob": "8c79f1d3e34d547b60ef9ce6ca0211e834462369",
-      "sha256": "59e383a1c19389bea0cae110417955c5b8d208448fcd3e6bace170d4350e0f46"
+      "byte_length": 8101,
+      "git_blob": "c9bad5f223ac988180a9f0007c8891f2cdb01b0d",
+      "sha256": "de16949e0a06b924a02643a1e7ec3c547f8ef6aa2fcf7e96977d6320b773770a"
+    },
+    {
+      "path": "foundation/qf0/qf0a_impl/tests/test_post_governance_readiness.py",
+      "byte_length": 4005,
+      "git_blob": "2705ce4c0ada3a476e28b63b039aecd0edc11ed5",
+      "sha256": "862e39788ba8006f9cb82528252d6849680098dd787d3347c626f8a63b20a614"
     }
   ]
 }
