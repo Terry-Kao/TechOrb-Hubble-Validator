@@ -21,9 +21,11 @@ sys.path.insert(0, str(ROOT / "foundation/qf0/qf0a_impl/src"))
 
 from qf0a.adjudication import AdjudicationRecord, ControlObservation, EXPECTED_CONTROL_REASON, ThresholdResult
 from qf0a.controls import CONTROL_DEFINITIONS, ControlId
-from qf0a.evidence import (FIXED_RAW_ARRAYS, prepare_new_evidence_root,
+from qf0a.evidence import (FIXED_RAW_ARRAYS, expected_final_inventory,
+    expected_preverdict_inventory, expected_relative_paths, prepare_new_evidence_root,
     serialize_machine_verdict, serialize_negative_controls, serialize_raw_output_index,
-    write_array_once, write_json_once, write_source_manifest_bytes_with_sha, write_text_once)
+    validate_exact_final_inventory, validate_hash_manifest, write_array_once,
+    write_json_once, write_source_manifest_bytes_with_sha, write_text_once)
 from qf0a.protocol_binding import FROZEN_THRESHOLDS, PROTOCOL_SHA256
 from qf0a.provenance import ExecutionSourceSeal
 from qf0a.runner import FrozenQF0ARunner, build_run_manifest
@@ -123,6 +125,99 @@ class EvidenceSerializationIntegrationTests(unittest.TestCase):
         self.assertTrue(complete.required_evidence_complete)
         runner._stage_g3_final_sealing(derive_machine_verdict(self.run_id, complete), complete)
         _validate("QF0A_MACHINE_VERDICT.schema.json", json.loads((self.root / "machine_verdict.json").read_text()))
+        validate_exact_final_inventory(self.root)
+        validate_hash_manifest(self.root)
+
+    def _assert_g2_extra_blocked(self, relative_path: str, payload: bytes = b"unexpected\n") -> None:
+        runner, conditional, provisional = self._materialize_preverdict_package()
+        path = self.root / relative_path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payload)
+        result = runner._stage_g2_validate_evidence(conditional, provisional)
+        self.assertFalse(result.required_evidence_complete)
+        self.assertNotEqual(derive_machine_verdict(self.run_id, result).pipeline_reproduction_verdict, "PASS")
+
+    def test_unexpected_root_file_rejected_at_g2(self):
+        self._assert_g2_extra_blocked("unexpected.json", b"{}\n")
+
+    def test_extra_raw_array_rejected_at_g2(self):
+        extra = self.root / "raw" / "extra.npy"
+        with extra.open("wb") as handle:
+            np.save(handle, np.asarray([1.0], dtype=np.float64), allow_pickle=False)
+        runner, conditional, provisional = self._materialize_preverdict_package_after_existing_raw()
+        result = runner._stage_g2_validate_evidence(conditional, provisional)
+        self.assertFalse(result.required_evidence_complete)
+
+    def _materialize_preverdict_package_after_existing_raw(self):
+        """Add an extra raw file after ordinary package materialization."""
+        extra_bytes = (self.root / "raw" / "extra.npy").read_bytes()
+        (self.root / "raw" / "extra.npy").unlink()
+        package = self._materialize_preverdict_package()
+        (self.root / "raw" / "extra.npy").write_bytes(extra_bytes)
+        return package
+
+    def test_extra_log_rejected_at_g2(self):
+        self._assert_g2_extra_blocked("logs/extra.log")
+
+    def test_unexpected_directory_rejected_at_g2(self):
+        runner, conditional, provisional = self._materialize_preverdict_package()
+        (self.root / "tmp").mkdir()
+        result = runner._stage_g2_validate_evidence(conditional, provisional)
+        self.assertFalse(result.required_evidence_complete)
+
+    def _sealed_package(self) -> None:
+        runner, conditional, provisional = self._materialize_preverdict_package()
+        complete = runner._stage_g2_validate_evidence(conditional, provisional)
+        self.assertTrue(complete.required_evidence_complete)
+        runner._stage_g3_final_sealing(derive_machine_verdict(self.run_id, complete), complete)
+
+    def test_final_package_with_23rd_file_rejected(self):
+        self._sealed_package()
+        (self.root / "unexpected.json").write_text("{}\n", encoding="utf-8")
+        with self.assertRaises(RuntimeError):
+            validate_exact_final_inventory(self.root)
+
+    def test_correctly_hashed_extra_checksum_entry_still_rejected(self):
+        self._sealed_package()
+        extra = self.root / "unexpected.json"
+        extra.write_text("{}\n", encoding="utf-8")
+        digest = hashlib.sha256(extra.read_bytes()).hexdigest()
+        with (self.root / "SHA256SUMS.txt").open("a", encoding="ascii", newline="\n") as handle:
+            handle.write(f"{digest}  unexpected.json\n")
+        with self.assertRaises(RuntimeError):
+            validate_hash_manifest(self.root)
+
+    def test_checksum_missing_expected_path_rejected(self):
+        self._sealed_package()
+        path = self.root / "SHA256SUMS.txt"
+        lines = path.read_text(encoding="ascii").splitlines()
+        path.write_text("\n".join(lines[1:]) + "\n", encoding="ascii", newline="\n")
+        with self.assertRaises(RuntimeError):
+            validate_hash_manifest(self.root)
+
+    def test_checksum_duplicate_path_rejected(self):
+        self._sealed_package()
+        path = self.root / "SHA256SUMS.txt"
+        first = path.read_text(encoding="ascii").splitlines()[0]
+        with path.open("a", encoding="ascii", newline="\n") as handle:
+            handle.write(first + "\n")
+        with self.assertRaisesRegex(RuntimeError, "duplicate"):
+            validate_hash_manifest(self.root)
+
+    def test_checksum_hash_mismatch_rejected(self):
+        self._sealed_package()
+        path = self.root / "SHA256SUMS.txt"
+        lines = path.read_text(encoding="ascii").splitlines()
+        _, rel = lines[0].split("  ", 1)
+        lines[0] = f"{'0' * 64}  {rel}"
+        path.write_text("\n".join(lines) + "\n", encoding="ascii", newline="\n")
+        with self.assertRaisesRegex(RuntimeError, "hash mismatch"):
+            validate_hash_manifest(self.root)
+
+    def test_frozen_inventory_counts(self):
+        self.assertEqual(len(expected_relative_paths()), 22)
+        self.assertEqual(len(expected_final_inventory()), 22)
+        self.assertEqual(len(expected_preverdict_inventory()), 20)
 
     def test_malformed_raw_or_controls_and_missing_evidence_block_pass(self):
         for target in ("raw_output_index.json", "negative_controls.json"):

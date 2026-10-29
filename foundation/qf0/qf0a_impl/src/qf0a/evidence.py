@@ -38,6 +38,38 @@ if tuple(RAW_ARRAY_CONTRACT) != FIXED_RAW_ARRAYS:
 def expected_relative_paths() -> tuple[str, ...]:
     return FIXED_ROOT_FILES + tuple(f"raw/{name}" for name in FIXED_RAW_ARRAYS) + ("logs/run.log",)
 
+def expected_final_inventory() -> frozenset[str]:
+    return frozenset(expected_relative_paths())
+
+def expected_preverdict_inventory() -> frozenset[str]:
+    return expected_final_inventory() - {"machine_verdict.json", "SHA256SUMS.txt"}
+
+def actual_evidence_files(root: Path) -> set[str]:
+    return {path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file()}
+
+def actual_evidence_directories(root: Path) -> set[str]:
+    return {path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_dir()}
+
+def _validate_exact_inventory(root: Path, expected: frozenset[str], stage: str) -> None:
+    actual = actual_evidence_files(root)
+    if actual != expected:
+        missing = sorted(expected - actual)
+        unexpected = sorted(actual - expected)
+        raise RuntimeError(f"{stage} evidence inventory mismatch: missing={missing}, unexpected={unexpected}")
+    directories = actual_evidence_directories(root)
+    if directories != {"raw", "logs"}:
+        raise RuntimeError(
+            f"{stage} evidence directory inventory mismatch: "
+            f"missing={sorted({'raw', 'logs'} - directories)}, "
+            f"unexpected={sorted(directories - {'raw', 'logs'})}"
+        )
+
+def validate_exact_preverdict_inventory(root: Path) -> None:
+    _validate_exact_inventory(root, expected_preverdict_inventory(), "pre-verdict")
+
+def validate_exact_final_inventory(root: Path) -> None:
+    _validate_exact_inventory(root, expected_final_inventory(), "final")
+
 def prepare_new_evidence_root(root: Path) -> None:
     if root.exists() and any(root.iterdir()):
         raise RuntimeError("evidence root must be new or empty")
@@ -177,23 +209,24 @@ def serialize_machine_verdict(verdict, adjudication) -> dict[str, object]:
     }
 
 def validate_complete_inventory(root: Path) -> None:
-    missing = [path for path in expected_relative_paths() if not (root / path).is_file()]
-    if missing:
-        raise RuntimeError(f"evidence inventory incomplete: {missing}")
+    """Compatibility name for the exact final-inventory contract."""
+    validate_exact_final_inventory(root)
 
 def validate_hash_manifest(root: Path) -> None:
+    validate_exact_final_inventory(root)
     expected = {}
     for line in (root / "SHA256SUMS.txt").read_text(encoding="ascii").splitlines():
+        if line.count("  ") != 1:
+            raise RuntimeError("malformed hash-manifest line")
         digest, rel = line.split("  ", 1)
+        if len(digest) != 64 or digest != digest.lower() or any(char not in "0123456789abcdef" for char in digest):
+            raise RuntimeError(f"invalid SHA-256 digest for hash-manifest path: {rel}")
         if rel in expected:
             raise RuntimeError(f"duplicate hash-manifest path: {rel}")
         expected[rel] = digest
-    actual_paths = {
-        path.relative_to(root).as_posix() for path in root.rglob("*")
-        if path.is_file() and path.name != "SHA256SUMS.txt"
-    }
-    if set(expected) != actual_paths:
-        raise RuntimeError("hash manifest does not exactly cover sealed inventory")
+    expected_checksum_paths = expected_final_inventory() - {"SHA256SUMS.txt"}
+    if set(expected) != expected_checksum_paths:
+        raise RuntimeError("hash manifest path set does not equal frozen inventory")
     for rel, digest in expected.items():
         if hashlib.sha256((root / rel).read_bytes()).hexdigest() != digest:
             raise RuntimeError(f"sealed evidence hash mismatch: {rel}")

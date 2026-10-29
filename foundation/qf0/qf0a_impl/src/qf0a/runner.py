@@ -20,9 +20,9 @@ from .conditional_state import (clock_hamiltonian, clock_povm_element, condition
 from .controls import (CONTROL_DEFINITIONS, ControlId, ConstructionOrigin, ConstructionProvenance,
     CONTROL_IMPLEMENTATIONS, detect_post_hoc_mutation, scramble_clock_labels,
     validate_construction_origin_attestation)
-from .evidence import (FIXED_RAW_ARRAYS, expected_relative_paths, prepare_new_evidence_root,
+from .evidence import (FIXED_RAW_ARRAYS, prepare_new_evidence_root,
     serialize_machine_verdict, serialize_negative_controls, serialize_raw_output_index,
-    validate_complete_inventory, validate_hash_manifest, write_array_once,
+    validate_exact_final_inventory, validate_exact_preverdict_inventory, validate_hash_manifest, write_array_once,
     write_remaining_registered_arrays, write_json_once, write_source_manifest_bytes_with_sha,
     write_text_once)
 from .metrics import (constraint_residual, hermiticity_residual, minimum_eigenvalue,
@@ -324,10 +324,8 @@ class FrozenQF0ARunner:
         for name, meta in conditional["stage_b_identities"].items():
             actual = hashlib.sha256((self.evidence_root / "raw" / name).read_bytes()).hexdigest()
             if actual != meta["sha256"]: return replace(provisional, post_hoc_mutation=True)
-        required = set(expected_relative_paths()) - {"machine_verdict.json", "SHA256SUMS.txt"}
-        if not all((self.evidence_root / item).is_file() for item in required):
-            return provisional
         try:
+            validate_exact_preverdict_inventory(self.evidence_root)
             self._validate_schema_file("run_manifest.json", "QF0A_RUN_MANIFEST.schema.json")
             raw_index = self._validate_schema_file("raw_output_index.json", "QF0A_RAW_OUTPUT.schema.json")
             controls = self._validate_schema_file("negative_controls.json", "QF0A_NEGATIVE_CONTROL_RESULT.schema.json")
@@ -363,6 +361,6 @@ class FrozenQF0ARunner:
         for path in sorted(p for p in self.evidence_root.rglob("*") if p.is_file() and p.name != "SHA256SUMS.txt"):
             hashes.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.relative_to(self.evidence_root).as_posix()}")
         write_text_once(self.evidence_root / "SHA256SUMS.txt", "\n".join(hashes)+"\n")
-        validate_complete_inventory(self.evidence_root)
+        validate_exact_final_inventory(self.evidence_root)
         self._validate_schema_file("machine_verdict.json", "QF0A_MACHINE_VERDICT.schema.json")
         validate_hash_manifest(self.evidence_root)
