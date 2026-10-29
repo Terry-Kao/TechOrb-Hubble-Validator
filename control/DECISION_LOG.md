@@ -1,5 +1,29 @@
 # Decision Log
 
+## Current QF-0A evidence-contract acceptance — 2026-10-29
+
+This section supersedes earlier QF-0A status checkpoints below.
+PR #17 approved head `bb4a07170414204f83b6bb7540497162433f6194` was squash merged at `cc6bf75e4ae43dcac5327adb78500a7b575c57fb`. Evidence Contract Serialization + Exact Inventory Repair: **ACCEPTED / MERGED / NOT EXECUTED**.
+Protocol v1.1: **FROZEN / ACCEPTED**; blob `3af303a471d99397429d33f77ca512578f40f972`; SHA-256 `1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a`.
+Preregistration v1.1: **FROZEN / ACCEPTED**; blob `ce92de9e5d2b0dadf8e40f194ddfaf9b94a32844`; SHA-256 `60d90f23f3369456b24d8af83236f232a745aeb2bb125099725408859237821c`.
+Environment Freeze v1.1: **FROZEN / ACCEPTED / READY / NOT EXECUTED**; blob `4bb6f73d5cfd96422829d3f0680ed52c9614e9e0`; SHA-256 `13bd8a95059363a5b2208f36e514e0e7d08b4467f4a0db35e2ce2bf37c41299a`; dependency lock SHA-256 `9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2`. Host readiness was separately verified host-locally; GitHub has not independently re-measured host hashes.
+Scientific + Adjudication Source Freeze v1.1: **FROZEN / ACCEPTED / NOT EXECUTED**; source baseline `80403cb383807334066eec482012ed42d4ded0ca`; manifest `foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.1.json`: 40 entries; SHA-256 `a86d73cd80094711a4790c2e6944a400e59fe7e8d8833e62b20f754a7e48a5ce`.
+Implementation blobs: evidence.py `b7e717d2a4750c94a25bb3a4f3488710b4727388`; runner.py `1076e3b70a3bed710e306475d5da1a22236bbc79`; test_evidence_serialization.py `f26b100fe883fa8395a8049b1fa6359e8572795c`.
+
+Evidence contract closure: **ACCEPTED**. Inventory validation is set equality: exactly 20 pre-verdict regular files, 22 final regular files, and 21 non-checksum paths in SHA256SUMS; only raw/ and logs/ directories are allowed. Extra files/directories, correctly hashed extra checksum entries, missing entries, duplicate paths, and hash mismatches fail closed. A machine-verdict file alone does not constitute accepted qualification; successful official process exit and successful G3 final sealing are mandatory.
+
+QUAL-001: **FIRST QUALIFICATION ATTEMPT — EXECUTED / NUMERICAL GATES PASS / EVIDENCE CONTRACT BLOCKED**; **IMMUTABLE HISTORICAL ATTEMPT / NUMERICAL GATES PASS / EVIDENCE CONTRACT BLOCKED**. Raw machine verdict PASS and Foundation verdict NOT_APPLICABLE remain historical output; governance adjudication BLOCKED because raw_output_index, negative_controls, and machine_verdict failed schemas. No retry; no accepted qualification. Historical bytes remain immutable.
+QUAL-002 authorization: **NOT CREATED / UNAUTHORIZED**; run: **NOT STARTED**. This synchronization generated no science, authorization, evidence root, or machine verdict.
+
+Classification remains **SOFTWARE QUALIFICATION / KNOWN-RESULT REPRODUCTION / CONSTRUCTIBILITY DEMONSTRATION**. A future PASS does not validate Tech-Orb Foundation, emergent time in nature, absence of external time, clock ambiguity resolution, arbitrary temporal-frame equivalence, interacting relational dynamics, or QF-0D.
+
+**Next gate: Claude Independent Final Pre-QUAL-002 Challenge Review**.
+
+Decision provenance: QUAL-001 executed exactly once; 22 numerical thresholds passed and six controls reported expected failure, with raw machine PASS, but evidence serialization/schema failure caused governance BLOCKED. No retry; immutable preservation retained. PR #17 prospectively repaired raw-output, negative-controls and machine-verdict serialization, G2 validation, G3 sealing, exact source-manifest byte copying, exact 20/22 inventories, checksum path-set equality and extra-file/directory rejection. Initial independent review returned REVISE for the exact-inventory gap; narrow closure repaired it and final narrow review returned APPROVE FOR MERGE. The first merge attempt correctly failed closed on a stale handoff preregistration expectation; no repository defect was found. The corrected independently verified final identity is ce92de9e5d2b0dadf8e40f194ddfaf9b94a32844 / 60d90f23f3369456b24d8af83236f232a745aeb2bb125099725408859237821c. QUAL-002 remains separately gated.
+
+## Earlier checkpoint record (QF-0A statuses superseded above)
+
+
 ## D-2026-10-20-01 — Governance Reset
 
 **Status:** Approved by merged PR #2 (4134c4b0e95c28975e4a64e97157ffc9c7b2f843)  
