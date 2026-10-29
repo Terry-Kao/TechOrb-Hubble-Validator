@@ -59,7 +59,7 @@
     "protocol": {
       "type": "object", "additionalProperties": false,
       "required": ["version", "path", "git_blob_sha", "file_sha256", "authoritative_main_sha"],
-      "properties": {"version": {"const": "QF0A_FROZEN_PROTOCOL_v1.1"}, "path": {"const": "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md"}, "git_blob_sha": {"const": "3af303a471d99397429d33f77ca512578f40f972"}, "file_sha256": {"const": "1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"}, "authoritative_main_sha": {"const": "a9e9a8ec0b637d4a724a6d3baaded83b54c0058e"}}
+      "properties": {"version": {"const": "QF0A_FROZEN_PROTOCOL_v1.1"}, "path": {"const": "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md"}, "git_blob_sha": {"const": "3af303a471d99397429d33f77ca512578f40f972"}, "file_sha256": {"const": "1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"}, "authoritative_main_sha": {"$ref": "#/$defs/gitSha"}}
     }
   }
 }

@@ -18,6 +18,12 @@ PROTOCOL = "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md"
 PREREG = "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md"
 ENV = "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json"
 SCHEMA = "foundation/qf0/qf0a_impl/schemas/QF0A_EXECUTION_AUTHORIZATION.schema.json"
+ACCEPTED_GOVERNANCE = (
+    "README.md",
+    "control/DECISION_LOG.md",
+    "control/EVIDENCE_INDEX.md",
+    "control/PROJECT_STATE.md",
+)
 
 def git(root: Path, *args: str, text=False):
     return subprocess.check_output(["git", *args], cwd=root, text=text)
@@ -45,11 +51,12 @@ class RuntimeSourceIdentityTests(unittest.TestCase):
         subprocess.check_call(["git","config","user.email","synthetic@example.invalid"],cwd=self.repo)
         subprocess.check_call(["git","config","user.name","Synthetic Provenance Test"],cwd=self.repo)
         fixtures={RUNNER:b"RUNNER_FROZEN=True\n",PROTOCOL:b"protocol\n",PREREG:b"prereg\n",ENV:b"{}\n",SCHEMA:b"{}\n"}
+        self.paths=list(fixtures)
+        fixtures.update({path: b"governance baseline\n" for path in ACCEPTED_GOVERNANCE})
         for path,data in fixtures.items(): write(self.repo,path,data)
         self.baseline=commit(self.repo,"synthetic source baseline")
-        self.paths=list(fixtures)
         self._write_manifest(self.baseline)
-        commit(self.repo,"synthetic manifest freeze")
+        self.freeze_head=commit(self.repo,"synthetic manifest freeze")
         manifest_bytes=git(self.repo,"show",f"HEAD:{MANIFEST_PATH}")
         by_path={item["path"]:item for item in json.loads(manifest_bytes)["files"]}
         self.authorization={"source_manifest_sha256":hashlib.sha256(manifest_bytes).hexdigest(),"source_baseline_commit":self.baseline,
@@ -67,6 +74,46 @@ class RuntimeSourceIdentityTests(unittest.TestCase):
         write(self.repo,RUNNER,b"RUNNER_FROZEN=False\n"); commit(self.repo,"clean attacker source mutation")
         self.assertEqual(git(self.repo,"status","--porcelain",text=True),"")
         with self.assertRaises(ProvenanceViolation): verify_execution_head_against_source_manifest(self.repo,self.authorization)
+
+    def test_exact_accepted_post_baseline_governance_changes_pass(self):
+        for path in ACCEPTED_GOVERNANCE:
+            write(self.repo,path,b"accepted final governance\n")
+        commit(self.repo,"accepted governance synchronization")
+        seal=verify_execution_head_against_source_manifest(self.repo,self.authorization)
+        self.assertEqual(seal.current_execution_head,git(self.repo,"rev-parse","HEAD",text=True).strip())
+
+    def test_unlisted_governance_file_is_rejected_by_policy(self):
+        write(self.repo,"control/UNAUTHORIZED.md",b"not allowlisted\n"); commit(self.repo,"unlisted governance change")
+        with self.assertRaisesRegex(ProvenanceViolation,"outside governance allowlist"):
+            verify_execution_head_against_source_manifest(self.repo,self.authorization)
+
+    def test_active_source_schema_and_environment_mutations_remain_rejected(self):
+        mutations=(
+            (RUNNER,b"RUNNER_FROZEN=False\n"),
+            (SCHEMA,b'{"changed":true}\n'),
+            (ENV,b'{"changed":true}\n'),
+        )
+        for path,data in mutations:
+            with self.subTest(path=path):
+                subprocess.check_call(["git","reset","--hard",self.freeze_head],cwd=self.repo,stdout=subprocess.DEVNULL)
+                write(self.repo,path,data); commit(self.repo,f"mutate {path}")
+                with self.assertRaises(ProvenanceViolation):
+                    verify_execution_head_against_source_manifest(self.repo,self.authorization)
+
+    def test_readiness_check_does_not_import_scientific_modules(self):
+        script = """
+import json, pathlib, sys
+sys.path.insert(0, sys.argv[1])
+from qf0a.provenance import verify_execution_head_against_source_manifest
+verify_execution_head_against_source_manifest(pathlib.Path(sys.argv[2]), json.loads(sys.argv[3]))
+scientific={'qf0a.conditional_state','qf0a.controls','qf0a.metrics','qf0a.runner'}
+assert scientific.isdisjoint(sys.modules), sorted(scientific & set(sys.modules))
+"""
+        subprocess.check_call([
+            sys.executable, "-c", script,
+            str(ROOT / "foundation/qf0/qf0a_impl/src"),
+            str(self.repo), json.dumps(self.authorization),
+        ])
 
     def test_added_alternate_active_module_is_rejected(self):
         write(self.repo,"foundation/qf0/qf0a_impl/src/qf0a/runner_alt.py",b"ALT=True\n"); commit(self.repo,"clean alternate module")

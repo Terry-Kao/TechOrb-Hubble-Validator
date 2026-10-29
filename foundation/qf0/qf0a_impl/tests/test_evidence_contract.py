@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "foundation/qf0/qf0a_impl/src"))
 
 from qf0a.audit import canonical_committed_identity
 from qf0a.evidence import FIXED_RAW_ARRAYS, expected_relative_paths, prepare_new_evidence_root, validate_complete_inventory, write_array_once, register_existing_array, write_json_once, write_source_manifest_with_sha
+from qf0a.provenance import ExecutionSourceSeal
 from qf0a.runner import build_run_manifest
 
 class EvidenceContractTests(unittest.TestCase):
@@ -55,8 +56,11 @@ class EvidenceContractTests(unittest.TestCase):
 
     def test_runner_generated_manifest_validates_frozen_schema(self):
         environment = json.loads((ROOT / "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json").read_text())
-        document = build_run_manifest(ROOT, "synthetic-manifest-only", {"source_baseline_commit":"a"*40}, environment, "b"*64, "c"*40)
-        self.assertEqual(document["implementation"]["current_execution_head"], "c"*40)
+        head = subprocess.check_output(["git","rev-parse","HEAD"], cwd=ROOT, text=True).strip()
+        seal = ExecutionSourceSeal(head, "a"*40, "b"*64, "c"*40, tuple())
+        document = build_run_manifest(ROOT, "synthetic-manifest-only", {"source_baseline_commit":"a"*40}, environment, "b"*64, seal)
+        self.assertEqual(document["implementation"]["current_execution_head"], head)
+        self.assertEqual(document["protocol"]["authoritative_main_sha"], head)
         self.assertEqual(document["implementation"]["source_baseline_commit"], "a"*40)
         schema = json.loads((ROOT / "foundation/qf0/qf0a_impl/schemas/QF0A_RUN_MANIFEST.schema.json").read_text())
         Draft202012Validator(schema, format_checker=FormatChecker()).validate(document)
