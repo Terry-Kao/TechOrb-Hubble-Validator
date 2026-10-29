@@ -40,7 +40,7 @@ def fixtures() -> tuple[dict[str, tuple[str, dict]], list[dict], dict[str, dict]
     run("run_missing_required", lambda x: x.pop("environment"), "schema", "missing required field")
     run("run_wrong_protocol_hash", lambda x: x["protocol"].update(file_sha256=SHA), "schema", "wrong protocol hash")
     run("run_wrong_protocol_blob", lambda x: x["protocol"].update(git_blob_sha="d" * 40), "schema", "wrong protocol blob")
-    run("run_wrong_main", lambda x: x["protocol"].update(authoritative_main_sha="d" * 40), "schema", "wrong authoritative main")
+    run("run_bad_authoritative_main_sha", lambda x: x["protocol"].update(authoritative_main_sha="not-a-sha"), "schema", "malformed authoritative execution commit")
     run("run_dirty", lambda x: x["implementation"].update(dirty=True), "schema", "dirty tree")
     run("run_bad_python", lambda x: x["environment"].update(python="CPython 3.11.9"), "schema", "invalid CPython")
     run("run_bad_numpy", lambda x: x["environment"].update(numpy_version="2.2.0"), "schema", "invalid NumPy")

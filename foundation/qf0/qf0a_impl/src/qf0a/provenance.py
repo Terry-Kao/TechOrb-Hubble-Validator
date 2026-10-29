@@ -14,6 +14,10 @@ PROTOCOL_PATH = "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md"
 PREREGISTRATION_PATH = "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md"
 ENVIRONMENT_PATH = "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json"
 ALLOWED_POST_BASELINE_PATHS = frozenset({
+    "README.md",
+    "control/DECISION_LOG.md",
+    "control/EVIDENCE_INDEX.md",
+    "control/PROJECT_STATE.md",
     MANIFEST_PATH,
     "foundation/qf0/qf0a_impl/manifests/QF0A_V1_1_ADJUDICATION_EVIDENCE_REFREEZE_REPORT.md",
 })

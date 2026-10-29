@@ -49,13 +49,32 @@ class FrozenIdentityBundle:
     source_baseline_commit: str
     runner_blob: str
 
-def build_run_manifest(repo_root: Path, run_id: str, manifest: dict[str, object], environment: dict[str, object], source_sha: str, current_execution_head: str) -> dict[str, object]:
+def _execution_branch(repo_root: Path, source_seal: ExecutionSourceSeal) -> str:
+    current_head = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=repo_root, text=True
+    ).strip()
+    if current_head != source_seal.current_execution_head:
+        raise RuntimeError("execution HEAD differs from validated source seal")
+    result = subprocess.run(
+        ["git", "symbolic-ref", "--quiet", "--short", "HEAD"],
+        cwd=repo_root, text=True, capture_output=True, check=False,
+    )
+    if result.returncode == 0:
+        branch = result.stdout.strip()
+        if not branch:
+            raise RuntimeError("attached execution HEAD has no branch name")
+        return branch
+    if result.returncode == 1:
+        return "DETACHED"
+    raise RuntimeError("could not determine execution branch context")
+
+def build_run_manifest(repo_root: Path, run_id: str, manifest: dict[str, object], environment: dict[str, object], source_sha: str, source_seal: ExecutionSourceSeal) -> dict[str, object]:
     """Build provenance only; safe for synthetic schema tests and performs no science."""
     now = datetime.now(timezone.utc); local = now.astimezone(ZoneInfo("Asia/Taipei"))
     host = environment["host"]
     return {"schema_version":"1.1","run_id":run_id,
-      "protocol":{"version":"QF0A_FROZEN_PROTOCOL_v1.1","path":"foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md","git_blob_sha":PROTOCOL_GIT_BLOB,"file_sha256":PROTOCOL_SHA256,"authoritative_main_sha":"a9e9a8ec0b637d4a724a6d3baaded83b54c0058e"},
-      "implementation":{"commit_sha":current_execution_head,"current_execution_head":current_execution_head,"source_baseline_commit":manifest["source_baseline_commit"],"branch":"qf0a/v1.1-pre-execution-repair-refreeze","dirty":False,"source_manifest_path":"source_manifest.json","source_manifest_sha256":source_sha},
+      "protocol":{"version":"QF0A_FROZEN_PROTOCOL_v1.1","path":"foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md","git_blob_sha":PROTOCOL_GIT_BLOB,"file_sha256":PROTOCOL_SHA256,"authoritative_main_sha":source_seal.current_execution_head},
+      "implementation":{"commit_sha":source_seal.current_execution_head,"current_execution_head":source_seal.current_execution_head,"source_baseline_commit":source_seal.source_baseline_commit,"branch":_execution_branch(repo_root, source_seal),"dirty":False,"source_manifest_path":"source_manifest.json","source_manifest_sha256":source_sha},
       "environment":{"os":host["os"],"kernel":host["version"],"cpu_architecture":host["architecture"],"cpu_model":host["cpu"],"python":f"CPython {environment['python']['version']}","packages_lock_sha256":environment["dependency_lock_canonical_sha256"],"numpy_version":environment["packages"][0]["version"],"scipy_version":environment["packages"][1]["version"],"blas_lapack":{"vendor":"scipy-openblas","version_or_build":environment["blas_lapack"]["scipy"]},"locale":os.environ.get("LANG","UNSET"),"timezone":host["timezone"],"numeric_dtypes":environment["numeric_dtypes"]},
       "execution":{"timestamp_utc":now.isoformat(),"timestamp_asia_taipei":local.isoformat(),"python_executable":sys.executable,"command_line":sys.argv or ["qf0a"],"cwd":str(repo_root)},
       "determinism":{"seeds":{"primary":104729,"repeat_1":130363,"repeat_2":155921},"thread_environment":environment["threads"],"eigensolver_policy":"frozen-full-spectral-projector","tolerance_policy":"frozen-protocol-only"},
@@ -280,7 +299,7 @@ class FrozenQF0ARunner:
         environment = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json").read_text(encoding="utf-8"))
         write_json_once(self.evidence_root / "environment_manifest.json", environment)
         source_sha = write_source_manifest_with_sha(self.evidence_root, manifest)
-        run_manifest = build_run_manifest(self.repo_root, self.run_id, manifest, environment, source_sha, self.provenance_seal.current_execution_head)
+        run_manifest = build_run_manifest(self.repo_root, self.run_id, manifest, environment, source_sha, self.provenance_seal)
         write_json_once(self.evidence_root / "run_manifest.json", run_manifest)
         write_json_once(self.evidence_root / "leakage_audit.json", {"run_id": self.run_id, "verdict": "PASS", "scope": "RUNTIME_PROVENANCE"})
         write_text_once(self.evidence_root / "human_report.md", f"# QF-0A v1.1 qualification report\n\nRun: `{self.run_id}`\n\nMachine-generated pipeline qualification only. No post-hoc scientific interpretation.\n")
