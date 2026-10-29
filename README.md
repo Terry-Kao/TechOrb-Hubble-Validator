@@ -117,3 +117,13 @@ Theory-to-theory spectrum RMS is an engineering diagnostic, not an observational
 
 No merge into `main` should be interpreted as scientific validation; it records the governed state of the research program.
 
+
+## QF-0A v1.1 post-governance execution-readiness status (2026-10-29)
+
+The repository repair and re-freeze from PR #15 is **ACCEPTED / MERGED / NOT EXECUTED**. Protocol v1.1 and Preregistration v1.1 remain **FROZEN / ACCEPTED / NOT EXECUTED**. Environment Freeze v1.1 remains **FROZEN / ACCEPTED / READY / NOT EXECUTED**; frozen Windows environment provisioning was verified separately on the execution host, not independently re-measured by GitHub.
+
+The Scientific + Adjudication Source Freeze v1.1 is **FROZEN / ACCEPTED / NOT EXECUTED** at source baseline `3c144f0f523800973bcff68f40d59a1e34ed6932`, with 39 manifest entries and source-manifest SHA-256 `ed504e4ddec500de69ea5d2834b532ad17d8f45a5a1d8f8a4489d6a12b132e09`. Runtime post-governance readiness closure is **ACCEPTED**.
+
+Scientific Execution Authorization is **NOT CREATED / UNAUTHORIZED**. The first qualification run is **NOT STARTED**. QF-0A remains only `SOFTWARE QUALIFICATION / KNOWN-RESULT REPRODUCTION / CONSTRUCTIBILITY DEMONSTRATION`; a future PASS would not validate Tech-Orb Foundation, emergent time in nature, absence of external time, clock ambiguity resolution, arbitrary temporal-frame equivalence, interacting relational dynamics, or QF-0D.
+
+**Next gate:** QF-0A v1.1 — Identity-Bound Scientific Execution Authorization + First Qualification Run.

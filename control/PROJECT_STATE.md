@@ -97,3 +97,25 @@ The recovered historical Alpine 3.20.10 / musl / GCC 13.2.1 environment matches 
 ## R1 Closure — 2026-10-21
 
 R1 was pre-registered at `79247c1e97d433c38d0f1fc0f1e9366866f5e475` before numerical execution. The first canonical attempt was rejected and preserved because its copied source tree was dirty. The accepted attempt used a pristine Git archive of CLASS v3.2.0 `aa92943e4ab86b56970953589b4897adf2bd0f99`. Historical control artifacts matched exactly; canonical HyRec Run 1 and Run 2 were byte-identical for background, thermodynamics, unlensed/lensed CMB and linear/nonlinear matter spectra. R1 pipeline verdict is PASS; model verdict is NOT APPLICABLE. R2 numerical work is not started.
+
+
+## 2026-10-29 — QF-0A v1.1 post-governance readiness acceptance
+
+- Repository repair / re-freeze: **ACCEPTED / MERGED / NOT EXECUTED** (PR #15; merge `2c2326ce0828e80ab27428cbc6833e6d30aabc8d`).
+- Protocol v1.1: **FROZEN / ACCEPTED / NOT EXECUTED**.
+- Preregistration v1.1: **FROZEN / ACCEPTED / NOT EXECUTED**.
+- Environment Freeze v1.1: **FROZEN / ACCEPTED / READY / NOT EXECUTED**. Provisioning was separately verified host-locally; GitHub does not claim an independent host measurement.
+- Scientific + Adjudication Source Freeze v1.1: **FROZEN / ACCEPTED / NOT EXECUTED**.
+  - Source baseline: `3c144f0f523800973bcff68f40d59a1e34ed6932`
+  - Manifest entries: `39`
+  - Manifest SHA-256: `ed504e4ddec500de69ea5d2834b532ad17d8f45a5a1d8f8a4489d6a12b132e09`
+  - Runner blob: `86158c464810f2fa5d265adaadff8c7d99e13ce2`
+  - Provenance blob: `0184ba60490cea91441c1b87e9543e0161b38749`
+- Runtime post-governance readiness closure: **ACCEPTED**.
+- Scientific Execution Authorization: **NOT CREATED / UNAUTHORIZED**.
+- First Qualification Run: **NOT STARTED**.
+- Epistemic classification: `SOFTWARE QUALIFICATION / KNOWN-RESULT REPRODUCTION / CONSTRUCTIBILITY DEMONSTRATION`.
+
+A future PASS is not validation of Tech-Orb Foundation, emergent time in nature, absence of external time, clock ambiguity resolution, arbitrary temporal-frame equivalence, interacting relational dynamics, or QF-0D.
+
+**Next gate:** QF-0A v1.1 — Identity-Bound Scientific Execution Authorization + First Qualification Run.
