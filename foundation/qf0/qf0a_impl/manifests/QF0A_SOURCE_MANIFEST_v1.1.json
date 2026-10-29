@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "source_baseline_commit": "3c144f0f523800973bcff68f40d59a1e34ed6932",
+  "source_baseline_commit": "80403cb383807334066eec482012ed42d4ded0ca",
   "scientific_execution": "NOT_PERFORMED",
   "canonical_hash_policy": "git-committed-bytes-v1",
   "files": [
@@ -11,28 +11,10 @@
       "sha256": "54f889317ed67cfd9dd599a7d03b9c8a97660cab570fe886ff116e722e322ab7"
     },
     {
-      "path": "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md",
-      "byte_length": 8069,
-      "git_blob": "3af303a471d99397429d33f77ca512578f40f972",
-      "sha256": "1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"
-    },
-    {
-      "path": "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md",
-      "byte_length": 5544,
-      "git_blob": "4e303e39abe9f389257eb5e91e607a668ff25f8f",
-      "sha256": "5c3ce46eac8459097754c2e52902cd1b785ea77c8fb7264d0683a1db113585e2"
-    },
-    {
       "path": "foundation/qf0/CLAIM_REGISTRY_v1.1.json",
       "byte_length": 1160,
       "git_blob": "9925798aba06b7c644bc7ddd833ace63487a31f2",
       "sha256": "a41a3997710331aab1c75b87b8df6bb2e65c459cda380d85958e2777095ab328"
-    },
-    {
-      "path": "foundation/qf0/LITERATURE_COLLISION_MATRIX_v1.1.md",
-      "byte_length": 2678,
-      "git_blob": "90fecc3c0f5be73d0ecd3ef89a9dec51c1723688",
-      "sha256": "33391a58eaa44cebe521923d98e5b519ccaef3e13958b5a16a2412990f340f78"
     },
     {
       "path": "foundation/qf0/LITERATURE_COLLISION_MATRIX_v1.1.json",
@@ -41,10 +23,22 @@
       "sha256": "18699b6ec1282153ad3ee69f24563137d33ed7897f1917c9ab342497308f0cf7"
     },
     {
-      "path": "foundation/qf0/qf0a_impl/README.md",
-      "byte_length": 1593,
-      "git_blob": "03b41c6bf6a235ed3a8d0145261861b016315b02",
-      "sha256": "334fc6bb04d84676172476c95cf58c78a2e77e86f6b61ece1df6976212c1a017"
+      "path": "foundation/qf0/LITERATURE_COLLISION_MATRIX_v1.1.md",
+      "byte_length": 2678,
+      "git_blob": "90fecc3c0f5be73d0ecd3ef89a9dec51c1723688",
+      "sha256": "33391a58eaa44cebe521923d98e5b519ccaef3e13958b5a16a2412990f340f78"
+    },
+    {
+      "path": "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md",
+      "byte_length": 8069,
+      "git_blob": "3af303a471d99397429d33f77ca512578f40f972",
+      "sha256": "1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a"
+    },
+    {
+      "path": "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md",
+      "byte_length": 7568,
+      "git_blob": "ce92de9e5d2b0dadf8e40f194ddfaf9b94a32844",
+      "sha256": "60d90f23f3369456b24d8af83236f232a745aeb2bb125099725408859237821c"
     },
     {
       "path": "foundation/qf0/qf0a_impl/LEAKAGE_AUDIT_CHECKLIST.md",
@@ -53,10 +47,16 @@
       "sha256": "869b6ece480a500b5cd50e4e0af5e6d9a9adba3250727eeb4ebfcc8eaca80ee2"
     },
     {
+      "path": "foundation/qf0/qf0a_impl/README.md",
+      "byte_length": 1593,
+      "git_blob": "03b41c6bf6a235ed3a8d0145261861b016315b02",
+      "sha256": "334fc6bb04d84676172476c95cf58c78a2e77e86f6b61ece1df6976212c1a017"
+    },
+    {
       "path": "foundation/qf0/qf0a_impl/audit/QF0A_STATIC_LEAKAGE_AUDIT_v1.1.json",
-      "byte_length": 3921,
-      "git_blob": "fe6d77cafc1f9e95b604e6486ab61e473544566e",
-      "sha256": "aca459dd11232c716eda3f016aed22281f65406a86413848fca951c9cab8a126"
+      "byte_length": 5595,
+      "git_blob": "da6cc6a2920f497a6ffe7954239d053ba9b35ca2",
+      "sha256": "7e762fb76e2ff8d45385cbe54a22af6549fa05ad4e1b0b1f3214bf45f3ab1430"
     },
     {
       "path": "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json",
@@ -71,16 +71,16 @@
       "sha256": "2fee7d8ea832024ef6a42350c444052e8ac8cf88c085a46faefd1a142ca90625"
     },
     {
-      "path": "foundation/qf0/qf0a_impl/environment/requirements-scientific.txt",
-      "byte_length": 80,
-      "git_blob": "afbd9e7b2e240fbcdef92aec8c88d0c421abf7c2",
-      "sha256": "83cc0e200c81db86e3209c063d958751969400cdcd2ac92a92a2b999566b155f"
-    },
-    {
       "path": "foundation/qf0/qf0a_impl/environment/requirements-scientific.lock",
       "byte_length": 355,
       "git_blob": "ef9ab075d657374228fe7adb20b3e6841c2cfaed",
       "sha256": "9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2"
+    },
+    {
+      "path": "foundation/qf0/qf0a_impl/environment/requirements-scientific.txt",
+      "byte_length": 80,
+      "git_blob": "afbd9e7b2e240fbcdef92aec8c88d0c421abf7c2",
+      "sha256": "83cc0e200c81db86e3209c063d958751969400cdcd2ac92a92a2b999566b155f"
     },
     {
       "path": "foundation/qf0/qf0a_impl/requirements-validation.txt",
@@ -155,10 +155,16 @@
       "sha256": "bc33dddd73d1b35a8ed3af99543a4b1eb0661b01e2446565010405b88c907807"
     },
     {
+      "path": "foundation/qf0/qf0a_impl/src/qf0a/entrypoint.py",
+      "byte_length": 1278,
+      "git_blob": "04d7c8ad7d16cf75cc683c2be3df50cae99b2fd6",
+      "sha256": "8eee2237bdf44bc9f7fc6e6f268e17c864bd1372fad398b77ee6f322910e0971"
+    },
+    {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/evidence.py",
-      "byte_length": 4123,
-      "git_blob": "047db00446d5feb4553848446849899d3a703ba1",
-      "sha256": "b61a2a3f02ac0a99a1676726eafa6f5ab631fb1d0cbc3cf906e2f7dd7ef71fbb"
+      "byte_length": 11239,
+      "git_blob": "b7e717d2a4750c94a25bb3a4f3488710b4727388",
+      "sha256": "6686aad1028441d8428c0ad4b76a6c037c58ccac5d33054f2ad21e38987a186b"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/metrics.py",
@@ -173,10 +179,16 @@
       "sha256": "1207359e1e59e3280a06bb2b34b8c40cc86b55916847093d60b59959a7b4299e"
     },
     {
+      "path": "foundation/qf0/qf0a_impl/src/qf0a/provenance.py",
+      "byte_length": 6797,
+      "git_blob": "0184ba60490cea91441c1b87e9543e0161b38749",
+      "sha256": "80bfb3e73b5c3e29199115b28ea161c08bfbe5d4ba15347f4d3f9edab09a4972"
+    },
+    {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/runner.py",
-      "byte_length": 26748,
-      "git_blob": "86158c464810f2fa5d265adaadff8c7d99e13ce2",
-      "sha256": "b1567c5cb43c81f8c089ae8cf2972743ab0dfa05cd154ae46c179685dce59c2c"
+      "byte_length": 29651,
+      "git_blob": "1076e3b70a3bed710e306475d5da1a22236bbc79",
+      "sha256": "b9d818b36d5fabd5e112482a5c0cd75eeaf692daf49a0ae91a835fe2166e1b78"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/verdict.py",
@@ -203,6 +215,24 @@
       "sha256": "edae461a0227e1b8b7426b8ddd1383b2dcb1d2f4f304fde5f9fc1168f8f0d36e"
     },
     {
+      "path": "foundation/qf0/qf0a_impl/tests/test_evidence_serialization.py",
+      "byte_length": 14834,
+      "git_blob": "f26b100fe883fa8395a8049b1fa6359e8572795c",
+      "sha256": "a94262c67f92455137d73d77109fd25486180c8857bf1afb9e071ed2b8eabbf7"
+    },
+    {
+      "path": "foundation/qf0/qf0a_impl/tests/test_post_governance_readiness.py",
+      "byte_length": 4005,
+      "git_blob": "2705ce4c0ada3a476e28b63b039aecd0edc11ed5",
+      "sha256": "862e39788ba8006f9cb82528252d6849680098dd787d3347c626f8a63b20a614"
+    },
+    {
+      "path": "foundation/qf0/qf0a_impl/tests/test_runtime_source_identity.py",
+      "byte_length": 8101,
+      "git_blob": "c9bad5f223ac988180a9f0007c8891f2cdb01b0d",
+      "sha256": "de16949e0a06b924a02643a1e7ec3c547f8ef6aa2fcf7e96977d6320b773770a"
+    },
+    {
       "path": "foundation/qf0/qf0a_impl/tests/test_source_freeze.py",
       "byte_length": 8348,
       "git_blob": "27d533fd9581725c7ab02f0d12f3e92f9af48f7b",
@@ -213,30 +243,6 @@
       "byte_length": 18060,
       "git_blob": "32dc77c63a15c24672f1c3cd45bb2fecb9ab2f11",
       "sha256": "e43eccad417e172bab4b3f79251594136b9ffe1753c8380269c0603ea64e31de"
-    },
-    {
-      "path": "foundation/qf0/qf0a_impl/src/qf0a/entrypoint.py",
-      "byte_length": 1278,
-      "git_blob": "04d7c8ad7d16cf75cc683c2be3df50cae99b2fd6",
-      "sha256": "8eee2237bdf44bc9f7fc6e6f268e17c864bd1372fad398b77ee6f322910e0971"
-    },
-    {
-      "path": "foundation/qf0/qf0a_impl/src/qf0a/provenance.py",
-      "byte_length": 6797,
-      "git_blob": "0184ba60490cea91441c1b87e9543e0161b38749",
-      "sha256": "80bfb3e73b5c3e29199115b28ea161c08bfbe5d4ba15347f4d3f9edab09a4972"
-    },
-    {
-      "path": "foundation/qf0/qf0a_impl/tests/test_runtime_source_identity.py",
-      "byte_length": 8101,
-      "git_blob": "c9bad5f223ac988180a9f0007c8891f2cdb01b0d",
-      "sha256": "de16949e0a06b924a02643a1e7ec3c547f8ef6aa2fcf7e96977d6320b773770a"
-    },
-    {
-      "path": "foundation/qf0/qf0a_impl/tests/test_post_governance_readiness.py",
-      "byte_length": 4005,
-      "git_blob": "2705ce4c0ada3a476e28b63b039aecd0edc11ed5",
-      "sha256": "862e39788ba8006f9cb82528252d6849680098dd787d3347c626f8a63b20a614"
     }
   ]
 }

@@ -17,11 +17,14 @@ from . import analytic_reference
 from .adjudication import AdjudicationRecord, ControlObservation, EXPECTED_CONTROL_REASON, ThresholdResult
 from .conditional_state import (clock_hamiltonian, clock_povm_element, condition_density_matrix,
     constraint, correlated_kernel_state, pure_density, system_hamiltonian)
-from .controls import (ControlId, ConstructionOrigin, ConstructionProvenance,
+from .controls import (CONTROL_DEFINITIONS, ControlId, ConstructionOrigin, ConstructionProvenance,
     CONTROL_IMPLEMENTATIONS, detect_post_hoc_mutation, scramble_clock_labels,
     validate_construction_origin_attestation)
-from .evidence import (prepare_new_evidence_root, validate_complete_inventory, write_array_once,
-    write_remaining_registered_arrays, write_json_once, write_source_manifest_with_sha, write_text_once)
+from .evidence import (FIXED_RAW_ARRAYS, prepare_new_evidence_root,
+    serialize_machine_verdict, serialize_negative_controls, serialize_raw_output_index,
+    validate_exact_final_inventory, validate_exact_preverdict_inventory, validate_hash_manifest, write_array_once,
+    write_remaining_registered_arrays, write_json_once, write_source_manifest_bytes_with_sha,
+    write_text_once)
 from .metrics import (constraint_residual, hermiticity_residual, minimum_eigenvalue,
     neighboring_step_distances, povm_completeness_residual, probability_sum_defect,
     pure_reference_fidelity, registered_step_unitary, registered_tau_grid,
@@ -108,7 +111,7 @@ class FrozenQF0ARunner:
         self._stage_g1_materialize_evidence(conditional, analytic, diagnostics, controls, provisional)
         complete = self._stage_g2_validate_evidence(conditional, provisional)
         verdict = derive_machine_verdict(self.run_id, complete)
-        self._stage_g3_final_sealing(verdict)
+        self._stage_g3_final_sealing(verdict, complete)
 
     def _stage_a_fail_closed_provenance(self) -> None:
         schema = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/schemas/QF0A_EXECUTION_AUTHORIZATION.schema.json").read_text(encoding="utf-8"))
@@ -292,35 +295,72 @@ class FrozenQF0ARunner:
                   "coarse_clock_diagnostics.npy": diagnostics["coarse"]}
         arrays.pop("conditional_densities.npy"); arrays.pop("conditional_probabilities.npy")
         index = write_remaining_registered_arrays(self.evidence_root / "raw", arrays, conditional["stage_b_identities"])
-        write_json_once(self.evidence_root / "raw_output_index.json", {"run_id": self.run_id, "arrays": index})
-        write_json_once(self.evidence_root / "negative_controls.json", {"run_id": self.run_id, "controls": [[a.value,b.value,c] for a,b,c in controls]})
-        write_json_once(self.evidence_root / "diagnostics.json", {"section9_fields":["g","exact_kernel_dimension","numerical_kernel_dimension","selected_rank","boundary_distance","projector_hermiticity_residual","projector_idempotence_residual","projection_norm","continued_state_constraint_residual","overlap_real","overlap_imag","g0_recovery_trace_distance","minimum_absolute_eigenvalue","determinism_trace_distance"], "values":{name: value.tolist() for name,value in diagnostics.items()}, "threshold_results":[item.__dict__ for item in provisional.threshold_results]})
-        manifest = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.1.json").read_text(encoding="utf-8"))
+        write_json_once(self.evidence_root / "raw_output_index.json", serialize_raw_output_index(self.run_id, index))
+        control_timestamp = datetime.now(timezone.utc).isoformat()
+        write_json_once(self.evidence_root / "diagnostics.json", {"section9_fields":["g","exact_kernel_dimension","numerical_kernel_dimension","selected_rank","boundary_distance","projector_hermiticity_residual","projector_idempotence_residual","projection_norm","continued_state_constraint_residual","overlap_real","overlap_imag","g0_recovery_trace_distance","minimum_absolute_eigenvalue","determinism_trace_distance"], "values":{name: value.tolist() for name,value in diagnostics.items()}, "threshold_results":[item.__dict__ for item in provisional.threshold_results], "control_observations":[{"control_id":a.value,"observed_status":b.value,"reason_code":c} for a,b,c in controls]})
+        diagnostic_sha = hashlib.sha256((self.evidence_root / "diagnostics.json").read_bytes()).hexdigest()
+        write_json_once(self.evidence_root / "negative_controls.json", serialize_negative_controls(
+            self.run_id, controls, CONTROL_DEFINITIONS, "diagnostics.json", diagnostic_sha, control_timestamp))
+        manifest_path = "foundation/qf0/qf0a_impl/manifests/QF0A_SOURCE_MANIFEST_v1.1.json"
+        committed_manifest = subprocess.check_output(
+            ["git", "show", f"{self.provenance_seal.current_execution_head}:{manifest_path}"], cwd=self.repo_root)
+        manifest = json.loads(committed_manifest.decode("utf-8"))
         environment = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json").read_text(encoding="utf-8"))
         write_json_once(self.evidence_root / "environment_manifest.json", environment)
-        source_sha = write_source_manifest_with_sha(self.evidence_root, manifest)
+        source_sha = write_source_manifest_bytes_with_sha(self.evidence_root, committed_manifest)
         run_manifest = build_run_manifest(self.repo_root, self.run_id, manifest, environment, source_sha, self.provenance_seal)
         write_json_once(self.evidence_root / "run_manifest.json", run_manifest)
         write_json_once(self.evidence_root / "leakage_audit.json", {"run_id": self.run_id, "verdict": "PASS", "scope": "RUNTIME_PROVENANCE"})
         write_text_once(self.evidence_root / "human_report.md", f"# QF-0A v1.1 qualification report\n\nRun: `{self.run_id}`\n\nMachine-generated pipeline qualification only. No post-hoc scientific interpretation.\n")
         write_text_once(self.evidence_root / "logs/run.log", "frozen pre-finalization stages completed\n")
 
+    def _validate_schema_file(self, filename: str, schema_name: str) -> dict[str, object]:
+        schema = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/schemas" / schema_name).read_text(encoding="utf-8"))
+        document = json.loads((self.evidence_root / filename).read_text(encoding="utf-8"))
+        Draft202012Validator(schema, format_checker=FormatChecker()).validate(document)
+        return document
+
     def _stage_g2_validate_evidence(self, conditional, provisional):
         for name, meta in conditional["stage_b_identities"].items():
             actual = hashlib.sha256((self.evidence_root / "raw" / name).read_bytes()).hexdigest()
             if actual != meta["sha256"]: return replace(provisional, post_hoc_mutation=True)
-        schema = json.loads((self.repo_root / "foundation/qf0/qf0a_impl/schemas/QF0A_RUN_MANIFEST.schema.json").read_text(encoding="utf-8"))
-        document = json.loads((self.evidence_root / "run_manifest.json").read_text(encoding="utf-8"))
-        Draft202012Validator(schema, format_checker=FormatChecker()).validate(document)
-        required = set(expected for expected in ("execution_authorization.json","run_manifest.json","environment_manifest.json","source_manifest.json","source_manifest.sha256","raw_output_index.json","negative_controls.json","leakage_audit.json","diagnostics.json","human_report.md","logs/run.log"))
-        if not all((self.evidence_root / item).is_file() for item in required): return provisional
+        try:
+            validate_exact_preverdict_inventory(self.evidence_root)
+            self._validate_schema_file("run_manifest.json", "QF0A_RUN_MANIFEST.schema.json")
+            raw_index = self._validate_schema_file("raw_output_index.json", "QF0A_RAW_OUTPUT.schema.json")
+            controls = self._validate_schema_file("negative_controls.json", "QF0A_NEGATIVE_CONTROL_RESULT.schema.json")
+            authorization = self._validate_schema_file("execution_authorization.json", "QF0A_EXECUTION_AUTHORIZATION.schema.json")
+            if authorization != self.authorization:
+                raise RuntimeError("evidence authorization differs from validated authorization")
+            if [item["identifier"] + ".npy" for item in raw_index["arrays"]] != list(FIXED_RAW_ARRAYS):
+                raise RuntimeError("raw-output index order or inventory mismatch")
+            for item in raw_index["arrays"]:
+                if hashlib.sha256((self.evidence_root / item["path"]).read_bytes()).hexdigest() != item["sha256"]:
+                    raise RuntimeError(f"raw-output hash mismatch: {item['path']}")
+            if {item["control_id"] for item in controls["controls"]} != {item.value for item in ControlId}:
+                raise RuntimeError("negative-control inventory mismatch")
+            for item in controls["controls"]:
+                if hashlib.sha256((self.evidence_root / item["evidence_path"]).read_bytes()).hexdigest() != item["evidence_sha256"]:
+                    raise RuntimeError(f"negative-control evidence mismatch: {item['control_id']}")
+            source_bytes = (self.evidence_root / "source_manifest.json").read_bytes()
+            source_sha = hashlib.sha256(source_bytes).hexdigest()
+            if source_sha != (self.evidence_root / "source_manifest.sha256").read_text(encoding="ascii").strip():
+                raise RuntimeError("source-manifest evidence-copy hash mismatch")
+            if source_sha != self.authorization["source_manifest_sha256"]:
+                raise RuntimeError("source-manifest evidence copy differs from authorization-bound committed bytes")
+            leakage = json.loads((self.evidence_root / "leakage_audit.json").read_text(encoding="utf-8"))
+            if leakage.get("verdict") != "PASS":
+                raise RuntimeError("leakage audit is not PASS")
+        except Exception:
+            return replace(provisional, required_evidence_complete=False, leakage_audit_pass=False)
         return replace(provisional, required_evidence_complete=True)
 
-    def _stage_g3_final_sealing(self, verdict) -> None:
-        write_json_once(self.evidence_root / "machine_verdict.json", {"run_id": verdict.run_id, "pipeline_reproduction_verdict": verdict.pipeline_reproduction_verdict,
-            "foundation_model_verdict": verdict.foundation_model_verdict.value, "reason_codes": list(verdict.reason_codes)})
+    def _stage_g3_final_sealing(self, verdict, adjudication) -> None:
+        write_json_once(self.evidence_root / "machine_verdict.json", serialize_machine_verdict(verdict, adjudication))
         hashes = []
         for path in sorted(p for p in self.evidence_root.rglob("*") if p.is_file() and p.name != "SHA256SUMS.txt"):
             hashes.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.relative_to(self.evidence_root).as_posix()}")
         write_text_once(self.evidence_root / "SHA256SUMS.txt", "\n".join(hashes)+"\n")
-        validate_complete_inventory(self.evidence_root)
+        validate_exact_final_inventory(self.evidence_root)
+        self._validate_schema_file("machine_verdict.json", "QF0A_MACHINE_VERDICT.schema.json")
+        validate_hash_manifest(self.evidence_root)
