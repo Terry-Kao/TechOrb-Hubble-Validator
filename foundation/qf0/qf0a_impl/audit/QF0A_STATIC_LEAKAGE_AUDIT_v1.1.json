@@ -1,6 +1,6 @@
 {
   "schema_version":"1.1",
-  "status":"PROPOSED / STATIC ONLY / NO SCIENCE",
+  "status":"PROSPECTIVE SERIALIZATION REPAIR / STATIC ONLY / NO SCIENCE",
   "verdict":"PASS",
   "checks":[
     {"id":"NO_CALLER_VERDICT","status":"PASS","evidence":"derive_machine_verdict has no pipeline/verdict parameter"},
@@ -21,7 +21,11 @@
     {"id":"WRITE_ONCE_RAW_EVIDENCE","status":"PASS","evidence":"exclusive-create array writer rejects overwrite and Stage-B hashes are revalidated before final verdict"},
     {"id":"EVIDENCE_BEFORE_FINAL_PASS","status":"PASS","evidence":"STAGE_ORDER places G2 schema/inventory/hash validation before F2 final verdict"},
     {"id":"RUN_MANIFEST_SCHEMA_GATE","status":"PASS","evidence":"Draft202012Validator plus FormatChecker validates the completed run_manifest before F2"},
-    {"id":"SOURCE_MANIFEST_EXACT_BYTES","status":"PASS","evidence":"source_manifest.sha256 hashes the exact written evidence/source_manifest.json bytes"},
+    {"id":"RAW_OUTPUT_SCHEMA_GATE","status":"PASS","evidence":"canonical nine-array serializer and G2 validate QF0A_RAW_OUTPUT before F2"},
+    {"id":"NEGATIVE_CONTROL_SCHEMA_GATE","status":"PASS","evidence":"canonical exact-six serializer and G2 validate QF0A_NEGATIVE_CONTROL_RESULT before F2"},
+    {"id":"MACHINE_VERDICT_FINAL_SEAL","status":"PASS","evidence":"G3 validates the written machine verdict schema and full checksum inventory without rewriting verdict or earlier evidence"},
+    {"id":"SOURCE_MANIFEST_EXACT_BYTES","status":"PASS","evidence":"future evidence copies exact authorization-bound committed source-manifest bytes; byte hash and semantic identity are both checked"},
+    {"id":"QUAL001_IMMUTABLE_HISTORY","status":"PASS","evidence":"prospective tests contain no QUAL-001 numerical values or expected-result dependency; historical evidence is not modified"},
     {"id":"CURRENT_HEAD_MATCHES_FROZEN_MANIFEST","status":"PASS","evidence":"pre-import and Stage-A verification compare every current HEAD committed file by blob, byte length and SHA-256"},
     {"id":"MANIFEST_BOUND_BY_AUTHORIZATION","status":"PASS","evidence":"authorization-bound SHA-256 is checked against current HEAD manifest bytes before parsing or trusting manifest contents"},
     {"id":"RUNNER_HEAD_IDENTITY","status":"PASS","evidence":"current HEAD runner blob must equal both manifest entry and authorization runner blob"},

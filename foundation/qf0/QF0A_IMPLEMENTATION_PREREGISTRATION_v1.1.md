@@ -1,6 +1,6 @@
 # QF-0A Implementation Preregistration v1.1
 
-**Status:** `PROPOSED / PRE-EXECUTION REPAIR / NOT EXECUTED`  
+**Status:** `PROSPECTIVE EVIDENCE-CONTRACT REPAIR / QUAL-001 IMMUTABLE AND BLOCKED`
 **Authoritative pre-repair main:** `a9e9a8ec0b637d4a724a6d3baaded83b54c0058e`
 
 ## Frozen identities
@@ -55,8 +55,14 @@ Future execution requires a separate schema-valid `execution_authorization.json`
 
 The predetermined inventory includes authorization, run/environment/source manifests, conditional raw arrays, analytic arrays, metric arrays/index, diagnostic records, exactly six controls, leakage audit, machine verdict, deterministic machine-generated `human_report.md`, logs, and `SHA256SUMS.txt`. `source_manifest.sha256` is the SHA-256 of the exact bytes of the evidence copy `source_manifest.json`. Stage-B conditional arrays are written once and their hashes are rechecked before final adjudication. Completeness and canonical paths are machine checked; no post-inspection selection or overwrite is allowed.
 
+G2 validates every pre-verdict evidence contract: authorization, run manifest, raw-output index, negative controls, fixed inventory, referenced hashes, immutable Stage-B hashes, the authorization-bound exact committed source-manifest bytes, and leakage/provenance status. F2 derives the verdict only after G2. G3 then writes the schema-valid machine verdict and checksum manifest and performs a final, non-mutating seal validation over the complete 22-file inventory. Because the verdict does not exist during G2, machine-verdict schema and full sealed-inventory validation occur after F2; a final-seal failure is surfaced fail-closed and never repairs or rewrites earlier evidence.
+
+Negative-control records refer to the already-written immutable `diagnostics.json`, which contains the six typed control observations and reason codes. This avoids circular dependency on `machine_verdict.json` or `SHA256SUMS.txt` without adding an evidence file. The evidence-copy source manifest is now copied from exact committed bytes, so its own byte hash and the authorization-bound committed-manifest hash are intentionally equal for future runs.
+
+Historical `QF0A-v1.1-QUAL-001` remains the first qualification attempt: executed once; numerical gates and raw machine verdict reported PASS; external governance adjudication BLOCKED because three evidence records failed their schemas; no retry; no accepted evidence PR. Its 22 files are immutable and are not fixtures, targets, or expected-value sources for this prospective repair.
+
 Source Freeze identity applies to the committed source actually executed at runtime, not merely to the historical baseline commit. The authorization externally binds the committed source-manifest SHA-256. Before scientific modules are imported by the official fresh-process entry point, every manifest entry at current HEAD must match its frozen blob, byte length, and canonical SHA-256; the active execution inventory must contain no unmanifested path. A later clean commit is executable only when all frozen active entries remain byte-identical and its diff from the baseline is confined to the explicit manifest/re-freeze governance allowlist. Interactive, notebook, and pre-imported scientific-module execution paths are prohibited.
 
 ## Gate
 
-No frozen scientific result may be generated in this repair. The next gate is independent read-only review of v1.1.
+No frozen scientific result may be generated in this repair. The next gate is **Independent read-only review of QF-0A v1.1 Evidence Contract Serialization Repair / Re-Freeze**.
