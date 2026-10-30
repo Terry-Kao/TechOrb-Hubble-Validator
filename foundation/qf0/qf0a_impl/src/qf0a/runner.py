@@ -55,6 +55,86 @@ class FrozenIdentityBundle:
     source_baseline_commit: str
     runner_blob: str
 
+@dataclass(frozen=True)
+class BlasRuntimeIdentity:
+    package: str
+    backend: str
+    version: str
+    integer_interface: str
+    dynamic_arch: bool
+    architecture_target: str
+    raw_observation: str
+
+    def canonical(self) -> str:
+        return (f"package={self.package};backend={self.backend};version={self.version};"
+                f"integer_interface={self.integer_interface};dynamic_arch={str(self.dynamic_arch).lower()};"
+                f"architecture_target={self.architecture_target}")
+
+def _normalized_backend(value: object) -> str:
+    return str(value).strip().lower().replace("_", "-")
+
+def _frozen_blas_expectation(package: str, value: str) -> dict[str, object]:
+    tokens = value.split()
+    if len(tokens) < 4:
+        raise RuntimeError(f"{package} frozen BLAS/LAPACK identity is incomplete")
+    known = {"ILP64", "LP64", "DYNAMIC_ARCH"}
+    targets = [token for token in tokens[2:] if token.upper() not in known]
+    if len(targets) != 1:
+        raise RuntimeError(f"{package} frozen BLAS/LAPACK target is ambiguous")
+    return {"backend": _normalized_backend(tokens[0]), "version": tokens[1],
+            "integer_interface": next((token.upper() for token in tokens[2:] if token.upper() in {"ILP64", "LP64"}), None),
+            "dynamic_arch": "DYNAMIC_ARCH" in {token.upper() for token in tokens[2:]},
+            "architecture_target": targets[0].lower()}
+
+def normalize_blas_runtime_identity(package: str, config: dict[str, object]) -> BlasRuntimeIdentity:
+    """Normalize structured NumPy/SciPy build config; missing required facts fail closed."""
+    dependencies = config.get("Build Dependencies")
+    if not isinstance(dependencies, dict):
+        raise RuntimeError(f"{package} BLAS/LAPACK build dependencies are not observable")
+    normalized: list[tuple[str, str, str, bool, str]] = []
+    raw: dict[str, object] = {}
+    for kind in ("blas", "lapack"):
+        item = dependencies.get(kind)
+        if not isinstance(item, dict) or item.get("found") is not True:
+            raise RuntimeError(f"{package} {kind} runtime identity is missing or unparseable")
+        backend = _normalized_backend(item.get("name", ""))
+        version = str(item.get("version", "")).strip()
+        configuration = str(item.get("openblas configuration", "")).strip()
+        tokens = configuration.split()
+        upper = [token.upper() for token in tokens]
+        if not backend or not version or not configuration or "OPENBLAS" not in upper:
+            raise RuntimeError(f"{package} {kind} runtime identity is missing or unparseable")
+        if "has ilp64" in item:
+            integer_interface = "ILP64" if item["has ilp64"] is True else "LP64"
+        elif "USE64BITINT" in upper or "ILP64" in upper:
+            integer_interface = "ILP64"
+        else:
+            integer_interface = "LP64"
+        dynamic_arch = "DYNAMIC_ARCH" in upper
+        try:
+            marker = upper.index("NO_AFFINITY")
+            architecture_target = next(token for token in tokens[marker + 1:] if "=" not in token)
+        except (ValueError, StopIteration) as exc:
+            raise RuntimeError(f"{package} {kind} architecture target is missing or unparseable") from exc
+        normalized.append((backend, version, integer_interface, dynamic_arch, architecture_target.lower()))
+        raw[kind] = {key: item[key] for key in sorted(item)}
+    if normalized[0] != normalized[1]:
+        raise RuntimeError(f"{package} BLAS and LAPACK runtime identities differ")
+    backend, version, integer_interface, dynamic_arch, target = normalized[0]
+    return BlasRuntimeIdentity(package, backend, version, integer_interface, dynamic_arch, target,
+                               json.dumps(raw, sort_keys=True, separators=(",", ":"), default=str))
+
+def validate_blas_runtime_identity(identity: BlasRuntimeIdentity, frozen: str) -> None:
+    expected = _frozen_blas_expectation(identity.package, frozen)
+    comparisons = {"backend": identity.backend, "version": identity.version,
+                   "dynamic_arch": identity.dynamic_arch, "architecture_target": identity.architecture_target}
+    if expected["integer_interface"] is not None:
+        comparisons["integer_interface"] = identity.integer_interface
+    mismatches = [f"{field}: observed={actual!r}, expected={expected[field]!r}"
+                  for field, actual in comparisons.items() if actual != expected[field]]
+    if mismatches:
+        raise RuntimeError(f"{identity.package} BLAS/LAPACK runtime identity mismatch: " + "; ".join(mismatches))
+
 def _execution_branch(repo_root: Path, source_seal: ExecutionSourceSeal) -> str:
     current_head = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=repo_root, text=True
@@ -119,15 +199,23 @@ def observe_runtime_environment(expected: dict[str, object]) -> dict[str, object
     for name, wanted in expected["threads"].items():
         if observed["thread_environment"][name] != wanted:
             failures.append(f"thread variable {name}: observed={observed['thread_environment'][name]!r}, expected={wanted!r}")
-    # Both frozen BLAS identities must be observable from the loaded packages.
-    numpy_config = json.dumps(getattr(np.__config__, "CONFIG", {}), sort_keys=True).lower()
-    scipy_config = json.dumps(getattr(scipy.__config__, "CONFIG", {}), sort_keys=True).lower()
-    observed["blas_lapack_observation"] = {"numpy": numpy_config, "scipy": scipy_config}
-    for package, text in (("numpy", numpy_config), ("scipy", scipy_config)):
-        frozen = str(expected["blas_lapack"][package]).lower()
-        version_token = next((token for token in frozen.split() if token[0].isdigit()), "")
-        if "openblas" not in text or not version_token or version_token.replace(".dev", "") not in text.replace(".dev", ""):
-            failures.append(f"{package} BLAS/LAPACK runtime identity does not match freeze")
+    # Observe first, normalize, then compare every frozen build component.
+    blas_observed = {
+        "numpy": normalize_blas_runtime_identity("numpy", getattr(np.__config__, "CONFIG", {})),
+        "scipy": normalize_blas_runtime_identity("scipy", getattr(scipy.__config__, "CONFIG", {})),
+    }
+    for package, identity in blas_observed.items():
+        try:
+            validate_blas_runtime_identity(identity, str(expected["blas_lapack"][package]))
+        except RuntimeError as exc:
+            failures.append(str(exc))
+    observed["blas_lapack_observation"] = {
+        package: {"backend": identity.backend, "version": identity.version,
+                  "integer_interface": identity.integer_interface, "dynamic_arch": identity.dynamic_arch,
+                  "architecture_target": identity.architecture_target,
+                  "canonical": identity.canonical(), "raw_observation": identity.raw_observation}
+        for package, identity in blas_observed.items()
+    }
     if failures:
         raise RuntimeError("runtime environment mismatch: " + "; ".join(failures))
     return observed
@@ -142,11 +230,19 @@ def build_run_manifest(repo_root: Path, run_id: str, manifest: dict[str, object]
         "version": environment["python"]["version"], "python_executable": sys.executable,
         "numpy_version": environment["packages"][0]["version"], "scipy_version": environment["packages"][1]["version"],
         "numeric_dtypes": environment["numeric_dtypes"], "thread_environment": environment["threads"],
+        "blas_lapack_observation": {
+            "numpy": {"backend": "synthetic", "canonical": "synthetic-observed-numpy"},
+            "scipy": {"backend": "synthetic", "canonical": "synthetic-observed-scipy"},
+        },
     }
+    blas = runtime["blas_lapack_observation"]
+    observed_backends = {blas["numpy"]["backend"], blas["scipy"]["backend"]}
+    vendor = observed_backends.pop() if len(observed_backends) == 1 else "+".join(sorted(observed_backends))
+    observed_blas_canonical = f"numpy[{blas['numpy']['canonical']}]|scipy[{blas['scipy']['canonical']}]"
     return {"schema_version":"1.1","run_id":run_id,
       "protocol":{"version":"QF0A_FROZEN_PROTOCOL_v1.1","path":"foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md","git_blob_sha":PROTOCOL_GIT_BLOB,"file_sha256":PROTOCOL_SHA256,"authoritative_main_sha":source_seal.current_execution_head},
       "implementation":{"commit_sha":source_seal.current_execution_head,"current_execution_head":source_seal.current_execution_head,"source_baseline_commit":source_seal.source_baseline_commit,"branch":_execution_branch(repo_root, source_seal),"dirty":False,"source_manifest_path":"source_manifest.json","source_manifest_sha256":source_sha},
-      "environment":{"os":runtime["os"],"kernel":runtime["kernel"],"cpu_architecture":runtime["cpu_architecture"],"cpu_model":runtime["cpu_model"],"python":f"{runtime['implementation']} {runtime['version']}","packages_lock_sha256":environment["dependency_lock_canonical_sha256"],"numpy_version":runtime["numpy_version"],"scipy_version":runtime["scipy_version"],"blas_lapack":{"vendor":"scipy-openblas","version_or_build":environment["blas_lapack"]["scipy"]},"locale":os.environ.get("LANG","UNSET"),"timezone":host["timezone"],"numeric_dtypes":runtime["numeric_dtypes"]},
+      "environment":{"os":runtime["os"],"kernel":runtime["kernel"],"cpu_architecture":runtime["cpu_architecture"],"cpu_model":runtime["cpu_model"],"python":f"{runtime['implementation']} {runtime['version']}","packages_lock_sha256":environment["dependency_lock_canonical_sha256"],"numpy_version":runtime["numpy_version"],"scipy_version":runtime["scipy_version"],"blas_lapack":{"vendor":vendor,"version_or_build":observed_blas_canonical},"locale":os.environ.get("LANG","UNSET"),"timezone":host["timezone"],"numeric_dtypes":runtime["numeric_dtypes"]},
       "execution":{"timestamp_utc":now.isoformat(),"timestamp_asia_taipei":local.isoformat(),"python_executable":runtime["python_executable"],"command_line":sys.argv or ["qf0a"],"cwd":os.getcwd()},
       "determinism":{"seeds":{"primary":104729,"repeat_1":130363,"repeat_2":155921},"thread_environment":runtime["thread_environment"],"eigensolver_policy":"frozen-full-spectral-projector","tolerance_policy":"frozen-protocol-only"},
       "evidence":{"environment_manifest":"environment_manifest.json","raw_output_index":"raw_output_index.json","negative_controls":"negative_controls.json","leakage_audit":"leakage_audit.json","machine_verdict":"machine_verdict.json","human_report":"human_report.md","hash_manifest":"SHA256SUMS.txt"}}
@@ -211,7 +307,8 @@ class FrozenQF0ARunner:
         self.runtime_observation = observe_runtime_environment(environment)
         leakage_errors = validate_static_separation(self.repo_root / "foundation/qf0/qf0a_impl/src/qf0a")
         self.leakage_audit = {"verdict": "PASS" if not leakage_errors else "BLOCKED", "errors": leakage_errors,
-                              "verified_module_count": len(module_origins)}
+                              "verified_module_count": len(module_origins), "verified_modules": list(module_origins),
+                              "blas_lapack_observation": self.runtime_observation["blas_lapack_observation"]}
         if leakage_errors:
             raise RuntimeError(f"static leakage separation failed: {leakage_errors}")
         self.run_id = str(document["run_id"])
