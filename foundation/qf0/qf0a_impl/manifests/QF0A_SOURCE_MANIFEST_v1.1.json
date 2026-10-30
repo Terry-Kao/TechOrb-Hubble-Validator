@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "source_baseline_commit": "ec6497164b89b1c050e0457ca8cb3770305990bf",
+  "source_baseline_commit": "cb1c44c0b888595ef07bf3bc68db6eb3fe43aa48",
   "scientific_execution": "NOT_PERFORMED",
   "canonical_hash_policy": "git-committed-bytes-v1",
   "files": [
@@ -36,9 +36,9 @@
     },
     {
       "path": "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md",
-      "byte_length": 9035,
-      "git_blob": "1afb1653c32432092cf85214eaedb7bc56213b48",
-      "sha256": "e1816e2d54755fd3f5c1a8adac411c3efbcdb15c597c009f5f9daea6744bd386"
+      "byte_length": 9981,
+      "git_blob": "ac74a7753b35d0f7a0c9ce2e4ebb16ccc05081d1",
+      "sha256": "0fea7b3c88645b0af687feb79da3871b838b14de507ffafefc3784d1b28ef932"
     },
     {
       "path": "foundation/qf0/qf0a_impl/LEAKAGE_AUDIT_CHECKLIST.md",
@@ -60,9 +60,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json",
-      "byte_length": 1513,
-      "git_blob": "4bb6f73d5cfd96422829d3f0680ed52c9614e9e0",
-      "sha256": "13bd8a95059363a5b2208f36e514e0e7d08b4467f4a0db35e2ce2bf37c41299a"
+      "byte_length": 1788,
+      "git_blob": "10fb01ea128dcfec3d7b795f06903ac228c05f6b",
+      "sha256": "f3f934b66f87627e436c825158d3cad05703f55a31b876634be19915f6bd16f2"
     },
     {
       "path": "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.md",
@@ -186,9 +186,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/runner.py",
-      "byte_length": 40200,
-      "git_blob": "8cdc839738dc2efcfc2db4babcd887aaedb4673b",
-      "sha256": "9601791f5484442313bc765d40c82ce324d7965f624e8b3d9ff417830818753d"
+      "byte_length": 41936,
+      "git_blob": "d4113bfcacc2c7abc91c97f5b8e41ed0359f5f1a",
+      "sha256": "b72af41fec851f633bca679bea94c19cc96a117b534c1eccc00b7fb467b10079"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/verdict.py",
@@ -222,9 +222,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_phase_a_runtime_closure.py",
-      "byte_length": 9663,
-      "git_blob": "70d6eed6585e71a2de39b5d0484b62a65ca982af",
-      "sha256": "0dfc2196964d3b039ef247ab243b1318e0a050959f3310cee2a9c15799110ffd"
+      "byte_length": 12190,
+      "git_blob": "60fbd82ef2c13c508b52db273018cebb573de0bc",
+      "sha256": "733c2fa93699b426e1f4404c0b058331e6c1b5745657314e638834b6b1886002"
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_post_governance_readiness.py",
