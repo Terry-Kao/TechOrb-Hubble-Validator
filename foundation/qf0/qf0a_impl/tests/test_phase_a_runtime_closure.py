@@ -115,12 +115,47 @@ class PhaseARuntimeClosureTests(unittest.TestCase):
             with self.assertRaisesRegex(ProvenanceViolation, "not an ancestor"):
                 verify_execution_head_against_source_manifest(ROOT, authorization)
         else:
+            drift = [path for path, item in by_path.items()
+                     if subprocess.check_output(["git", "rev-parse", f"HEAD:{path}"], cwd=ROOT, text=True).strip() != item["git_blob"]]
+            if drift:
+                with self.assertRaisesRegex(ProvenanceViolation, "current HEAD blob mismatch"):
+                    verify_execution_head_against_source_manifest(ROOT, authorization)
+                return  # EXPECTED PRE-REFREEZE BLOCK; identities must not be relabelled.
             seal = verify_execution_head_against_source_manifest(ROOT, authorization)
             self.assertEqual(seal.current_execution_head, head)
             self.assertEqual(seal.source_baseline_commit, manifest["source_baseline_commit"])
             self.assertEqual(seal.source_manifest_sha256, authorization["source_manifest_sha256"])
             self.assertEqual(seal.runner_blob, authorization["runner_blob"])
             self.assertTrue(set(by_path).issubset(set(seal.verified_paths)))
+
+    def test_positive_host_and_validation_rejections(self):
+        from qf0a.runner import observe_windows_cpu_brand, observe_validation_stack
+        expected = json.loads((ROOT / "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json").read_text())
+        with mock.patch.dict(os.environ, expected["threads"]):
+            observed = observe_runtime_environment(expected)
+            self.assertEqual(observed["cpu_model"], expected["host"]["cpu"])
+            self.assertTrue(observed["validation_stack"]["date_time_supported"])
+            with mock.patch("platform.processor", return_value="unrelated presentation"):
+                self.assertEqual(observe_runtime_environment(expected)["cpu_model"], observed["cpu_model"])
+            wrong = json.loads(json.dumps(expected)); wrong["host"]["cpu"] = "wrong brand"
+            with self.assertRaisesRegex(RuntimeError, "CPU model"):
+                observe_runtime_environment(wrong)
+            wrong = json.loads(json.dumps(expected)); wrong["validation_stack"]["jsonschema_version"] = "0"
+            with self.assertRaisesRegex(RuntimeError, "jsonschema version"):
+                observe_runtime_environment(wrong)
+        with mock.patch("winreg.QueryValueEx", return_value=("  Brand\t Model  ", 1)):
+            self.assertEqual(observe_windows_cpu_brand()["normalized"], "Brand Model")
+        for value in ("", "   ", 42):
+            with mock.patch("winreg.QueryValueEx", return_value=(value, 1)):
+                with self.assertRaisesRegex(RuntimeError, "registry"):
+                    observe_windows_cpu_brand()
+        with mock.patch("winreg.OpenKey", side_effect=OSError("unavailable")):
+            with self.assertRaisesRegex(RuntimeError, "registry"):
+                observe_windows_cpu_brand()
+        with mock.patch("qf0a.runner.FormatChecker") as checker:
+            checker.return_value.conforms.return_value = True
+            with self.assertRaisesRegex(RuntimeError, "nonfunctional"):
+                observe_validation_stack()
 
     def test_runtime_mismatch_fails_closed(self):
         expected = json.loads((ROOT / "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json").read_text())
