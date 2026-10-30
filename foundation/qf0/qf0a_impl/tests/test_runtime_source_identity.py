@@ -11,7 +11,9 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(ROOT / "foundation/qf0/qf0a_impl/src"))
-from qf0a.provenance import MANIFEST_PATH, ProvenanceViolation, assert_fresh_official_process, verify_execution_head_against_source_manifest
+from qf0a.provenance import (MANIFEST_PATH, ProvenanceViolation, assert_fresh_official_process,
+    _baseline_is_usable, is_allowed_post_baseline_path, verify_execution_head_against_source_manifest,
+    verify_loaded_qf0a_modules)
 
 RUNNER = "foundation/qf0/qf0a_impl/src/qf0a/runner.py"
 PROTOCOL = "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md"
@@ -82,10 +84,12 @@ class RuntimeSourceIdentityTests(unittest.TestCase):
         seal=verify_execution_head_against_source_manifest(self.repo,self.authorization)
         self.assertEqual(seal.current_execution_head,git(self.repo,"rev-parse","HEAD",text=True).strip())
 
-    def test_unlisted_governance_file_is_rejected_by_policy(self):
-        write(self.repo,"control/UNAUTHORIZED.md",b"not allowlisted\n"); commit(self.repo,"unlisted governance change")
-        with self.assertRaisesRegex(ProvenanceViolation,"outside governance allowlist"):
-            verify_execution_head_against_source_manifest(self.repo,self.authorization)
+    def test_rule_based_governance_policy_is_narrow(self):
+        self.assertTrue(is_allowed_post_baseline_path("control/reviews/NARROW.md"))
+        self.assertTrue(is_allowed_post_baseline_path("QF0A_V1.1_RUNTIME_REFREEZE_REPORT_2026-10-30.md"))
+        for rejected in ("UNKNOWN.md", ".gitattributes", "bootstrap.pth", RUNNER, SCHEMA, ENV, PROTOCOL, PREREG):
+            with self.subTest(path=rejected):
+                self.assertFalse(is_allowed_post_baseline_path(rejected))
 
     def test_active_source_schema_and_environment_mutations_remain_rejected(self):
         mutations=(
@@ -138,5 +142,36 @@ assert scientific.isdisjoint(sys.modules), sorted(scientific & set(sys.modules))
                 assert_fresh_official_process()
         finally:
             del sys.modules["qf0a.metrics"]
+
+    def test_baseline_must_exist_and_be_ancestor(self):
+        with self.assertRaisesRegex(ProvenanceViolation, "object is unavailable"):
+            _baseline_is_usable(self.repo, "f" * 40, self.freeze_head)
+        subprocess.check_call(["git", "checkout", "--orphan", "unrelated"], cwd=self.repo, stdout=subprocess.DEVNULL)
+        subprocess.check_call(["git", "rm", "-rf", "."], cwd=self.repo, stdout=subprocess.DEVNULL)
+        write(self.repo, "other.txt", b"unrelated\n"); unrelated = commit(self.repo, "unrelated")
+        subprocess.check_call(["git", "checkout", "-q", self.freeze_head], cwd=self.repo)
+        with self.assertRaisesRegex(ProvenanceViolation, "not an ancestor"):
+            _baseline_is_usable(self.repo, unrelated, self.freeze_head)
+
+    def test_loaded_module_origin_and_committed_bytes_are_bound(self):
+        dirty = subprocess.run(["git", "diff", "--quiet", "HEAD", "--", "foundation/qf0/qf0a_impl/src/qf0a"], cwd=ROOT).returncode != 0
+        if dirty:
+            with self.assertRaisesRegex(ProvenanceViolation, "bytes differ"):
+                verify_loaded_qf0a_modules(ROOT)
+        else:
+            observed = verify_loaded_qf0a_modules(ROOT)
+            self.assertTrue(any(item["module"] == "qf0a.provenance" for item in observed))
+        original = Path(sys.modules["qf0a.provenance"].__file__)
+        module = sys.modules["qf0a.provenance"]
+        old_file = module.__file__
+        old_origin = module.__spec__.origin
+        try:
+            module.__file__ = str(self.repo / "elsewhere.py")
+            module.__spec__.origin = module.__file__
+            with self.assertRaisesRegex(ProvenanceViolation, "outside verified|bytes differ"):
+                verify_loaded_qf0a_modules(ROOT)
+        finally:
+            module.__file__ = old_file
+            module.__spec__.origin = old_origin
 
 if __name__ == "__main__": unittest.main()

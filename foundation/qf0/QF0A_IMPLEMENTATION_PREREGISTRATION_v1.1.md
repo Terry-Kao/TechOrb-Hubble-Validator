@@ -61,6 +61,14 @@ Negative-control records refer to the already-written immutable `diagnostics.jso
 
 Historical `QF0A-v1.1-QUAL-001` remains the first qualification attempt: executed once; numerical gates and raw machine verdict reported PASS; external governance adjudication BLOCKED because three evidence records failed their schemas; no retry; no accepted evidence PR. Its 22 files are immutable and are not fixtures, targets, or expected-value sources for this prospective repair.
 
+## Phase A runtime provenance and failure semantics clarification (prospective)
+
+This clarification changes no scientific threshold, tau grid, interaction value, control definition, expected failure mode, or scientific interpretation. Phase A is **PRE-REFREEZE / NOT EXECUTION-READY**. A future source baseline may only be the authoritative `main` commit created after the Phase A repair PR is independently reviewed and merged; a branch-only commit is not an eligible execution baseline.
+
+Before scientific computation, the official process must bind every loaded `qf0a` module to the canonical repository source directory and to the exact committed bytes, observe the runtime Python/package/host/thread/dtype/BLAS identities, execute static leakage separation, and require an absent canonical evidence root at `foundation/qf0/qf0a_impl/evidence/<run_id>`. Any mismatch fails closed.
+
+A fail-closed rejection before canonical evidence-root creation does not consume the one-run opportunity, but must be logged outside that absent run directory. Once the canonical evidence root is created, any later exception or failure consumes the run ID and no retry is permitted. A machine PASS is not accepted unless the official process exits with code 0, G3 final sealing succeeds, and an independent offline review validates the final inventory, machine-verdict schema, and checksum manifest. A G3 failure after a provisional or machine PASS is therefore **NOT ACCEPTED**.
+
 Source Freeze identity applies to the committed source actually executed at runtime, not merely to the historical baseline commit. The authorization externally binds the committed source-manifest SHA-256. Before scientific modules are imported by the official fresh-process entry point, every manifest entry at current HEAD must match its frozen blob, byte length, and canonical SHA-256; the active execution inventory must contain no unmanifested path. A later clean commit is executable only when all frozen active entries remain byte-identical and its diff from the baseline is confined to the explicit manifest/re-freeze governance allowlist. Interactive, notebook, and pre-imported scientific-module execution paths are prohibited.
 
 ## Gate

@@ -15,7 +15,9 @@ ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(ROOT / "foundation/qf0/qf0a_impl/src"))
 
 from qf0a.audit import canonical_committed_identity
-from qf0a.evidence import FIXED_RAW_ARRAYS, expected_relative_paths, prepare_new_evidence_root, validate_complete_inventory, write_array_once, register_existing_array, write_json_once, write_source_manifest_with_sha
+from qf0a.evidence import (FIXED_RAW_ARRAYS, canonical_evidence_root, expected_relative_paths,
+    prepare_new_evidence_root, validate_complete_inventory, write_array_once,
+    register_existing_array, write_json_once, write_source_manifest_with_sha)
 from qf0a.provenance import ExecutionSourceSeal
 from qf0a.runner import build_run_manifest
 
@@ -76,5 +78,16 @@ class EvidenceContractTests(unittest.TestCase):
         finally:
             if root.exists():
                 import shutil; shutil.rmtree(root)
+
+    def test_canonical_absent_evidence_root_only(self):
+        with tempfile.TemporaryDirectory(dir=ROOT) as temp:
+            repo = Path(temp)
+            exact = canonical_evidence_root(repo, "synthetic-run")
+            prepare_new_evidence_root(exact, repo, "synthetic-run")
+            with self.assertRaisesRegex(RuntimeError, "must not exist"):
+                prepare_new_evidence_root(exact, repo, "synthetic-run")
+            alternate = repo / "alternate" / "synthetic-run"
+            with self.assertRaisesRegex(RuntimeError, "canonical"):
+                prepare_new_evidence_root(alternate, repo, "synthetic-run")
 
 if __name__ == "__main__": unittest.main()

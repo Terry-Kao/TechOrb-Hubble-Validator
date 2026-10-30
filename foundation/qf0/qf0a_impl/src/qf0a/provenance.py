@@ -5,6 +5,7 @@ from dataclasses import dataclass
 import hashlib
 import json
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -13,14 +14,14 @@ RUNNER_PATH = "foundation/qf0/qf0a_impl/src/qf0a/runner.py"
 PROTOCOL_PATH = "foundation/qf0/QF0A_FROZEN_PROTOCOL_v1.1.md"
 PREREGISTRATION_PATH = "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md"
 ENVIRONMENT_PATH = "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json"
-ALLOWED_POST_BASELINE_PATHS = frozenset({
+EXACT_GOVERNANCE_PATHS = frozenset({
     "README.md",
-    "control/DECISION_LOG.md",
-    "control/EVIDENCE_INDEX.md",
-    "control/PROJECT_STATE.md",
     MANIFEST_PATH,
     "foundation/qf0/qf0a_impl/manifests/QF0A_V1_1_ADJUDICATION_EVIDENCE_REFREEZE_REPORT.md",
 })
+ROOT_QF0A_REPORT = re.compile(
+    r"QF0A_V1\.1_[A-Z0-9_]*(?:REFREEZE|REPAIR)[A-Z0-9_]*_\d{4}-\d{2}-\d{2}\.md"
+)
 ACTIVE_PREFIXES = (
     "foundation/qf0/qf0a_impl/src/qf0a/",
     "foundation/qf0/qf0a_impl/schemas/",
@@ -50,6 +51,70 @@ def _committed_bytes(repo_root: Path, commit: str, path: str) -> bytes:
 
 def _blob(repo_root: Path, commit: str, path: str) -> str:
     return str(_git(repo_root, "rev-parse", f"{commit}:{path}", text=True)).strip()
+
+def _baseline_is_usable(repo_root: Path, baseline: str, head: str) -> None:
+    if not baseline:
+        raise ProvenanceViolation("source baseline is absent")
+    try:
+        subprocess.check_call(
+            ["git", "cat-file", "-e", f"{baseline}^{{commit}}"], cwd=repo_root,
+            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise ProvenanceViolation("source baseline commit object is unavailable") from exc
+    result = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", baseline, head], cwd=repo_root,
+        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False,
+    )
+    if result.returncode != 0:
+        raise ProvenanceViolation("source baseline is not an ancestor of execution HEAD")
+
+def is_allowed_post_baseline_path(path: str) -> bool:
+    """Narrow governance policy; active/runtime paths always remain manifest-governed."""
+    normalized = path.replace("\\", "/")
+    if normalized in ACTIVE_EXACT_PATHS or any(normalized.startswith(p) for p in ACTIVE_PREFIXES):
+        return False
+    if normalized == ".gitattributes" or normalized.endswith(".py") or normalized.endswith(".pth"):
+        return False
+    if normalized in EXACT_GOVERNANCE_PATHS:
+        return True
+    if normalized.startswith("control/"):
+        relative = normalized.removeprefix("control/")
+        return relative.endswith(".md") and ".." not in relative.split("/")
+    return "/" not in normalized and ROOT_QF0A_REPORT.fullmatch(normalized) is not None
+
+def _inside(path: Path, directory: Path) -> bool:
+    try:
+        path.resolve(strict=True).relative_to(directory.resolve(strict=True))
+        return True
+    except (ValueError, FileNotFoundError):
+        return False
+
+def verify_loaded_qf0a_modules(repo_root: Path, head: str | None = None) -> tuple[dict[str, str], ...]:
+    """Bind every loaded qf0a module to committed bytes under this repository."""
+    root = Path(repo_root).resolve()
+    source_dir = (root / "foundation/qf0/qf0a_impl/src/qf0a").resolve()
+    revision = head or str(_git(root, "rev-parse", "HEAD", text=True)).strip()
+    observed: list[dict[str, str]] = []
+    for name, module in sorted(sys.modules.items()):
+        if name != "qf0a" and not name.startswith("qf0a."):
+            continue
+        spec = getattr(module, "__spec__", None)
+        origin = getattr(spec, "origin", None) or getattr(module, "__file__", None)
+        if not origin or origin in {"built-in", "frozen"}:
+            raise ProvenanceViolation(f"qf0a module has no verifiable file origin: {name}")
+        path = Path(origin)
+        if path.suffix in {".pyc", ".pyo"}:
+            path = Path(getattr(module, "__file__", path)).with_suffix(".py")
+        if not _inside(path, source_dir):
+            raise ProvenanceViolation(f"qf0a module loaded outside verified repository source: {name}: {origin}")
+        relative = path.resolve().relative_to(root).as_posix()
+        committed = _committed_bytes(root, revision, relative)
+        actual = path.read_bytes()
+        if actual != committed:
+            raise ProvenanceViolation(f"loaded qf0a module bytes differ from committed HEAD: {name}")
+        observed.append({"module": name, "origin": str(path.resolve()), "sha256": hashlib.sha256(actual).hexdigest()})
+    return tuple(observed)
 
 def _active_inventory(repo_root: Path, head: str) -> set[str]:
     tracked = set(str(_git(repo_root, "ls-tree", "-r", "--name-only", head, text=True)).splitlines())
@@ -88,6 +153,7 @@ def verify_execution_head_against_source_manifest(repo_root: Path, authorization
     baseline = str(manifest.get("source_baseline_commit", ""))
     if baseline != authorization["source_baseline_commit"]:
         raise ProvenanceViolation("source baseline differs from authorization")
+    _baseline_is_usable(root, baseline, head)
     entries = manifest.get("files")
     if not isinstance(entries, list):
         raise ProvenanceViolation("source manifest files inventory is absent")
@@ -118,6 +184,7 @@ def verify_execution_head_against_source_manifest(repo_root: Path, authorization
     if actual_active != expected_active:
         raise ProvenanceViolation(f"unmanifested or missing active execution path: {sorted(actual_active ^ expected_active)}")
     changed = set(str(_git(root, "diff", "--name-only", baseline, head, text=True)).splitlines())
-    if not changed <= ALLOWED_POST_BASELINE_PATHS:
-        raise ProvenanceViolation(f"post-baseline change outside governance allowlist: {sorted(changed - ALLOWED_POST_BASELINE_PATHS)}")
+    rejected = sorted(path for path in changed if not is_allowed_post_baseline_path(path))
+    if rejected:
+        raise ProvenanceViolation(f"post-baseline change outside governance allowlist: {rejected}")
     return ExecutionSourceSeal(head, baseline, manifest_sha, str(authorization["runner_blob"]), tuple(sorted(by_path)))
