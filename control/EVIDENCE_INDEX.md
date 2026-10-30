@@ -1,5 +1,5 @@
 # Evidence Index
- 
+
 ## Current QF-0A Phase B acceptance — 2026-10-30
 
 This section supersedes every earlier QF-0A checkpoint below.
