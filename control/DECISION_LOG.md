@@ -1,4 +1,35 @@
 # Decision Log
+ 
+## Current QF-0A Phase B acceptance — 2026-10-30
+
+This section supersedes every earlier QF-0A checkpoint below.
+Runtime Provenance & Environment-Observation Closure + Main-Lineage Re-Freeze: independently reviewed, ACCEPTED / MERGED.
+Phase A PR #19 merge: bab7393b370c36b72b9f08f4e7eb4285bf49420c; ACCEPTED / MERGED.
+Transition PR #20 merge: ec6497164b89b1c050e0457ca8cb3770305990bf; ACCEPTED / MERGED. Replaces Phase-A-only ancestry-failure assertion with lifecycle-aware provenance readiness.
+Phase B PR #21 approved head: 4c317490386cf5b5c04b477c5be0327f796dea95; merge M3: dad1dedb166262046dce2b6d7af74eada794fc06; ACCEPTED / MERGED.
+Source baseline M2: ec6497164b89b1c050e0457ca8cb3770305990bf.
+Manifest blob: 8a240e7effcdd6b2fe7adf053aea1b5203d2a38a; SHA-256: 8b05e8ef9a0adff3cec373bde6ac92625577898b5764c4ea86ef1d7623ea8667; 41 entries; scientific_execution NOT_PERFORMED.
+F-01 CLOSED (governance policy); F-02 CLOSED (MAIN-LINEAGE SOURCE BASELINE); F-03 CLOSED (loaded module origin/bytes); F-04 CLOSED (environment and BLAS/LAPACK observation); F-05 CLOSED (canonical absent evidence root); F-07 CLOSED (executed static leakage validation).
+F-06/F-08: no new scientific finding or independently inferred finding classification is asserted by this sync.
+Protocol blob 3af303a471d99397429d33f77ca512578f40f972; SHA-256 1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a.
+Prereg blob 1afb1653c32432092cf85214eaedb7bc56213b48; SHA-256 e1816e2d54755fd3f5c1a8adac411c3efbcdb15c597c009f5f9daea6744bd386.
+Environment blob 4bb6f73d5cfd96422829d3f0680ed52c9614e9e0; SHA-256 13bd8a95059363a5b2208f36e514e0e7d08b4467f4a0db35e2ce2bf37c41299a.
+Dependency lock SHA-256 9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2.
+Technical frozen artifacts are unchanged by this synchronization.
+
+**QF0A-v1.1-QUAL-001 — IMMUTABLE HISTORICAL ATTEMPT**
+EXECUTED / NUMERICAL GATES PASS / EVIDENCE CONTRACT BLOCKED.
+Raw machine verdict PASS is historical runner output only; Foundation verdict NOT_APPLICABLE.
+Not accepted qualification; no retry; historical bytes immutable.
+QUAL-002 authorization: NOT CREATED / UNAUTHORIZED; run: NOT STARTED; evidence: ABSENT.
+Implementation/provenance repair and re-freeze gates accepted, pending independent final pre-QUAL-002 challenge review.
+
+Classification: Software Qualification + Known-result Reproduction + Constructibility Demonstration.
+A future QUAL-002 PASS establishes no Foundation validation, Tech-Orb ontology, emergent time, absence of external/meta-time, Page–Wootters physical reality, GR/Lorentz emergence, QF-0D support, or empirical physics result.
+No QF-0A execution or qualification authorization occurred in this synchronization.
+
+Next gate: **Claude Independent Final Pre-QUAL-002 Challenge Review — Post-Repair / Final-Main Edition**.
+Only after an acceptable independent verdict: Terry Governance Decision — Authorize or Hold QF0A-v1.1-QUAL-002.
 
 ## Current QF-0A evidence-contract acceptance — 2026-10-29
 
