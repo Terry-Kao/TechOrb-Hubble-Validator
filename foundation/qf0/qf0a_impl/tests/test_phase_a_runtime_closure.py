@@ -91,7 +91,7 @@ class PhaseARuntimeClosureTests(unittest.TestCase):
         self.assertEqual(recorded["version_or_build"],
                          "numpy[OBSERVED-NUMPY-CANONICAL]|scipy[OBSERVED-SCIPY-CANONICAL]")
         self.assertNotEqual(recorded["version_or_build"], environment["blas_lapack"]["scipy"])
-    def test_real_repository_head_is_explicitly_pre_refreeze(self):
+    def test_real_repository_head_matches_manifest_lineage_state(self):
         data = subprocess.check_output(["git", "show", f"HEAD:{MANIFEST_PATH}"], cwd=ROOT)
         manifest = json.loads(data)
         by_path = {item["path"]: item for item in manifest["files"]}
@@ -105,8 +105,22 @@ class PhaseARuntimeClosureTests(unittest.TestCase):
             "preregistration_sha256": by_path["foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md"]["sha256"],
             "environment_sha256": by_path["foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json"]["sha256"],
         }
-        with self.assertRaisesRegex(ProvenanceViolation, "not an ancestor"):
-            verify_execution_head_against_source_manifest(ROOT, authorization)
+        head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+        ancestry = subprocess.run(
+            ["git", "merge-base", "--is-ancestor", manifest["source_baseline_commit"], head],
+            cwd=ROOT, check=False,
+        )
+        self.assertIn(ancestry.returncode, (0, 1), "Git ancestry query failed")
+        if ancestry.returncode == 1:
+            with self.assertRaisesRegex(ProvenanceViolation, "not an ancestor"):
+                verify_execution_head_against_source_manifest(ROOT, authorization)
+        else:
+            seal = verify_execution_head_against_source_manifest(ROOT, authorization)
+            self.assertEqual(seal.current_execution_head, head)
+            self.assertEqual(seal.source_baseline_commit, manifest["source_baseline_commit"])
+            self.assertEqual(seal.source_manifest_sha256, authorization["source_manifest_sha256"])
+            self.assertEqual(seal.runner_blob, authorization["runner_blob"])
+            self.assertTrue(set(by_path).issubset(set(seal.verified_paths)))
 
     def test_runtime_mismatch_fails_closed(self):
         expected = json.loads((ROOT / "foundation/qf0/qf0a_impl/environment/QF0A_ENVIRONMENT_FREEZE_v1.1.json").read_text())
