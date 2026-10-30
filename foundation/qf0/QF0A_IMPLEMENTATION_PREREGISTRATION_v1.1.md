@@ -74,3 +74,8 @@ Source Freeze identity applies to the committed source actually executed at runt
 ## Gate
 
 No frozen scientific result may be generated in this repair. The next gate is **Independent read-only review of QF-0A v1.1 Evidence Contract Serialization Repair / Re-Freeze**.
+# Host-satisfiable observation repair — 2026-10-30
+
+Official CPU brand is read only from Windows registry HKLM\HARDWARE\DESCRIPTION\System\CentralProcessor\0, ProcessorNameString (REG_SZ). Normalize by stripping leading/trailing whitespace and collapsing consecutive Unicode whitespace to one ASCII space; preserve every other character. Missing, empty, non-string or unreadable values fail closed. No platform.processor fallback is permitted.
+The validation runtime must observe importlib.metadata jsonschema version 4.23.0 and behaviorally prove date-time FormatChecker accepts 2026-10-30T00:00:00Z and rejects not-a-date-time.
+A positive non-scientific full host-satisfiability check is mandatory before canonical evidence-root creation. Failure consumes no run opportunity. No scientific computation occurs during this verification. This repair remains PRE-REFREEZE / NOT EXECUTION-READY until a separately reviewed main-lineage re-freeze.

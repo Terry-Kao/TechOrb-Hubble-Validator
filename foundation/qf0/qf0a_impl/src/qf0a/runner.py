@@ -157,9 +157,34 @@ def _execution_branch(repo_root: Path, source_seal: ExecutionSourceSeal) -> str:
 def _sha256_path(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
+def observe_windows_cpu_brand() -> dict[str, str]:
+    if sys.platform != "win32":
+        raise RuntimeError("CPU registry observation requires Windows")
+    import winreg
+    try:
+        with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"HARDWARE\DESCRIPTION\System\CentralProcessor\0") as key:
+            raw, kind = winreg.QueryValueEx(key, "ProcessorNameString")
+        if kind != winreg.REG_SZ or not isinstance(raw, str) or not raw.strip():
+            raise ValueError("empty or non-string ProcessorNameString")
+        return {"source": r"windows-registry:HKLM\HARDWARE\DESCRIPTION\System\CentralProcessor\0\ProcessorNameString",
+                "normalization": "strip-and-collapse-whitespace", "raw": raw, "normalized": " ".join(raw.split())}
+    except (OSError, ValueError) as exc:
+        raise RuntimeError("CPU registry observation failed") from exc
+
+def observe_validation_stack() -> dict[str, object]:
+    from importlib.metadata import version
+    checker = FormatChecker()
+    supported = checker.conforms("2026-10-30T00:00:00Z", "date-time") and not checker.conforms("not-a-date-time", "date-time")
+    observed = {"jsonschema_version": version("jsonschema"), "date_time_supported": supported}
+    if not supported:
+        raise RuntimeError("date-time FormatChecker is nonfunctional")
+    return observed
+
 def observe_runtime_environment(expected: dict[str, object]) -> dict[str, object]:
     """Observe, then fail closed against the freeze; never relabel expected values as observed."""
     import scipy
+    cpu = observe_windows_cpu_brand()
+    validation = observe_validation_stack()
     implementation = platform.python_implementation()
     version = platform.python_version()
     architecture = platform.machine()
@@ -173,7 +198,7 @@ def observe_runtime_environment(expected: dict[str, object]) -> dict[str, object
         "base_executable": str(base_executable), "base_executable_sha256": _sha256_path(base_executable),
         "numpy_version": np.__version__, "scipy_version": scipy.__version__,
         "os": os_name, "kernel": platform.version(), "cpu_architecture": architecture,
-        "cpu_model": platform.processor(), "thread_environment": {
+        "cpu_model": cpu["normalized"], "cpu_observation": cpu, "validation_stack": validation, "thread_environment": {
             name: os.environ.get(name) for name in expected["threads"]
         },
         "numeric_dtypes": [str(np.dtype("float64")), str(np.dtype("complex128"))],
@@ -190,7 +215,10 @@ def observe_runtime_environment(expected: dict[str, object]) -> dict[str, object
         "SciPy version": (scipy.__version__, expected["packages"][1]["version"]),
         "OS": (os_name, exp_host["os"]), "OS version": (platform.version(), exp_host["version"]),
         "CPU architecture": (architecture.upper(), str(exp_host["architecture"]).upper()),
-        "CPU model": (platform.processor(), exp_host["cpu"]),
+        "CPU model": (cpu["normalized"], exp_host["cpu"]),
+        "CPU source": (cpu["source"], exp_host["cpu_identity_source"]),
+        "CPU normalization": (cpu["normalization"], exp_host["cpu_normalization"]),
+        "jsonschema version": (validation["jsonschema_version"], expected["validation_stack"]["jsonschema_version"]),
         "numeric dtypes": (observed["numeric_dtypes"], expected["numeric_dtypes"]),
     }
     for label, (actual, wanted) in comparisons.items():

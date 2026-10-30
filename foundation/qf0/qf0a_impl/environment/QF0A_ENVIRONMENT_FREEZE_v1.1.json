@@ -11,7 +11,8 @@
   "blas_lapack":{"numpy":"scipy-openblas 0.3.27 ILP64 DYNAMIC_ARCH Haswell","scipy":"scipy-openblas 0.3.27.dev DYNAMIC_ARCH Zen"},
   "threads":{"OMP_NUM_THREADS":"1","OPENBLAS_NUM_THREADS":"1","MKL_NUM_THREADS":"1","VECLIB_MAXIMUM_THREADS":"1","NUMEXPR_NUM_THREADS":"1"},
   "numeric_dtypes":["float64","complex128"],
-  "host":{"os":"Microsoft Windows 11 Home","version":"10.0.26200","architecture":"AMD64","cpu":"AMD Ryzen 7 9700X","timezone":"Asia/Taipei"},
+  "host":{"os":"Microsoft Windows 11 Home","version":"10.0.26200","architecture":"AMD64","cpu":"AMD Ryzen 7 9700X 8-Core Processor","cpu_identity_source":"windows-registry:HKLM\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0\\ProcessorNameString","cpu_normalization":"strip-and-collapse-whitespace","timezone":"Asia/Taipei"},
+  "validation_stack":{"jsonschema_version":"4.23.0","date_time_format_required":true},
   "git":{"version":"2.56.0.windows.3","core_autocrlf":"true"},
   "canonical_hash_policy":"git-committed-bytes-v1",
   "gitattributes":{"git_blob":"3565f993726838565e32016941c4ee2fec65a65a","canonical_sha256":"54f889317ed67cfd9dd599a7d03b9c8a97660cab570fe886ff116e722e322ab7"}
