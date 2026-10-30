@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "source_baseline_commit": "80403cb383807334066eec482012ed42d4ded0ca",
+  "source_baseline_commit": "ec6497164b89b1c050e0457ca8cb3770305990bf",
   "scientific_execution": "NOT_PERFORMED",
   "canonical_hash_policy": "git-committed-bytes-v1",
   "files": [
@@ -36,9 +36,9 @@
     },
     {
       "path": "foundation/qf0/QF0A_IMPLEMENTATION_PREREGISTRATION_v1.1.md",
-      "byte_length": 7568,
-      "git_blob": "ce92de9e5d2b0dadf8e40f194ddfaf9b94a32844",
-      "sha256": "60d90f23f3369456b24d8af83236f232a745aeb2bb125099725408859237821c"
+      "byte_length": 9035,
+      "git_blob": "1afb1653c32432092cf85214eaedb7bc56213b48",
+      "sha256": "e1816e2d54755fd3f5c1a8adac411c3efbcdb15c597c009f5f9daea6744bd386"
     },
     {
       "path": "foundation/qf0/qf0a_impl/LEAKAGE_AUDIT_CHECKLIST.md",
@@ -156,15 +156,15 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/entrypoint.py",
-      "byte_length": 1278,
-      "git_blob": "04d7c8ad7d16cf75cc683c2be3df50cae99b2fd6",
-      "sha256": "8eee2237bdf44bc9f7fc6e6f268e17c864bd1372fad398b77ee6f322910e0971"
+      "byte_length": 2381,
+      "git_blob": "d666c9e42f799548dcff41844ac856262a12a259",
+      "sha256": "16a23cd9e2a140195b5839a284fc6e0abd8f4a9b08970cf5ab418fdbd9d90d11"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/evidence.py",
-      "byte_length": 11239,
-      "git_blob": "b7e717d2a4750c94a25bb3a4f3488710b4727388",
-      "sha256": "6686aad1028441d8428c0ad4b76a6c037c58ccac5d33054f2ad21e38987a186b"
+      "byte_length": 11665,
+      "git_blob": "225e2b483f3c7f8cabf866ce530d7a9b5ac6a62a",
+      "sha256": "2f737e7d60effde88dcf88b8fec44ccd40449bf2a15171d6e3c0a71965fa4dde"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/metrics.py",
@@ -180,15 +180,15 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/provenance.py",
-      "byte_length": 6797,
-      "git_blob": "0184ba60490cea91441c1b87e9543e0161b38749",
-      "sha256": "80bfb3e73b5c3e29199115b28ea161c08bfbe5d4ba15347f4d3f9edab09a4972"
+      "byte_length": 10248,
+      "git_blob": "d01dc3dbac9f84056b4baf01d7aba043b9337d0d",
+      "sha256": "ebe9cf76360f6b2c5d5288fa52aa59a1626fbda980ba5e766357eb2c54b442f4"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/runner.py",
-      "byte_length": 29651,
-      "git_blob": "1076e3b70a3bed710e306475d5da1a22236bbc79",
-      "sha256": "b9d818b36d5fabd5e112482a5c0cd75eeaf692daf49a0ae91a835fe2166e1b78"
+      "byte_length": 40200,
+      "git_blob": "8cdc839738dc2efcfc2db4babcd887aaedb4673b",
+      "sha256": "9601791f5484442313bc765d40c82ce324d7965f624e8b3d9ff417830818753d"
     },
     {
       "path": "foundation/qf0/qf0a_impl/src/qf0a/verdict.py",
@@ -210,15 +210,21 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_evidence_contract.py",
-      "byte_length": 4650,
-      "git_blob": "f0535eb1441c8b7de3b81966268793ab2f327141",
-      "sha256": "edae461a0227e1b8b7426b8ddd1383b2dcb1d2f4f304fde5f9fc1168f8f0d36e"
+      "byte_length": 5317,
+      "git_blob": "74d36a195bdd3d49636fd4f53da4d62c4b85a98f",
+      "sha256": "55bce968776a9ead60ed9d1670d639b8bcf044ded69b906f6531792f766ba15d"
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_evidence_serialization.py",
       "byte_length": 14834,
       "git_blob": "f26b100fe883fa8395a8049b1fa6359e8572795c",
       "sha256": "a94262c67f92455137d73d77109fd25486180c8857bf1afb9e071ed2b8eabbf7"
+    },
+    {
+      "path": "foundation/qf0/qf0a_impl/tests/test_phase_a_runtime_closure.py",
+      "byte_length": 9663,
+      "git_blob": "70d6eed6585e71a2de39b5d0484b62a65ca982af",
+      "sha256": "0dfc2196964d3b039ef247ab243b1318e0a050959f3310cee2a9c15799110ffd"
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_post_governance_readiness.py",
@@ -228,9 +234,9 @@
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_runtime_source_identity.py",
-      "byte_length": 8101,
-      "git_blob": "c9bad5f223ac988180a9f0007c8891f2cdb01b0d",
-      "sha256": "de16949e0a06b924a02643a1e7ec3c547f8ef6aa2fcf7e96977d6320b773770a"
+      "byte_length": 10157,
+      "git_blob": "5741c9979269f17d6a675a353fe41e15dcd6b2f4",
+      "sha256": "1048c453feda4c887a89d25459300013f582b5133ac269c81557ee49f7a3e80c"
     },
     {
       "path": "foundation/qf0/qf0a_impl/tests/test_source_freeze.py",
