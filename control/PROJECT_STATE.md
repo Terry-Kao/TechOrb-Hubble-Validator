@@ -1,5 +1,34 @@
 # Project State
 
+## Current host-satisfiable re-freeze acceptance — 2026-10-30
+
+This section supersedes all earlier QF-0A current-status checkpoints below; historical records remain preserved.
+PR #23 Host-Satisfiable Environment Repair: ACCEPTED / MERGED. Approved head f38bf8561891f820517c873e70960dca200069a8; merge M4 cb1c44c0b888595ef07bf3bc68db6eb3fe43aa48. Repairs F-14 CPU source, F-15 positive satisfiability and F-16 validation-stack observation; technical bytes frozen by PR #24.
+PR #24 Host-Satisfiable Main-Lineage Re-Freeze: ACCEPTED / MERGED. Approved head d6c499b5060c7e54a2c56a832b83dbde63542c58; merge M5 60ff4cd1d41d8e77def72e741c3a25969b95b4b7.
+Source baseline remains M4 cb1c44c0b888595ef07bf3bc68db6eb3fe43aa48. Main-lineage source re-freeze accepted.
+Manifest blob f74f1bf4e9fd6e81b2c11c1bf2008198953d1673; SHA-256 fb072ab0abeb443baf52f15807a827e94b43524081b89ffb3873da7df9995241; 41 entries; scientific_execution NOT_PERFORMED.
+Runner blob d4113bfcacc2c7abc91c97f5b8e41ed0359f5f1a; environment 10fb01ea128dcfec3d7b795f06903ac228c05f6b; prereg ac74a7753b35d0f7a0c9ce2e4ebb16ccc05081d1; runtime closure test 60fbd82ef2c13c508b52db273018cebb573de0bc.
+
+Claude's historical final challenge against 6aaf4a24882fcc527ff82abfd1001413064c42b9 returned REVISE for F-14 HIGH. That verdict remains historical evidence. F-14 was subsequently host-confirmed; PR #23 repaired it and PR #24 re-froze M4.
+F-01 CLOSED; F-02 CLOSED; F-03 CLOSED; F-04 CLOSED; F-05 CLOSED; F-06 ACCEPTABLE; F-07 CLOSED; F-08 ACCEPTABLE.
+F-04 was previously reopened through F-14 after Claude's final challenge; F-14/F-15/F-16 repair and main-lineage re-freeze now restore F-04 to CLOSED, pending the next independent Claude narrow final review.
+F-14 CLOSED: registry ProcessorNameString, narrow whitespace-only normalization, no fallback, missing/error/empty/wrong value fail closed; repaired host satisfies freeze.
+F-15 CLOSED: positive coverage and real-host satisfiability observed; rejection coverage retained.
+F-16 CLOSED: actual jsonschema 4.23.0 observed, valid date-time accepted, invalid rejected, missing/nonfunctional checker fails closed.
+Remaining follow-ups: F-09 LOW / ACCEPTABLE; F-10 LOW / OPEN; F-11 LOW / OPEN (scientific-strength limitation); F-12 LOW / OPEN; F-13 LOW / substantially mitigated; F-17 MEDIUM / execution condition; F-18 LOW; F-19 LOW; F-20 LOW; F-21 LOW (build metadata, not loaded-DLL attestation). These are not closed by this sync.
+
+HOST-LOCAL OBSERVATION: full frozen-host satisfiability PASS after merge; CPU AMD Ryzen 7 9700X 8-Core Processor from Windows registry, strip-and-collapse-whitespace; jsonschema 4.23.0 and behavioral date-time capability PASS. This is neither CI evidence nor external/GitHub-independent replication. Independent Claude review remains outstanding.
+**QF0A-v1.1-QUAL-001 — IMMUTABLE HISTORICAL ATTEMPT**
+EXECUTED / NUMERICAL GATES PASS / EVIDENCE CONTRACT BLOCKED.
+Machine PASS is historical runner output only; Foundation NOT_APPLICABLE; not accepted qualification; no retry; historical bytes immutable.
+QUAL-002 authorization: NOT CREATED / UNAUTHORIZED; run: NOT STARTED; evidence: ABSENT.
+Host/environment repair and main-lineage re-freeze accepted, pending independent Claude final narrow challenge and Terry governance decision.
+Classification: Software Qualification + Known-result Reproduction + Constructibility Demonstration. No Foundation/ontology, emergent-time, absence-of-meta-time, Page–Wootters empirical, GR/Lorentz, QF-0D or empirical physics support is established.
+No technical frozen artifact modified by this governance sync. No QF-0A or scientific execution.
+Next gate: **Claude Independent Narrow Final Pre-QUAL-002 Review — Post-F14/F15/F16 Repair / Final-Main Edition**.
+Only after an acceptable verdict: Terry Governance Decision — Authorize or Hold QF0A-v1.1-QUAL-002.
+
+
 ## Current QF-0A Phase B acceptance — 2026-10-30
 
 This section supersedes every earlier QF-0A checkpoint below.
