@@ -1,5 +1,27 @@
 # Tech-Orb Research Program
 
+## Current QUAL-002 authorization-gate specification acceptance — 2026-10-31
+
+This block supersedes older current-status checkpoints below; historical records remain preserved.
+PR #26, QF-0A v1.1: define QUAL-002 authorization and execution gates: **ACCEPTED / MERGED — GOVERNANCE SPECIFICATION ONLY**.
+Approved head de102102ccf1532622f4d1d0a7fd4bf7c5a4e9fc; merge / SPEC_MAIN a464bae26ab6127b93f3bc03dc8c2689a4ff3217.
+Normative specification: control/QF0A_QUAL002_AUTHORIZATION_EXECUTION_GATE_SPEC_v1.0.md; accepted blob 4c629b70d6933733b7aa9298bd735accd8559bb9. Its candidate-status wording is preserved byte-identically as reviewed; this governance block records acceptance of the specification only.
+Acceptance/merge of the QUAL-002 authorization and execution-gate specification does NOT authorize QF0A-v1.1-QUAL-002.
+QUAL-002 authorization = NOT CREATED / UNAUTHORIZED
+QUAL-002 run = NOT STARTED
+QUAL-002 evidence = ABSENT
+
+Claude final independent review: APPROVE WITH NON-BLOCKING FOLLOW-UPS; no CRITICAL/HIGH blocker. F-14 CLOSED; F-15 CLOSED; F-16 CLOSED; F-04 restored CLOSED. F-17 MEDIUM / mandatory execution gate; F-23 MEDIUM / mandatory execution gate. F-22/F-24/F-25/F-26 remain LOW follow-ups, not closed here.
+Specification review history: initial PR #26 verdict REVISE — bootstrap ordering defect; narrow bootstrap revision approved at de102102ccf1532622f4d1d0a7fd4bf7c5a4e9fc; final verdict APPROVED FOR MERGE.
+Future execution after a separate Terry authorization MUST satisfy the accepted normative specification: bootstrap filesystem/import-hook audit BEFORE normal Python startup (.pth/sitecustomize/usercustomize/*._pth, pyvenv.cfg); optional bootstrap-only -S -P -s -E discovery; formal -P -s; controlled PYTHONPATH; separate fresh external caches; validation module origins and pip freeze/check; strict provenance; host satisfiability; external authorization validation; absent root; one-shot/no-retry; independent offline acceptance.
+Frozen source baseline remains M4 cb1c44c0b888595ef07bf3bc68db6eb3fe43aa48; manifest blob f74f1bf4e9fd6e81b2c11c1bf2008198953d1673; SHA-256 fb072ab0abeb443baf52f15807a827e94b43524081b89ffb3873da7df9995241; 41 entries; scientific_execution NOT_PERFORMED. No technical artifact or accepted spec byte changed by this sync.
+QF0A-v1.1-QUAL-001 — IMMUTABLE HISTORICAL ATTEMPT: EXECUTED / NUMERICAL GATES PASS / EVIDENCE CONTRACT BLOCKED; Foundation NOT_APPLICABLE; no retry or rewrite.
+Classification remains Software Qualification + Known-result Reproduction + Constructibility Demonstration; no Foundation or empirical physics promotion.
+No authorization artifact/SHA, execution transcript, formal P0–P9 preflight, evidence root, QF-0A or scientific execution created/performed by this task.
+Exact next gate: **Terry Governance Decision — AUTHORIZE or HOLD QF0A-v1.1-QUAL-002**.
+No further Claude review is required unless new technical facts emerge. No automatic authorization-materialization workflow follows this acceptance.
+
+
 ## Current host-satisfiable re-freeze acceptance — 2026-10-30
 
 This section supersedes all earlier QF-0A current-status checkpoints below; historical records remain preserved.
