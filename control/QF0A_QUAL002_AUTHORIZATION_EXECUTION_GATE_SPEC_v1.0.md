@@ -49,27 +49,42 @@ Execution HEAD MUST equal freshly fetched authoritative main. Later governance c
 
 ## Mandatory sequential gates
 
-Every gate MUST PASS in one recorded session. Historical PASS SHALL NOT substitute. Before any repository Python import, P0 MUST complete.
+Every gate MUST PASS in one recorded session. Historical PASS SHALL NOT substitute. Order MUST be P0 repository audit, P1 bootstrap filesystem/import-hook audit, P2 controlled launch preparation, P3 interpreter self-observation, P4 package audit, then P5–P9 below. No normal site-enabled Python startup may occur before P1 PASS; before any repository Python import, P0–P5 MUST complete.
 
 ### P0 repository and ignored-source audit
 
 Record `git fetch`, `git rev-parse HEAD`, `git rev-parse origin/main`, `git status --porcelain`. Worktree MUST be clean. `git status --porcelain --ignored -- foundation/qf0/qf0a_impl/src` MUST produce EMPTY OUTPUT. Any ignored/untracked source, __pycache__, .pyc/.pyo or stray module FAILS preflight. The controller MUST NOT delete automatically; separate sanitation and complete preflight restart are required. No root means no consumption.
 
-### P1 F-17 launch hygiene
+### P1 bootstrap filesystem / import-hook audit — F-17
+
+Primary inspection MUST use OS/filesystem tools independent of Python site initialization (PowerShell on this Windows host). A normal site-enabled Python process MUST NOT be used to establish that the bootstrap environment was clean before startup. In particular, `python -P -s -c "import site; ..."` MUST NOT be initial cleanliness proof: -s does not disable system/venv site processing.
+
+Before normal Python startup, inspect and record exact resolved locations:
+
+- Frozen venv D:\AI_Project\TechOrb\QF0A\env\qf0a-v1.1-py31210 and its Scripts\python.exe; full pyvenv.cfg contents, home, include-system-site-packages and version if present.
+- Venv Lib\site-packages, and base interpreter executable/runtime directories resolved from home and the frozen environment relationship. Derivation MUST be recorded rather than guessed. Unexpected system-site enablement FAILS; if explicitly adjudicated enabled, every relevant base/system site-packages directory MUST also be audited.
+- User-site candidate %APPDATA%\Python\Python312\site-packages and any configuration-derived alternative; record ABSENT when missing, despite formal -s defense.
+- Interpreter-adjacent python._pth, python312._pth and all *._pth in venv interpreter/Scripts and base executable/runtime directories. Record every path and full contents. Unexpected ._pth FAILS unless explicitly adjudicated as part of the frozen environment.
+
+Inspect all applicable startup/import locations for *.pth, *._pth, sitecustomize.py/.pyc/.pyo, usercustomize.py/.pyc/.pyo, cached startup-customization bytecode, stray/unexpected qf0a*, duplicate/unexpected jsonschema*, and other path/import hooks. For each .pth record exact path, size, SHA-256, full text where decodable, and whether a line begins with executable import content. Preserve undecodable raw bytes and STOP for adjudication. Executable .pth lines MUST NOT be silently accepted; explicit adjudication is mandatory. Unknown/unexplained hooks FAIL PREFLIGHT / STOP. pip metadata does not establish hook-file integrity.
+
+If filesystem/config inspection cannot resolve a required path, a bootstrap-only stdlib -c discovery process MAY use the exact frozen interpreter with `-S -P -s -E`. It MUST NOT import site, repository code, jsonschema, NumPy or SciPy, execute qualification logic, or create evidence. -S prevents automatic site initialization; -E ignores ambient PYTHON* variables. Pure filesystem discovery MUST be used when sufficient. This exception is path/config discovery only; it does not waive filesystem audit.
+
+### P2 controlled launch environment — after P1 PASS
 
 Interpreter MUST be D:\AI_Project\TechOrb\QF0A\env\qf0a-v1.1-py31210\Scripts\python.exe with `-P -s`. PYTHONPATH MUST contain exactly `<repo>\foundation\qf0\qf0a_impl\src`. PYTHONPYCACHEPREFIX MUST identify a newly created empty external dedicated directory. Every other import-affecting PYTHON* variable MUST be unset unless explicitly adjudicated. Record all such variables, including PYTHONHOME, PYTHONSTARTUP, PYTHONINSPECT, PYTHONUSERBASE, PYTHONNOUSERSITE, PYTHONSAFEPATH and the two required variables. -P prevents unsafe automatic path prepending; -s disables user site/usercustomize.
 
-### P2 interpreter self-observation
+### P3 interpreter self-observation — only after bootstrap clearance
 
-With intended -P -s mode record sys.executable, sys._base_executable if present, sys.version, sys.implementation, sys.orig_argv, sys.flags.safe_path/no_user_site, sys.pycache_prefix and sys.path. Both flags MUST be true; prefix and source path MUST match intended paths. Unexpected preceding/duplicate paths FAIL. Preflight cache output SHALL NOT be reused for formal launch: reserve a separate fresh empty external cache directory for the fresh formal process and record both paths.
-
-### P3 site-packages filesystem audit
-
-Record site.getsitepackages(), site.getusersitepackages(), relevant sys.path, and pyvenv.cfg including include-system-site-packages. Audit every active site-packages directory for *.pth, sitecustomize.py/.pyc, usercustomize.py/.pyc, unexpected qf0a*, duplicate/unexpected jsonschema* and import hooks. Preserve every .pth byte content and path; executable/import statements require explicit adjudication before launch. Unexpected customization, installed qf0a or unexplained hooks FAIL. pip freeze alone is insufficient. Because site startup can precede this inspection, these preparatory observations SHALL NOT be treated as proof that startup hooks did not run; filesystem audit MUST clear the launch environment before formal execution.
+With intended -P -s mode record sys.executable, sys._base_executable if present, sys.version, sys.implementation, sys.orig_argv, sys.flags.safe_path/no_user_site, sys.pycache_prefix and sys.path. Both flags MUST be true; prefix and source path MUST match intended paths. Unexpected preceding/duplicate paths FAIL. Record site.getsitepackages(), site.getusersitepackages() and actual relevant sys.path; every discovered startup location MUST already have P1 clearance. A new/unexplained location FAILS and requires complete preflight restart with expanded filesystem audit before normal startup.
+After P3, re-audit P1 startup-hook paths using filesystem tools against recorded inventory/hashes: no unexpected changed/new .pth, ._pth, sitecustomize, usercustomize, stray source/import-hook artifact may appear. Any change FAILS and requires complete preflight restart. Expected observation-cache output is confined to its recorded external directory and MUST NOT alter startup-hook state.
+Preflight observation cache SHALL NOT be reused for formal launch. Record separate external preflight cache and new formal-execution cache paths. Immediately before formal launch, the latter MUST still be empty; otherwise FAIL / STOP.
 
 ### P4 F-23 package audit
 
 Record exact frozen-interpreter `-P -s -m pip freeze --all` and `-P -s -m pip check` output. pip check MUST succeed. jsonschema MUST be 4.23.0; rfc3339-validator and required format dependencies MUST exist. Record metadata/version/location/requirements for jsonschema, jsonschema-specifications, referencing, rpds-py, rfc3339-validator and every dependency required by installed [format] stack. No qf0a distribution may shadow source. Unexplained versions, duplicates, metadata or dependency state FAIL; expected packages plus behavioral validation require no repair/re-freeze.
+This gate MUST follow P1 filesystem clearance; pip freeze/check MUST NOT replace it. Record actual imported module origins (__file__ and spec origin) for jsonschema, referencing, rpds and rfc3339_validator (or the actual applicable module name), and compare resolved paths with audited approved package locations. Metadata alone is insufficient; unexpected origins FAIL PREFLIGHT / STOP.
+After bootstrap clearance, external preflight MUST also resolve qf0a non-executingly where feasible and require its package origin/search locations exclusively under `<repo>\foundation\qf0\qf0a_impl\src\qf0a`. It MUST NOT import scientific modules for this check; actual formal provenance remains authoritative.
 
 ### P5 threads
 
@@ -100,6 +115,7 @@ Only State 3 permits the following conceptual command; it MUST NOT be executed w
 ```
 
 These three required flags match committed entrypoint d666c9e42f799548dcff41844ac856262a12a259. Future controller MUST recheck committed CLI, preserve actual one-line command verbatim, maintain controlled environment and fresh external cache, and re-record HEAD/auth SHA/root absence immediately before launch. No bypass or alternate launcher is permitted.
+Formal launch remains `-P -s`; -S MUST NOT be added to formal execution under this specification. The `-S -P -s -E` mode above is exclusively optional bootstrap path discovery, not a frozen runtime change. F-17/F-23 remain external execution gates, not implementation-repair requirements.
 Before successful root creation, failure MUST be logged externally and does not consume the run; no root may remain. Once root is created, any exception, crash, numerical/evidence/G3 failure consumes QUAL-002. NO RETRY UNDER QUAL-002; no deletion/recreation.
 
 ## Result and acceptance
