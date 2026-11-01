@@ -1,5 +1,34 @@
 # Evidence Index
 
+## QUAL-002 authorization materialization
+
+This checkpoint supersedes older current-status checkpoints below; historical records remain unchanged.
+Status: **TERRY AUTHORIZED / P8 CLARIFIED / AUTHORIZATION MATERIALIZED / EXECUTION HOLD / QUAL-002 NOT STARTED**.
+Accepted state-machine State 2: **AUTHORIZATION MATERIALIZED / EXECUTION HOLD**. No transition to State 3 is made.
+Human decision: `AUTHORIZE QF0A-v1.1-QUAL-002`; issuer: `Terry Kao`. Terry's authorization remains valid and has not been revoked; no second authorization is required.
+Fresh A0 completed as a read-only pre-materialization readiness check (A0 PASS — READY FOR AUTHORIZATION MATERIALIZATION); this task freshly rechecked its preconditions against `92b930b78b2c51e5626ebf7fbc223fbe6524a5b4`. Neither establishes a formal P0–P9 PASS.
+Run ID: `QF0A-v1.1-QUAL-002`.
+External authorization artifact: `D:\AI_Project\TechOrb\QF0A\authorizations\QF0A-v1.1-QUAL-002.authorization.json` (repo-external; not committed).
+Authorization byte length: `889`; serialization: UTF-8 without BOM, two-space indentation, LF, exactly one final newline.
+AUTH_SHA (SHA-256 of actual final authorization JSON bytes): `10718851bad5511220bcb347e34721de65588b016695adb699b96b895704ec0a`.
+Authorization timestamp_utc: `2026-11-01T14:18:30Z`.
+Governance record reference (exact authorization field): `control/DECISION_LOG.md#qual-002-authorization-materialization`; the exact heading above generates this stable anchor without a future commit hash.
+Materialization date: 2026-11-01. The existing authorization artifact bytes are frozen and remain unchanged. The prior task stopped before commit/PR because local governance-comparison tooling coerced timestamp_utc into DateTime. Terry adjudicated this as a non-normative, repairable verification-tooling defect, not an artifact/schema/P8/frozen-identity/scientific failure or run-consumption event. This bounded recovery repairs only local verification tooling and completes the four-file governance binding; no second authorization or full A0 restart is required while main/frozen identities remain unchanged.
+Final external bytes were reread and matched intended bytes and pre-write SHA exactly. Authorization-artifact validation against committed schema `c324b2e2831104a7805f8a3c55d65d1e55cae375` passed under Draft 2020-12 with date-time format assertion; exactly 14 required fields, no additional properties. This is artifact validation only, not formal P8.
+P8 two-side prebinding established: actual authorization artifact SHA == governance-recorded AUTH_SHA. Transcript-side AUTH_SHA: NOT YET RECORDED; transcript-side binding remains pending future continuous recorded preflight. Formal P8 has not run.
+Frozen protocol blob: `3af303a471d99397429d33f77ca512578f40f972`; SHA-256: `1cf9f7f3a8cfa6a5b0e12a3290d7e545f44586f9359aaa5367754415cdcc5f3a`.
+Frozen preregistration blob: `ac74a7753b35d0f7a0c9ce2e4ebb16ccc05081d1`; SHA-256: `0fea7b3c88645b0af687feb79da3871b838b14de507ffafefc3784d1b28ef932`.
+Frozen environment blob: `10fb01ea128dcfec3d7b795f06903ac228c05f6b`; SHA-256: `f3f934b66f87627e436c825158d3cad05703f55a31b876634be19915f6bd16f2`.
+Dependency-lock SHA-256: `9ec9da7aaa0f7a7b85d9cb33909d03b0b934f0948c0fbb1c1182274e2edea0b2`.
+M4 source baseline: `cb1c44c0b888595ef07bf3bc68db6eb3fe43aa48`.
+Source manifest blob: `f74f1bf4e9fd6e81b2c11c1bf2008198953d1673`; SHA-256: `fb072ab0abeb443baf52f15807a827e94b43524081b89ffb3873da7df9995241`; 41 unique frozen entries verified unchanged; scientific_execution = NOT_PERFORMED.
+Runner blob: `d4113bfcacc2c7abc91c97f5b8e41ed0359f5f1a`.
+Accepted gate specification blob remains `4c629b70d6933733b7aa9298bd735accd8559bb9`; P8 clarification blob remains `bca62cd5d19b32f989bffd6dd579b5f85e2d80cd`. No normative or frozen technical bytes changed.
+Execution status: transcript NOT CREATED; formal P0–P9 NOT STARTED; PREFLIGHT NOT YET PASSED; canonical evidence root ABSENT; run ID NOT CONSUMED; scientific execution NOT PERFORMED; qualification NOT EXECUTED; machine verdict NOT PRODUCED.
+QF0A-v1.1-QUAL-001 — IMMUTABLE HISTORICAL ATTEMPT: EXECUTED / NUMERICAL GATES PASS / EVIDENCE CONTRACT BLOCKED; no retry or rewrite.
+Exact next gate: **Fresh continuous recorded P0–P9 execution-preflight session**, as a separately bounded task starting from freshly fetched post-materialization main and creating the external execution transcript before formal preflight. This task stops at State 2.
+No qualification execution or scientific interpretation is promoted by this governance binding.
+
 ## Current QUAL-002 P8 hash-binding clarification — 2026-11-01
 
 This checkpoint supersedes older current-status checkpoints below; historical sections remain unchanged.
