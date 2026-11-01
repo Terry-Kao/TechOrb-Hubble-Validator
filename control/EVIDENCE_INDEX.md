@@ -1,5 +1,21 @@
 # Evidence Index
 
+## Current QUAL-002 P8 hash-binding clarification — 2026-11-01
+
+This checkpoint supersedes older current-status checkpoints below; historical sections remain unchanged.
+Status: **TERRY AUTHORIZED / P8 CLARIFIED / AUTHORIZATION ARTIFACT NOT YET MATERIALIZED / QUAL-002 NOT STARTED**.
+Terry explicitly decided `AUTHORIZE QF0A-v1.1-QUAL-002`; that authorization remains valid and has not been revoked.
+Pre-materialization inspection discovered ambiguous P8 SHA wording. The previous controller stopped fail-closed before authorization artifact creation: a pre-execution governance/specification clarification event, not a QUAL-002 execution failure.
+That workflow did not create a canonical evidence root or consume the run ID; QUAL-002 has not run. P0–P9 were not run; no scientific execution occurred; no frozen technical artifact changed.
+Terry has now issued binding P8 adjudication, implemented by `control/QF0A_QUAL002_P8_HASH_BINDING_CLARIFICATION_v1.0.md` (NORMATIVE GOVERNANCE CLARIFICATION).
+P8 requires the authorization-artifact SHA recorded in the transcript to equal the authorization-artifact SHA recorded in DECISION_LOG and SHA-256 recomputed from the actual external authorization JSON bytes. It does not require equality of the transcript, DECISION_LOG and authorization objects' own file hashes.
+The original accepted specification `control/QF0A_QUAL002_AUTHORIZATION_EXECUTION_GATE_SPEC_v1.0.md` remains byte-identical at blob `4c629b70d6933733b7aa9298bd735accd8559bb9`, including its historical ambiguous wording.
+No second Terry authorization is required solely because of this clarification. This governance task does not materialize authorization or its final SHA, create an execution transcript/evidence root, complete formal A0, run P0–P9, or execute QUAL-002.
+M4 remains `cb1c44c0b888595ef07bf3bc68db6eb3fe43aa48`; source manifest blob `f74f1bf4e9fd6e81b2c11c1bf2008198953d1673`, SHA-256 `fb072ab0abeb443baf52f15807a827e94b43524081b89ffb3873da7df9995241`, 41 entries, scientific_execution NOT_PERFORMED.
+QF0A-v1.1-QUAL-001 — IMMUTABLE HISTORICAL ATTEMPT: EXECUTED / NUMERICAL GATES PASS / EVIDENCE CONTRACT BLOCKED; no retry or rewrite.
+Exact next gate after merge: **Fresh A0 restart under the accepted spec + P8 normative clarification**.
+Only after fresh A0 PASS, a later separately bounded task may continue: authorization artifact materialization → governance SHA binding → P0–P9 → one-shot QUAL-002 execution → independent offline review and governance acceptance. No partial A0 result from the stopped workflow constitutes A0 PASS.
+
 ## Current QUAL-002 authorization-gate specification acceptance — 2026-10-31
 
 This block supersedes older current-status checkpoints below; historical records remain preserved.
