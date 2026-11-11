@@ -1,0 +1,38 @@
+name: Tech-Orb Governance Policy Integrity
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+jobs:
+  governance:
+    name: techorb-governance-policy-integrity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Test and verify governance integrity
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$PR_NUMBER" =~ ^[0-9]+$ ]]
+          tool_dir="$(mktemp -d)"
+          validator=.github/governance/validate_policy.py
+          tests=.github/governance/test_policy.py
+          source_sha="$BASE_SHA"
+          if ! git cat-file -e "$BASE_SHA:$validator"; then
+            source_sha="$HEAD_SHA"
+          fi
+          git show "$source_sha:$validator" > "$tool_dir/validate_policy.py"
+          git show "$source_sha:$tests" > "$tool_dir/test_policy.py"
+          printf 'Validator source commit %s\n' "$source_sha"
+          python3 -I -B "$tool_dir/test_policy.py" --repo "$GITHUB_WORKSPACE"
+          python3 -I -B "$tool_dir/validate_policy.py" --repo "$GITHUB_WORKSPACE" --base "$BASE_SHA" --head "$HEAD_SHA" --pr "$PR_NUMBER"
