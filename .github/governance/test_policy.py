@@ -75,10 +75,152 @@ def fixtures(origin,repo):
       ("21_FORMAL_ARTIFACT",{"synthetic.authorization.json":("100644",b"{}\n")},False,44,"EXECUTION_ARTIFACT_PATH",1),
     ],commit
 
+
+def binding_tests(repo, candidate):
+    import copy
+    workflow = ".github/workflows/r2-governance-policy-ci.yml"
+    old = ANCHOR
+    base = "f9040f13d576c31b405d0b82eba4aa7c34f9f6b8"
+    head = "c6eb1a44349ca2774d8bd72327078b4f43d1c874"
+    merge = "c9c56818cbe03c9c9afaca87c35669f6f1da6523"
+    def git(path, *args, data=None):
+        result = subprocess.run(["git", "--no-replace-objects", "-C", str(path), *args],
+                              input=data, capture_output=True)
+        if result.returncode:
+            raise RuntimeError(result.stderr.decode(errors="replace"))
+        return result.stdout
+    source = git(repo, "show", f"{candidate}:{workflow}").decode()
+    inline = source.split("          python3 -I -B - <<'PY'\n", 1)[1].split("\n          PY", 1)[0]
+    inline = "\n".join(line[10:] for line in inline.splitlines())
+    boot = {"__name__": "candidate_bootstrap"}
+    exec(compile(inline, workflow, "exec"), boot)
+    results = []
+    repo_id = boot["REPOSITORY_ID"]
+    event = {"number": 30, "action": "reopened",
+             "repository": {"id": repo_id, "full_name": boot["REPOSITORY"]},
+             "pull_request": {"number": 30, "head": {"sha": head},
+                              "base": {"sha": old, "ref": "main", "repo": {"id": repo_id}}}}
+    with tempfile.TemporaryDirectory(prefix="r2-binding-tests-", dir=repo.resolve().parent) as tmp:
+        work = Path(tmp)
+        git(work, "init", "--quiet")
+        objects = git(repo, "rev-parse", "--path-format=absolute", "--git-path", "objects").decode().strip()
+        (work / ".git/objects/info/alternates").write_bytes((objects + "\n").encode())
+        git(work, "update-ref", "--no-deref", "HEAD", merge)
+        def commit(tree_source, parents):
+            tree = git(work, "rev-parse", tree_source + "^{tree}").decode().strip()
+            args = [arg for parent in parents for arg in ("-p", parent)]
+            return git(work, "-c", "user.name=CI Fixture", "-c", "user.email=fixture@example.invalid",
+                       "commit-tree", tree, *args, data=b"CI fixture\n").decode().strip()
+        foreign = commit(old, [M4])
+        wrong_first = commit(merge, [old, head])
+        wrong_second = commit(merge, [base, old])
+        # Missing-test fixture retains the accepted validator blob in an actual Git tree.
+        item = git(work, "ls-tree", base, "--", boot["SOURCES"][0]).decode().split()
+        child = git(work, "mktree", data=f"100644 blob {item[2]}\tvalidate_policy.py\n".encode()).strip()
+        gov = git(work, "mktree", data=b"040000 tree " + child + b"\tgovernance\n").strip()
+        root = git(work, "mktree", data=b"040000 tree " + gov + b"\t.github\n").strip()
+        no_tests = git(work, "-c", "user.name=CI Fixture", "-c", "user.email=fixture@example.invalid",
+                       "commit-tree", root.decode(), "-p", old, data=b"Missing tests\n").decode().strip()
+        missing_validator = commit(head, [old])
+        contract = json.loads(git(work, "show", f"{head}:{CONTRACT}"))
+        contract["formal_dispatch"] = True
+        blob = git(work, "hash-object", "-w", "--stdin", data=json.dumps(contract).encode()).decode().strip()
+        git(work, "read-tree", head)
+        git(work, "update-index", "--cacheinfo", f"100644,{blob},{CONTRACT}")
+        tree = git(work, "write-tree").decode().strip()
+        invalid_policy = git(work, "-c", "user.name=CI Fixture", "-c", "user.email=fixture@example.invalid",
+                             "commit-tree", tree, "-p", old, data=b"Invalid R2 policy\n").decode().strip()
+        state = (base, head, old)
+        def resolve(checkout=merge, before=state, fetched=None, after=None, changes=None,
+                    ref="refs/pull/30/merge", actual=None):
+            payload = copy.deepcopy(event)
+            if changes:
+                changes(payload)
+            git(work, "update-ref", "--no-deref", "HEAD", actual or checkout)
+            return boot["resolve"](work, payload, ref, checkout, before, fetched or (base, checkout),
+                                   after or before)
+        def stage(source_base=base, mode="TRUSTED_BASE_VALIDATION"):
+            destination = Path(tempfile.mkdtemp(dir=work))
+            records = boot["stage_sources"](work, {"mode": mode, "base": source_base}, destination)
+            return records, destination
+        def validate(head_sha=head):
+            binding = {**resolve(), "head": head_sha}
+            records, destination = stage()
+            return {"sources": records, "verdict": boot["validate"](work, binding, destination)}
+        def recorded(test, expected, operation):
+            import contextlib
+            import io
+            output = io.StringIO()
+            with contextlib.redirect_stdout(output), contextlib.redirect_stderr(output):
+                try:
+                    value = operation()
+                    actual, status = (value.get("reason", "PASS") if isinstance(value, dict) else "PASS"), 0
+                except boot["Hold"] as error:
+                    value, actual, status = None, str(error), 1
+            expected_exit = 0 if test.startswith("POS") else 1
+            results.append({"id": test, "expected": expected, "actual": actual, "exit": status,
+                            "expected_exit": expected_exit, "detail": value, "log": output.getvalue(),
+                            "pass": (actual, status) == (expected, expected_exit)})
+        def set_base(value):
+            return lambda payload: payload["pull_request"]["base"].update(sha=value)
+        def original():
+            for rev in (old, head):
+                result = subprocess.run(["git", "-C", str(work), "show", f"{rev}:{boot['SOURCES'][0]}"],
+                                        capture_output=True)
+                boot["require"](result.returncode == 128, "ORIGINAL_FAILURE_NOT_REPRODUCED")
+                print(result.stderr.decode(), end="")
+            return {"original_exit": 128, "binding": resolve()}
+        def split_sources():
+            # A head with candidate tests cannot replace the accepted Base test blob.
+            records, _ = stage()
+            head_blob = git(work, "rev-parse", f"{candidate}:{boot['SOURCES'][1]}").decode().strip()
+            boot["require"](records["test_policy.py"]["blob"] == head_blob,
+                            "HEAD_TEST_SOURCE_REJECTED")
+        recorded("POS-01", "TRUSTED_BASE_VALIDATED", lambda: resolve(changes=set_base(base),
+                 before=(base, head, base)))
+        recorded("POS-02", "EVENT_BASE_STALE_BUT_VERIFIED", resolve)
+        recorded("POS-03", "PASS", original)
+        recorded("POS-04", "PASS", lambda: stage()[0])
+        recorded("POS-05", "PASS", validate)
+        recorded("POS-06", "PASS", lambda: {"source_commit": candidate,
+                 "bootstrap_sha256": __import__("hashlib").sha256(inline.encode()).hexdigest()})
+        negatives = (
+            ("TRUSTED_BASE_PARENT_MISMATCH", lambda: resolve(checkout=wrong_first)),
+            ("SYNTHETIC_HEAD_PARENT_MISMATCH", lambda: resolve(checkout=wrong_second)),
+            ("SYNTHETIC_MERGE_INVALID", lambda: resolve(checkout=head)),
+            ("REPOSITORY_ID_MISMATCH", lambda: resolve(changes=lambda p: p["repository"].update(id=1))),
+            ("TRUSTED_BASE_REF_DRIFT", lambda: resolve(fetched=(old, merge))),
+            ("TRUSTED_BASE_REF_DRIFT", lambda: resolve(after=(old, head, old))),
+            ("PR_HEAD_MISMATCH", lambda: resolve(after=(base, old, old))),
+            ("TRUSTED_VALIDATOR_MISSING", lambda: stage(missing_validator)),
+            ("TRUSTED_TESTS_MISSING", lambda: stage(no_tests)),
+            ("HEAD_TEST_SOURCE_REJECTED", split_sources),
+            ("TRUSTED_VALIDATOR_MISSING", lambda: stage(old)),
+            ("INVALID_SOURCE_SHA", lambda: resolve(changes=set_base(""))),
+            ("PR_NUMBER_OR_REF_MISMATCH", lambda: resolve(ref="refs/pull/31/merge")),
+            ("REPOSITORY_MISMATCH", lambda: resolve(changes=lambda p: p["repository"].update(full_name="other/repo"))),
+            ("GIT_READ_FAILED", lambda: resolve(changes=set_base("a" * 40), before=(base, head, base))),
+            ("SYNTHETIC_MERGE_REF_DRIFT", lambda: resolve(fetched=(base, wrong_first))),
+            ("EVENT_BASE_NOT_ANCESTOR", lambda: resolve(changes=set_base(foreign), before=(base, head, base))),
+            ("TRUSTED_BASE_REF_DRIFT", lambda: resolve(before=(candidate, head, old), after=(candidate, head, old))),
+            ("CANDIDATE_SELFTEST_ONLY", lambda: stage(mode="CANDIDATE_REPAIR_SELFTEST")),
+            ("VALIDATOR_REJECTED", lambda: validate(invalid_policy)),
+        )
+        for index, (reason, operation) in enumerate(negatives, 1):
+            recorded(f"NEG-{index:02d}", reason, operation)
+    print(json.dumps({"mode": "CANDIDATE_REPAIR_SELFTEST", "source_commit": candidate,
+                      "fixture": {"base": base, "event_base": old, "head": head, "merge": merge},
+                      "pass": sum(row["pass"] for row in results), "tests": results}, sort_keys=True))
+    return 0 if all(row["pass"] for row in results) else 1
+
+
 def main():
     cli=argparse.ArgumentParser()
     cli.add_argument("--repo",type=Path,required=True)
+    cli.add_argument("--binding-candidate")
     args=cli.parse_args()
+    if args.binding_candidate:
+        return binding_tests(args.repo, args.binding_candidate)
     results=[]
     script=Path(__file__).with_name("validate_policy.py")
     with tempfile.TemporaryDirectory(prefix="techorb-governance-") as tmp:
