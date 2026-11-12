@@ -28,7 +28,8 @@ jobs:
           import subprocess
           import sys
           import tempfile
-          from urllib.request import urlopen
+          from urllib.request import Request, urlopen
+          from datetime import datetime, timezone
 
           REPOSITORY = "Terry-Kao/TechOrb-Hubble-Validator"
           REPOSITORY_ID = 1157514826
@@ -57,31 +58,6 @@ jobs:
               )
               require(result.returncode == 0, "GIT_READ_FAILED")
               return result.stdout
-
-
-          def snapshot(pr):
-              def read(path):
-                  with urlopen(API + path, timeout=20) as response:
-                      return json.load(response)
-
-              repo, branch, pull = read(""), read("/branches/main"), read(f"/pulls/{pr}")
-              require(repo["id"] == REPOSITORY_ID, "REPOSITORY_ID_MISMATCH")
-              require(repo["full_name"] == REPOSITORY and repo["default_branch"] == "main",
-                      "REPOSITORY_MISMATCH")
-              require(pull["number"] == pr and pull["state"] == "open", "PR_NUMBER_OR_STATE")
-              require(pull["base"]["repo"]["id"] == REPOSITORY_ID, "REPOSITORY_ID_MISMATCH")
-              require(pull["base"]["ref"] == "main", "BASE_REF_MISMATCH")
-              return branch["commit"]["sha"], pull["head"]["sha"], pull["base"]["sha"]
-
-
-          def remote_refs(pr):
-              with tempfile.TemporaryDirectory(prefix="r2-ref-audit-") as tmp:
-                  git(tmp, "init", "--bare", "--quiet")
-                  git(tmp, "-c", "fetch.fsckObjects=true", "fetch", "--no-tags", "--no-recurse-submodules",
-                      "--depth=1", REMOTE,
-                      "refs/heads/main:refs/heads/audit-main", f"refs/pull/{pr}/merge:refs/heads/audit-merge")
-                  return tuple(git(tmp, "rev-parse", ref).decode().strip()
-                               for ref in ("refs/heads/audit-main", "refs/heads/audit-merge"))
 
 
           def resolve(repo, event, ref, context_sha, before, fetched, after):
@@ -118,6 +94,124 @@ jobs:
               }
 
 
+          def report(stage, **data):
+              print(json.dumps({"stage": stage, **data}, sort_keys=True), flush=True)
+
+
+          def api_read(path):
+              with urlopen(Request(API + path, headers={"Cache-Control": "no-cache"}), timeout=20) as response:
+                  require(response.geturl() == API + path, "API_ORIGIN_MISMATCH")
+                  return json.load(response), response.headers.get("Date")
+
+
+          def commit_shape(repo, oid):
+              require(sha(oid) and git(repo, "cat-file", "-t", oid).strip() == b"commit",
+                      "SYNTHETIC_MERGE_INVALID")
+              headers = git(repo, "cat-file", "commit", oid).split(b"\n\n", 1)[0].splitlines()
+              trees = [row[5:].decode() for row in headers if row.startswith(b"tree ")]
+              parents = [row[7:].decode() for row in headers if row.startswith(b"parent ")]
+              require(len(trees) == 1 and len(parents) == 2 and all(sha(x) for x in trees + parents),
+                      "SYNTHETIC_MERGE_INVALID")
+              return {"parents": parents, "tree": trees[0]}
+
+
+          def verify_api_commit(oid, shape, obj, signed):
+              require(obj["sha"] == oid and obj["url"] == API + "/git/commits/" + oid
+                      and obj["tree"]["sha"] == shape["tree"]
+                      and [p["sha"] for p in obj["parents"]] == shape["parents"],
+                      "MERGE_API_GIT_MISMATCH")
+              if signed:
+                  verification = obj["verification"]
+                  require(verification["verified"] is True and verification["reason"] == "valid"
+                          and obj["committer"]["email"] == "noreply@github.com",
+                          "MERGE_PROVENANCE_UNVERIFIED")
+
+
+          def equivalence(checkout, observed, local, remote, api_local, api_remote):
+              rebuilt = checkout != observed
+              verify_api_commit(checkout, local, api_local, rebuilt)
+              verify_api_commit(observed, remote, api_remote, rebuilt)
+              require(local["parents"] == remote["parents"], "REBUILT_MERGE_PARENTS_MISMATCH")
+              require(local["tree"] == remote["tree"], "REBUILT_MERGE_TREE_MISMATCH")
+              return "VERIFIED_REBUILD" if rebuilt else "EXACT_SHA"
+
+
+          def verify_refs(before, fetched, after, head):
+              require(before == after, "UNRESOLVED_REF_RACE")
+              require(tuple(fetched) == (before[0], head, before[3]), "API_GIT_REF_MISMATCH")
+
+
+          def observe_snapshot(pr, checkout, local, head):
+              before = snapshot(pr)
+              with tempfile.TemporaryDirectory(prefix="r2-ref-audit-") as tmp:
+                  git(tmp, "init", "--bare", "--quiet")
+                  refs = ("refs/heads/main", f"refs/pull/{pr}/head", f"refs/pull/{pr}/merge")
+                  destinations = ("refs/heads/audit-main", "refs/heads/audit-head", "refs/heads/audit-merge")
+                  git(tmp, "-c", "fetch.fsckObjects=true", "fetch", "--no-tags", "--no-recurse-submodules",
+                      "--depth=1", REMOTE, *(f"{src}:{dst}" for src, dst in zip(refs, destinations)))
+                  fetched = tuple(git(tmp, "rev-parse", ref).decode().strip() for ref in destinations)
+                  report("FETCH_OBSERVED", main_sha=fetched[0], head_sha=fetched[1], remote_merge_ref_sha=fetched[2],
+                         local_timestamp=datetime.now(timezone.utc).isoformat())
+                  remote = commit_shape(tmp, fetched[2])
+              after = snapshot(pr)
+              report("API_REF_SNAPSHOT", before=before, after=after)
+              before_ref, after_ref = before["refs"], after["refs"]
+              verify_refs(before_ref, fetched, after_ref, head)
+              obj_checkout = api_read("/git/commits/" + checkout)[0]
+              obj_remote = obj_checkout if checkout == fetched[2] else api_read("/git/commits/" + fetched[2])[0]
+              reason = equivalence(checkout, fetched[2], local, remote, obj_checkout, obj_remote)
+              last = snapshot(pr)
+              require(last["refs"] == after_ref, "UNRESOLVED_REF_RACE")
+              report("SNAPSHOT_VERIFIED", snapshot=last, remote_merge_ref_sha=fetched[2],
+                     remote_merge_parents=remote["parents"], remote_merge_tree=remote["tree"],
+                     equivalence_reason=reason, api_checkout_verification=obj_checkout["verification"]["reason"],
+                     api_remote_verification=obj_remote["verification"]["reason"])
+              return after_ref[:3], fetched[2], reason
+
+
+          def snapshot(pr):
+              repo, rd = api_read("")
+              branch, bd = api_read("/branches/main")
+              pull, pd = api_read(f"/pulls/{pr}")
+              merge, md = api_read(f"/git/ref/pull/{pr}/merge")
+              require(repo["id"] == REPOSITORY_ID, "REPOSITORY_ID_MISMATCH")
+              require(repo["full_name"] == REPOSITORY and repo["default_branch"] == "main", "REPOSITORY_MISMATCH")
+              require(pull["number"] == pr and pull["state"] == "open", "PR_NUMBER_OR_STATE")
+              require(pull["base"]["repo"]["id"] == REPOSITORY_ID, "REPOSITORY_ID_MISMATCH")
+              require(pull["base"]["ref"] == "main", "BASE_REF_MISMATCH")
+              require(merge["ref"] == f"refs/pull/{pr}/merge" and merge["object"]["type"] == "commit",
+                      "REMOTE_REF_INVALID")
+              refs = (branch["commit"]["sha"], pull["head"]["sha"], pull["base"]["sha"], merge["object"]["sha"])
+              require(all(sha(x) for x in refs), "INVALID_SOURCE_SHA")
+              return {"refs": refs, "repository_id": repo["id"], "pr_number": pr, "base_ref": "main",
+                      "api_dates": [rd, bd, pd, md], "local_timestamp": datetime.now(timezone.utc).isoformat()}
+
+
+          def rebuild_binding(repo, event, ref, checkout, authority):
+              # Equivalence is decided separately using the independently fetched object and API records.
+              # The legacy identity/ancestry checks continue to bind the original checkout.
+              return resolve(repo, event, ref, checkout, authority, (authority[0], checkout), authority)
+
+
+          def verify_final_authority(initial, final):
+              require(initial == final, "TRUSTED_BASE_REF_DRIFT")
+
+
+          def check_source_binding(binding, records):
+              require(set(records) == {"validate_policy.py", "test_policy.py"}
+                      and all(x["commit"] == binding["base"] for x in records.values()),
+                      "VALIDATOR_TEST_SOURCE_SPLIT")
+
+
+          def check_policy_result(binding, result):
+              require(result["result"] == "PASS" and result["base"] == binding["base"]
+                      and result["head"] == binding["head"]
+                      and result["execution_authority"] is False
+                      and result["policy_acceptance_granted"] is False, "VALIDATOR_RESULT_UNBOUND")
+              require(binding["pr"] != 30 or (result["scope"] == "R2_POLICY"
+                      and result["reason"] == "POLICY_INTEGRITY"), "PR30_SCOPE_MISMATCH")
+
+
           def stage_sources(repo, binding, destination):
               require(binding["mode"] == "TRUSTED_BASE_VALIDATION", "CANDIDATE_SELFTEST_ONLY")
               base = binding["base"]
@@ -144,11 +238,7 @@ jobs:
               print(process.stderr, end="", file=sys.stderr, flush=True)
               require(process.returncode == 0, "VALIDATOR_REJECTED")
               result = json.loads(process.stdout)
-              require(result["result"] == "PASS" and result["base"] == binding["base"]
-                      and result["head"] == binding["head"]
-                      and result["execution_authority"] is False
-                      and result["policy_acceptance_granted"] is False, "VALIDATOR_RESULT_UNBOUND")
-              require(binding["pr"] != 30 or result["scope"] == "R2_POLICY", "PR30_SCOPE_MISMATCH")
+              check_policy_result(binding, result)
               return result
 
 
@@ -162,25 +252,46 @@ jobs:
                   pr = event["number"]
                   require(type(pr) is int and pr > 0, "PR_NUMBER_OR_REF_MISMATCH")
                   repo = Path(os.environ["GITHUB_WORKSPACE"])
-                  before = snapshot(pr)
-                  fetched = remote_refs(pr)
-                  after = snapshot(pr)
-                  binding = resolve(repo, event, os.environ["GITHUB_REF"], os.environ["GITHUB_SHA"],
-                                    before, fetched, after)
+                  checkout = os.environ["GITHUB_SHA"]
+                  ref = os.environ["GITHUB_REF"]
+                  pull = event["pull_request"]
+                  require(sha(checkout) and git(repo, "rev-parse", "HEAD").decode().strip() == checkout,
+                          "CHECKOUT_SHA_MISMATCH")
+                  require(ref == f"refs/pull/{pr}/merge" and pull["number"] == pr, "PR_NUMBER_OR_REF_MISMATCH")
+                  require(event["repository"]["id"] == REPOSITORY_ID and event["repository"]["full_name"] == REPOSITORY,
+                          "REPOSITORY_ID_MISMATCH")
+                  local = commit_shape(repo, checkout)
+                  report("RUNNER_EVENT", repository_id=REPOSITORY_ID, pr_number=pr, event_action=event.get("action"),
+                         event_base_sha=pull["base"]["sha"], event_head_sha=pull["head"]["sha"],
+                         github_sha=checkout, checkout_sha=checkout, checkout_parents=local["parents"],
+                         checkout_tree=local["tree"], github_ref=ref)
+                  before, remote_a, reason_a = observe_snapshot(pr, checkout, local, pull["head"]["sha"])
+                  binding = rebuild_binding(repo, event, ref, checkout, before)
                   with tempfile.TemporaryDirectory(prefix="r2-trusted-source-") as tmp:
                       destination = Path(tmp)
-                      print(json.dumps({**binding, "sources": stage_sources(repo, binding, destination)}),
-                            flush=True)
+                      records = stage_sources(repo, binding, destination)
+                      check_source_binding(binding, records)
+                      print(json.dumps({**binding, "sources": records}), flush=True)
                       subprocess.run([sys.executable, "-I", "-B", str(destination / "test_policy.py"),
                                       "--repo", str(repo)], check=True, timeout=210)
+                      after, remote_b, reason_b = observe_snapshot(pr, checkout, local, pull["head"]["sha"])
+                      verify_final_authority(before, after)
+                      report("TRUSTED_INPUTS", trusted_base_sha=binding["base"], trusted_head_sha=binding["head"],
+                             validator_source_commit=records["validate_policy.py"]["commit"],
+                             test_source_commit=records["test_policy.py"]["commit"],
+                             binding_mode=binding["mode"], equivalence_reason=[reason_a, reason_b],
+                             remote_merge_ref_sha=[remote_a, remote_b])
                       result = validate(repo, binding, destination)
-                  require(snapshot(pr) == after and remote_refs(pr) == fetched and snapshot(pr) == after,
-                          "TRUSTED_BASE_REF_DRIFT")
+                  final, remote_c, reason_c = observe_snapshot(pr, checkout, local, pull["head"]["sha"])
+                  verify_final_authority(after, final)
+                  require(remote_c == remote_b, "UNRESOLVED_REF_RACE")
+                  report("FINAL_VERDICT", final_result="PASS", remote_merge_ref_sha=remote_c,
+                         equivalence_reason=reason_c, scope=result["scope"])
                   print(json.dumps({"mode": binding["mode"], "result": "PASS", "scope": result["scope"],
                                     "base": binding["base"], "head": binding["head"]}), flush=True)
                   return 0
               except (Hold, OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as error:
-                  print(json.dumps({"result": "HOLD", "reason": str(error) if isinstance(error, Hold)
+                  print(json.dumps({"result": "HOLD", "final_result": "HOLD", "reason": str(error) if isinstance(error, Hold)
                                     else "BOOTSTRAP_READ_OR_EXECUTION_FAILED",
                                     "error_type": type(error).__name__}), flush=True)
                   return 1
@@ -191,7 +302,7 @@ jobs:
           PY
   candidate-repair-selftest:
     name: techorb-governance-ci-repair-selftest
-    if: github.event.pull_request.head.repo.id == 1157514826 && github.event.pull_request.head.ref == 'r2/governance-ci-base-binding-repair-v1'
+    if: github.event.pull_request.head.repo.id == 1157514826 && github.event.pull_request.head.ref == 'r2/governance-ci-synthetic-merge-rebuild-v1'
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
@@ -210,5 +321,6 @@ jobs:
           test "$(git rev-parse HEAD)" = "$CANDIDATE_SHA"
           tmp="$(mktemp -d)"
           git init --quiet "$tmp"
-          git -C "$tmp" fetch --no-tags --no-recurse-submodules https://github.com/Terry-Kao/TechOrb-Hubble-Validator.git c9c56818cbe03c9c9afaca87c35669f6f1da6523 "$CANDIDATE_SHA"
+          git -C "$tmp" fetch --no-tags --no-recurse-submodules https://github.com/Terry-Kao/TechOrb-Hubble-Validator.git c9c56818cbe03c9c9afaca87c35669f6f1da6523 43668273a47e11b5c8a4bc384d7dd5d2b5225ce3 8ce3e365826d299019fa41ae98c94e063ca5c5d8 "$CANDIDATE_SHA"
           python3 -I -B .github/governance/test_policy.py --repo "$tmp" --binding-candidate "$CANDIDATE_SHA"
+          python3 -I -B .github/governance/test_policy.py --repo "$tmp" --rebuild-candidate "$CANDIDATE_SHA"
