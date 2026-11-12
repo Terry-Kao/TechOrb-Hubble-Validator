@@ -1,0 +1,27 @@
+{
+  "version": "1.0-candidate",
+  "status": "CANDIDATE / NOT ACCEPTED / NOT AUTHORIZED FOR FORMAL EXECUTION",
+  "phase": "G-POLICY",
+  "formal_dispatch": false,
+  "qual002_state": "STATE_2_EXECUTION_HOLD",
+  "qualification_state": "R2_UNALLOCATED_HOLD",
+  "historical_anchor": "3ebb37a180d8acb7a663e50d219530d48c9334a7",
+  "historical_m4": "cb1c44c0b888595ef07bf3bc68db6eb3fe43aa48",
+  "decisions": [
+    "DECISION-R2-01",
+    "DECISION-R2-02",
+    "DECISION-R2-03",
+    "DECISION-R2-04",
+    "DECISION-R2-05"
+  ],
+  "allowed_paths": [
+    "control/r2/v1.0/AUTHORIZATION_BINDING.md",
+    "control/r2/v1.0/HISTORICAL_QUAL002.md",
+    "control/r2/v1.0/INDEX.md",
+    "control/r2/v1.0/MODEL_B.md",
+    "control/r2/v1.0/POLICY_CONTRACT.json",
+    "control/r2/v1.0/QUALIFICATION_ROUTE.md",
+    "control/r2/v1.0/TECHNICAL_BASELINE.md",
+    "control/r2/v1.0/TRUSTED_G_SOURCE.md"
+  ]
+}
