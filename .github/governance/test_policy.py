@@ -214,11 +214,145 @@ def binding_tests(repo, candidate):
     return 0 if all(row["pass"] for row in results) else 1
 
 
+def rebuild_tests(repo, candidate):
+    import copy
+    workflow = ".github/workflows/r2-governance-policy-ci.yml"
+    base = "bf3a7d3500329af29e7c0a0ad3f66e923a0414a3"
+    head = "c6eb1a44349ca2774d8bd72327078b4f43d1c874"
+    checkout = "43668273a47e11b5c8a4bc384d7dd5d2b5225ce3"
+    rebuilt = "8ce3e365826d299019fa41ae98c94e063ca5c5d8"
+    def load_boot(oid):
+        wf = command(repo, "show", f"{oid}:{workflow}").decode()
+        body = wf.split("          python3 -I -B - <<'PY'\n", 1)[1].split("\n          PY", 1)[0]
+        ns = {"__name__": "candidate_bootstrap"}
+        exec(compile("\n".join(row[10:] for row in body.splitlines()), workflow, "exec"), ns)
+        return ns
+    boot = load_boot(candidate)
+    old = load_boot(base)
+    event = {"number": 30, "action": "reopened",
+             "repository": {"id": boot["REPOSITORY_ID"], "full_name": boot["REPOSITORY"]},
+             "pull_request": {"number": 30, "head": {"sha": head},
+                              "base": {"sha": ANCHOR, "ref": "main", "repo": {"id": boot["REPOSITORY_ID"]}}}}
+    authority = (base, head, ANCHOR)
+    fixture = os.environ.get("R2_REBUILD_FIXTURE_DIR")
+    def get_object(oid):
+        if fixture:
+            return json.loads((Path(fixture) / (oid + ".json")).read_bytes())
+        return boot["api_read"]("/git/commits/" + oid)[0]
+    ca, ra = get_object(checkout), get_object(rebuilt)
+    local = boot["commit_shape"](repo, checkout)
+    remote = boot["commit_shape"](repo, rebuilt)
+    with tempfile.TemporaryDirectory(prefix="r2-rebuild-", dir=repo.resolve().parent) as tmp:
+        work = Path(tmp)
+        command(work, "init", "-q")
+        objects = command(repo, "rev-parse", "--path-format=absolute", "--git-path", "objects").decode().strip()
+        (work / ".git/objects/info/alternates").write_bytes((objects + "\n").encode())
+        command(work, "update-ref", "--no-deref", "HEAD", checkout)
+        def make_commit(tree, parents):
+            args = [arg for oid in parents for arg in ("-p", oid)]
+            return command(work, "commit-tree", tree, *args, data=b"Untrusted fixture\n").decode().strip()
+        def remote_fixture(tree, parents):
+            oid = make_commit(tree, parents)
+            return oid, boot["commit_shape"](work, oid), {
+                **ra, "sha": oid, "url": boot["API"] + "/git/commits/" + oid,
+                "tree": {"sha": tree}, "parents": [{"sha": p} for p in parents]}
+        def eq(oid=rebuilt, shape=remote, obj=ra):
+            return boot["equivalence"](checkout, oid, local, shape, ca, obj)
+        def bind(payload=event, state=authority):
+            return boot["rebuild_binding"](work, payload, "refs/pull/30/merge", checkout, state)
+        result = []
+        def run(case, expected, operation):
+            try:
+                detail = operation()
+                actual = "PASS"
+            except (boot["Hold"], old["Hold"]) as error:
+                detail, actual = None, str(error)
+            result.append({"case": case, "expected": expected, "actual": actual, "detail": detail,
+                           "pass": actual == expected})
+        def checked_eq():
+            boot["require"](eq() == "VERIFIED_REBUILD", "REBUILD_EXPECTED")
+            return {"checkout_sha": checkout, "remote_merge_ref_sha": rebuilt,
+                    "checkout_parents": local["parents"], "remote_merge_parents": remote["parents"],
+                    "checkout_tree": local["tree"], "remote_merge_tree": remote["tree"],
+                    "equivalence_reason": "VERIFIED_REBUILD"}
+        binding = bind()
+        destination = work / "sources"
+        destination.mkdir()
+        records = boot["stage_sources"](work, binding, destination)
+        verdict = boot["validate"](work, binding, destination)
+        before = (*authority, checkout)
+        after = (*authority, rebuilt)
+        alternate_tree = command(work, "rev-parse", head + "^{tree}").decode().strip()
+        def verify_rebuild_window():
+            boot["verify_refs"](before, (base, head, checkout), before, head)
+            boot["verify_refs"](after, (base, head, rebuilt), after, head)
+            boot["verify_final_authority"](before[:3], after[:3])
+            return checked_eq()
+        def altered_event(section, key, value):
+            e = copy.deepcopy(event)
+            e[section][key] = value
+            return e
+        def source_missing(wanted):
+            command(work, "read-tree", base)
+            removed = boot["SOURCES"][0 if wanted == "validator" else 1]
+            command(work, "update-index", "--force-remove", "--", removed)
+            tree = command(work, "write-tree").decode().strip()
+            oid = make_commit(tree, [base])
+            return boot["stage_sources"](work, {**binding, "base": oid}, destination)
+        run("ORIGINAL", "SYNTHETIC_MERGE_REF_DRIFT",
+            lambda: old["resolve"](work, event, "refs/pull/30/merge", checkout, authority,
+                                   (base, rebuilt), authority))
+        run("POS-R01", "PASS", lambda: eq(checkout, local, ca))
+        run("POS-R02", "PASS", checked_eq)
+        run("POS-R03", "PASS", lambda: {"evidence": checked_eq(), "api_verified": [ca["verification"]["verified"], ra["verification"]["verified"]]})
+        run("POS-R04", "PASS", lambda: verdict)
+        run("POS-R05", "PASS", lambda: boot["check_source_binding"](binding, records))
+        run("POS-R06", "PASS", lambda: {"reason": bind()["reason"], "event_base": ANCHOR})
+        run("POS-R07", "PASS", verify_rebuild_window)
+        run("POS-R08", "PASS", checked_eq)
+        cases = [
+            ("REBUILT_MERGE_PARENTS_MISMATCH", lambda: eq(*remote_fixture(local["tree"], [ANCHOR, head]))),
+            ("REBUILT_MERGE_PARENTS_MISMATCH", lambda: eq(*remote_fixture(local["tree"], [base, ANCHOR]))),
+            ("REBUILT_MERGE_PARENTS_MISMATCH", lambda: eq(*remote_fixture(local["tree"], [head, base]))),
+            ("REBUILT_MERGE_TREE_MISMATCH", lambda: eq(*remote_fixture(alternate_tree, [base, head]))),
+            ("REBUILT_MERGE_PARENTS_MISMATCH", lambda: eq(*remote_fixture(local["tree"], [ANCHOR, base]))),
+            ("REPOSITORY_ID_MISMATCH", lambda: bind(altered_event("repository", "id", 1))),
+            ("PR_NUMBER_OR_REF_MISMATCH", lambda: bind(altered_event("pull_request", "number", 31))),
+            ("PR_HEAD_MISMATCH", lambda: bind(state=(base, ANCHOR, ANCHOR))),
+            ("TRUSTED_BASE_REF_DRIFT", lambda: boot["verify_final_authority"](authority, (ANCHOR, head, ANCHOR))),
+            ("MERGE_PROVENANCE_UNVERIFIED", lambda: eq(obj={**ra, "verification": {"verified": False, "reason": "unsigned"}})),
+            ("API_GIT_REF_MISMATCH", lambda: boot["verify_refs"](after, (base, head, checkout), after, head)),
+            ("GIT_READ_FAILED", lambda: boot["commit_shape"](work, "1" * 40)),
+            ("MERGE_API_GIT_MISMATCH", lambda: eq(obj={**ra, "url": "https://example.invalid/commit"})),
+            ("SYNTHETIC_MERGE_INVALID", lambda: boot["commit_shape"](work, make_commit(local["tree"], [base]))),
+            ("EVENT_BASE_NOT_ANCESTOR", lambda: bind(altered_event("pull_request", "base",
+                 {**event["pull_request"]["base"], "sha": head}), (base, head, base))),
+            ("TRUSTED_VALIDATOR_MISSING", lambda: source_missing("validator")),
+            ("TRUSTED_TESTS_MISSING", lambda: source_missing("tests")),
+            ("VALIDATOR_TEST_SOURCE_SPLIT", lambda: boot["check_source_binding"](binding, {**records, "test_policy.py": {"commit": head}})),
+            ("TRUSTED_VALIDATOR_MISSING", lambda: boot["stage_sources"](work, {**binding, "base": head}, destination)),
+            ("REBUILT_MERGE_TREE_MISMATCH", lambda: eq(*remote_fixture(alternate_tree, [base, head]))),
+            ("UNRESOLVED_REF_RACE", lambda: boot["verify_refs"](before, (base, head, rebuilt), after, head)),
+            ("CANDIDATE_SELFTEST_ONLY", lambda: boot["stage_sources"](work, {**binding, "mode": "CANDIDATE_REPAIR_SELFTEST"}, destination)),
+            ("PR30_SCOPE_MISMATCH", lambda: boot["check_policy_result"](binding, {**verdict, "scope": "COMMON_ONLY"})),
+            ("VALIDATOR_RESULT_UNBOUND", lambda: boot["check_policy_result"](binding, {**verdict, "execution_authority": True})),
+        ]
+        for index, (reason, operation) in enumerate(cases, 1):
+            run(f"NEG-R{index:02d}", reason, operation)
+    print(json.dumps({"mode": "CANDIDATE_REPAIR_SELFTEST", "suite": "SYNTHETIC_MERGE_REBUILD",
+                      "source_commit": candidate, "tests": result, "pass": sum(x["pass"] for x in result)},
+                     sort_keys=True), flush=True)
+    return 0 if all(x["pass"] for x in result) else 1
+
+
 def main():
     cli=argparse.ArgumentParser()
     cli.add_argument("--repo",type=Path,required=True)
     cli.add_argument("--binding-candidate")
+    cli.add_argument("--rebuild-candidate")
     args=cli.parse_args()
+    if args.rebuild_candidate:
+        return rebuild_tests(args.repo, args.rebuild_candidate)
     if args.binding_candidate:
         return binding_tests(args.repo, args.binding_candidate)
     results=[]
