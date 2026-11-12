@@ -17,22 +17,198 @@ jobs:
           persist-credentials: false
       - name: Test and verify governance integrity
         shell: bash
+        run: |
+          python3 -I -B - <<'PY'
+
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+          import re
+          import subprocess
+          import sys
+          import tempfile
+          from urllib.request import urlopen
+
+          REPOSITORY = "Terry-Kao/TechOrb-Hubble-Validator"
+          REPOSITORY_ID = 1157514826
+          API = "https://api.github.com/repos/" + REPOSITORY
+          REMOTE = "https://github.com/" + REPOSITORY + ".git"
+          SOURCES = (".github/governance/validate_policy.py", ".github/governance/test_policy.py")
+
+
+          class Hold(Exception):
+              pass
+
+
+          def require(condition, reason):
+              if not condition:
+                  raise Hold(reason)
+
+
+          def sha(value):
+              return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{40}", value) is not None
+
+
+          def git(repo, *args):
+              result = subprocess.run(
+                  ["git", "--no-replace-objects", "-C", str(repo), *args],
+                  capture_output=True, timeout=90,
+              )
+              require(result.returncode == 0, "GIT_READ_FAILED")
+              return result.stdout
+
+
+          def snapshot(pr):
+              def read(path):
+                  with urlopen(API + path, timeout=20) as response:
+                      return json.load(response)
+
+              repo, branch, pull = read(""), read("/branches/main"), read(f"/pulls/{pr}")
+              require(repo["id"] == REPOSITORY_ID, "REPOSITORY_ID_MISMATCH")
+              require(repo["full_name"] == REPOSITORY and repo["default_branch"] == "main",
+                      "REPOSITORY_MISMATCH")
+              require(pull["number"] == pr and pull["state"] == "open", "PR_NUMBER_OR_STATE")
+              require(pull["base"]["repo"]["id"] == REPOSITORY_ID, "REPOSITORY_ID_MISMATCH")
+              require(pull["base"]["ref"] == "main", "BASE_REF_MISMATCH")
+              return branch["commit"]["sha"], pull["head"]["sha"], pull["base"]["sha"]
+
+
+          def remote_refs(pr):
+              with tempfile.TemporaryDirectory(prefix="r2-ref-audit-") as tmp:
+                  git(tmp, "init", "--bare", "--quiet")
+                  git(tmp, "-c", "fetch.fsckObjects=true", "fetch", "--no-tags", "--no-recurse-submodules",
+                      "--depth=1", REMOTE,
+                      "refs/heads/main:refs/heads/audit-main", f"refs/pull/{pr}/merge:refs/heads/audit-merge")
+                  return tuple(git(tmp, "rev-parse", ref).decode().strip()
+                               for ref in ("refs/heads/audit-main", "refs/heads/audit-merge"))
+
+
+          def resolve(repo, event, ref, context_sha, before, fetched, after):
+              require(event["repository"]["id"] == REPOSITORY_ID, "REPOSITORY_ID_MISMATCH")
+              require(event["repository"]["full_name"] == REPOSITORY, "REPOSITORY_MISMATCH")
+              pull = event["pull_request"]
+              pr = event["number"]
+              require(type(pr) is int and pr > 0 and pull["number"] == pr
+                      and ref == f"refs/pull/{pr}/merge", "PR_NUMBER_OR_REF_MISMATCH")
+              require(pull["base"]["repo"]["id"] == REPOSITORY_ID, "REPOSITORY_ID_MISMATCH")
+              require(pull["base"]["ref"] == "main", "BASE_REF_MISMATCH")
+              stale, head = pull["base"]["sha"], pull["head"]["sha"]
+              require(all(sha(value) for value in (stale, head, context_sha, *before, *fetched, *after)),
+                      "INVALID_SOURCE_SHA")
+              require(before[1] == after[1] == head, "PR_HEAD_MISMATCH")
+              require(before[0] == after[0] == fetched[0], "TRUSTED_BASE_REF_DRIFT")
+              require(git(repo, "rev-parse", "HEAD").decode().strip() == context_sha,
+                      "CHECKOUT_SHA_MISMATCH")
+              require(fetched[1] == context_sha, "SYNTHETIC_MERGE_REF_DRIFT")
+              parents = git(repo, "rev-list", "--parents", "-n", "1", context_sha).decode().split()
+              require(len(parents) == 3 and parents[0] == context_sha, "SYNTHETIC_MERGE_INVALID")
+              _, base, second = parents
+              require(second == head, "SYNTHETIC_HEAD_PARENT_MISMATCH")
+              require(base == fetched[0], "TRUSTED_BASE_PARENT_MISMATCH")
+              require(before[2] == after[2] and before[2] in (base, stale), "PR_BASE_METADATA_DRIFT")
+              require(git(repo, "merge-base", stale, base).decode().strip() == stale,
+                      "EVENT_BASE_NOT_ANCESTOR")
+              return {
+                  "mode": "TRUSTED_BASE_VALIDATION",
+                  "reason": "TRUSTED_BASE_VALIDATED" if base == stale else "EVENT_BASE_STALE_BUT_VERIFIED",
+                  "base": base, "event_base": stale, "head": head, "pr": pr,
+                  "repository_id": REPOSITORY_ID, "synthetic_merge": context_sha,
+                  "parents": [base, second], "action": event.get("action"),
+              }
+
+
+          def stage_sources(repo, binding, destination):
+              require(binding["mode"] == "TRUSTED_BASE_VALIDATION", "CANDIDATE_SELFTEST_ONLY")
+              base = binding["base"]
+              records = {}
+              for path, missing in zip(SOURCES, ("TRUSTED_VALIDATOR_MISSING", "TRUSTED_TESTS_MISSING")):
+                  entry = git(repo, "ls-tree", base, "--", path).decode().split()
+                  require(len(entry) == 4 and entry[:2] == ["100644", "blob"] and entry[3] == path, missing)
+                  data = git(repo, "cat-file", "blob", entry[2])
+                  (destination / Path(path).name).write_bytes(data)
+                  records[Path(path).name] = {
+                      "commit": base, "blob": entry[2], "sha256": hashlib.sha256(data).hexdigest(),
+                  }
+              return records
+
+
+          def validate(repo, binding, destination):
+              process = subprocess.run(
+                  [sys.executable, "-I", "-B", str(destination / "validate_policy.py"),
+                   "--repo", str(repo), "--base", binding["base"], "--head", binding["head"],
+                   "--pr", str(binding["pr"])],
+                  capture_output=True, text=True, encoding="utf-8", timeout=120,
+              )
+              print(process.stdout, end="", flush=True)
+              print(process.stderr, end="", file=sys.stderr, flush=True)
+              require(process.returncode == 0, "VALIDATOR_REJECTED")
+              result = json.loads(process.stdout)
+              require(result["result"] == "PASS" and result["base"] == binding["base"]
+                      and result["head"] == binding["head"]
+                      and result["execution_authority"] is False
+                      and result["policy_acceptance_granted"] is False, "VALIDATOR_RESULT_UNBOUND")
+              require(binding["pr"] != 30 or result["scope"] == "R2_POLICY", "PR30_SCOPE_MISMATCH")
+              return result
+
+
+          def live():
+              try:
+                  require(os.environ["GITHUB_EVENT_NAME"] == "pull_request", "EVENT_TYPE_MISMATCH")
+                  require(os.environ["GITHUB_REPOSITORY"] == REPOSITORY, "REPOSITORY_MISMATCH")
+                  require(os.environ["GITHUB_REPOSITORY_ID"] == str(REPOSITORY_ID), "REPOSITORY_ID_MISMATCH")
+                  require(os.environ["GITHUB_SERVER_URL"] == "https://github.com", "GITHUB_SERVER_MISMATCH")
+                  event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_bytes())
+                  pr = event["number"]
+                  require(type(pr) is int and pr > 0, "PR_NUMBER_OR_REF_MISMATCH")
+                  repo = Path(os.environ["GITHUB_WORKSPACE"])
+                  before = snapshot(pr)
+                  fetched = remote_refs(pr)
+                  after = snapshot(pr)
+                  binding = resolve(repo, event, os.environ["GITHUB_REF"], os.environ["GITHUB_SHA"],
+                                    before, fetched, after)
+                  with tempfile.TemporaryDirectory(prefix="r2-trusted-source-") as tmp:
+                      destination = Path(tmp)
+                      print(json.dumps({**binding, "sources": stage_sources(repo, binding, destination)}),
+                            flush=True)
+                      subprocess.run([sys.executable, "-I", "-B", str(destination / "test_policy.py"),
+                                      "--repo", str(repo)], check=True, timeout=210)
+                      result = validate(repo, binding, destination)
+                  require(snapshot(pr) == after and remote_refs(pr) == fetched and snapshot(pr) == after,
+                          "TRUSTED_BASE_REF_DRIFT")
+                  print(json.dumps({"mode": binding["mode"], "result": "PASS", "scope": result["scope"],
+                                    "base": binding["base"], "head": binding["head"]}), flush=True)
+                  return 0
+              except (Hold, OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as error:
+                  print(json.dumps({"result": "HOLD", "reason": str(error) if isinstance(error, Hold)
+                                    else "BOOTSTRAP_READ_OR_EXECUTION_FAILED",
+                                    "error_type": type(error).__name__}), flush=True)
+                  return 1
+
+
+          if __name__ == "__main__":
+              sys.exit(live())
+          PY
+  candidate-repair-selftest:
+    name: techorb-governance-ci-repair-selftest
+    if: github.event.pull_request.head.repo.id == 1157514826 && github.event.pull_request.head.ref == 'r2/governance-ci-base-binding-repair-v1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Execute isolated candidate bootstrap regression
+        shell: bash
         env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          CANDIDATE_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
           set -euo pipefail
-          [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$PR_NUMBER" =~ ^[0-9]+$ ]]
-          tool_dir="$(mktemp -d)"
-          validator=.github/governance/validate_policy.py
-          tests=.github/governance/test_policy.py
-          source_sha="$BASE_SHA"
-          if ! git cat-file -e "$BASE_SHA:$validator"; then
-            source_sha="$HEAD_SHA"
-          fi
-          git show "$source_sha:$validator" > "$tool_dir/validate_policy.py"
-          git show "$source_sha:$tests" > "$tool_dir/test_policy.py"
-          printf 'Validator source commit %s\n' "$source_sha"
-          python3 -I -B "$tool_dir/test_policy.py" --repo "$GITHUB_WORKSPACE"
-          python3 -I -B "$tool_dir/validate_policy.py" --repo "$GITHUB_WORKSPACE" --base "$BASE_SHA" --head "$HEAD_SHA" --pr "$PR_NUMBER"
+          [[ "$CANDIDATE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_SHA"
+          tmp="$(mktemp -d)"
+          git init --quiet "$tmp"
+          git -C "$tmp" fetch --no-tags --no-recurse-submodules https://github.com/Terry-Kao/TechOrb-Hubble-Validator.git c9c56818cbe03c9c9afaca87c35669f6f1da6523 "$CANDIDATE_SHA"
+          python3 -I -B .github/governance/test_policy.py --repo "$tmp" --binding-candidate "$CANDIDATE_SHA"
